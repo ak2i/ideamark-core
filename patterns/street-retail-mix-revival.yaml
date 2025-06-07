@@ -1,0 +1,30 @@
+title: "\u5546\u5E97\u8857\u306E\u6A5F\u80FD\u6DF7\u5728\u306B\u3088\u308B\u518D\u6D3B\
+  \u6027\u5316"
+type: urban_commercial_design
+id: IdeaMark-bf2c8b43-4686-48fe-ab58-6b2a3bf66a70
+context:
+- "\u90FD\u5E02\u90CA\u5916\u30FB\u5730\u65B9\u90FD\u5E02\u306E\u7A7A\u6D1E\u5316\u3057\
+  \u305F\u5546\u5E97\u8857"
+problem:
+  summary: "\u7269\u8CA9\u4E3B\u4F53\u306E\u5546\u5E97\u8857\u304C\u751F\u6D3B\u6A5F\
+    \u80FD\u3092\u5931\u3044\u6765\u8A2A\u8005\u304C\u6E1B\u5C11"
+solution:
+  approach: "\u5546\u696D\u30FB\u798F\u7949\u30FB\u4ED5\u4E8B\u30FB\u4EA4\u6D41\u3092\
+    \u6DF7\u5728\u3055\u305B\u305F\u8907\u5408\u5316"
+metadata:
+  tags:
+  - "\u5546\u5E97\u8857"
+  - "\u8907\u5408\u65BD\u8A2D"
+  - "\u5730\u57DF\u7D4C\u6E08"
+  scalefactor:
+    timewindow: "3\u301C6\u5E74"
+    spacemetrics: "\u90FD\u5E02\u30D6\u30ED\u30C3\u30AF"
+    regions:
+    - "\u95A2\u6771\u570F"
+    - "\u4E2D\u90E8\u5730\u65B9"
+    organizations:
+    - "\u5546\u5DE5\u4F1A"
+    - "\u307E\u3061\u3065\u304F\u308A\u4F1A\u793E"
+access:
+  uri: https://github.com/ak2i/ideamark-core/blob/main/patterns/street-retail-mix-revival.yaml
+  visibility: public

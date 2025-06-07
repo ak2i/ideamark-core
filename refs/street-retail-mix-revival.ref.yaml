@@ -1,0 +1,21 @@
+ref:
+  id: IdeaMark-bf2c8b43-4686-48fe-ab58-6b2a3bf66a70
+  title: "\u5546\u5E97\u8857\u306E\u6A5F\u80FD\u6DF7\u5728\u306B\u3088\u308B\u518D\
+    \u6D3B\u6027\u5316"
+  access:
+    uri: https://github.com/ak2i/ideamark-core/blob/main/patterns/street-retail-mix-revival.yaml
+    visibility: public
+  metadata:
+    tags:
+    - "\u5546\u5E97\u8857"
+    - "\u8907\u5408\u65BD\u8A2D"
+    - "\u5730\u57DF\u7D4C\u6E08"
+    scalefactor:
+      timewindow: "3\u301C6\u5E74"
+      spacemetrics: "\u90FD\u5E02\u30D6\u30ED\u30C3\u30AF"
+      regions:
+      - "\u95A2\u6771\u570F"
+      - "\u4E2D\u90E8\u5730\u65B9"
+      organizations:
+      - "\u5546\u5DE5\u4F1A"
+      - "\u307E\u3061\u3065\u304F\u308A\u4F1A\u793E"

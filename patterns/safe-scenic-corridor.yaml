@@ -1,0 +1,31 @@
+title: "\u5B89\u5168\u304B\u3064\u9B45\u529B\u7684\u306A\u56DE\u904A\u52D5\u7DDA\u306E\
+  \u8A2D\u8A08"
+type: environmental_infrastructure
+id: IdeaMark-ae39c47a-0795-43a3-90ec-0e4f58ea7643
+context:
+- "\u89B3\u5149\u5730\u3084\u5C71\u9593\u90E8\u306B\u304A\u3051\u308B\u89B3\u5149\u3068\
+  \u9632\u707D\u306E\u91CD\u8907\u7684\u8981\u4EF6"
+problem:
+  summary: "\u907F\u96E3\u8DEF\u3068\u89B3\u5149\u52D5\u7DDA\u304C\u5225\u3005\u306B\
+    \u5B58\u5728\u3057\u3001\u4FDD\u5B88\u3084\u6CE8\u610F\u559A\u8D77\u304C\u5206\
+    \u6563\u3057\u3066\u3044\u308B"
+solution:
+  approach: "\u4E21\u8005\u3092\u7D71\u5408\u3057\u305F\u5171\u6709\u56DE\u904A\u52D5\
+    \u7DDA\u3092\u8A2D\u8A08"
+metadata:
+  tags:
+  - "\u89B3\u5149"
+  - "\u9632\u707D"
+  - "\u5730\u57DF\u8CC7\u6E90"
+  scalefactor:
+    timewindow: "1\u301C3\u5E74"
+    spacemetrics: "\u5730\u57DF\u570F"
+    regions:
+    - "\u7D00\u4F0A\u534A\u5CF6"
+    - "\u5C71\u9593\u90E8"
+    organizations:
+    - "\u81EA\u6CBB\u4F53"
+    - "\u89B3\u5149\u5354\u4F1A"
+access:
+  uri: https://github.com/ak2i/ideamark-core/blob/main/patterns/safe-scenic-corridor.yaml
+  visibility: public

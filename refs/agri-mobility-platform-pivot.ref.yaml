@@ -1,0 +1,23 @@
+ref:
+  id: IdeaMark-aa85ca44-5dab-4e0f-b6a7-35f20260bd3b
+  title: "\u8FB2\u6A5F\u5177\u6574\u5099\u696D\u304B\u3089\u306E\u591A\u7528\u9014\
+    \u30E2\u30D3\u30EA\u30C6\u30A3\u30D7\u30E9\u30C3\u30C8\u30D5\u30A9\u30FC\u30E0\
+    \u8EE2\u63DB"
+  access:
+    uri: https://github.com/ak2i/ideamark-core/blob/main/patterns/agri-mobility-platform-pivot.yaml
+    visibility: public
+  metadata:
+    tags:
+    - "\u8FB2\u696D"
+    - "\u6574\u5099\u696D"
+    - "\u30E2\u30D3\u30EA\u30C6\u30A3"
+    - "\u5730\u57DF\u4EA4\u901A"
+    scalefactor:
+      timewindow: "2\u301C4\u5E74"
+      spacemetrics: "\u8FB2\u6751\u5730\u5E2F"
+      regions:
+      - "\u5CF6\u6839\u770C"
+      - "\u4E2D\u5C71\u9593\u5730\u57DF"
+      organizations:
+      - "\u6574\u5099\u4F1A\u793E"
+      - "\u8FB2\u5354"
