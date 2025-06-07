@@ -1,0 +1,22 @@
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# IDE/editor configs
+.vscode/
+.idea/
+
+# Python tools (for conversion/validation scripts)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+.env
+.env.*
+
+# Generated docs or exports
+/export/
+*.pdf
+*.html
+*.zip

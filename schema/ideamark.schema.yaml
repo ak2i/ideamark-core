@@ -1,0 +1,125 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: IdeaMark Template Schema
+description: Schema for documenting structured, reusable patterns for social, industrial,
+  or business challenges and solutions.
+type: object
+required:
+- id
+- title
+- type
+- problem
+- solution
+properties:
+  id:
+    type: string
+    pattern: ^IdeaMark-[a-fA-F0-9\-]{36}$
+    description: Globally unique ID (UUID format prefixed with 'IdeaMark-')
+  title:
+    type: string
+    description: Human-readable title of the IdeaMark pattern
+  type:
+    type: string
+    description: Domain or category tag (e.g., 'urban_design', 'platform_pivot')
+  author:
+    type: string
+    description: 'Optional contact: GitHub ID, email, or SNS handle'
+  context:
+    type: array
+    items:
+      type: string
+    description: Background contexts where this pattern applies
+  problem:
+    type: object
+    required:
+    - summary
+    properties:
+      summary:
+        type: string
+      factors:
+        type: array
+        items:
+          type: string
+  solution:
+    type: object
+    required:
+    - approach
+    properties:
+      approach:
+        type: string
+      components:
+        type: array
+        items:
+          type: string
+      examples:
+        type: array
+        items:
+          type: string
+  children:
+    type: array
+    items:
+      type: string
+    description: List of child IdeaMark IDs
+  relations:
+    type: object
+    properties:
+      siblings:
+        type: array
+        items:
+          type: string
+      derived_from:
+        type: array
+        items:
+          type: string
+  metadata:
+    type: object
+    properties:
+      tags:
+        type: array
+        items:
+          type: string
+      scalefactor:
+        type: object
+        properties:
+          timewindow:
+            type: string
+          spacemetrics:
+            type: string
+          regions:
+            type: array
+            items:
+              type: string
+          organizations:
+            type: array
+            items:
+              type: string
+  usage_scenarios:
+    type: array
+    items:
+      type: string
+  access:
+    type: object
+    required:
+    - uri
+    - visibility
+    properties:
+      uri:
+        type: string
+        format: uri
+      visibility:
+        type: string
+        enum:
+        - public
+        - private
+        - restricted
+      credentials:
+        type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - basic_auth
+            - oauth
+            - token
+            - session
+          contact:
+            type: string
