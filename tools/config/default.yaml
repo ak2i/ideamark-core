@@ -24,7 +24,15 @@ logging:
   format: "[%(asctime)s] [%(levelname)s] [%(name)s] %(message)s"
   console: true
   file: false
-  
+
 output:
   create_summary: true
   validate_output: true
+
+oauth:
+  client_id: ${OAUTH_CLIENT_ID}
+  client_secret: ${OAUTH_CLIENT_SECRET}
+  authorization_url: https://provider.example.com/auth
+  token_url: https://provider.example.com/token
+  redirect_uri: http://localhost:8000/oauth/callback
+  scope: 'openid profile email'
