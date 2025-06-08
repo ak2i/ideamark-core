@@ -1,0 +1,37 @@
+id: IdeaMark-9ee5b897-e67c-498a-86e9-f596c1f9907e
+title: Pivot from Agricultural Machinery Maintenance to a Multi-purpose Mobility Platform
+type: business_model_pivot
+context:
+- Difficulty sustaining local agricultural machinery service industry due to declining
+  demand
+- Declining profitability of coastal fisheries and difficulty attracting young fishers
+problem:
+  summary: Decreasing sales and maintenance contracts make it difficult to sustain
+    rural service businesses
+solution:
+  approach: Repurpose used agricultural machinery as shared regional mobility platforms,
+    not limited to farming tasks
+metadata:
+  tags:
+  - agriculture
+  - maintenance
+  - mobility
+  - rural transport
+  - fisheries
+  - e-commerce
+  - regional economy
+  scalefactor:
+    timewindow: 2-4 years
+    spacemetrics: rural areas
+    regions:
+    - Shimane Prefecture
+    - mountainous areas
+    organizations:
+    - maintenance companies
+    - JA cooperatives
+access:
+  uri: https://github.com/ak2i/ideamark-core/blob/main/patterns/merged-9ee5b897-e67c-498a-86e9-f596c1f9907e.yaml
+  visibility: public
+linked_patterns:
+- IdeaMark-aa85ca44-5dab-4e0f-b6a7-35f20260bd3b
+- IdeaMark-9c5aad9c-7de7-4f3a-8b3e-452795654cd0
