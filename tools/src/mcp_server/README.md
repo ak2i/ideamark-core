@@ -125,7 +125,7 @@ curl -X POST \
 
 ### Search Patterns
 ```bash
-curl "http://localhost:8000/v1/pattern/search?query=authentication&type=security&limit=5" \
+curl "http://localhost:8000/v1/pattern/search?q=authentication&type=security&limit=5" \
   -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
