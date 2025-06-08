@@ -93,11 +93,14 @@ docker run -d \
 | `CORS_ORIGINS` | `*` | CORS allowed origins |
 | `HOST` | `0.0.0.0` | Server bind host |
 | `PORT` | `8000` | Server port |
-| `OAUTH_CLIENT_ID` | | OAuth client ID |
-| `OAUTH_CLIENT_SECRET` | | OAuth client secret |
 | `OAUTH_AUTHORIZATION_URL` | | OAuth authorization endpoint |
 | `OAUTH_TOKEN_URL` | | OAuth token endpoint |
 | `OAUTH_REDIRECT_URI` | | Redirect URI registered with provider |
+| `OPENAI_API_KEY` | | OpenAI API key |
+| `ANTHROPIC_API_KEY` | | Anthropic API key |
+| `MISTRAL_API_KEY` | | Mistral API key |
+| `GOOGLE_API_KEY` | | Google API key |
+| `LLM_PROVIDER` | `openai` | Preferred LLM backend |
 
 ## Authentication
 
@@ -226,3 +229,56 @@ curl -H "Authorization: Bearer $TOKEN" http://localhost:8000/v1/pattern/example
 ```
 
 See the [OpenAI MCP documentation](https://platform.openai.com/docs/mcp) for more details.
+
+## ローカルでのLLM接続確認
+
+以下の手順でMCP Serverを起動し、OpenAI や Anthropic などのLLMに接続できるか確認できます。
+
+1. **依存ライブラリのインストール**
+   ```bash
+   cd tools
+   pip install -r requirements.txt
+   ```
+
+2. **APIキーの設定**
+   利用するプロバイダーに応じて環境変数を設定します。例として OpenAI と Anthropic のキーを設定する場合:
+   ```bash
+   export OPENAI_API_KEY=sk-your-openai-key
+   export ANTHROPIC_API_KEY=sk-your-anthropic-key
+   ```
+   `LLM_PROVIDER` を指定すると特定のプロバイダーを強制できます。
+   ```bash
+   export LLM_PROVIDER=openai   # openai / anthropic / mistral / google / local
+   ```
+
+3. **サーバーの起動**
+   ```bash
+   cd src/mcp_server
+   python -m uvicorn main:app --port 8000 --reload
+   ```
+
+4. **テストリクエストで確認**
+   2つのパターンを保存した後、`/v1/pattern/merge` エンドポイントを `strategy`=`synthesis` で呼び出すと、設定したLLMを利用して統合が行われます。
+   ```bash
+   TOKEN=$(python - <<'PY'
+from mcp_server.auth.jwt_auth import create_dev_token
+print(create_dev_token('llm-test', admin=True))
+PY
+)
+
+   curl -X POST -H "Content-Type: application/json" \
+        -H "Authorization: Bearer $TOKEN" \
+        -d '{"content": {"id": "A", "title": "Pattern A", "problem": {"summary": "A"}, "solution": {"approach": "A"}}}' \
+        http://localhost:8000/v1/pattern/A
+
+   curl -X POST -H "Content-Type: application/json" \
+        -H "Authorization: Bearer $TOKEN" \
+        -d '{"content": {"id": "B", "title": "Pattern B", "problem": {"summary": "B"}, "solution": {"approach": "B"}}}' \
+        http://localhost:8000/v1/pattern/B
+
+   curl -X POST -H "Content-Type: application/json" \
+        -H "Authorization: Bearer $TOKEN" \
+        -d '{"pattern_ids": ["A", "B"], "strategy": "synthesis"}' \
+        http://localhost:8000/v1/pattern/merge
+   ```
+   成功すると `merged_content` フィールドにLLMが生成した内容が返り、接続確認ができます。
