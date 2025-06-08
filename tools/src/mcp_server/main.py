@@ -12,6 +12,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from api.patterns import router as patterns_router
 from api.health import router as health_router
+from api.mcp_metadata import router as metadata_router
 from auth.jwt_auth import get_current_user
 from utils.logging import get_logger
 from utils.config import Config
@@ -37,6 +38,7 @@ def create_app() -> FastAPI:
     
     app.include_router(health_router, prefix="", tags=["health"])
     app.include_router(patterns_router, prefix="/v1", tags=["patterns"])
+    app.include_router(metadata_router, prefix="", tags=["metadata"])
     
     @app.exception_handler(HTTPException)
     async def http_exception_handler(request: Request, exc: HTTPException):

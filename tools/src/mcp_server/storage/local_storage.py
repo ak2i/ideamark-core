@@ -82,7 +82,7 @@ class LocalStorage:
     
     def list_all_refs(self) -> List[Dict[str, Any]]:
         refs = []
-        
+
         try:
             for ref_file in self.refs_dir.glob("*.ref.yaml"):
                 with open(ref_file, 'r') as f:
@@ -91,8 +91,23 @@ class LocalStorage:
         except Exception as e:
             logger.error(f"Failed to list refs: {e}")
             raise
-        
+
         return refs
+
+    def list_all_patterns(self) -> List[Dict[str, Any]]:
+        """Return all patterns stored on disk."""
+        patterns = []
+
+        try:
+            for pattern_file in self.patterns_dir.glob("*.yaml"):
+                with open(pattern_file, 'r') as f:
+                    pattern_data = yaml.safe_load(f)
+                    patterns.append(pattern_data)
+        except Exception as e:
+            logger.error(f"Failed to list patterns: {e}")
+            raise
+
+        return patterns
     
     def pattern_exists(self, pattern_id: str) -> bool:
         pattern_path = self.patterns_dir / f"{pattern_id}.yaml"
