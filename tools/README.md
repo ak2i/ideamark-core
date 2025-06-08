@@ -22,21 +22,21 @@ This directory contains helper scripts and utilities for managing, validating, a
 
 ## Available Tools
 
-### Pattern Merge Tool (`merge_tool.py`)
+### パターンマージツール (`merge_tool.py`)
 
-A comprehensive CLI tool for merging multiple IdeaMark patterns using sophisticated merge strategies.
+複数のIdeaMarkパターンを高度なマージ戦略を使用して結合する包括的なCLIツールです。
 
-#### Setup
+#### セットアップ
 
-1. **Install Dependencies**
+1. **依存関係のインストール**
    ```bash
    cd tools/
    pip install -r requirements.txt
    ```
 
-2. **Configure LLM Providers (Optional)**
+2. **LLMプロバイダーの設定（オプション）**
    
-   For synthesis strategy, set environment variables:
+   synthesis戦略を使用する場合は、環境変数を設定してください：
    ```bash
    # OpenAI
    export OPENAI_API_KEY="your-openai-api-key"
@@ -45,28 +45,28 @@ A comprehensive CLI tool for merging multiple IdeaMark patterns using sophistica
    export ANTHROPIC_API_KEY="your-anthropic-api-key"
    ```
 
-3. **Verify Installation**
+3. **インストールの確認**
    ```bash
    python merge_tool.py --help
    ```
 
-#### Usage
+#### 使用方法
 
-**Basic Syntax:**
+**基本構文:**
 ```bash
 python merge_tool.py --refs <A.ref.yaml> <B.ref.yaml> [<C.ref.yaml> ...] \
     [--intent union] [--strategy prefer] [--priority A B C] [--out <path>]
 ```
 
-**Merge Strategies:**
-- `manual` - Leave TODO placeholders for manual resolution
-- `prefer` - Use priority order to resolve conflicts
-- `annotate` - Include all versions with source annotations
-- `synthesis` - Use LLM to generate synthesized content
+**マージ戦略:**
+- `manual` - 手動解決用のTODOプレースホルダーを残す
+- `prefer` - 優先順位を使用して競合を解決
+- `annotate` - ソース注釈付きですべてのバージョンを含める
+- `synthesis` - LLMを使用して統合されたコンテンツを生成
 
-**Examples:**
+**使用例:**
 
-1. **Basic merge with prefer strategy:**
+1. **prefer戦略を使用した基本的なマージ:**
    ```bash
    python merge_tool.py \
      --refs ../refs/agri-mobility-platform-pivot.ref.yaml \
@@ -75,7 +75,7 @@ python merge_tool.py --refs <A.ref.yaml> <B.ref.yaml> [<C.ref.yaml> ...] \
      --out merged_pattern.yaml
    ```
 
-2. **Directory output with three files:**
+2. **3つのファイルを生成するディレクトリ出力:**
    ```bash
    python merge_tool.py \
      --refs ../refs/pattern1.ref.yaml \
@@ -83,12 +83,12 @@ python merge_tool.py --refs <A.ref.yaml> <B.ref.yaml> [<C.ref.yaml> ...] \
      --strategy prefer \
      --out merged_output/
    ```
-   Creates:
+   以下のファイルが作成されます:
    - `merged_output/patterns/merged-<uuid>.yaml`
    - `merged_output/refs/merged-<uuid>.ref.yaml`
    - `merged_output/summary/merged-<uuid>.md`
 
-3. **Manual conflict resolution:**
+3. **手動競合解決:**
    ```bash
    python merge_tool.py \
      --refs ../refs/pattern1.ref.yaml \
@@ -97,7 +97,7 @@ python merge_tool.py --refs <A.ref.yaml> <B.ref.yaml> [<C.ref.yaml> ...] \
      --out manual_merge.yaml
    ```
 
-4. **Priority-based merging:**
+4. **優先順位ベースのマージ:**
    ```bash
    python merge_tool.py \
      --refs ../refs/pattern1.ref.yaml \
@@ -107,7 +107,7 @@ python merge_tool.py --refs <A.ref.yaml> <B.ref.yaml> [<C.ref.yaml> ...] \
      --out result.yaml
    ```
 
-5. **LLM-assisted synthesis:**
+5. **LLM支援による統合:**
    ```bash
    python merge_tool.py \
      --refs ../refs/pattern1.ref.yaml \
@@ -116,7 +116,7 @@ python merge_tool.py --refs <A.ref.yaml> <B.ref.yaml> [<C.ref.yaml> ...] \
      --out synthesized.yaml
    ```
 
-6. **Annotated merge with source tracking:**
+6. **ソース追跡付きの注釈マージ:**
    ```bash
    python merge_tool.py \
      --refs ../refs/pattern1.ref.yaml \
@@ -125,56 +125,56 @@ python merge_tool.py --refs <A.ref.yaml> <B.ref.yaml> [<C.ref.yaml> ...] \
      --out annotated_merge.yaml
    ```
 
-#### Testing
+#### テスト方法
 
-**1. Validate Tool Installation:**
+**1. ツールのインストール確認:**
 ```bash
 cd tools/
 python merge_tool.py --help
 ```
 
-**2. Test with Sample Patterns:**
+**2. サンプルパターンでのテスト:**
 ```bash
-# Test prefer strategy
+# prefer戦略のテスト
 python merge_tool.py \
   --refs ../refs/agri-mobility-platform-pivot.ref.yaml \
   --refs ../refs/fisherman-direct-ecommerce.ref.yaml \
   --strategy prefer \
   --out test_prefer.yaml
 
-# Validate output against schema
+# スキーマに対する出力の検証
 python validate_output.py test_prefer.yaml ../schema/ideamark.schema.yaml
 ```
 
-**3. Test All Merge Strategies:**
+**3. すべてのマージ戦略のテスト:**
 ```bash
-# Manual strategy
+# Manual戦略
 python merge_tool.py --refs ../refs/agri-mobility-platform-pivot.ref.yaml --refs ../refs/fisherman-direct-ecommerce.ref.yaml --strategy manual --out test_manual/
 
-# Annotate strategy  
+# Annotate戦略  
 python merge_tool.py --refs ../refs/agri-mobility-platform-pivot.ref.yaml --refs ../refs/fisherman-direct-ecommerce.ref.yaml --strategy annotate --out test_annotate/
 
-# Synthesis strategy (requires API keys)
+# Synthesis戦略（APIキーが必要）
 python merge_tool.py --refs ../refs/agri-mobility-platform-pivot.ref.yaml --refs ../refs/fisherman-direct-ecommerce.ref.yaml --strategy synthesis --out test_synthesis/
 
-# Validate all outputs
+# すべての出力を検証
 python validate_output.py test_manual ../schema/ideamark.schema.yaml
 python validate_output.py test_annotate ../schema/ideamark.schema.yaml  
 python validate_output.py test_synthesis ../schema/ideamark.schema.yaml
 ```
 
-**4. Test Error Handling:**
+**4. エラーハンドリングのテスト:**
 ```bash
-# Test with invalid reference file
+# 無効な参照ファイルでのテスト
 python merge_tool.py --refs nonexistent.ref.yaml --refs ../refs/agri-mobility-platform-pivot.ref.yaml --strategy prefer --out test_error.yaml
 
-# Test with unreachable URI (modify a ref file temporarily)
-# Should show network retry behavior
+# 到達不可能なURIでのテスト（一時的にrefファイルを変更）
+# ネットワークリトライ動作が表示されるはずです
 ```
 
-#### Configuration
+#### 設定
 
-**Default Configuration (`config/default.yaml`):**
+**デフォルト設定 (`config/default.yaml`):**
 ```yaml
 merge:
   default_intent: union
@@ -198,35 +198,35 @@ network:
   timeout: 30
 ```
 
-**Custom Configuration:**
+**カスタム設定:**
 ```bash
 python merge_tool.py --config custom_config.yaml --refs pattern1.ref.yaml pattern2.ref.yaml --out result.yaml
 ```
 
-#### Troubleshooting
+#### トラブルシューティング
 
-**Common Issues:**
+**よくある問題:**
 
-1. **Schema Validation Errors:**
-   - Ensure reference files have valid structure
-   - Check that pattern URIs are accessible
-   - Verify YAML syntax is correct
+1. **スキーマ検証エラー:**
+   - 参照ファイルが有効な構造を持っていることを確認
+   - パターンURIがアクセス可能であることを確認
+   - YAML構文が正しいことを確認
 
-2. **Network Errors:**
-   - Check internet connectivity
-   - Verify GitHub URLs are accessible
-   - Tool automatically retries with exponential backoff
+2. **ネットワークエラー:**
+   - インターネット接続を確認
+   - GitHub URLがアクセス可能であることを確認
+   - ツールは指数バックオフで自動的にリトライします
 
-3. **LLM Synthesis Failures:**
-   - Verify API keys are set correctly
-   - Tool automatically falls back to manual strategy
-   - Check API rate limits and quotas
+3. **LLM統合の失敗:**
+   - APIキーが正しく設定されていることを確認
+   - ツールは自動的にmanual戦略にフォールバックします
+   - APIレート制限とクォータを確認
 
-4. **File Permission Errors:**
-   - Ensure write permissions for output directory
-   - Check disk space availability
+4. **ファイル権限エラー:**
+   - 出力ディレクトリの書き込み権限を確認
+   - ディスク容量が利用可能であることを確認
 
-**Debug Mode:**
+**デバッグモード:**
 ```bash
 python merge_tool.py --log-level DEBUG --refs pattern1.ref.yaml pattern2.ref.yaml --out debug_output.yaml
 ```
