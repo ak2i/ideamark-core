@@ -1,0 +1,19 @@
+ref:
+  id: IdeaMark-1122bf18-fad9-4ddd-b8b6-b3f04acebf97
+  title: Tourism Administration Support for Busy Beach Towns
+  access:
+    uri: https://github.com/ak2i/ideamark-core/blob/main/patterns/beach-town-tourism-admin.yaml
+    visibility: public
+  metadata:
+    tags:
+    - beach tourism
+    - local government
+    - seasonal economy
+    scalefactor:
+      timewindow: peak season
+      spacemetrics: coastal zones
+      regions:
+      - small beach towns
+      organizations:
+      - tourism boards
+      - local chambers of commerce

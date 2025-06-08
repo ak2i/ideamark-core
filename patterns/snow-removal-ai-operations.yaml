@@ -1,0 +1,26 @@
+id: IdeaMark-12f93205-2033-4484-95c1-ea7c80551201
+title: AI Optimization of Snowplow Deployment in Heavy Snow Cities
+type: urban_service_optimization
+context:
+- Cities with persistent winter snowfall struggle with limited snowplow fleets
+- Real-time traffic and weather conditions vary widely across districts
+problem:
+  summary: Inefficient routing and scheduling leads to uneven snow removal and higher costs
+solution:
+  approach: Deploy AI to predict snowfall intensity and optimize snowplow dispatch and routing
+metadata:
+  tags:
+  - snow removal
+  - municipal services
+  - logistics
+  scalefactor:
+    timewindow: daily during winter
+    spacemetrics: citywide roads
+    regions:
+    - heavy snow areas
+    organizations:
+    - city public works departments
+    - transportation agencies
+access:
+  uri: https://github.com/ak2i/ideamark-core/blob/main/patterns/snow-removal-ai-operations.yaml
+  visibility: public

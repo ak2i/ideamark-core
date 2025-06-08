@@ -1,0 +1,19 @@
+ref:
+  id: IdeaMark-435c63f3-aaeb-4b9e-ba4b-2b9a87483c18
+  title: Urban Waste Recycling Logistics Optimization
+  access:
+    uri: https://github.com/ak2i/ideamark-core/blob/main/patterns/urban-waste-recycling-logistics.yaml
+    visibility: public
+  metadata:
+    tags:
+    - waste management
+    - recycling
+    - city planning
+    scalefactor:
+      timewindow: ongoing
+      spacemetrics: metropolitan areas
+      regions:
+      - major cities
+      organizations:
+      - municipal sanitation departments
+      - recycling firms

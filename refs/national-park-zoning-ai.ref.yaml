@@ -1,0 +1,19 @@
+ref:
+  id: IdeaMark-4c2dafa1-ea57-4a5c-8927-4a096837a746
+  title: AI-Supported Zoning for Balanced National Park Tourism
+  access:
+    uri: https://github.com/ak2i/ideamark-core/blob/main/patterns/national-park-zoning-ai.yaml
+    visibility: public
+  metadata:
+    tags:
+    - national park
+    - conservation
+    - tourism management
+    scalefactor:
+      timewindow: seasonal
+      spacemetrics: protected areas
+      regions:
+      - national parks
+      organizations:
+      - park management agencies
+      - conservation NGOs

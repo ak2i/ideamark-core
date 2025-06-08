@@ -1,0 +1,26 @@
+id: IdeaMark-435c63f3-aaeb-4b9e-ba4b-2b9a87483c18
+title: Urban Waste Recycling Logistics Optimization
+type: circular_economy_planning
+context:
+- Growing urban populations generate increasing waste streams
+- Recycling centers are often unevenly utilized
+problem:
+  summary: Inefficient collection routes and sorting lead to low recycling rates and high costs
+solution:
+  approach: Use AI to plan dynamic collection schedules and match waste types to appropriate processors
+metadata:
+  tags:
+  - waste management
+  - recycling
+  - city planning
+  scalefactor:
+    timewindow: ongoing
+    spacemetrics: metropolitan areas
+    regions:
+    - major cities
+    organizations:
+    - municipal sanitation departments
+    - recycling firms
+access:
+  uri: https://github.com/ak2i/ideamark-core/blob/main/patterns/urban-waste-recycling-logistics.yaml
+  visibility: public
