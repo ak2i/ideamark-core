@@ -93,6 +93,29 @@ token = create_dev_token("dev-user", admin=True)
 print(f"Authorization: Bearer {token}")
 ```
 
+## OAuth Authentication
+
+You can also authenticate via an external OAuth2 provider. After login the
+provider returns an access token, which is used the same as a JWT token in
+`Authorization: Bearer` headers.
+
+Set your OAuth credentials:
+
+```bash
+export OAUTH_CLIENT_ID=my-client-id
+export OAUTH_CLIENT_SECRET=my-secret
+export OAUTH_ISSUER_URL=https://auth.example.com
+```
+
+Initiate the login flow from your application:
+
+```python
+import webbrowser
+
+auth_url = f"{OAUTH_ISSUER_URL}/authorize?client_id={OAUTH_CLIENT_ID}&response_type=token"
+webbrowser.open(auth_url)
+```
+
 ## Storage Structure
 
 The `WORK_DIR` contains:
