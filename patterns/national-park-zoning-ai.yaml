@@ -1,0 +1,26 @@
+id: IdeaMark-4c2dafa1-ea57-4a5c-8927-4a096837a746
+title: AI-Supported Zoning for Balanced National Park Tourism
+type: environmental_management
+context:
+- Growing visitor numbers to pristine national parks
+- Need to protect sensitive habitats while enabling access
+problem:
+  summary: Manual zoning decisions are slow to adapt to seasonal and ecological changes
+solution:
+  approach: Use AI to analyze environmental impact data and adjust visitor zones dynamically
+metadata:
+  tags:
+  - national park
+  - conservation
+  - tourism management
+  scalefactor:
+    timewindow: seasonal
+    spacemetrics: protected areas
+    regions:
+    - national parks
+    organizations:
+    - park management agencies
+    - conservation NGOs
+access:
+  uri: https://github.com/ak2i/ideamark-core/blob/main/patterns/national-park-zoning-ai.yaml
+  visibility: public
