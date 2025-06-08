@@ -2,6 +2,18 @@
 
 The MCP server is responsible for exposing IdeaMark pattern operations in a stateless, versioned manner that enables AI agents to interact with structured knowledge patterns. Requirements derive from [mcp_integration.md](../mcp_integration.md).
 
+## Self‑Descriptive Elements
+
+MCP servers advertise **Tools**, **Resources**, and **Prompts** so that clients can dynamically discover available capabilities. These elements are language‑agnostic – a server might be implemented in Python, Node.js, Deno, or any other runtime. Clients use `tools/list`, `resources/list`, and `prompts/list` RPC methods to obtain metadata about available functions and data sources before invoking them.
+
+```
+GET /mcp/tools/list    → returns callable tool definitions
+GET /mcp/resources/list → lists accessible URIs or context blobs
+GET /mcp/prompts/list  → exposes reusable prompt templates
+```
+
+This self‑description is central to MCP’s flexibility. For example, a Node.js server could return a set of JavaScript functions with JSON schemas for input, while a Python server could expose the same functionality via asyncio coroutines. Agents decide which tool to call based on these definitions rather than hard‑coded endpoints.
+
 ## Functional Requirements
 
 ### Core Pattern Operations
