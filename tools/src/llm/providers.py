@@ -1,3 +1,19 @@
+"""LLM provider interfaces and implementations.
+
+This module defines lightweight wrappers around various language model services.
+The providers use environment variables for authentication:
+
+```
+OPENAI_API_KEY      API key for OpenAI models
+ANTHROPIC_API_KEY   API key for Anthropic models
+MISTRAL_API_KEY     API key for Mistral AI models
+GOOGLE_API_KEY      API key for Google Gemini / Vertex AI models
+```
+
+Each provider reads these variables during initialization. Missing keys will
+result in runtime errors when trying to generate completions.
+"""
+
 import os
 from abc import ABC, abstractmethod
 from typing import Optional, Dict, Any
@@ -85,6 +101,70 @@ class LocalLLMProvider(LLMProvider):
             logger.error(f"Local LLM generation failed: {e}")
             raise
 
+class MistralProvider(LLMProvider):
+    def __init__(self, config: Dict[str, Any]):
+        self.endpoint = "https://api.mistral.ai/v1/chat/completions"
+        self.api_key = os.getenv("MISTRAL_API_KEY")
+        self.model = config.get("model", "mistral-small")
+        self.max_tokens = config.get("max_tokens", 2000)
+        self.temperature = config.get("temperature", 0.3)
+        logger.info(f"Initialized Mistral provider with model {self.model}")
+
+    def generate(self, prompt: str) -> str:
+        try:
+            import requests
+            headers = {"Authorization": f"Bearer {self.api_key}"}
+            data = {
+                "model": self.model,
+                "messages": [{"role": "user", "content": prompt}],
+                "max_tokens": self.max_tokens,
+                "temperature": self.temperature,
+            }
+            response = requests.post(
+                self.endpoint, json=data, timeout=60, headers=headers
+            )
+            response.raise_for_status()
+            return (
+                response.json()["choices"][0]["message"]["content"].strip()
+            )
+        except Exception as e:
+            logger.error(f"Mistral generation failed: {e}")
+            raise
+
+
+class GoogleProvider(LLMProvider):
+    def __init__(self, config: Dict[str, Any]):
+        self.api_key = os.getenv("GOOGLE_API_KEY")
+        self.model = config.get("model", "gemini-pro")
+        self.max_tokens = config.get("max_tokens", 2000)
+        self.temperature = config.get("temperature", 0.3)
+        self.endpoint = (
+            f"https://generativelanguage.googleapis.com/v1beta/models/{self.model}:generateContent"
+        )
+        logger.info(f"Initialized Google provider with model {self.model}")
+
+    def generate(self, prompt: str) -> str:
+        try:
+            import requests
+            params = {"key": self.api_key}
+            data = {
+                "contents": [{"parts": [{"text": prompt}]}],
+                "generationConfig": {
+                    "maxOutputTokens": self.max_tokens,
+                    "temperature": self.temperature,
+                },
+            }
+            response = requests.post(
+                self.endpoint, params=params, json=data, timeout=60
+            )
+            response.raise_for_status()
+            return (
+                response.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
+            )
+        except Exception as e:
+            logger.error(f"Google generation failed: {e}")
+            raise
+
 def create_llm_provider(provider_name: str, config: Config) -> Optional[LLMProvider]:
     provider_config = config.get_llm_config(provider_name)
     
@@ -97,6 +177,10 @@ def create_llm_provider(provider_name: str, config: Config) -> Optional[LLMProvi
             return OpenAIProvider(provider_config)
         elif provider_name == 'anthropic':
             return AnthropicProvider(provider_config)
+        elif provider_name == 'mistral':
+            return MistralProvider(provider_config)
+        elif provider_name == 'google':
+            return GoogleProvider(provider_config)
         elif provider_name == 'local':
             return LocalLLMProvider(provider_config)
         else:
