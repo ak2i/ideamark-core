@@ -1,17 +1,88 @@
-# MCP Server/Container Requirements
+# MCP Server Requirements
 
-The MCP server is responsible for exposing IdeaMark pattern operations in a stateless, versioned manner. Requirements derive from [mcp_integration.md](../mcp_integration.md).
+The MCP server is responsible for exposing IdeaMark pattern operations in a stateless, versioned manner that enables AI agents to interact with structured knowledge patterns. Requirements derive from [mcp_integration.md](../mcp_integration.md).
 
-## Functional
-- Provide endpoints for fetching, saving, validating and searching patterns as described in the conceptual doc.
-- Support generation of `.ref.yaml` files and pattern merges through dedicated actions.
-- Respect `access.visibility` flags when serving or storing content.
-- Operate on a git repository or local filesystem with a fallback strategy.
+## Functional Requirements
 
-## Operational
-- Should run inside a lightweight container image.
-- Must remain stateless between calls except for persistent storage of pattern files.
-- Version each endpoint and include metadata in responses.
-- Log whether content originates from human authors or AI agents.
+### Core Pattern Operations
+- **Pattern Retrieval**: Fetch individual patterns by ID from various sources (GitHub, local filesystem, HTTP URLs)
+- **Pattern Storage**: Save new or updated patterns with validation and access control enforcement
+- **Pattern Validation**: Validate pattern content against the IdeaMark schema before storage
+- **Reference Generation**: Auto-generate `.ref.yaml` files from pattern content with proper metadata
+- **Pattern Merging**: Combine multiple patterns using configurable merge strategies and LLM assistance
+- **Pattern Search**: Query patterns by keywords, tags, or metadata with relevance ranking
 
-These requirements ensure the server can integrate cleanly with AI agents and tooling.
+### Access Control & Security
+- **Visibility Enforcement**: Respect `access.visibility` flags (`public`, `private`, `restricted`) when serving content
+- **Authentication**: Support token-based authentication with read/write scope differentiation
+- **Authorization**: Implement role-based access for pattern modification and restricted content
+- **Audit Logging**: Track all operations with user identification and content source attribution
+
+### Data Integration
+- **Multi-Source Loading**: Support GitHub repositories, local filesystems, and HTTP endpoints
+- **Schema Compliance**: Enforce IdeaMark schema validation using existing `PatternValidator`
+- **LLM Integration**: Leverage configured LLM providers for merge conflict resolution and content synthesis
+- **Fallback Strategies**: Graceful degradation when external services are unavailable
+
+### Content Management
+- **Version Tracking**: Maintain pattern version history and change attribution
+- **Conflict Resolution**: Handle merge conflicts using LLM-assisted strategies
+- **Metadata Enrichment**: Auto-populate metadata fields during pattern creation and updates
+- **Link Management**: Maintain referential integrity between patterns and their references
+
+## Non-Functional Requirements
+
+### Performance
+- **Response Time**: API endpoints must respond within 5 seconds for standard operations
+- **Throughput**: Support at least 100 concurrent requests for read operations
+- **Scalability**: Horizontal scaling capability through stateless design
+- **Caching**: Implement intelligent caching for frequently accessed patterns
+
+### Reliability
+- **Availability**: 99.9% uptime for production deployments
+- **Error Handling**: Graceful error responses with detailed error codes and messages
+- **Retry Logic**: Built-in retry mechanisms for external service calls
+- **Circuit Breakers**: Prevent cascade failures when dependencies are unavailable
+
+### Security
+- **Data Protection**: Encrypt sensitive data in transit and at rest
+- **Input Validation**: Sanitize all inputs to prevent injection attacks
+- **Rate Limiting**: Implement per-user rate limiting to prevent abuse
+- **Audit Trail**: Comprehensive logging of all security-relevant events
+
+### Operational
+- **Containerization**: Deploy as lightweight Docker containers
+- **Statelessness**: No server-side session state between requests
+- **Health Monitoring**: Expose health check endpoints for orchestration platforms
+- **Metrics**: Provide Prometheus-compatible metrics for monitoring
+
+### Integration Requirements
+
+#### Existing Component Integration
+- **PatternValidator**: Utilize `tools/src/merge/validators.py` for schema validation
+- **PatternMerger**: Leverage `tools/src/merge/core.py` for pattern combination operations
+- **PatternLoader**: Use `tools/src/io/pattern_loader.py` for flexible content loading
+- **LLM Providers**: Integrate with `tools/src/llm/providers.py` for AI-assisted operations
+- **Configuration**: Use `tools/src/utils/config.py` for centralized configuration management
+
+#### External Service Integration
+- **GitHub API**: Support GitHub repository access with token authentication
+- **LLM Services**: Compatible with OpenAI, Anthropic, and local LLM endpoints
+- **File Systems**: Support both local and network-mounted storage backends
+- **Monitoring**: Integration with standard observability tools (Prometheus, Grafana)
+
+## Compliance Requirements
+
+### Data Governance
+- **Content Attribution**: Distinguish between human-authored and AI-generated content
+- **License Compliance**: Respect CC0 licensing for public patterns
+- **Privacy**: Handle private patterns according to data protection regulations
+- **Retention**: Implement configurable data retention policies
+
+### API Standards
+- **REST Compliance**: Follow REST principles for resource-oriented design
+- **OpenAPI**: Provide OpenAPI 3.0 specification for all endpoints
+- **Versioning**: Support API versioning with backward compatibility
+- **Content Negotiation**: Support JSON and YAML response formats
+
+These requirements ensure the MCP server can integrate cleanly with AI agents, maintain data integrity, and scale to support collaborative pattern development workflows.
