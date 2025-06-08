@@ -1,21 +1,20 @@
 ref:
   id: IdeaMark-7bec9825-dfa7-4a34-b18e-5e0bfae68a8d
-  title: "\u5730\u57DF\u6797\u696D\u3068\u30AB\u30FC\u30DC\u30F3\u30AF\u30EC\u30B8\
-    \u30C3\u30C8\u5E02\u5834\u306E\u63A5\u7D9A"
+  title: Connecting Local Forestry to the Carbon Credit Market
   access:
     uri: https://github.com/ak2i/ideamark-core/blob/main/patterns/forest-carbon-cooperative.yaml
     visibility: public
   metadata:
     tags:
-    - "\u6797\u696D"
-    - "\u30AB\u30FC\u30DC\u30F3"
-    - "\u74B0\u5883\u5E02\u5834"
+    - forestry
+    - carbon
+    - environmental markets
     scalefactor:
-      timewindow: "5\u301C10\u5E74"
-      spacemetrics: "\u5C71\u6797\u6D41\u57DF\u570F"
+      timewindow: 5-10 years
+      spacemetrics: watershed-scale forest areas
       regions:
-      - "\u4E2D\u90E8\u5C71\u5CB3"
-      - "\u4E5D\u5DDE\u68EE\u6797\u570F"
+      - Chubu Mountains
+      - Kyushu forest zones
       organizations:
-      - "\u68EE\u6797\u7D44\u5408"
-      - "\u74B0\u5883\u30B3\u30F3\u30B5\u30EB"
+      - forestry cooperatives
+      - environmental consultancies

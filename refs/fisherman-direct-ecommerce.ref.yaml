@@ -1,21 +1,20 @@
 ref:
   id: IdeaMark-9c5aad9c-7de7-4f3a-8b3e-452795654cd0
-  title: "\u6F01\u5354\u306B\u3088\u308B\u76F4\u63A5\u8CA9\u58F2\u578BEC\u30D7\u30E9\
-    \u30C3\u30C8\u30D5\u30A9\u30FC\u30E0"
+  title: Direct-to-Consumer E-Commerce Platform by Fishing Cooperatives
   access:
     uri: https://github.com/ak2i/ideamark-core/blob/main/patterns/fisherman-direct-ecommerce.yaml
     visibility: public
   metadata:
     tags:
-    - "\u6F01\u696D"
-    - EC
-    - "\u5730\u57DF\u7D4C\u6E08"
+    - fisheries
+    - e-commerce
+    - regional economy
     scalefactor:
-      timewindow: "2\u301C5\u5E74"
-      spacemetrics: "\u6CBF\u5CB8\u5730\u57DF"
+      timewindow: 2-5 years
+      spacemetrics: coastal regions
       regions:
-      - "\u702C\u6238\u5185\u6D77"
-      - "\u5317\u6D77\u9053"
+      - Seto Inland Sea
+      - Hokkaido
       organizations:
-      - "\u6F01\u5354"
-      - "\u81EA\u6CBB\u4F53"
+      - fishing cooperatives
+      - municipal governments
