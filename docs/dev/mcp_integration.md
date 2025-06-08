@@ -83,4 +83,8 @@ MCP bridges the gap between **interactive dialogue** and **structured knowledge 
 
 ---
 
+## Further Reading
+- [MCP Server/Container Requirements](mcp_integration/01_requirements.md)
+- [MCP Server Detailed Specifications](mcp_integration/02_specifications.md)
+
 This document serves as a conceptual specification for developers implementing MCP clients or servers in an IdeaMark-compatible environment.
