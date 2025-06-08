@@ -1,31 +1,30 @@
-title: "\u8FB2\u6A5F\u5177\u6574\u5099\u696D\u304B\u3089\u306E\u591A\u7528\u9014\u30E2\
-  \u30D3\u30EA\u30C6\u30A3\u30D7\u30E9\u30C3\u30C8\u30D5\u30A9\u30FC\u30E0\u8EE2\u63DB"
-type: business_model_pivot
 id: IdeaMark-aa85ca44-5dab-4e0f-b6a7-35f20260bd3b
+title: Pivot from Agricultural Machinery Maintenance to a Multi-purpose Mobility Platform
+type: business_model_pivot
 context:
-- "\u5730\u65B9\u8FB2\u696D\u306E\u7E2E\u5C0F\u3068\u6574\u5099\u696D\u306E\u7D99\u7D9A\
-  \u56F0\u96E3"
+- Difficulty sustaining local agricultural machinery service industry due to declining
+  demand
 problem:
-  summary: "\u8CA9\u58F2\u53F0\u6570\u6E1B\u5C11\u3068\u4FDD\u5B88\u5951\u7D04\u6E1B\
-    \u306B\u3088\u308A\u6574\u5099\u696D\u306E\u7DAD\u6301\u304C\u56F0\u96E3"
+  summary: Decreasing sales and maintenance contracts make it difficult to sustain
+    rural service businesses
 solution:
-  approach: "\u4E2D\u53E4\u8FB2\u6A5F\u3092\u30B7\u30A7\u30A2\u30EA\u30F3\u30B0\u53EF\
-    \u80FD\u306A\u5730\u57DF\u30E2\u30D3\u30EA\u30C6\u30A3\u306B\u8EE2\u7528"
+  approach: Repurpose used agricultural machinery as shared regional mobility platforms,
+    not limited to farming tasks
 metadata:
   tags:
-  - "\u8FB2\u696D"
-  - "\u6574\u5099\u696D"
-  - "\u30E2\u30D3\u30EA\u30C6\u30A3"
-  - "\u5730\u57DF\u4EA4\u901A"
+  - agriculture
+  - maintenance
+  - mobility
+  - rural transport
   scalefactor:
-    timewindow: "2\u301C4\u5E74"
-    spacemetrics: "\u8FB2\u6751\u5730\u5E2F"
+    timewindow: 2-4 years
+    spacemetrics: rural areas
     regions:
-    - "\u5CF6\u6839\u770C"
-    - "\u4E2D\u5C71\u9593\u5730\u57DF"
+    - Shimane Prefecture
+    - mountainous areas
     organizations:
-    - "\u6574\u5099\u4F1A\u793E"
-    - "\u8FB2\u5354"
+    - maintenance companies
+    - JA cooperatives
 access:
   uri: https://github.com/ak2i/ideamark-core/blob/main/patterns/agri-mobility-platform-pivot.yaml
   visibility: public

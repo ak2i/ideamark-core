@@ -1,30 +1,28 @@
-title: "\u6F01\u5354\u306B\u3088\u308B\u76F4\u63A5\u8CA9\u58F2\u578BEC\u30D7\u30E9\
-  \u30C3\u30C8\u30D5\u30A9\u30FC\u30E0"
-type: digital_commerce_model
 id: IdeaMark-9c5aad9c-7de7-4f3a-8b3e-452795654cd0
+title: Direct-to-Consumer E-Commerce Platform by Fishing Cooperatives
+type: digital_commerce_model
 context:
-- "\u6CBF\u5CB8\u6F01\u696D\u306E\u53CE\u76CA\u6027\u306E\u4F4E\u4E0B\u3068\u82E5\u624B\
-  \u6F01\u696D\u8005\u306E\u96E2\u8131"
+- Declining profitability of coastal fisheries and difficulty attracting young fishers
 problem:
-  summary: "\u4E2D\u592E\u5378\u58F2\u4F9D\u5B58\u3067\u53CE\u76CA\u304C\u8584\u304F\
-    \u3001\u82E5\u624B\u304C\u53C2\u5165\u3057\u306B\u304F\u3044"
+  summary: Overreliance on wholesale markets leads to low margins and makes it difficult
+    for new entrants
 solution:
-  approach: "\u6E2F\u76F4\u9001\uFF0B\u30B5\u30D6\u30B9\u30AF\u914D\u9001\u578B\u306E\
-    \u30D5\u30A1\u30F3\u30B3\u30DF\u30E5\u30CB\u30C6\u30A3\u69CB\u7BC9"
+  approach: Establish a fan-based subscription e-commerce model for direct shipping
+    from ports
 metadata:
   tags:
-  - "\u6F01\u696D"
-  - EC
-  - "\u5730\u57DF\u7D4C\u6E08"
+  - fisheries
+  - e-commerce
+  - regional economy
   scalefactor:
-    timewindow: "2\u301C5\u5E74"
-    spacemetrics: "\u6CBF\u5CB8\u5730\u57DF"
+    timewindow: 2-5 years
+    spacemetrics: coastal regions
     regions:
-    - "\u702C\u6238\u5185\u6D77"
-    - "\u5317\u6D77\u9053"
+    - Seto Inland Sea
+    - Hokkaido
     organizations:
-    - "\u6F01\u5354"
-    - "\u81EA\u6CBB\u4F53"
+    - fishing cooperatives
+    - municipal governments
 access:
   uri: https://github.com/ak2i/ideamark-core/blob/main/patterns/fisherman-direct-ecommerce.yaml
   visibility: public
