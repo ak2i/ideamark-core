@@ -190,7 +190,15 @@ llm:
       model: claude-3-sonnet-20240229
       max_tokens: 2000
       temperature: 0.3
-  fallback_strategy: manual
+    mistral:
+      model: mistral-medium
+      max_tokens: 2000
+      temperature: 0.3
+    google:
+      model: gemini-pro
+      max_tokens: 2000
+      temperature: 0.3
+    fallback_strategy: manual
   
 network:
   retries: 3
