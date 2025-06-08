@@ -19,6 +19,16 @@ MCP bridges the gap between **interactive dialogue** and **structured knowledge 
 - Assisted composition, comparison, and merge actions
 - Version-aware updates to public or restricted knowledge graphs
 
+## MCP Self-Descriptive Mechanisms
+
+MCP servers expose three categories of metadata so that agents can discover capabilities dynamically:
+
+- **Tools** – callable operations with names, descriptions and input schemas
+- **Resources** – URIs or contextual data the server can provide
+- **Prompts** – reusable instructions or templates for downstream LLM calls
+
+Clients typically retrieve these via `tools/list`, `resources/list`, and `prompts/list` RPC methods. A server might be written in Python with FastAPI, Deno with Oak, or Node.js with Express—the contract remains the same. This flexibility allows any runtime to plug into the IdeaMark workflow.
+
 ---
 
 ## Architecture

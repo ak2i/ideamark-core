@@ -1,6 +1,6 @@
 # MCP Server Technical Specifications
 
-This document provides detailed technical specifications for implementing the MCP server based on the requirements in [01_requirements.md](01_requirements.md).
+This document provides detailed technical specifications for implementing the MCP server based on the requirements in [01_requirements.md](01_requirements.md).  The code samples below use Python for clarity, but any language capable of serving JSON-RPC (for example Node.js or Deno) can implement the same endpoints.
 
 ## API Endpoint Specifications
 
@@ -470,6 +470,17 @@ if errors:
     return {"validation": {"valid": False, "errors": errors}}
 ```
 
+An implementation written in TypeScript might use a comparable validation library:
+
+```ts
+import { validatePattern } from "./lib/validators.ts";
+
+const errors = validatePattern(patternData);
+if (errors.length) {
+  return { validation: { valid: false, errors } };
+}
+```
+
 **LLM Provider Integration**:
 ```python
 from tools.src.llm.providers import create_llm_provider
@@ -479,6 +490,17 @@ if llm_provider:
     synthesis_result = llm_provider.generate(merge_prompt)
 ```
 
+The same concept can be expressed in JavaScript using a different SDK:
+
+```js
+import { createLlmProvider } from './lib/llm.js';
+
+const provider = createLlmProvider('openai', config);
+if (provider) {
+  const synthesisResult = await provider.generate(mergePrompt);
+}
+```
+
 **Configuration Management**:
 ```python
 from tools.src.utils.config import Config
@@ -486,6 +508,15 @@ from tools.src.utils.config import Config
 config = Config()
 github_token = os.getenv('GITHUB_TOKEN')
 llm_config = config.get_llm_config('openai')
+```
+
+In a Deno environment configuration might be loaded with environment utilities:
+
+```ts
+import { config as loadEnv } from "https://deno.land/std/dotenv/mod.ts";
+
+const env = await loadEnv();
+const githubToken = env["GITHUB_TOKEN"];
 ```
 
 ### External Service Integration
@@ -533,6 +564,18 @@ COPY . .
 EXPOSE 8000
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+```
+
+If you prefer a JavaScript runtime, a comparable container might use a Node.js or Deno base image:
+
+```dockerfile
+FROM denoland/deno:latest
+WORKDIR /app
+COPY deps.ts .
+RUN deno cache deps.ts
+COPY . .
+EXPOSE 8000
+CMD ["deno", "run", "--allow-env", "--allow-net", "main.ts"]
 ```
 
 **Environment Variables**:
