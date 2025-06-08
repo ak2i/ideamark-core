@@ -24,6 +24,8 @@ A Docker-based Model Context Protocol (MCP) server for IdeaMark pattern operatio
 
 ### Health & Monitoring
 - `GET /health` - Health check with dependency status
+- `GET /oauth/login` - Redirect to OAuth provider
+- `GET /oauth/callback` - Exchange code for token
 
 ## Quick Start
 
@@ -40,6 +42,11 @@ pip install -r requirements.txt
 export WORK_DIR=/tmp/mcp_data
 export JWT_SECRET_KEY=dev-secret-key
 export LOG_LEVEL=INFO
+export OAUTH_CLIENT_ID=your-client-id
+export OAUTH_CLIENT_SECRET=your-client-secret
+export OAUTH_AUTHORIZATION_URL=https://provider.example/auth
+export OAUTH_TOKEN_URL=https://provider.example/token
+export OAUTH_REDIRECT_URI=http://localhost:8000/oauth/callback
 ```
 
 3. **Run the server**:
@@ -79,9 +86,16 @@ docker run -d \
 | `JWT_ALGORITHM` | `HS256` | JWT algorithm |
 | `JWT_EXPIRATION_HOURS` | `24` | Token expiration time |
 | `LOG_LEVEL` | `INFO` | Logging level |
+| `OAUTH_CLIENT_ID` | | OAuth client ID |
+| `OAUTH_CLIENT_SECRET` | | OAuth client secret |
 | `CORS_ORIGINS` | `*` | CORS allowed origins |
 | `HOST` | `0.0.0.0` | Server bind host |
 | `PORT` | `8000` | Server port |
+| `OAUTH_CLIENT_ID` | | OAuth client ID |
+| `OAUTH_CLIENT_SECRET` | | OAuth client secret |
+| `OAUTH_AUTHORIZATION_URL` | | OAuth authorization endpoint |
+| `OAUTH_TOKEN_URL` | | OAuth token endpoint |
+| `OAUTH_REDIRECT_URI` | | Redirect URI registered with provider |
 
 ## Authentication
 
