@@ -544,6 +544,12 @@ llm:
     anthropic:
       api_key: "${ANTHROPIC_API_KEY}"
       model: "claude-3-sonnet-20240229"
+    mistral:
+      api_key: "${MISTRAL_API_KEY}"
+      model: "mistral-large"
+    google:
+      api_key: "${GOOGLE_API_KEY}"
+      model: "gemini-pro"
 ```
 
 ## Deployment Architecture
@@ -592,11 +598,22 @@ GITHUB_API_URL=https://api.github.com
 # LLM Providers
 OPENAI_API_KEY=sk-your-key-here
 ANTHROPIC_API_KEY=sk-ant-your-key-here
+MISTRAL_API_KEY=sk-mistral-your-key
+GOOGLE_API_KEY=sk-google-your-key
 
 # Server Configuration
 LOG_LEVEL=INFO
 CORS_ORIGINS=*
 API_VERSION=1.0
+```
+
+To select a specific LLM backend at startup, set the `LLM_PROVIDER` environment
+variable (or pass a comparable CLI flag) to one of the keys defined under
+`llm.providers`. For example:
+
+```bash
+export LLM_PROVIDER=mistral
+python standalone_server.py
 ```
 
 ### Health Checks
