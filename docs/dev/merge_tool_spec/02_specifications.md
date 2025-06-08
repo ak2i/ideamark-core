@@ -4,12 +4,14 @@ This document expands on the high level points in [merge_tool_spec.md](../merge_
 
 ## CLI Interface
 ```
-python merge_tool.py --refs <A.ref.yaml> <B.ref.yaml> [--intent union] [--strategy prefer-a] [--out <path>]
+python merge_tool.py --refs <A.ref.yaml> <B.ref.yaml> [<C.ref.yaml> ...] \
+    [--intent union] [--strategy prefer] [--priority A B C] [--out <path>]
 ```
-- `--refs` specifies one or more reference files.
+- `--refs` specifies two or more IdeaMark reference files. The order of files sets default priority when no explicit `--priority` is given.
 - `--intent` indicates how extensively the patterns should be combined (`intersection`, `union`, `hybrid`, `synthesis`).
-- `--strategy` controls conflict resolution (`manual`, `prefer-a`, `prefer-b`, `annotate`).
-- `--out` may be a filename or directory. When a directory is given, the merged file is named `merged-<uuid>.yaml` and stored there.
+- `--strategy` controls conflict resolution (`manual`, `prefer`, `annotate`, `synthesis`). `prefer-a` and `prefer-b` remain accepted aliases when exactly two references are supplied.
+- `--priority` lists reference aliases in descending priority for the `prefer` strategy. When omitted, the order passed to `--refs` is used.
+- `--out` may be a filename or directory. When a directory is given, the tool creates subfolders `patterns/`, `refs/` and `summary/` and stores output files under them using the common stem `merged-<uuid>`.
 
 ## Conflict Detection
 The fields checked for conflicting content are:
@@ -19,8 +21,8 @@ The fields checked for conflicting content are:
 
 Detection heuristics depend on the merge strategy:
 - **manual**: simple text comparison; if different, include TODO placeholders in the output.
-- **prefer-a / prefer-b**: conflicts are detected but resolved by selecting the preferred pattern's text.
-- **annotate**: embed both versions in a block quote with annotation markers.
+- **prefer**: conflicts are detected but resolved according to the priority list. When exactly two references are provided, `prefer-a` and `prefer-b` behave as priority `[A,B]` or `[B,A]`.
+- **annotate**: embed all versions in a block quote with annotation markers in their priority order.
 - **synthesis**: generate a synthesized text via an LLM prompt tailored to the provider (e.g., OpenAI, Anthropic). Providers may define custom prompt templates.
 
 ## Placeholder Format
@@ -48,6 +50,13 @@ The optional report is saved alongside the merged file using `.md` or `.json` ex
 - `strategy`: conflict resolution strategy
 - `conflicts`: list of fields and how they were resolved
 - `output`: filename of the merged pattern
+
+## Output Directory Structure
+When `--out` points to a directory, three files are produced with the same UUID stem:
+- `patterns/merged-<uuid>.yaml` – the merged pattern document.
+- `refs/merged-<uuid>.ref.yaml` – a machine generated reference capturing provenance.
+- `summary/merged-<uuid>.md` – the human readable summary report.
+Users are encouraged to publish these three files together in their repository or file share service to allow others to audit how the merge was performed.
 
 ## Validation Workflow
 1. Load each referenced pattern and validate it against `schema/ideamark.schema.yaml`.
