@@ -206,23 +206,23 @@ The server provides structured logging and health checks:
 - Environment variable based secret management
 - CORS configuration for cross-origin requests
 
-## Connecting to ChatGPT via MCP
+## Connecting Chat LLMs via MCP
 
-To connect ChatGPT with this server, set `MCP_SERVER_URL` (or a similarly named variable) in your ChatGPT tool configuration to the base URL of the MCP server. During initialization ChatGPT will call `\<MCP_SERVER_URL>/tools/list` to discover available tools.
+To connect ChatGPT, Claude, or any other chat-based LLM with this server, set `MCP_SERVER_URL` (or the equivalent variable for your client) to the base URL of the MCP server. During initialization the client will call `<MCP_SERVER_URL>/tools/list` to discover available tools.
 
 You can generate a development JWT for testing:
 
 ```python
 from mcp_server.auth.jwt_auth import create_dev_token
 
-token = create_dev_token("chatgpt-dev", admin=True)
+token = create_dev_token("chat-client-dev", admin=True)
 print(token)
 ```
 
-Include the token when ChatGPT or any client makes requests:
+Include the token when your chat client makes requests:
 
 ```bash
 curl -H "Authorization: Bearer $TOKEN" http://localhost:8000/v1/pattern/example
 ```
 
-See the [OpenAI MCP documentation](https://platform.openai.com/docs/assistants/mcp) for more details.
+See the [OpenAI MCP documentation](https://platform.openai.com/docs/mcp) for more details.
