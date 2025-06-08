@@ -86,6 +86,8 @@ docker run -d \
 | `JWT_ALGORITHM` | `HS256` | JWT algorithm |
 | `JWT_EXPIRATION_HOURS` | `24` | Token expiration time |
 | `LOG_LEVEL` | `INFO` | Logging level |
+| `OAUTH_CLIENT_ID` | | OAuth client ID |
+| `OAUTH_CLIENT_SECRET` | | OAuth client secret |
 | `CORS_ORIGINS` | `*` | CORS allowed origins |
 | `HOST` | `0.0.0.0` | Server bind host |
 | `PORT` | `8000` | Server port |
