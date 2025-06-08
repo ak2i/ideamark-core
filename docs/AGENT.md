@@ -68,6 +68,14 @@ Include in the body:
 
 ---
 
+## MCP Integration
+
+For technical instructions on connecting tools and agents via the Model Context
+Protocol (MCP), see the resources in
+[`docs/dev/mcp_integration/`](dev/mcp_integration/).
+
+---
+
 ## Future Capabilities (Optional)
 
 Agents may eventually assist with:
