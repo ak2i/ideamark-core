@@ -6,10 +6,10 @@ sys.path.insert(0, '/home/ubuntu/repos/ideamark-core/tools/src')
 
 def test_imports():
     try:
-        from main import app
+        from mcp_server.main import app
         print("✓ FastAPI app created successfully")
         
-        from auth.jwt_auth import create_dev_token
+        from mcp_server.auth.jwt_auth import create_dev_token
         token = create_dev_token("test-user", admin=True)
         print(f"✓ JWT token created: {token[:20]}...")
         
