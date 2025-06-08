@@ -5,7 +5,7 @@ import os
 import uuid
 from datetime import datetime
 
-from auth.jwt_auth import get_current_user
+from auth import get_current_user
 from storage.local_storage import LocalStorage
 from models.pattern_models import (
     PatternResponse,

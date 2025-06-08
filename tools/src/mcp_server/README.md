@@ -24,6 +24,8 @@ A Docker-based Model Context Protocol (MCP) server for IdeaMark pattern operatio
 
 ### Health & Monitoring
 - `GET /health` - Health check with dependency status
+- `GET /oauth/login` - Redirect to OAuth provider
+- `GET /oauth/callback` - Exchange code for token
 
 ## Quick Start
 
@@ -40,6 +42,11 @@ pip install -r requirements.txt
 export WORK_DIR=/tmp/mcp_data
 export JWT_SECRET_KEY=dev-secret-key
 export LOG_LEVEL=INFO
+export OAUTH_CLIENT_ID=your-client-id
+export OAUTH_CLIENT_SECRET=your-client-secret
+export OAUTH_AUTHORIZATION_URL=https://provider.example/auth
+export OAUTH_TOKEN_URL=https://provider.example/token
+export OAUTH_REDIRECT_URI=http://localhost:8000/oauth/callback
 ```
 
 3. **Run the server**:
@@ -82,6 +89,11 @@ docker run -d \
 | `CORS_ORIGINS` | `*` | CORS allowed origins |
 | `HOST` | `0.0.0.0` | Server bind host |
 | `PORT` | `8000` | Server port |
+| `OAUTH_CLIENT_ID` | | OAuth client ID |
+| `OAUTH_CLIENT_SECRET` | | OAuth client secret |
+| `OAUTH_AUTHORIZATION_URL` | | OAuth authorization endpoint |
+| `OAUTH_TOKEN_URL` | | OAuth token endpoint |
+| `OAUTH_REDIRECT_URI` | | Redirect URI registered with provider |
 
 ## Authentication
 
@@ -91,6 +103,15 @@ The server supports JWT token authentication. For local development, you can gen
 from mcp_server.auth.jwt_auth import create_dev_token
 token = create_dev_token("dev-user", admin=True)
 print(f"Authorization: Bearer {token}")
+```
+
+You can also authenticate via an external OAuth provider. Set the OAuth environment
+variables above, then visit `/oauth/login` to begin the flow. After completing
+authorization the server returns a JWT and sets an `access_token` cookie.
+Example command line login using `curl`:
+
+```bash
+curl -L http://localhost:8000/oauth/login
 ```
 
 ## Storage Structure
