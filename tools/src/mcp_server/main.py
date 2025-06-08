@@ -10,11 +10,11 @@ import logging
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from api.patterns import router as patterns_router
-from api.health import router as health_router
-from api.mcp_metadata import router as metadata_router
-from auth import get_current_user
-from auth.oauth import router as oauth_router
+from mcp_server.api.patterns import router as patterns_router
+from mcp_server.api.health import router as health_router
+from mcp_server.api.mcp_metadata import router as metadata_router
+from mcp_server.auth import get_current_user
+from mcp_server.auth.oauth import router as oauth_router
 from utils.logging import get_logger
 from utils.config import Config
 
