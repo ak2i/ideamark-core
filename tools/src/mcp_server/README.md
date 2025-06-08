@@ -42,6 +42,7 @@ pip install -r requirements.txt
 export WORK_DIR=/tmp/mcp_data
 export JWT_SECRET_KEY=dev-secret-key
 export LOG_LEVEL=INFO
+export AUTH_DISABLED=true  # disable auth for local testing
 export OAUTH_CLIENT_ID=your-client-id
 export OAUTH_CLIENT_SECRET=your-client-secret
 export OAUTH_AUTHORIZATION_URL=https://provider.example/auth
@@ -85,6 +86,7 @@ docker run -d \
 | `JWT_SECRET_KEY` | `dev-secret-key` | JWT signing secret |
 | `JWT_ALGORITHM` | `HS256` | JWT algorithm |
 | `JWT_EXPIRATION_HOURS` | `24` | Token expiration time |
+| `AUTH_DISABLED` | `false` | Set to `true` to disable authentication |
 | `LOG_LEVEL` | `INFO` | Logging level |
 | `OAUTH_CLIENT_ID` | | OAuth client ID |
 | `OAUTH_CLIENT_SECRET` | | OAuth client secret |
@@ -98,6 +100,8 @@ docker run -d \
 | `OAUTH_REDIRECT_URI` | | Redirect URI registered with provider |
 
 ## Authentication
+
+Authentication defaults to JWT or OAuth tokens. To disable all authentication (useful for local ChatGPT integration), set `AUTH_DISABLED=true`.
 
 The server supports JWT token authentication. For local development, you can generate a dev token:
 
