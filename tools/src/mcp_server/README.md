@@ -230,55 +230,59 @@ curl -H "Authorization: Bearer $TOKEN" http://localhost:8000/v1/pattern/example
 
 See the [OpenAI MCP documentation](https://platform.openai.com/docs/mcp) for more details.
 
-## ローカルでのLLM接続確認
+## LLM Connectivity Test with Docker
 
-以下の手順でMCP Serverを起動し、OpenAI や Anthropic などのLLMに接続できるか確認できます。
+You can verify that the MCP server can reach providers such as OpenAI or
+Anthropic without relying on your local Python environment. The example below
+uses the provided Dockerfile.
 
-1. **依存ライブラリのインストール**
+1. **Build the Docker image**
    ```bash
-   cd tools
-   pip install -r requirements.txt
+   cd tools/src/mcp_server
+   docker build -t ideamark-mcp-server .
    ```
 
-2. **APIキーの設定**
-   利用するプロバイダーに応じて環境変数を設定します。例として OpenAI と Anthropic のキーを設定する場合:
+2. **Run the server with API keys**
+   Set the keys for the providers you want to test and expose port `8000`.
    ```bash
-   export OPENAI_API_KEY=sk-your-openai-key
-   export ANTHROPIC_API_KEY=sk-your-anthropic-key
-   ```
-   `LLM_PROVIDER` を指定すると特定のプロバイダーを強制できます。
-   ```bash
-   export LLM_PROVIDER=openai   # openai / anthropic / mistral / google / local
-   ```
-
-3. **サーバーの起動**
-   ```bash
-   cd src/mcp_server
-   python -m uvicorn main:app --port 8000 --reload
+   docker run -d --name mcp-test \
+      -p 8000:8000 \
+      -e OPENAI_API_KEY=sk-your-openai-key \
+      -e ANTHROPIC_API_KEY=sk-your-anthropic-key \
+      -e LLM_PROVIDER=openai \
+      ideamark-mcp-server
    ```
 
-4. **テストリクエストで確認**
-   2つのパターンを保存した後、`/v1/pattern/merge` エンドポイントを `strategy`=`synthesis` で呼び出すと、設定したLLMを利用して統合が行われます。
+3. **Create a development token**
    ```bash
-   TOKEN=$(python - <<'PY'
+   TOKEN=$(docker run --rm ideamark-mcp-server python - <<'PY'
 from mcp_server.auth.jwt_auth import create_dev_token
-print(create_dev_token('llm-test', admin=True))
+print(create_dev_token("llm-test", admin=True))
 PY
 )
+   ```
 
+4. **Send test requests**
+   After saving two patterns, call `/v1/pattern/merge` with `strategy=synthesis`.
+   The response should include a `merged_content` field produced by the chosen LLM.
+   ```bash
    curl -X POST -H "Content-Type: application/json" \
         -H "Authorization: Bearer $TOKEN" \
-        -d '{"content": {"id": "A", "title": "Pattern A", "problem": {"summary": "A"}, "solution": {"approach": "A"}}}' \
+        -d '{"content":{"id":"A","title":"Pattern A","problem":{"summary":"A"},"solution":{"approach":"A"}}}' \
         http://localhost:8000/v1/pattern/A
 
    curl -X POST -H "Content-Type: application/json" \
         -H "Authorization: Bearer $TOKEN" \
-        -d '{"content": {"id": "B", "title": "Pattern B", "problem": {"summary": "B"}, "solution": {"approach": "B"}}}' \
+        -d '{"content":{"id":"B","title":"Pattern B","problem":{"summary":"B"},"solution":{"approach":"B"}}}' \
         http://localhost:8000/v1/pattern/B
 
    curl -X POST -H "Content-Type: application/json" \
         -H "Authorization: Bearer $TOKEN" \
-        -d '{"pattern_ids": ["A", "B"], "strategy": "synthesis"}' \
+        -d '{"pattern_ids":["A","B"],"strategy":"synthesis"}' \
         http://localhost:8000/v1/pattern/merge
    ```
-   成功すると `merged_content` フィールドにLLMが生成した内容が返り、接続確認ができます。
+
+5. **Stop the container** when you are done:
+   ```bash
+   docker rm -f mcp-test
+   ```
