@@ -79,7 +79,7 @@ This self‑description is central to MCP’s flexibility. For example, a Node.j
 
 #### External Service Integration
 - **GitHub API**: Support GitHub repository access with token authentication
-- **LLM Services**: Compatible with OpenAI, Anthropic, and local LLM endpoints
+- **LLM Services**: Compatible with OpenAI, Anthropic, Mistral, Google (Gemini), and local LLM endpoints; dynamic provider selection enables adding new providers via configuration
 - **File Systems**: Support both local and network-mounted storage backends
 - **Monitoring**: Integration with standard observability tools (Prometheus, Grafana)
 
