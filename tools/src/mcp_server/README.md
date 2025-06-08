@@ -107,13 +107,27 @@ token = create_dev_token("dev-user", admin=True)
 print(f"Authorization: Bearer {token}")
 ```
 
-You can also authenticate via an external OAuth provider. Set the OAuth environment
-variables above, then visit `/oauth/login` to begin the flow. After completing
-authorization the server returns a JWT and sets an `access_token` cookie.
-Example command line login using `curl`:
+## OAuth Authentication
+
+You can also authenticate via an external OAuth2 provider. After login the
+provider returns an access token, which is used the same as a JWT token in
+`Authorization: Bearer` headers.
+
+Set your OAuth credentials:
 
 ```bash
-curl -L http://localhost:8000/oauth/login
+export OAUTH_CLIENT_ID=my-client-id
+export OAUTH_CLIENT_SECRET=my-secret
+export OAUTH_ISSUER_URL=https://auth.example.com
+```
+
+Initiate the login flow from your application:
+
+```python
+import webbrowser
+
+auth_url = f"{OAUTH_ISSUER_URL}/authorize?client_id={OAUTH_CLIENT_ID}&response_type=token"
+webbrowser.open(auth_url)
 ```
 
 ## Storage Structure
