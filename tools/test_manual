@@ -1,0 +1,51 @@
+id: IdeaMark-189baa4c-daef-4a85-9da1-9964a167c5e9
+title: 'TODO: resolve conflict between IdeaMark-aa85ca44-5dab-4e0f-b6a7-35f20260bd3b,
+  IdeaMark-9c5aad9c-7de7-4f3a-8b3e-452795654cd0 for title'
+type: 'TODO: resolve conflict between IdeaMark-aa85ca44-5dab-4e0f-b6a7-35f20260bd3b,
+  IdeaMark-9c5aad9c-7de7-4f3a-8b3e-452795654cd0 for type'
+context:
+- Difficulty sustaining local agricultural machinery service industry due to declining
+  demand
+- Declining profitability of coastal fisheries and difficulty attracting young fishers
+problem:
+  summary: 'TODO: resolve conflict between IdeaMark-aa85ca44-5dab-4e0f-b6a7-35f20260bd3b,
+    IdeaMark-9c5aad9c-7de7-4f3a-8b3e-452795654cd0 for problem.summary'
+solution:
+  approach: 'TODO: resolve conflict between IdeaMark-aa85ca44-5dab-4e0f-b6a7-35f20260bd3b,
+    IdeaMark-9c5aad9c-7de7-4f3a-8b3e-452795654cd0 for solution.approach'
+metadata:
+  scalefactor:
+    TODO: resolve conflict between pattern_0, pattern_1 for metadata.scalefactor
+    options:
+      option_0:
+        timewindow: 2-4 years
+        spacemetrics: rural areas
+        regions:
+        - Shimane Prefecture
+        - mountainous areas
+        organizations:
+        - maintenance companies
+        - JA cooperatives
+      option_1:
+        timewindow: 2-5 years
+        spacemetrics: coastal regions
+        regions:
+        - Seto Inland Sea
+        - Hokkaido
+        organizations:
+        - fishing cooperatives
+        - municipal governments
+  tags:
+  - agriculture
+  - maintenance
+  - mobility
+  - rural transport
+  - fisheries
+  - e-commerce
+  - regional economy
+access:
+  uri: https://github.com/ak2i/ideamark-core/blob/main/patterns/merged-189baa4c-daef-4a85-9da1-9964a167c5e9.yaml
+  visibility: public
+linked_patterns:
+- IdeaMark-aa85ca44-5dab-4e0f-b6a7-35f20260bd3b
+- IdeaMark-9c5aad9c-7de7-4f3a-8b3e-452795654cd0

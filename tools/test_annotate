@@ -1,0 +1,51 @@
+id: IdeaMark-247f079e-59b1-4f84-bf41-399e80a20d50
+title: '[From IdeaMark-aa85ca44-5dab-4e0f-b6a7-35f20260bd3b] Pivot from Agricultural
+  Machinery Maintenance to a Multi-purpose Mobility Platform
+
+  [From IdeaMark-9c5aad9c-7de7-4f3a-8b3e-452795654cd0] Direct-to-Consumer E-Commerce
+  Platform by Fishing Cooperatives'
+type: '[From IdeaMark-aa85ca44-5dab-4e0f-b6a7-35f20260bd3b] business_model_pivot
+
+  [From IdeaMark-9c5aad9c-7de7-4f3a-8b3e-452795654cd0] digital_commerce_model'
+context:
+- Difficulty sustaining local agricultural machinery service industry due to declining
+  demand
+- Declining profitability of coastal fisheries and difficulty attracting young fishers
+problem:
+  summary: '[From IdeaMark-aa85ca44-5dab-4e0f-b6a7-35f20260bd3b] Decreasing sales
+    and maintenance contracts make it difficult to sustain rural service businesses
+
+    [From IdeaMark-9c5aad9c-7de7-4f3a-8b3e-452795654cd0] Overreliance on wholesale
+    markets leads to low margins and makes it difficult for new entrants'
+solution:
+  approach: '[From IdeaMark-aa85ca44-5dab-4e0f-b6a7-35f20260bd3b] Repurpose used agricultural
+    machinery as shared regional mobility platforms, not limited to farming tasks
+
+    [From IdeaMark-9c5aad9c-7de7-4f3a-8b3e-452795654cd0] Establish a fan-based subscription
+    e-commerce model for direct shipping from ports'
+metadata:
+  tags:
+  - agriculture
+  - maintenance
+  - mobility
+  - rural transport
+  - fisheries
+  - e-commerce
+  - regional economy
+  scalefactor:
+    annotation: Merged from 2 sources
+    sources: {}
+    timewindow: 2-4 years
+    spacemetrics: rural areas
+    regions:
+    - Shimane Prefecture
+    - mountainous areas
+    organizations:
+    - maintenance companies
+    - JA cooperatives
+access:
+  uri: https://github.com/ak2i/ideamark-core/blob/main/patterns/merged-247f079e-59b1-4f84-bf41-399e80a20d50.yaml
+  visibility: public
+linked_patterns:
+- IdeaMark-aa85ca44-5dab-4e0f-b6a7-35f20260bd3b
+- IdeaMark-9c5aad9c-7de7-4f3a-8b3e-452795654cd0
