@@ -35,6 +35,7 @@ A Docker-based Model Context Protocol (MCP) server for IdeaMark pattern operatio
 ```bash
 cd tools
 pip install -r requirements.txt
+cd ..
 ```
 
 2. **Copy the sample environment file**:
@@ -45,7 +46,7 @@ cp .env.example .env
 
 3. **Run the server**:
 ```bash
-cd src/mcp_server
+cd lib/mcp_server
 python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
@@ -179,14 +180,13 @@ The MCP server integrates with:
 
 ### Running Tests
 ```bash
-cd tools
-python -m pytest src/mcp_server/tests/
+python lib/mcp_server/simple_test.py
 ```
 
 ### Code Style
 ```bash
-black src/mcp_server/
-flake8 src/mcp_server/
+black lib/mcp_server/
+flake8 lib/mcp_server/
 ```
 
 ## Monitoring
