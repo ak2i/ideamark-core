@@ -46,3 +46,20 @@ async def health_check() -> Dict[str, Any]:
             "average_response_time_ms": 150
         }
     }
+
+
+@router.get("/mcp/v1/ping")
+async def ping() -> Dict[str, Any]:
+    """Lightweight health ping for MCP clients."""
+    return {"status": "ok", "timestamp": datetime.utcnow().isoformat() + "Z"}
+
+
+@router.get("/mcp/v1/initialize")
+async def initialize() -> Dict[str, Any]:
+    """Return basic server info for MCP initialization."""
+    return {
+        "status": "initialized",
+        "server": "IdeaMark MCP Server",
+        "version": "1.0.0",
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+    }

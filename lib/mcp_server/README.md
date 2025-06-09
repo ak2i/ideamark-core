@@ -13,14 +13,14 @@ A Docker-based Model Context Protocol (MCP) server for IdeaMark pattern operatio
 ## API Endpoints
 
 ### Pattern Operations
-- `GET /v1/pattern/{id}` - Fetch pattern by ID
-- `POST /v1/pattern/{id}` - Save/update pattern
-- `POST /v1/pattern/validate` - Validate pattern schema compliance
-- `POST /v1/pattern/merge` - Merge multiple patterns
-- `GET /v1/pattern/search` - Search patterns with filters
+- `GET /mcp/v1/pattern/{id}` - Fetch pattern by ID
+- `POST /mcp/v1/pattern/{id}` - Save/update pattern
+- `POST /mcp/v1/pattern/validate` - Validate pattern schema compliance
+- `POST /mcp/v1/pattern/merge` - Merge multiple patterns
+- `GET /mcp/v1/pattern/search` - Search patterns with filters
 
 ### Reference Operations
-- `POST /v1/ref/generate` - Auto-generate .ref.yaml from pattern
+- `POST /mcp/v1/ref/generate` - Auto-generate .ref.yaml from pattern
 
 ### Health & Monitoring
 - `GET /health` - Health check with dependency status
@@ -149,7 +149,7 @@ The `WORK_DIR` contains:
 ### Fetch Pattern
 ```bash
 curl -H "Authorization: Bearer YOUR_TOKEN" \
-  http://localhost:8000/v1/pattern/IdeaMark-123
+  http://localhost:8000/mcp/v1/pattern/IdeaMark-123
 ```
 
 ### Validate Pattern
@@ -158,12 +158,12 @@ curl -X POST \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -d '{"content": {"id": "test", "title": "Test Pattern"}}' \
-  http://localhost:8000/v1/pattern/validate
+  http://localhost:8000/mcp/v1/pattern/validate
 ```
 
 ### Search Patterns
 ```bash
-curl "http://localhost:8000/v1/pattern/search?q=authentication&type=security&limit=5" \
+curl "http://localhost:8000/mcp/v1/pattern/search?q=authentication&type=security&limit=5" \
   -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
@@ -218,7 +218,7 @@ print(token)
 Include the token when your chat client makes requests:
 
 ```bash
-curl -H "Authorization: Bearer $TOKEN" http://localhost:8000/v1/pattern/example
+curl -H "Authorization: Bearer $TOKEN" http://localhost:8000/mcp/v1/pattern/example
 ```
 
 See the [OpenAI MCP documentation](https://platform.openai.com/docs/mcp) for more details.
@@ -256,23 +256,23 @@ PY
    ```
 
 4. **Send test requests**
-   After saving two patterns, call `/v1/pattern/merge` with `strategy=synthesis`.
+   After saving two patterns, call `/mcp/v1/pattern/merge` with `strategy=synthesis`.
    The response should include a `merged_content` field produced by the chosen LLM.
    ```bash
    curl -X POST -H "Content-Type: application/json" \
         -H "Authorization: Bearer $TOKEN" \
         -d '{"content":{"id":"A","title":"Pattern A","problem":{"summary":"A"},"solution":{"approach":"A"}}}' \
-        http://localhost:8000/v1/pattern/A
+        http://localhost:8000/mcp/v1/pattern/A
 
    curl -X POST -H "Content-Type: application/json" \
         -H "Authorization: Bearer $TOKEN" \
         -d '{"content":{"id":"B","title":"Pattern B","problem":{"summary":"B"},"solution":{"approach":"B"}}}' \
-        http://localhost:8000/v1/pattern/B
+        http://localhost:8000/mcp/v1/pattern/B
 
    curl -X POST -H "Content-Type: application/json" \
         -H "Authorization: Bearer $TOKEN" \
         -d '{"pattern_ids":["A","B"],"strategy":"synthesis"}' \
-        http://localhost:8000/v1/pattern/merge
+        http://localhost:8000/mcp/v1/pattern/merge
    ```
 
 5. **Stop the container** when you are done:

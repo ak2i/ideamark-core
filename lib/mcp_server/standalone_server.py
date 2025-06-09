@@ -267,7 +267,7 @@ async def health_check() -> Dict[str, Any]:
     }
 
 
-@app.get("/v1/pattern/{pattern_id}", response_model=PatternResponse)
+@app.get("/mcp/v1/pattern/{pattern_id}", response_model=PatternResponse)
 async def fetch_pattern(
     pattern_id: str, user: Dict[str, Any] = Depends(get_current_user)
 ):
@@ -293,7 +293,7 @@ async def fetch_pattern(
     )
 
 
-@app.post("/v1/pattern/{pattern_id}", response_model=PatternResponse)
+@app.post("/mcp/v1/pattern/{pattern_id}", response_model=PatternResponse)
 async def save_pattern_endpoint(
     pattern_id: str,
     request: PatternSaveRequest,
@@ -320,7 +320,7 @@ async def save_pattern_endpoint(
     )
 
 
-@app.post("/v1/pattern/validate", response_model=PatternValidationResponse)
+@app.post("/mcp/v1/pattern/validate", response_model=PatternValidationResponse)
 async def validate_pattern_endpoint(
     request: PatternValidateRequest, user: Dict[str, Any] = Depends(get_current_user)
 ):
@@ -344,7 +344,7 @@ async def validate_pattern_endpoint(
     )
 
 
-@app.post("/v1/ref/generate", response_model=RefGenerationResponse)
+@app.post("/mcp/v1/ref/generate", response_model=RefGenerationResponse)
 async def generate_ref(
     request: RefGenerateRequest, user: Dict[str, Any] = Depends(get_current_user)
 ):
@@ -394,7 +394,7 @@ async def generate_ref(
     )
 
 
-@app.post("/v1/pattern/merge", response_model=PatternMergeResponse)
+@app.post("/mcp/v1/pattern/merge", response_model=PatternMergeResponse)
 async def merge_patterns(
     request: PatternMergeRequest, user: Dict[str, Any] = Depends(get_current_user)
 ):
@@ -455,7 +455,7 @@ async def merge_patterns(
     )
 
 
-@app.get("/v1/pattern/search", response_model=PatternSearchResponse)
+@app.get("/mcp/v1/pattern/search", response_model=PatternSearchResponse)
 async def search_patterns(
     q: str = Query(..., description="Search query"),
     type: Optional[str] = Query(None, description="Filter by pattern type"),

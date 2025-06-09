@@ -17,58 +17,58 @@ def _get_tools() -> List[Dict[str, Any]]:
         {
             "operation": "pattern.fetch",
             "method": "GET",
-            "path": "/v1/pattern/{pattern_id}",
+            "path": "/mcp/v1/pattern/{pattern_id}",
             "description": "Retrieve a pattern by ID",
         },
         {
             "operation": "pattern.save",
             "method": "POST",
-            "path": "/v1/pattern/{pattern_id}",
+            "path": "/mcp/v1/pattern/{pattern_id}",
             "description": "Save or update a pattern",
         },
         {
             "operation": "pattern.validate",
             "method": "POST",
-            "path": "/v1/pattern/validate",
+            "path": "/mcp/v1/pattern/validate",
             "description": "Validate pattern content against the schema",
         },
         {
             "operation": "ref.generate",
             "method": "POST",
-            "path": "/v1/ref/generate",
+            "path": "/mcp/v1/ref/generate",
             "description": "Generate a .ref.yaml from pattern content",
         },
         {
             "operation": "pattern.merge",
             "method": "POST",
-            "path": "/v1/pattern/merge",
+            "path": "/mcp/v1/pattern/merge",
             "description": "Merge multiple patterns together",
         },
         {
             "operation": "pattern.search",
             "method": "GET",
-            "path": "/v1/pattern/search",
+            "path": "/mcp/v1/pattern/search",
             "description": "Search available pattern references",
         },
     ]
 
 
-@router.get("/mcp/tools/list")
+@router.get("/mcp/v1/tools/list")
 async def list_tools() -> Dict[str, Any]:
     """Return metadata describing available MCP operations.
 
     Example response:
     {
         "tools": [
-            {"operation": "pattern.fetch", "method": "GET", "path": "/v1/pattern/{pattern_id}"},
-            {"operation": "pattern.save", "method": "POST", "path": "/v1/pattern/{pattern_id}"}
+            {"operation": "pattern.fetch", "method": "GET", "path": "/mcp/v1/pattern/{pattern_id}"},
+            {"operation": "pattern.save", "method": "POST", "path": "/mcp/v1/pattern/{pattern_id}"}
         ]
     }
     """
     return {"tools": _get_tools()}
 
 
-@router.get("/mcp/resources/list")
+@router.get("/mcp/v1/resources/list")
 async def list_resources() -> Dict[str, Any]:
     """List pattern and reference resources accessible from this server.
 
@@ -96,7 +96,7 @@ async def list_resources() -> Dict[str, Any]:
     return {"patterns": patterns, "refs": refs}
 
 
-@router.get("/mcp/prompts/list")
+@router.get("/mcp/v1/prompts/list")
 async def list_prompts() -> Dict[str, Any]:
     """Return available prompt templates for LLM operations.
 
