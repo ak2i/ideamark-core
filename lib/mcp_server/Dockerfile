@@ -2,11 +2,11 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-COPY tools/src/mcp_server/requirements.txt requirements.txt
+COPY lib/mcp_server/requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the entire source tree so shared modules like `utils` are present
-COPY tools/src/ /app
+COPY lib/ /app
 
 ENV PYTHONPATH=/app
 

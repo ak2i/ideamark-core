@@ -2,7 +2,12 @@
 
 import sys
 import os
-sys.path.insert(0, '/home/ubuntu/repos/ideamark-core/tools/src')
+from pathlib import Path
+
+# Allow running this test from anywhere
+root_dir = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(root_dir / "lib"))
+sys.path.insert(0, str(root_dir))
 
 def test_imports():
     try:

@@ -2,6 +2,8 @@
 
 This directory contains helper scripts and utilities for managing, validating, and visualizing IdeaMark patterns.
 
+Shared Python packages live under `/lib/` so they can be reused by any CLI tool or server.  Scripts here simply import from those modules and provide command‑line entry points.
+
 ---
 
 ## Tool Categories

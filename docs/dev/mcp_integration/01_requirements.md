@@ -71,11 +71,11 @@ This self‑description is central to MCP’s flexibility. For example, a Node.j
 ### Integration Requirements
 
 #### Existing Component Integration
-- **PatternValidator**: Utilize `tools/src/merge/validators.py` for schema validation
-- **PatternMerger**: Leverage `tools/src/merge/core.py` for pattern combination operations
-- **PatternLoader**: Use `tools/src/io/pattern_loader.py` for flexible content loading
-- **LLM Providers**: Integrate with `tools/src/llm/providers.py` for AI-assisted operations
-- **Configuration**: Use `tools/src/utils/config.py` for centralized configuration management
+- **PatternValidator**: Utilize `lib/merge/validators.py` for schema validation
+- **PatternMerger**: Leverage `lib/merge/core.py` for pattern combination operations
+- **PatternLoader**: Use `lib/io/pattern_loader.py` for flexible content loading
+- **LLM Providers**: Integrate with `lib/llm/providers.py` for AI-assisted operations
+- **Configuration**: Use `lib/utils/config.py` for centralized configuration management
 
 #### External Service Integration
 - **GitHub API**: Support GitHub repository access with token authentication

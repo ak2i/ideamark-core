@@ -5,12 +5,15 @@ import sys
 from pathlib import Path
 from typing import List
 
-sys.path.insert(0, str(Path(__file__).parent))
+# Allow imports from the shared libraries under /lib
+root_dir = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(root_dir))
+sys.path.insert(0, str(root_dir / "lib"))
 
-from src.merge.core import PatternMerger
-from src.io.file_writer import FileWriter
-from src.utils.config import Config
-from src.utils.logging import setup_logging, get_logger
+from lib.merge.core import PatternMerger
+from lib.io.file_writer import FileWriter
+from lib.utils.config import Config
+from lib.utils.logging import setup_logging, get_logger
 
 @click.command()
 @click.option('--refs', multiple=True, required=True, 
