@@ -4,11 +4,14 @@ import click
 import sys
 from pathlib import Path
 from typing import List
+from dotenv import load_dotenv, find_dotenv
 
 # Allow imports from the shared libraries under /lib
 root_dir = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(root_dir))
 sys.path.insert(0, str(root_dir / "lib"))
+
+load_dotenv(find_dotenv())
 
 from lib.merge.core import PatternMerger
 from lib.io.file_writer import FileWriter
