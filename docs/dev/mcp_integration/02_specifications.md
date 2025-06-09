@@ -569,7 +569,7 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "lib.mcp_server.main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
 If you prefer a JavaScript runtime, a comparable container might use a Node.js or Deno base image:

@@ -9,7 +9,7 @@ logger = get_logger('validators')
 class PatternValidator:
     def __init__(self, schema_path: str = None):
         if schema_path is None:
-            schema_path = Path(__file__).parent.parent.parent.parent / "schema" / "ideamark.schema.yaml"
+            schema_path = Path(__file__).resolve().parents[2] / "schema" / "ideamark.schema.yaml"
         
         with open(schema_path, 'r') as f:
             self.schema = yaml.safe_load(f)

@@ -5,24 +5,20 @@ import os
 import uuid
 from datetime import datetime
 
-from mcp_server.auth import get_current_user
-from storage.local_storage import LocalStorage
-from models.pattern_models import (
+from ..auth import get_current_user
+from ..storage.local_storage import LocalStorage
+from ..models.pattern_models import (
     PatternResponse,
     PatternValidationResponse,
     RefGenerationResponse,
     PatternMergeResponse,
     PatternSearchResponse,
 )
-import sys
-import os
-
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../.."))
-from merge.validators import PatternValidator, validate_ref_structure
-from merge.core import PatternMerger
-from io.pattern_loader import PatternLoader
-from utils.config import Config
-from utils.logging import get_logger
+from ...merge.validators import PatternValidator, validate_ref_structure
+from ...merge.core import PatternMerger
+from ...io.pattern_loader import PatternLoader
+from ...utils.config import Config
+from ...utils.logging import get_logger
 
 logger = get_logger("patterns_api")
 router = APIRouter()

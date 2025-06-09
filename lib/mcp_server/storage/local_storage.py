@@ -1,11 +1,9 @@
 import os
 import yaml
-import sys
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../..'))
-from utils.logging import get_logger
+from ...utils.logging import get_logger
 
 logger = get_logger('local_storage')
 

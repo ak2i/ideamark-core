@@ -46,8 +46,7 @@ cp .env.example .env
 
 3. **Run the server**:
 ```bash
-cd lib/mcp_server
-python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+python -m uvicorn lib.mcp_server.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 4. **Access the API**:
@@ -104,7 +103,7 @@ Authentication defaults to JWT or OAuth tokens. To disable all authentication (u
 The server supports JWT token authentication. For local development, you can generate a dev token:
 
 ```python
-from mcp_server.auth.jwt_auth import create_dev_token
+from lib.mcp_server.auth.jwt_auth import create_dev_token
 token = create_dev_token("dev-user", admin=True)
 print(f"Authorization: Bearer {token}")
 ```
@@ -210,7 +209,7 @@ To connect ChatGPT, Claude, or any other chat-based LLM with this server, set `M
 You can generate a development JWT for testing:
 
 ```python
-from mcp_server.auth.jwt_auth import create_dev_token
+from lib.mcp_server.auth.jwt_auth import create_dev_token
 
 token = create_dev_token("chat-client-dev", admin=True)
 print(token)
@@ -250,7 +249,7 @@ uses the provided Dockerfile.
 3. **Create a development token**
    ```bash
    TOKEN=$(docker run --rm ideamark-mcp-server python - <<'PY'
-from mcp_server.auth.jwt_auth import create_dev_token
+from lib.mcp_server.auth.jwt_auth import create_dev_token
 print(create_dev_token("llm-test", admin=True))
 PY
 )
