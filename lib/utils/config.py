@@ -8,7 +8,10 @@ class Config:
     def __init__(self, config_path: str = None):
         if config_path is None:
             config_path = (
-                Path(__file__).parent.parent.parent / "config" / "default.yaml"
+                Path(__file__).parent.parent.parent
+                / "tools"
+                / "config"
+                / "default.yaml"
             )
 
         with open(config_path, "r") as f:
@@ -53,6 +56,7 @@ def load_prompts(prompts_path: str = None) -> Dict[str, str]:
     if prompts_path is None:
         prompts_path = (
             Path(__file__).parent.parent.parent
+            / "tools"
             / "config"
             / "prompts"
             / "synthesis.yaml"

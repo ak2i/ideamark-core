@@ -5,6 +5,12 @@ It enables AI-human collaboration in recognizing, composing, and evolving soluti
 
 This repository provides the core schema, examples, and tools for authoring and integrating IdeaMark templates.
 
+For local development or testing, copy `.env.example` to `.env` so the MCP server and merge tools can load required environment variables:
+
+```bash
+cp .env.example .env
+```
+
 ## License
 
 This repository is licensed under [Creative Commons Zero v1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/).

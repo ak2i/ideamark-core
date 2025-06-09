@@ -37,18 +37,11 @@ cd tools
 pip install -r requirements.txt
 ```
 
-2. **Set environment variables**:
+2. **Copy the sample environment file**:
 ```bash
-export WORK_DIR=/tmp/mcp_data
-export JWT_SECRET_KEY=dev-secret-key
-export LOG_LEVEL=INFO
-export AUTH_DISABLED=true  # disable auth for local testing
-export OAUTH_CLIENT_ID=your-client-id
-export OAUTH_CLIENT_SECRET=your-client-secret
-export OAUTH_AUTHORIZATION_URL=https://provider.example/auth
-export OAUTH_TOKEN_URL=https://provider.example/token
-export OAUTH_REDIRECT_URI=http://localhost:8000/oauth/callback
+cp .env.example .env
 ```
+   Edit `.env` if you need to customize any values.
 
 3. **Run the server**:
 ```bash
@@ -96,6 +89,7 @@ docker run -d \
 | `OAUTH_AUTHORIZATION_URL` | | OAuth authorization endpoint |
 | `OAUTH_TOKEN_URL` | | OAuth token endpoint |
 | `OAUTH_REDIRECT_URI` | | Redirect URI registered with provider |
+| `OAUTH_SCOPE` | `openid profile email` | OAuth scopes requested |
 | `OPENAI_API_KEY` | | OpenAI API key |
 | `ANTHROPIC_API_KEY` | | Anthropic API key |
 | `MISTRAL_API_KEY` | | Mistral API key |
