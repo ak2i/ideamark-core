@@ -5,24 +5,24 @@ import os
 from pathlib import Path
 
 # Allow running this test from anywhere
-root_dir = Path(__file__).resolve().parent.parent
+root_dir = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(root_dir / "lib"))
 sys.path.insert(0, str(root_dir))
 
 def test_imports():
     try:
-        from mcp_server.main import app
+        from lib.mcp_server.main import app
         print("✓ FastAPI app created successfully")
         
-        from mcp_server.auth.jwt_auth import create_dev_token
+        from lib.mcp_server.auth.jwt_auth import create_dev_token
         token = create_dev_token("test-user", admin=True)
         print(f"✓ JWT token created: {token[:20]}...")
         
-        from storage.local_storage import LocalStorage
+        from lib.mcp_server.storage.local_storage import LocalStorage
         storage = LocalStorage("/tmp/test")
         print("✓ Local storage initialized")
         
-        from models.pattern_models import PatternResponse
+        from lib.mcp_server.models.pattern_models import PatternResponse
         print("✓ Pattern models imported")
         
         print("All imports successful!")

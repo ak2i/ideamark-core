@@ -1,13 +1,10 @@
 from fastapi import APIRouter
 from typing import Dict, Any, List
 import os
-import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../..'))
-
-from storage.local_storage import LocalStorage
-from utils.config import load_prompts
-from utils.logging import get_logger
+from ..storage.local_storage import LocalStorage
+from ...utils.config import load_prompts
+from ...utils.logging import get_logger
 
 logger = get_logger('mcp_metadata')
 router = APIRouter()

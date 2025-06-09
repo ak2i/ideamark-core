@@ -3,11 +3,9 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
 import os
-import sys
 from typing import Dict, Any, Optional
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../..'))
-from utils.logging import get_logger
+from ...utils.logging import get_logger
 
 logger = get_logger('jwt_auth')
 

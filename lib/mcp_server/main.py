@@ -3,20 +3,17 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import uvicorn
 import os
-import sys
 from datetime import datetime
 from typing import Dict, Any
 import logging
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-
-from mcp_server.api.patterns import router as patterns_router
-from mcp_server.api.health import router as health_router
-from mcp_server.api.mcp_metadata import router as metadata_router
-from mcp_server.auth import get_current_user
-from mcp_server.auth.oauth import router as oauth_router
-from utils.logging import get_logger
-from utils.config import Config
+from .api.patterns import router as patterns_router
+from .api.health import router as health_router
+from .api.mcp_metadata import router as metadata_router
+from .auth import get_current_user
+from .auth.oauth import router as oauth_router
+from ..utils.logging import get_logger
+from ..utils.config import Config
 
 logger = get_logger("mcp_server")
 
@@ -80,4 +77,4 @@ if __name__ == "__main__":
     host = os.getenv("HOST", "0.0.0.0")
     log_level = os.getenv("LOG_LEVEL", "info").lower()
 
-    uvicorn.run("main:app", host=host, port=port, log_level=log_level, reload=False)
+    uvicorn.run("lib.mcp_server.main:app", host=host, port=port, log_level=log_level, reload=False)

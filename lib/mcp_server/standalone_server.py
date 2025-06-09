@@ -14,10 +14,8 @@ import time
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 import logging
-import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-from mcp_server.api.mcp_metadata import router as metadata_router
+from .api.mcp_metadata import router as metadata_router
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("mcp_server")
