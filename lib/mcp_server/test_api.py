@@ -11,8 +11,12 @@ def test_mcp_server():
 
     import sys
     import os
+    from pathlib import Path
 
-    sys.path.insert(0, "/home/ubuntu/repos/ideamark-core/tools/src/mcp_server")
+    # Ensure imports work when running this test standalone
+    root_dir = Path(__file__).resolve().parent.parent
+    sys.path.insert(0, str(root_dir / "lib"))
+    sys.path.insert(0, str(root_dir))
 
     from jose import jwt
     from datetime import datetime, timedelta, timezone

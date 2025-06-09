@@ -65,7 +65,7 @@ python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 1. **Build the container**:
 ```bash
 # Run from the repository root so shared modules are included
-docker build -f tools/src/mcp_server/Dockerfile -t ideamark-mcp-server .
+docker build -f lib/mcp_server/Dockerfile -t ideamark-mcp-server .
 ```
 
 2. **Run with environment variables**:
@@ -239,7 +239,7 @@ uses the provided Dockerfile.
 1. **Build the Docker image**
    ```bash
    # Build from the repository root so all modules are copied
-   docker build -f tools/src/mcp_server/Dockerfile -t ideamark-mcp-server .
+   docker build -f lib/mcp_server/Dockerfile -t ideamark-mcp-server .
    ```
 
 2. **Run the server with API keys**

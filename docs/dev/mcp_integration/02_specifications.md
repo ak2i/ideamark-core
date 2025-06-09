@@ -462,7 +462,7 @@ Content-Security-Policy: default-src 'self'
 
 **PatternValidator Integration**:
 ```python
-from tools.src.merge.validators import PatternValidator
+from lib.merge.validators import PatternValidator
 
 validator = PatternValidator()
 errors = validator.validate_pattern(pattern_data)
@@ -483,7 +483,7 @@ if (errors.length) {
 
 **LLM Provider Integration**:
 ```python
-from tools.src.llm.providers import create_llm_provider
+from lib.llm.providers import create_llm_provider
 
 llm_provider = create_llm_provider('openai', config)
 if llm_provider:
@@ -503,7 +503,7 @@ if (provider) {
 
 **Configuration Management**:
 ```python
-from tools.src.utils.config import Config
+from lib.utils.config import Config
 
 config = Config()
 github_token = os.getenv('GITHUB_TOKEN')
