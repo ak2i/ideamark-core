@@ -59,7 +59,7 @@ def test_mcp_server():
 
     try:
         response = requests.post(
-            f"{base_url}/v1/pattern/validate",
+            f"{base_url}/mcp/v1/pattern/validate",
             headers=headers,
             json={"content": test_pattern},
         )
@@ -78,7 +78,7 @@ def test_mcp_server():
     print("\n3. Testing pattern save...")
     try:
         response = requests.post(
-            f"{base_url}/v1/pattern/test-pattern-123",
+            f"{base_url}/mcp/v1/pattern/test-pattern-123",
             headers=headers,
             json={"content": test_pattern},
         )
@@ -96,7 +96,7 @@ def test_mcp_server():
     print("\n4. Testing pattern fetch...")
     try:
         response = requests.get(
-            f"{base_url}/v1/pattern/test-pattern-123", headers=headers
+            f"{base_url}/mcp/v1/pattern/test-pattern-123", headers=headers
         )
         print(f"Pattern fetch: {response.status_code}")
         if response.status_code == 200:
@@ -112,7 +112,7 @@ def test_mcp_server():
     print("\n5. Testing ref generation...")
     try:
         response = requests.post(
-            f"{base_url}/v1/ref/generate",
+            f"{base_url}/mcp/v1/ref/generate",
             headers=headers,
             json={"pattern": test_pattern},
         )
@@ -130,7 +130,7 @@ def test_mcp_server():
     print("\n6. Testing pattern search...")
     try:
         response = requests.get(
-            f"{base_url}/v1/pattern/search?q=test&limit=5", headers=headers
+            f"{base_url}/mcp/v1/pattern/search?q=test&limit=5", headers=headers
         )
         print(f"Pattern search: {response.status_code}")
         if response.status_code == 200:
@@ -156,7 +156,7 @@ def test_mcp_server():
 
     try:
         response = requests.post(
-            f"{base_url}/v1/pattern/test-pattern-456",
+            f"{base_url}/mcp/v1/pattern/test-pattern-456",
             headers=headers,
             json={"content": test_pattern_2},
         )
@@ -167,7 +167,7 @@ def test_mcp_server():
 
     try:
         response = requests.post(
-            f"{base_url}/v1/ref/generate",
+            f"{base_url}/mcp/v1/ref/generate",
             headers=headers,
             json={"pattern": test_pattern_2},
         )
@@ -178,7 +178,7 @@ def test_mcp_server():
 
     try:
         response = requests.post(
-            f"{base_url}/v1/pattern/merge",
+            f"{base_url}/mcp/v1/pattern/merge",
             headers=headers,
             json={
                 "pattern_ids": ["test-pattern-123", "test-pattern-456"],

@@ -6,7 +6,7 @@ This document provides detailed technical specifications for implementing the MC
 
 ### 1. Pattern Retrieval: `pattern.fetch(id)`
 
-**Endpoint**: `GET /v1/pattern/{id}`
+**Endpoint**: `GET /mcp/v1/pattern/{id}`
 
 **Description**: Retrieve a complete pattern by its unique identifier.
 
@@ -62,7 +62,7 @@ This document provides detailed technical specifications for implementing the MC
 
 ### 2. Pattern Storage: `pattern.save(id, content)`
 
-**Endpoint**: `POST /v1/pattern/{id}`
+**Endpoint**: `POST /mcp/v1/pattern/{id}`
 
 **Description**: Save or update a pattern with validation and access control.
 
@@ -125,7 +125,7 @@ This document provides detailed technical specifications for implementing the MC
 
 ### 3. Pattern Validation: `pattern.validate(content)`
 
-**Endpoint**: `POST /v1/pattern/validate`
+**Endpoint**: `POST /mcp/v1/pattern/validate`
 
 **Description**: Validate pattern content against the IdeaMark schema without saving.
 
@@ -189,7 +189,7 @@ This document provides detailed technical specifications for implementing the MC
 
 ### 4. Reference Generation: `ref.generate(pattern)`
 
-**Endpoint**: `POST /v1/ref/generate`
+**Endpoint**: `POST /mcp/v1/ref/generate`
 
 **Description**: Generate a `.ref.yaml` file from pattern content with proper metadata.
 
@@ -251,7 +251,7 @@ This document provides detailed technical specifications for implementing the MC
 
 ### 5. Pattern Merging: `pattern.merge([ids])`
 
-**Endpoint**: `POST /v1/pattern/merge`
+**Endpoint**: `POST /mcp/v1/pattern/merge`
 
 **Description**: Merge multiple patterns using configurable strategies and LLM assistance.
 
@@ -323,7 +323,7 @@ This document provides detailed technical specifications for implementing the MC
 
 ### 6. Pattern Search: `pattern.search(query)`
 
-**Endpoint**: `GET /v1/pattern/search`
+**Endpoint**: `GET /mcp/v1/pattern/search`
 
 **Description**: Search patterns by keywords, tags, or metadata with relevance ranking.
 
