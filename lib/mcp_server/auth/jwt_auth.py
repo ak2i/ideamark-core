@@ -28,7 +28,7 @@ def create_access_token(data: Dict[str, Any], expires_delta: Optional[timedelta]
 
 def verify_token(token: str) -> Dict[str, Any]:
     try:
-        payload = jwt.decode(token, JWT_SECRET_KEY, algorithms=[JWT_ALGORITHM])
+        payload = jwt.decode(token, JWT_SECRET_KEY, algorithms=[JWT_ALGORITHM], audience="ideamark-api")
         return payload
     except JWTError as e:
         logger.warning(f"JWT verification failed: {e}")
@@ -58,9 +58,13 @@ async def get_current_user(credentials: Optional[HTTPAuthorizationCredentials] =
         
         return {
             "sub": user_id,
+            "iss": payload.get("iss"),
+            "aud": payload.get("aud"),
             "admin": payload.get("admin", False),
             "authenticated": True,
-            "exp": payload.get("exp")
+            "exp": payload.get("exp"),
+            "scopes": payload.get("scopes", []),
+            "permissions": payload.get("permissions", {})
         }
     except HTTPException:
         raise
@@ -75,7 +79,15 @@ async def get_current_user(credentials: Optional[HTTPAuthorizationCredentials] =
 def create_dev_token(user_id: str = "dev-user", admin: bool = True) -> str:
     data = {
         "sub": user_id,
+        "iss": "ideamark-mcp-server",
+        "aud": "ideamark-api",
         "admin": admin,
-        "iat": datetime.utcnow()
+        "iat": datetime.utcnow(),
+        "scopes": ["read", "write"],
+        "permissions": {
+            "patterns": ["read", "write"],
+            "refs": ["generate"],
+            "merge": ["execute"]
+        }
     }
     return create_access_token(data)
