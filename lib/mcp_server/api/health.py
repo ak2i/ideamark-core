@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException
 from datetime import datetime
 import os
 import time
+import requests
 from typing import Dict, Any
 
 from ...utils.logging import get_logger
@@ -19,11 +20,41 @@ async def health_check() -> Dict[str, Any]:
     
     uptime_seconds = int(time.time() - start_time)
     
-    dependencies = {
-        "schema_validator": "healthy",
-        "llm_provider": "healthy",
-        "github_api": "healthy"
-    }
+    dependencies = {}
+    
+    try:
+        from ...merge.validators import PatternValidator
+        from pathlib import Path
+        schema_path = str(Path(__file__).resolve().parents[3] / "schema" / "ideamark.schema.yaml")
+        validator = PatternValidator(schema_path)
+        dependencies["schema_validator"] = "healthy"
+    except Exception as e:
+        logger.warning(f"Schema validator health check failed: {e}")
+        dependencies["schema_validator"] = "unhealthy"
+    
+    try:
+        from ...llm.providers import OpenAIProvider
+        from ...utils.config import Config
+        config = Config()
+        llm_config = config.get_llm_config('openai')
+        provider = OpenAIProvider(llm_config)
+        dependencies["llm_provider"] = "healthy"
+    except Exception as e:
+        logger.warning(f"LLM provider health check failed: {e}")
+        dependencies["llm_provider"] = "unhealthy"
+    
+    try:
+        github_token = os.getenv('GITHUB_TOKEN')
+        if github_token:
+            response = requests.get('https://api.github.com/user', 
+                                  headers={'Authorization': f'token {github_token}'}, 
+                                  timeout=5)
+            dependencies["github_api"] = "healthy" if response.status_code == 200 else "unhealthy"
+        else:
+            dependencies["github_api"] = "healthy"
+    except Exception as e:
+        logger.warning(f"GitHub API health check failed: {e}")
+        dependencies["github_api"] = "unhealthy"
     
     try:
         work_dir = os.getenv("WORK_DIR", "/app/data")
