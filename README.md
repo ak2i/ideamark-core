@@ -24,6 +24,7 @@
    ```bash
    cd lib/mcp_server
    pip install -r requirements.txt
+   cd ../../
    ```
 
 4. **MCPサーバーをローカルで実行**
