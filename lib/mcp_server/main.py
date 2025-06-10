@@ -36,7 +36,7 @@ def create_app() -> FastAPI:
     )
 
     app.include_router(health_router, prefix="", tags=["health"])
-    app.include_router(patterns_router, prefix="/mcp/v1", tags=["patterns"])
+    app.include_router(patterns_router, prefix="/mcp", tags=["patterns"])
     app.include_router(metadata_router, prefix="", tags=["metadata"])
     app.include_router(oauth_router, prefix="", tags=["oauth"])
 
