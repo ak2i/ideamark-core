@@ -64,6 +64,33 @@ This allows AI and humans alike to:
 
 ---
 
+## Range, Granularity, Reference & Evidence
+
+These optional fields further specify scope and credibility:
+
+```yaml
+range:
+  spatial: regional
+  temporal: mid-term
+  social_scope: community
+
+granularity:
+  level: implementation
+  description: Optional note on why this level was chosen
+
+reference:
+  - label: JIS Z 8111
+    url: https://example.org/jis-z-8111
+    type: standard
+
+evidence:
+  - type: case-study
+    description: Supporting data or observation
+    url: https://example.org/example-evidence
+```
+
+Use them to clarify how broad or detailed the pattern is, cite standards, and attach evidence.
+
 ## URI & Access Model
 
 Each IdeaMark carries:

@@ -43,8 +43,22 @@ metadata:
     spacemetrics: "urban neighborhood"
     regions: ["Shikoku"]
     organizations: ["city council"]
-```
+range:
+  spatial: local
+  temporal: short-term
+  social_scope: community
+granularity:
+  level: strategic
+reference:
+  - label: Local Health Ordinance
+    url: https://example.org/health-ordinance
+    type: legal
+evidence:
+  - type: observation
+    description: Data collected from local clinic usage
+    url: https://example.org/clinic-data
 
+```
 **Tips:**
 - Keep field names lowercase and snake_case
 - Use plain strings or simple arrays — avoid deep nesting

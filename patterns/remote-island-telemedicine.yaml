@@ -21,6 +21,21 @@ metadata:
     organizations:
     - regional hospitals
     - local clinics
+range:
+  spatial: regional
+  temporal: mid-term
+  social_scope: community
+granularity:
+  level: implementation
+  description: Deployment details for telemedicine hubs
+reference:
+  - label: WHO Telemedicine Guidelines
+    url: https://www.who.int/publications/i/item/9789240018329
+    type: standard
+evidence:
+  - type: case-study
+    description: Okinawa remote islands telemedicine success
+    url: https://example.org/okinawa-case-study
 access:
   uri: https://github.com/ak2i/ideamark-core/blob/main/patterns/remote-island-telemedicine.yaml
   visibility: public
