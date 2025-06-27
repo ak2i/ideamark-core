@@ -92,6 +92,83 @@ properties:
             type: array
             items:
               type: string
+  range:
+    type: object
+    properties:
+      spatial:
+        type: string
+        enum:
+        - global
+        - national
+        - regional
+        - local
+        - site-specific
+      temporal:
+        type: string
+        enum:
+        - long-term
+        - mid-term
+        - short-term
+      social_scope:
+        type: string
+        enum:
+        - individual
+        - group
+        - organization
+        - community
+        - society
+        - civilization
+  granularity:
+    type: object
+    properties:
+      level:
+        type: string
+        enum:
+        - conceptual
+        - strategic
+        - tactical
+        - operational
+        - implementation
+      description:
+        type: string
+  reference:
+    type: array
+    items:
+      type: object
+      properties:
+        label:
+          type: string
+        url:
+          type: string
+          format: uri
+        type:
+          type: string
+          enum:
+          - standard
+          - glossary
+          - academic
+          - legal
+      required:
+      - label
+      - url
+  evidence:
+    type: array
+    items:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - case-study
+          - dataset
+          - experiment
+          - citation
+          - observation
+        description:
+          type: string
+        url:
+          type: string
+          format: uri
   usage_scenarios:
     type: array
     items:
