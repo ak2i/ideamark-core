@@ -39,3 +39,25 @@ evidence:
 access:
   uri: https://github.com/ak2i/ideamark-core/blob/main/patterns/remote-island-telemedicine.yaml
   visibility: public
+timeline:
+  - entity: task:telemedicine-setup
+    year: 2023
+    milestone: infrastructure buildout
+    status: completed
+dependencies:
+  - from: task:network-upgrade
+    to: task:telemedicine-setup
+    type: sequential
+    risk: medium
+observed_metrics:
+  - entity: task:patient-wait-time
+    metric: minutes
+    average: "15"
+    stdev: "5"
+patterns:
+  - type: delayed-decision
+    occurred_in: ["task:funding"]
+    severity: high
+hypotheses:
+  - text: Staff training delays may increase patient wait time
+    confidence: 0.6

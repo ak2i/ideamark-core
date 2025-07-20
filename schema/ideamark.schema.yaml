@@ -200,3 +200,68 @@ properties:
             - session
           contact:
             type: string
+  timeline:
+    type: array
+    items:
+      type: object
+      properties:
+        entity:
+          type: string
+        year:
+          type: integer
+        milestone:
+          type: string
+        status:
+          type: string
+      required:
+      - entity
+      - year
+      - milestone
+  dependencies:
+    type: array
+    items:
+      type: object
+      properties:
+        from:
+          type: string
+        to:
+          type: string
+        type:
+          type: string
+        risk:
+          type: string
+  observed_metrics:
+    type: array
+    items:
+      type: object
+      properties:
+        entity:
+          type: string
+        metric:
+          type: string
+        average:
+          type: string
+        stdev:
+          type: string
+  patterns:
+    type: array
+    items:
+      type: object
+      properties:
+        type:
+          type: string
+        occurred_in:
+          type: array
+          items:
+            type: string
+        severity:
+          type: string
+  hypotheses:
+    type: array
+    items:
+      type: object
+      properties:
+        text:
+          type: string
+        confidence:
+          type: number
