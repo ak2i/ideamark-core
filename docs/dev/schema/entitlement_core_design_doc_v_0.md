@@ -1,0 +1,285 @@
+# Entitlement-core DesignDoc v0.1（IdeaMark Template に準拠した拡張サンプル）
+
+```yaml
+$schema: https://json-schema.org/draft/2020-12/schema
+id: IdeaMark-7f1a1bce-7f9a-4a5d-9a56-3a9f6b1c2d34
+title: Entitlement-core
+type: system_design
+author: you@example.com
+provenance:
+  owner: platform-access-team
+  authors: [you@example.com]
+  last_updated: '2025-08-09T00:00:00Z'
+  license: CC0-1.0
+context:
+  - SaaSの機能開放/プラン差分を権利として扱いたい
+  - グループ委譲・有効期限付きの付与/剥奪を安全に運用したい
+problem:
+  summary: 主体(ユーザー/グループ)に機能やプロジェクト等のリソースへの権利を発行/失効し、属性ベースで利用可否を判定したい。
+  factors:
+    - 強整合が必要なのは発行/失効系で、参照/判定は高頻度
+    - CerbosやOso等のポリシーエンジン連携が前提
+solution:
+  approach: エンタイトルメント台帳(EntitlementLedger) + ABAC判定I/O + URN命名ガバナンスをコアに据える。
+  components:
+    - Entitlement entity と Grant/Revoke コマンド
+    - DecisionRequest/Response によるABAC I/O
+    - URN命名ルールと予約prefix
+  examples:
+    - feature:pro_reports を user:123 に member で付与
+metadata:
+  tags: [access-control, entitlement, abac, urn]
+range:
+  spatial: global
+  temporal: mid-term
+  social_scope: organization
+granularity:
+  level: strategic
+  description: 実装非依存のドメイン/コマンド/制約の合意を対象
+reference:
+  - { label: Cerbos, url: https://cerbos.dev, type: standard }
+  - { label: Oso,    url: https://www.osohq.com, type: standard }
+usage_scenarios:
+  - プラン機能開放の管理
+  - 組織内ロール委譲
+
+design:
+  version: ideamark-design/0.1
+
+  taxonomy:
+    domain: access
+    subdomain: entitlement
+    patterns: [EntitlementLedger, ABACGuard, URNGovernance]
+    maturity: draft
+    compat: [Cerbos-attrs, Oso]
+
+  vocabulary:
+    reserved_prefixes: [user, group, feature, project, doc]
+    relation_vocab: [member, owner, viewer]
+    action_vocab: [use, read, write, admin]
+    resource_kinds: [feature, document, project]
+
+  applicability:
+    applies_when:
+      - SaaSの機能開放/プラン差分をエンタイトルメントで管理する
+      - グループ/組織を介した委譲（group:*）を扱う
+    not_applies_when:
+      - HFT級の超低レイテンシ(~µs)が必須
+    scale_consistency:
+      consistency: Strong for issuance; eventual for high-QPS checks
+      expected_qps:
+        issue: "<= hundreds/sec"
+        check: "<= tens of thousands/sec (cache前提)"
+    tradeoffs:
+      - 発行台帳を強整合にするとスループットは低下
+      - 監査イベントを厚くすると書き込みコスト上昇
+    regulatory_notes:
+      - PIIはattrs/claimsに格納しないかマスキング
+
+  comparability:
+    shape_signature:
+      id_scheme: "URN (prefix:slug)"
+      uniqueness: [subjectId, resourceId, relation]
+      time_semantics: "issuedAt <= expiresAt | null (ISO8601, UTC)"
+    capability_vector:
+      commands:
+        - "Grant(subjectId, resourceId, relation, idempotencyKey?) -> Entitlement"
+        - "Revoke(subjectId, resourceId, relation, reason?) -> Success"
+      queries:
+        - "ListUserEntitlements(subjectId, relation?, kindFilter?, page?, pageSize?)"
+        - "ListEntitledUsers(resourceId, relation, page?, pageSize?)"
+      policies:
+        - "DecisionRequest(principal, resource, action, context?) -> DecisionResponse(allow, reason?)"
+    constraint_set:
+      - (subjectId, resourceId, relation) は一意
+      - expiresAt は null または issuedAt より後
+      - time は ISO8601 / UTC 固定
+      - Id は reserved_prefixes 準拠の URN
+    observability_pack:
+      events: [EntitlementGranted, IdempotencyReused, EntitlementRevoked, EntitlementExpired, DecisionDenied]
+      metrics:
+        - grant.qps
+        - revoke.qps
+        - decision.allow_rate
+        - decision.latency_ms{p50,p95}
+        - entitlement.count{active,expired}
+      logs:
+        - security_audit(grant/revoke/deny)
+    evolvability_hooks:
+      versioning: relation語彙の非破壊追加、resource.kindの追加
+      delegation: group:* を subject として許容
+      ttl_policy: プランごとのデフォルト期限設定
+      adapters: [Cerbos, Oso]
+
+  naming:
+    style: camelCase
+    urn:
+      format: "<prefix>:<slug>"
+      reserved_prefixes: [user, group, feature, project, doc]
+      collision_policy: reject on issuance; suggest slug mutation
+
+  domain:
+    entities:
+      - name: Principal
+        ns: core
+        attrs:
+          - { name: id, type: Id, required: true, example: "user:123" }
+          - { name: roles, type: 'string[]', required: false }
+          - { name: attrs, type: 'map<string, any>', required: false }
+          - { name: claims, type: 'map<string, any>', required: false }
+      - name: Resource
+        ns: core
+        attrs:
+          - { name: id, type: Id, required: true, example: "feature:pro_reports" }
+          - { name: kind, type: string, required: true, enum: [feature, document, project] }
+          - { name: attrs, type: 'map<string, any>', required: false }
+      - name: Entitlement
+        ns: access
+        attrs:
+          - { name: subjectId, type: Id, required: true }
+          - { name: resourceId, type: Id, required: true }
+          - { name: relation, type: string, required: true, enum_ref: vocabulary.relation_vocab }
+          - { name: issuedAt, type: timestamp, required: false }
+          - { name: expiresAt, type: 'timestamp|null', required: false }
+          - { name: meta, type: 'map<string, any>', required: false }
+    valueObjects:
+      - name: DecisionContext
+        attrs:
+          - { name: time, type: timestamp, required: false }
+          - { name: ip, type: string, required: false }
+          - { name: userAgent, type: string, required: false }
+          - { name: sessionId, type: string, required: false }
+          - { name: extra, type: 'map<string, any>', required: false }
+      - name: DecisionRequest
+        attrs:
+          - { name: principal, type: Principal, required: true }
+          - { name: resource,  type: Resource, required: true }
+          - { name: action,    type: string, required: true, enum_ref: vocabulary.action_vocab }
+          - { name: context,   type: DecisionContext, required: false }
+      - name: DecisionResponse
+        attrs:
+          - { name: allow, type: boolean, required: true }
+          - { name: reason, type: string, required: false }
+          - { name: debug, type: 'map<string, any>', required: false }
+    enums: []
+    relations:
+      - name: EntitlementUniq
+        kind: UNIQUE
+        on: [subjectId, resourceId, relation]
+
+  capabilities:
+    commands:
+      - name: Grant
+        input:
+          - { name: subjectId, type: Id, required: true }
+          - { name: resourceId, type: Id, required: true }
+          - { name: relation, type: string, required: true }
+          - { name: idempotencyKey, type: string, required: false }
+        output: [Entitlement]
+        invariants:
+          - EntitlementUniq を維持
+          - expiresAt が指定される場合は issuedAt より後
+      - name: Revoke
+        input:
+          - { name: subjectId, type: Id, required: true }
+          - { name: resourceId, type: Id, required: true }
+          - { name: relation, type: string, required: true }
+          - { name: reason, type: string, required: false }
+        output: [Success]
+    queries:
+      - name: ListUserEntitlements
+        input:
+          - { name: subjectId, type: Id, required: true }
+          - { name: relation, type: string, required: false }
+          - { name: kindFilter, type: string, required: false }
+          - { name: page, type: number, required: false }
+          - { name: pageSize, type: number, required: false, default: 50 }
+        output: ['Entitlement[]']
+      - name: ListEntitledUsers
+        input:
+          - { name: resourceId, type: Id, required: true }
+          - { name: relation, type: string, required: true }
+          - { name: page, type: number, required: false }
+          - { name: pageSize, type: number, required: false }
+        output: ['Id[]']
+
+  policies:
+    - name: CanUseFeature
+      dsl: |
+        allow(principal, resource, action) if
+          action == "use" &&
+          resource.kind == "feature" &&
+          exists Entitlement where
+            Entitlement.subjectId in [principal.id, principal.groups?] &&
+            Entitlement.resourceId == resource.id &&
+            Entitlement.relation in ["member","owner"] &&
+            (Entitlement.expiresAt is null or Entitlement.expiresAt > now());
+    - name: AdminOverride
+      dsl: "allow if 'admin' in principal.roles"
+
+  constraints:
+    - (subjectId, resourceId, relation) は一意
+    - expiresAt は null または issuedAt より後
+    - すべての time 系は ISO8601/UTC
+    - Id は reserved_prefixes の URN 準拠
+
+  scenarios:
+    - id: grant-pro-reports-to-user
+      given:
+        principal: user:123
+        resource: { id: feature:pro_reports, kind: feature }
+      when:
+        command: Grant
+        args: { subjectId: user:123, resourceId: feature:pro_reports, relation: member }
+      expect:
+        events: [EntitlementGranted]
+        queries:
+          - "ListUserEntitlements(user:123) includes (feature:pro_reports, member)"
+        decision:
+          - input: { principal: user:123, resource: feature:pro_reports, action: use }
+            allow: true
+
+    - id: deny-when-expired
+      precondition:
+        - "Entitlement(user:123, feature:pro_reports, member, expiresAt=2025-01-01T00:00:00Z)"
+      when:
+        decision:
+          input:
+            principal: user:123
+            resource: feature:pro_reports
+            action: use
+            context: { time: 2025-01-02T00:00:00Z }
+      expect:
+        allow: false
+        events: [DecisionDenied]
+
+    - id: idempotent-grant
+      when:
+        command: Grant
+        args: { subjectId: user:123, resourceId: feature:pro_reports, relation: member, idempotencyKey: abc }
+      then:
+        again:
+          command: Grant
+          args: { subjectId: user:123, resourceId: feature:pro_reports, relation: member, idempotencyKey: abc }
+      expect:
+        events: [IdempotencyReused]
+        queries:
+          - "ListUserEntitlements(user:123) count for (feature:pro_reports, member) == 1"
+
+    - id: group-delegation
+      given:
+        principal: { id: user:999, roles: [member], attrs: { groups: [group:pro_team] } }
+      precondition:
+        - "Grant(group:pro_team, feature:pro_reports, member)"
+      when:
+        decision:
+          input: { principal: user:999, resource: feature:pro_reports, action: use }
+      expect:
+        allow: true
+
+  artifacts:
+    typescript: https://example.com/artifacts/entitlement-core/types.ts
+    json_schema: https://example.com/artifacts/entitlement-core/schema.json
+    adr: https://example.com/artifacts/entitlement-core/adr-0001.md
+```
+

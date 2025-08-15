@@ -1,0 +1,329 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StoryCraft AI Core",
+  "type": "object",
+  "$defs": {
+    "SectionSpec": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "(example: text|chart|table|image)"
+        },
+        "template": {
+          "type": "string"
+        },
+        "requiredTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expression": {
+          "type": "string",
+          "description": "(example: interest.tag=='growth' && interest.value>0)"
+        },
+        "trueBranch": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SectionSpec"
+          }
+        },
+        "falseBranch": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SectionSpec"
+          }
+        },
+        "renderHints": {
+          "$ref": "#/$defs/RenderHints"
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ]
+    },
+    "RenderHints": {
+      "type": "object",
+      "properties": {
+        "layout": {
+          "type": "string",
+          "description": "(example: hero|grid|list)"
+        },
+        "tone": {
+          "type": "string",
+          "description": "(example: neutral|optimistic|critical)"
+        },
+        "ui": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    },
+    "SectionOutput": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "dataRef": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ]
+    },
+    "MediaInfo": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "mime": {
+          "type": "string"
+        },
+        "bytes": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "url",
+        "mime"
+      ]
+    },
+    "StorageTarget": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "(example: s3|gcs|local)"
+        },
+        "uri": {
+          "type": "string"
+        },
+        "lifecycle": {
+          "type": "string",
+          "description": "(example: ttl=30d)"
+        }
+      },
+      "required": [
+        "provider",
+        "uri"
+      ]
+    },
+    "NotificationConfig": {
+      "type": "object",
+      "properties": {
+        "channels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "(example: email|webpush)"
+        },
+        "recipients": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "templateId": {
+          "type": "string"
+        }
+      }
+    },
+    "InterestTemplate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "(example: template:interest:engagement_rate)"
+        },
+        "tag": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "valueType": {
+          "type": "string",
+          "description": "(example: percentage|score|count)"
+        },
+        "unit": {
+          "type": "string",
+          "description": "(example: %|件)"
+        },
+        "generatedBy": {
+          "type": "string",
+          "description": "(example: llm|function|human)"
+        },
+        "confidence": {
+          "type": "number"
+        },
+        "validated": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "tag",
+        "label"
+      ]
+    },
+    "StoryTemplate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "(example: template:story:quarterly_highlights)"
+        },
+        "title": {
+          "type": "string"
+        },
+        "applicableTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SectionSpec"
+          }
+        },
+        "renderingInstructions": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "sections"
+      ]
+    },
+    "Story": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "(example: story:2025q2_highlights)"
+        },
+        "templateId": {
+          "type": "string"
+        },
+        "tagsUsed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SectionOutput"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "templateId",
+        "createdAt"
+      ]
+    },
+    "OutputUnit": {
+      "type": "object",
+      "properties": {
+        "outputId": {
+          "type": "string",
+          "description": "(example: output:abc123)"
+        },
+        "type": {
+          "type": "string",
+          "description": "(enum_ref: vocabulary.output_type_vocab)"
+        },
+        "format": {
+          "type": "string",
+          "description": "(enum_ref: vocabulary.format_vocab)"
+        },
+        "title": {
+          "type": "string"
+        },
+        "generatedFromStoryId": {
+          "type": "string"
+        },
+        "bundleId": {
+          "type": "string"
+        },
+        "seriesId": {
+          "type": "string"
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SectionOutput"
+          }
+        },
+        "media": {
+          "$ref": "#/$defs/MediaInfo"
+        },
+        "storage": {
+          "$ref": "#/$defs/StorageTarget"
+        },
+        "notification": {
+          "$ref": "#/$defs/NotificationConfig"
+        },
+        "jwtMetadata": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "outputId",
+        "type",
+        "format",
+        "generatedFromStoryId",
+        "createdAt"
+      ]
+    }
+  }
+}

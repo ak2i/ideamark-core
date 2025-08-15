@@ -2,9 +2,12 @@ $schema: https://json-schema.org/draft/2020-12/schema
 title: IdeaMark Template Schema
 description: >
   Schema for documenting structured, reusable patterns for social, industrial,
-  or business challenges and solutions. Extended with optional "design" section
-  for system design (DesignDoc v0.1) to maximize searchability, reuse, and LLM-friendly comparison/composition.
+  or business challenges and solutions. It also supports an optional system-design
+  extension (`design`, DesignDoc v0.1) to maximize searchability, reuse, and
+  LLM-friendly comparison/composition. This schema is suitable for TypeScript
+  type generation, runtime validation, and AI interpretation.
 type: object
+additionalProperties: false
 required:
   - id
   - title
@@ -14,100 +17,91 @@ required:
 properties:
   id:
     type: string
-    pattern: ^IdeaMark-[a-fA-F0-9\-]{36}$
     description: Globally unique ID (UUID format prefixed with 'IdeaMark-')
+    pattern: ^IdeaMark-[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
   title:
     type: string
     description: Human-readable title of the IdeaMark pattern
   type:
     type: string
-    description: Domain or category tag (e.g., 'urban_design', 'platform_pivot')
+    description: Domain or category tag (e.g., 'system_design', 'urban_design', 'platform_pivot')
   author:
     type: string
-    description: 'Optional contact: GitHub ID, email, or SNS handle'
+    description: Optional contact; GitHub ID, email, or SNS handle
   provenance:
     type: object
+    additionalProperties: false
     description: Optional provenance for search/reuse
     properties:
-      owner:
-        type: string
+      owner: { type: string }
       authors:
         type: array
         items: { type: string }
       last_updated:
         type: string
         format: date-time
-      license:
-        type: string
+      license: { type: string }
   context:
     type: array
-    items:
-      type: string
     description: Background contexts where this pattern applies
+    items: { type: string }
   problem:
     type: object
+    additionalProperties: false
     required: [summary]
     properties:
-      summary:
-        type: string
+      summary: { type: string }
       factors:
         type: array
-        items:
-          type: string
+        items: { type: string }
   solution:
     type: object
+    additionalProperties: false
     required: [approach]
     properties:
-      approach:
-        type: string
+      approach: { type: string }
       components:
         type: array
-        items:
-          type: string
+        items: { type: string }
       examples:
         type: array
-        items:
-          type: string
+        items: { type: string }
   children:
     type: array
-    items:
-      type: string
     description: List of child IdeaMark IDs
+    items: { type: string }
   relations:
     type: object
+    additionalProperties: false
     properties:
       siblings:
         type: array
-        items:
-          type: string
+        items: { type: string }
       derived_from:
         type: array
-        items:
-          type: string
+        items: { type: string }
   metadata:
     type: object
+    additionalProperties: false
     properties:
       tags:
         type: array
-        items:
-          type: string
+        items: { type: string }
       scalefactor:
         type: object
+        additionalProperties: false
         properties:
-          timewindow:
-            type: string
-          spacemetrics:
-            type: string
+          timewindow: { type: string }
+          spacemetrics: { type: string }
           regions:
             type: array
-            items:
-              type: string
+            items: { type: string }
           organizations:
             type: array
-            items:
-              type: string
+            items: { type: string }
   range:
     type: object
+    additionalProperties: false
     properties:
       spatial:
         type: string
@@ -120,16 +114,17 @@ properties:
         enum: [individual, group, organization, community, society, civilization]
   granularity:
     type: object
+    additionalProperties: false
     properties:
       level:
         type: string
         enum: [conceptual, strategic, tactical, operational, implementation]
-      description:
-        type: string
+      description: { type: string }
   reference:
     type: array
     items:
       type: object
+      additionalProperties: false
       properties:
         label: { type: string }
         url:   { type: string, format: uri }
@@ -141,6 +136,7 @@ properties:
     type: array
     items:
       type: object
+      additionalProperties: false
       properties:
         type:
           type: string
@@ -149,30 +145,29 @@ properties:
         url: { type: string, format: uri }
   usage_scenarios:
     type: array
-    items:
-      type: string
+    items: { type: string }
   access:
     type: object
+    additionalProperties: false
     required: [uri, visibility]
     properties:
-      uri:
-        type: string
-        format: uri
+      uri: { type: string, format: uri }
       visibility:
         type: string
         enum: [public, private, restricted]
       credentials:
         type: object
+        additionalProperties: false
         properties:
           type:
             type: string
             enum: [basic_auth, oauth, token, session]
-          contact:
-            type: string
+          contact: { type: string }
   timeline:
     type: array
     items:
       type: object
+      additionalProperties: false
       properties:
         entity:   { type: string }
         year:     { type: integer }
@@ -183,6 +178,7 @@ properties:
     type: array
     items:
       type: object
+      additionalProperties: false
       properties:
         from: { type: string }
         to:   { type: string }
@@ -192,6 +188,7 @@ properties:
     type: array
     items:
       type: object
+      additionalProperties: false
       properties:
         entity:  { type: string }
         metric:  { type: string }
@@ -201,6 +198,7 @@ properties:
     type: array
     items:
       type: object
+      additionalProperties: false
       properties:
         type: { type: string }
         occurred_in:
@@ -211,6 +209,7 @@ properties:
     type: array
     items:
       type: object
+      additionalProperties: false
       properties:
         text: { type: string }
         confidence: { type: number }
@@ -221,186 +220,119 @@ properties:
   design:
     type: object
     description: Optional DesignDoc v0.1 for system design patterns and specs.
+    additionalProperties: false
     required: [version]
     properties:
       version:
         type: string
         pattern: ^ideamark-design/0\.1$
-      # Facets for search/reuse
       taxonomy:
         type: object
+        additionalProperties: false
         properties:
-          domain:     { type: string }
-          subdomain:  { type: string }
-          patterns:
-            type: array
-            items: { type: string }
-          maturity:
-            type: string
-            enum: [draft, beta, prod]
-          compat:
-            type: array
-            items: { type: string }
+          domain:    { type: string }
+          subdomain: { type: string }
+          patterns:  { type: array, items: { type: string } }
+          maturity:  { type: string, enum: [draft, beta, prod] }
+          compat:    { type: array, items: { type: string } }
       vocabulary:
         type: object
+        additionalProperties: false
         properties:
-          reserved_prefixes:
-            type: array
-            items: { type: string }
-          relation_vocab:
-            type: array
-            items: { type: string }
-          action_vocab:
-            type: array
-            items: { type: string }
-          resource_kinds:
-            type: array
-            items: { type: string }
+          reserved_prefixes: { type: array, items: { type: string } }
+          relation_vocab:    { type: array, items: { type: string } }
+          action_vocab:      { type: array, items: { type: string } }
+          resource_kinds:    { type: array, items: { type: string } }
+          # optional domain-specific sets (used by enum_ref)
+          tag_vocab:         { type: array, items: { type: string } }
+          format_vocab:      { type: array, items: { type: string } }
+          output_type_vocab: { type: array, items: { type: string } }
       applicability:
         type: object
+        additionalProperties: false
         properties:
-          applies_when:
-            type: array
-            items: { type: string }
-          not_applies_when:
-            type: array
-            items: { type: string }
+          applies_when:     { type: array, items: { type: string } }
+          not_applies_when: { type: array, items: { type: string } }
           scale_consistency:
             type: object
+            additionalProperties: false
             properties:
               consistency: { type: string }
               expected_qps:
                 type: object
-                additionalProperties:
-                  type: string
-          tradeoffs:
-            type: array
-            items: { type: string }
-          regulatory_notes:
-            type: array
-            items: { type: string }
+                additionalProperties: { type: string }
+          tradeoffs:        { type: array, items: { type: string } }
+          regulatory_notes: { type: array, items: { type: string } }
       comparability:
         type: object
+        additionalProperties: false
         properties:
           shape_signature:
             type: object
+            additionalProperties: false
             properties:
-              id_scheme:    { type: string }
-              uniqueness:
-                type: array
-                items: { type: string }
-              time_semantics:{ type: string }
+              id_scheme:     { type: string }
+              uniqueness:    { type: array, items: { type: string } }
+              time_semantics: { type: string }
           capability_vector:
             type: object
+            additionalProperties: false
             properties:
-              commands:
-                type: array
-                items: { type: string }
-              queries:
-                type: array
-                items: { type: string }
-              policies:
-                type: array
-                items: { type: string }
-          constraint_set:
-            type: array
-            items: { type: string }
+              commands: { type: array, items: { type: string } }
+              queries:  { type: array, items: { type: string } }
+              policies: { type: array, items: { type: string } }
+          constraint_set: { type: array, items: { type: string } }
           observability_pack:
             type: object
+            additionalProperties: false
             properties:
-              events:
-                type: array
-                items: { type: string }
-              metrics:
-                type: array
-                items: { type: string }
-              logs:
-                type: array
-                items: { type: string }
+              events:  { type: array, items: { type: string } }
+              metrics: { type: array, items: { type: string } }
+              logs:    { type: array, items: { type: string } }
           evolvability_hooks:
             type: object
+            additionalProperties: false
             properties:
               versioning: { type: string }
               delegation: { type: string }
               ttl_policy: { type: string }
-              adapters:
-                type: array
-                items: { type: string }
-
+              adapters:   { type: array, items: { type: string } }
       naming:
         type: object
+        additionalProperties: false
         properties:
           style: { type: string }
           urn:
             type: object
+            additionalProperties: false
             properties:
-              format: { type: string }
-              reserved_prefixes:
-                type: array
-                items: { type: string }
-              collision_policy: { type: string }
-
-      # Implementation-agnostic domain model
+              format:            { type: string }
+              reserved_prefixes: { type: array, items: { type: string } }
+              collision_policy:  { type: string }
       domain:
         type: object
+        additionalProperties: false
         properties:
-          entities:
-            type: array
-            items:
-              $ref: "#/$defs/EntityDef"
-          valueObjects:
-            type: array
-            items:
-              $ref: "#/$defs/ValueObjectDef"
-          enums:
-            type: array
-            items:
-              $ref: "#/$defs/EnumDef"
-          relations:
-            type: array
-            items:
-              $ref: "#/$defs/RelationDef"
-
+          entities:     { type: array, items: { $ref: "#/$defs/EntityDef" } }
+          valueObjects: { type: array, items: { $ref: "#/$defs/ValueObjectDef" } }
+          enums:        { type: array, items: { $ref: "#/$defs/EnumDef" } }
+          relations:    { type: array, items: { $ref: "#/$defs/RelationDef" } }
       capabilities:
         type: object
+        additionalProperties: false
         properties:
-          commands:
-            type: array
-            items:
-              $ref: "#/$defs/CommandDef"
-          queries:
-            type: array
-            items:
-              $ref: "#/$defs/QueryDef"
-
-      policies:
-        type: array
-        items:
-          $ref: "#/$defs/PolicyDef"
-
-      constraints:
-        type: array
-        items:
-          type: string
-
-      scenarios:
-        type: array
-        items:
-          $ref: "#/$defs/ScenarioDef"
-
+          commands: { type: array, items: { $ref: "#/$defs/CommandDef" } }
+          queries:  { type: array, items: { $ref: "#/$defs/QueryDef" } }
+      policies:    { type: array, items: { $ref: "#/$defs/PolicyDef" } }
+      constraints: { type: array, items: { type: string } }
+      scenarios:   { type: array, items: { $ref: "#/$defs/ScenarioDef" } }
       artifacts:
         type: object
-        description: Optional generated artifacts locations
+        additionalProperties: false
         properties:
-          typescript:
-            type: string
-            format: uri
-          json_schema:
-            type: string
-            format: uri
-          adr:
-            type: string
-            format: uri
+          typescript:  { type: string, format: uri }
+          json_schema: { type: string, format: uri }
+          adr:         { type: string, format: uri }
 
 # -------------------------------
 # $defs for DesignDoc v0.1
@@ -408,20 +340,20 @@ properties:
 $defs:
   AttrDef:
     type: object
+    additionalProperties: false
     required: [name, type]
     properties:
-      name: { type: string }
-      type: { type: string }
+      name:     { type: string }
+      type:     { type: string }
       required: { type: boolean, default: false }
-      enum:
-        type: array
-        items: { type: string }
+      enum:     { type: array, items: { type: string } }
       enum_ref:
         type: string
-        description: Path-like reference to vocabulary (e.g., 'vocabulary.relation_vocab')
+        description: Path-like pointer to a vocabulary list (e.g., 'vocabulary.relation_vocab')
       example: {}
   EntityDef:
     type: object
+    additionalProperties: false
     required: [name]
     properties:
       name: { type: string }
@@ -431,6 +363,7 @@ $defs:
         items: { $ref: "#/$defs/AttrDef" }
   ValueObjectDef:
     type: object
+    additionalProperties: false
     required: [name]
     properties:
       name: { type: string }
@@ -439,72 +372,56 @@ $defs:
         items: { $ref: "#/$defs/AttrDef" }
   EnumDef:
     type: object
+    additionalProperties: false
     required: [name, values]
     properties:
-      name: { type: string }
-      values:
-        type: array
-        items: { type: string }
+      name:   { type: string }
+      values: { type: array, items: { type: string } }
   RelationDef:
     type: object
+    additionalProperties: false
     required: [name, kind, on]
     properties:
       name: { type: string }
-      kind:
-        type: string
-        enum: [UNIQUE]
-      on:
-        type: array
-        items: { type: string }
+      kind: { type: string, enum: [UNIQUE] }
+      on:   { type: array, items: { type: string } }
   CommandDef:
     type: object
+    additionalProperties: false
     required: [name]
     properties:
       name: { type: string }
-      input:
-        type: array
-        items: { $ref: "#/$defs/AttrDef" }
-      output:
-        type: array
-        items: { type: string }
-      invariants:
-        type: array
-        items: { type: string }
+      input:  { type: array, items: { $ref: "#/$defs/AttrDef" } }
+      output: { type: array, items: { type: string } }
+      invariants: { type: array, items: { type: string } }
   QueryDef:
     type: object
+    additionalProperties: false
     required: [name]
     properties:
       name: { type: string }
-      input:
-        type: array
-        items: { $ref: "#/$defs/AttrDef" }
-      output:
-        type: array
-        items: { type: string }
+      input:  { type: array, items: { $ref: "#/$defs/AttrDef" } }
+      output: { type: array, items: { type: string } }
   PolicyDef:
     type: object
+    additionalProperties: false
     required: [name]
     properties:
       name: { type: string }
       dsl:  { type: string }
   ScenarioDef:
     type: object
+    additionalProperties: false
     required: [id]
     properties:
       id: { type: string }
-      given: { type: object, additionalProperties: true }
+      given: { type: object }
       precondition:
         type: array
         items:
           oneOf:
             - { type: string }
             - { type: object, additionalProperties: true }
-      when:
-        type: object
-        additionalProperties: true
-      then:
-        type: object
-        additionalProperties: true
-      expect:
-        type: object
-        additionalProperties: true
+      when: { type: object }
+      then: { type: object }
+      expect: { type: object }
