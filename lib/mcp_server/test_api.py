@@ -4,6 +4,9 @@ import requests
 import json
 import sys
 from datetime import datetime
+import pytest
+
+pytest.skip("requires running MCP server", allow_module_level=True)
 
 
 def test_mcp_server():
