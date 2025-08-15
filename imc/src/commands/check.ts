@@ -7,7 +7,9 @@ export async function cmdCheck(opts: { root: string; project: string }) {
   const project = opts.project;
   const prettier = existsSync(join(root, 'node_modules', '.bin', 'prettier')) ? join(root, 'node_modules', '.bin', 'prettier') : 'prettier';
   try {
-    execSync(`${prettier} -w "${join(root, 'projects', project)}"`, { stdio: 'inherit', shell: true });
+    execSync(`${prettier} -w "${join(root, 'projects', project)}"`, {
+      stdio: 'inherit',
+    });
   } catch {
     console.warn('Prettier not found or failed. Skipping format.');
   }
