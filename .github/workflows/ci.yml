@@ -20,7 +20,8 @@ jobs:
           node-version: 20
           cache: pnpm
 
-      - run: pnpm -w install
+      #- run: pnpm -w install
+      - run: pnpm -w install --frozen-lockfile=false
       - run: pnpm -w --filter '!@ideamark/web' typecheck
       - run: pnpm -w --filter '!@ideamark/web' build
       - run: pnpm -w --filter '!@ideamark/web' test

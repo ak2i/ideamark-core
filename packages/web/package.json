@@ -1,0 +1,10 @@
+{
+  "name": "@ideamark/web",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node -e \"console.log('web build placeholder')\"",
+    "typecheck": "node -e \"console.log('web typecheck placeholder')\"",
+    "test": "node -e \"console.log('web test placeholder')\""
+  }
+}
