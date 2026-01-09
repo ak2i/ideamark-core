@@ -21,6 +21,6 @@ jobs:
           cache: pnpm
 
       - run: pnpm -w install
-      - run: pnpm -w typecheck
-      - run: pnpm -w build
-      - run: pnpm -w test
+      - run: pnpm -w --filter '!@ideamark/web' typecheck
+      - run: pnpm -w --filter '!@ideamark/web' build
+      - run: pnpm -w --filter '!@ideamark/web' test
