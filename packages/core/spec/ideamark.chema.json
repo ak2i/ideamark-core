@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ideamark.example/schema/ideamark.json",
+  "type": "object",
+  "required": ["ideamark_version"],
+  "properties": {
+    "ideamark_version": { "type": "integer" }
+  },
+  "additionalProperties": true
+}
