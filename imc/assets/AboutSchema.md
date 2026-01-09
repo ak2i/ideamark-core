@@ -1,1 +1,0 @@
-# AboutSchema.md placeholder
