@@ -1,5 +1,5 @@
-import Ajv from 'ajv';
-import schema from '../spec/ideamark.schema.json' assert { type: 'json' };
+import { Ajv } from 'ajv';
+import schema from '../spec/ideamark.schema.json' with { type: 'json' };
 
 export type ValidationResult =
   | { ok: true }

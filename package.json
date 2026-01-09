@@ -11,7 +11,7 @@
     "typecheck": "pnpm -r typecheck"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
+    "@types/node": "^20.19.27",
     "eslint": "^9.0.0",
     "prettier": "^3.0.0",
     "typescript": "^5.5.0"
