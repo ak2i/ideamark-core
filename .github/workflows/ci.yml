@@ -1,0 +1,27 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.27.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      #- run: pnpm -w install
+      - run: pnpm -w install --frozen-lockfile
+      - run: pnpm -w --filter '!@ideamark/web' typecheck
+      - run: pnpm -w --filter '!@ideamark/web' build
+      - run: pnpm -w --filter '!@ideamark/web' test
