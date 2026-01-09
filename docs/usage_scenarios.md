@@ -5,6 +5,24 @@ This document positions those scenarios in terms of the data IdeaMark describes,
 
 ---
 
+## 0. Local Authoring (CLI v0)
+
+**Who:** Individual authors, small teams  
+**What:** Create documents from templates and validate them locally  
+**How:**
+- Use `ideamark new` to instantiate a template into a document file
+- Use `ideamark validate` to enforce the minimal frontmatter contract
+- Keep output local-first; no server required
+
+**Example (dev workflow):**
+```bash
+pnpm -C packages/cli build
+node packages/cli/dist/index.js new sample.md --template templates/official/software-development/workcell-v1/Decision6-WorkCell.ideamark.template.md
+node packages/cli/dist/index.js validate sample.md
+```
+
+---
+
 ## 1. Pattern Discovery
 
 **Who:** Researchers, designers, policymakers, strategists  

@@ -1,4 +1,4 @@
-import { Ajv } from 'ajv';
+import { Ajv2020 } from 'ajv/dist/2020.js';
 import { parse as parseYaml } from 'yaml';
 import schema from '../spec/ideamark.schema.json' with { type: 'json' };
 
@@ -6,7 +6,7 @@ export type SchemaValidationResult =
   | { ok: true }
   | { ok: false; errors: unknown };
 
-const ajv = new Ajv({ allErrors: true, strict: false });
+const ajv = new Ajv2020({ allErrors: true, strict: false });
 const validateFn = ajv.compile(schema);
 
 export function validateIdeaMark(doc: unknown): SchemaValidationResult {
