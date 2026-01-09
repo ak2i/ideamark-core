@@ -4,6 +4,7 @@ import { randomUUID } from 'node:crypto';
 import { Command } from 'commander';
 import { extractTemplateSlots, parse, validate } from '@ideamark/core';
 import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
+import { fetch } from 'undici';
 
 const program = new Command();
 
@@ -281,5 +282,469 @@ templateCommand
       console.error(JSON.stringify({ warnings: result.warnings }, null, 2));
     }
   });
+
+const assistCommand = program.command('assist').description('AI-assisted helpers');
+
+assistCommand
+  .command('fill')
+  .argument('<file>', 'IdeaMark document to fill')
+  .option('--source <path_or_url...>', 'Source files or URLs (repeatable)')
+  .option('--block <name>', 'Only fill the specified Slot')
+  .option('--model <name>', 'Model identifier (OpenAI-compatible)')
+  .option('--base-url <url>', 'OpenAI-compatible base URL')
+  .option('--api-key <key>', 'API key')
+  .option('--chunk-size <number>', 'Max characters per source chunk', '3000')
+  .option('--max-chunks <number>', 'Max chunks per slot', '4')
+  .option('--dry-run', 'Do not write changes')
+  .option('--json', 'Output machine-readable result')
+  .action(async (file, options) => {
+    let input: string;
+    try {
+      input = readFileSync(file, 'utf8');
+    } catch (error) {
+      const result = {
+        ok: false,
+        errors: [
+          {
+            code: 'file_read_error',
+            message: `failed to read file: ${file}`,
+          },
+        ],
+      };
+      console.error(JSON.stringify(result, null, 2));
+      process.exitCode = 1;
+      return;
+    }
+
+    const slotResult = extractTemplateSlots(input);
+    if (slotResult.slots.length === 0) {
+      console.error(
+        JSON.stringify(
+          { ok: false, errors: [{ code: 'no_slots', message: 'no slots found' }] },
+          null,
+          2,
+        ),
+      );
+      process.exitCode = 1;
+      return;
+    }
+
+    const selectedSlots = options.block
+      ? slotResult.slots.filter((slot) => slot.name === options.block)
+      : slotResult.slots;
+    if (selectedSlots.length === 0) {
+      console.error(
+        JSON.stringify(
+          {
+            ok: false,
+            errors: [
+              {
+                code: 'slot_not_found',
+                message: `slot not found: ${options.block}`,
+              },
+            ],
+          },
+          null,
+          2,
+        ),
+      );
+      process.exitCode = 1;
+      return;
+    }
+
+    let updated: AssistResult;
+    try {
+      const sources = await collectSources(options.source ?? []);
+      updated = await fillSlotsWithAi({
+        markdown: input,
+        slots: selectedSlots,
+        sources,
+        model: options.model,
+        baseUrl: options.baseUrl,
+        apiKey: options.apiKey,
+        chunkSize: Number(options.chunkSize),
+        maxChunks: Number(options.maxChunks),
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'unknown error';
+      console.error(
+        JSON.stringify(
+          { ok: false, errors: [{ code: 'assist_failed', message }] },
+          null,
+          2,
+        ),
+      );
+      process.exitCode = 1;
+      return;
+    }
+
+    if (!updated.ok) {
+      console.error(JSON.stringify(updated, null, 2));
+      process.exitCode = 1;
+      return;
+    }
+
+    if (options.json) {
+      console.log(JSON.stringify(updated, null, 2));
+      return;
+    }
+
+    if (options.dryRun) {
+      console.log(updated.markdown);
+      return;
+    }
+
+    writeFileSync(file, updated.markdown, 'utf8');
+    console.log(file);
+  });
+
+type AssistResult =
+  | {
+      ok: true;
+      markdown: string;
+      warnings: Array<{ code: string; message: string }>;
+      report: Array<{
+        slot: string;
+        chunks: Array<{ id: string; index: number }>;
+      }>;
+    }
+  | { ok: false; errors: Array<{ code: string; message: string }> };
+
+async function collectSources(
+  inputs: string[],
+): Promise<Array<{ id: string; content: string }>> {
+  const sources: Array<{ id: string; content: string }> = [];
+  for (const input of inputs) {
+    if (/^https?:\/\//i.test(input)) {
+      const response = await fetch(input);
+      if (!response.ok) {
+        throw new Error(`source_fetch_failed: ${input} (${response.status})`);
+      }
+      const text = await response.text();
+      sources.push({ id: input, content: text });
+      continue;
+    }
+
+    const content = readFileSync(input, 'utf8');
+    sources.push({ id: input, content });
+  }
+  return sources;
+}
+
+type SourceChunk = {
+  id: string;
+  content: string;
+  index: number;
+};
+
+async function fillSlotsWithAi(params: {
+  markdown: string;
+  slots: ReturnType<typeof extractTemplateSlots>['slots'];
+  sources: Array<{ id: string; content: string }>;
+  model?: string;
+  baseUrl?: string;
+  apiKey?: string;
+  chunkSize: number;
+  maxChunks: number;
+}): Promise<AssistResult> {
+  const baseUrl =
+    params.baseUrl ??
+    process.env.IDEAMARK_OPENAI_BASE_URL ??
+    process.env.OPENAI_BASE_URL ??
+    'https://api.openai.com/v1';
+  const apiKey =
+    params.apiKey ??
+    process.env.IDEAMARK_OPENAI_API_KEY ??
+    process.env.OPENAI_API_KEY;
+  const model = params.model ?? process.env.IDEAMARK_OPENAI_MODEL ?? 'gpt-4o-mini';
+
+  if (!apiKey) {
+    return {
+      ok: false,
+      errors: [{ code: 'missing_api_key', message: 'API key is required' }],
+    };
+  }
+
+  const warnings: Array<{ code: string; message: string }> = [];
+  const report: Array<{ slot: string; chunks: Array<{ id: string; index: number }> }> =
+    [];
+  const lines = params.markdown.split(/\r?\n/);
+  const updates: Array<{ yaml: string; start: number; end: number; slot: string }> =
+    [];
+  const sourceChunks = buildSourceChunks(params.sources, params.chunkSize);
+
+  for (const slot of params.slots) {
+    if (!slot.meta.blockStartLine || !slot.meta.blockEndLine) {
+      warnings.push({
+        code: 'slot_missing_block',
+        message: `slot "${slot.name}" has no YAML block to fill`,
+      });
+      continue;
+    }
+
+    const selectedChunks = selectSourceChunksForSlot(
+      slot,
+      sourceChunks,
+      params.maxChunks,
+    );
+    const prompt = buildSlotPrompt(slot, selectedChunks);
+    const response = await callOpenAi({
+      baseUrl,
+      apiKey,
+      model,
+      messages: [
+        {
+          role: 'system',
+          content:
+            'You are a template filler. Output only valid YAML. Do not add commentary.',
+        },
+        { role: 'user', content: prompt },
+      ],
+      temperature: 0.2,
+    });
+
+    report.push({
+      slot: slot.name,
+      chunks: selectedChunks.map((chunk) => ({ id: chunk.id, index: chunk.index })),
+    });
+
+    const yamlText = extractYamlFromResponse(response);
+    try {
+      parseYaml(yamlText);
+    } catch (error) {
+      warnings.push({
+        code: 'invalid_yaml',
+        message: `slot "${slot.name}" produced invalid YAML`,
+      });
+      continue;
+    }
+
+    updates.push({
+      slot: slot.name,
+      yaml: yamlText,
+      start: slot.meta.blockStartLine,
+      end: slot.meta.blockEndLine,
+    });
+  }
+
+  updates.sort((a, b) => b.start - a.start);
+  for (const update of updates) {
+    const contentStart = update.start;
+    const contentLength = update.end - update.start - 1;
+    const yamlLines = update.yaml.split(/\r?\n/);
+    lines.splice(contentStart, contentLength, ...yamlLines);
+  }
+
+  const provenanceResult = applyProvenance(lines.join('\n'), {
+    model,
+    baseUrl,
+    sources: params.sources.map((source) => source.id),
+    slots: params.slots.map((slot) => slot.name),
+  });
+
+  if ('message' in provenanceResult) {
+    warnings.push({
+      code: 'provenance_update_failed',
+      message: provenanceResult.message,
+    });
+    return { ok: true, markdown: lines.join('\n'), warnings, report };
+  }
+
+  return { ok: true, markdown: provenanceResult.markdown, warnings, report };
+}
+
+function buildSlotPrompt(
+  slot: ReturnType<typeof extractTemplateSlots>['slots'][number],
+  sources: SourceChunk[],
+): string {
+  const parts: string[] = [];
+  parts.push(`Slot: ${slot.heading}`);
+  if (slot.description) {
+    parts.push('Slot Description:');
+    parts.push(slot.description);
+  }
+  parts.push('YAML Skeleton:');
+  parts.push('```yaml');
+  parts.push(slot.yaml.trim());
+  parts.push('```');
+  parts.push('Sources:');
+  if (sources.length === 0) {
+    parts.push('- (none)');
+  }
+  for (const source of sources) {
+    parts.push(`--- SOURCE: ${source.id} [chunk ${source.index}] ---`);
+    parts.push(source.content);
+  }
+  parts.push(
+    [
+      'Instructions:',
+      '- Fill only the YAML keys provided in the skeleton.',
+      '- Do not add new keys.',
+      '- If information is missing, use empty strings or empty lists.',
+      '- Output YAML only.',
+    ].join('\n'),
+  );
+  return parts.join('\n\n');
+}
+
+function extractYamlFromResponse(response: string): string {
+  const fenceMatch = response.match(/```(?:yaml|yml)?\s*([\s\S]*?)```/i);
+  if (fenceMatch) {
+    return fenceMatch[1].trim();
+  }
+  return response.trim();
+}
+
+function buildSourceChunks(
+  sources: Array<{ id: string; content: string }>,
+  maxChars: number,
+): SourceChunk[] {
+  const chunks: SourceChunk[] = [];
+  for (const source of sources) {
+    const parts = splitSourceContent(source.content, maxChars);
+    parts.forEach((content, index) => {
+      chunks.push({ id: source.id, content, index });
+    });
+  }
+  return chunks;
+}
+
+function splitSourceContent(content: string, maxChars: number): string[] {
+  const paragraphs = content.split(/\n{2,}/);
+  const chunks: string[] = [];
+  let current = '';
+
+  for (const paragraph of paragraphs) {
+    if (paragraph.trim() === '') {
+      continue;
+    }
+    if (current.length + paragraph.length + 2 <= maxChars) {
+      current = current ? `${current}\n\n${paragraph}` : paragraph;
+      continue;
+    }
+    if (current) {
+      chunks.push(current);
+      current = '';
+    }
+    if (paragraph.length > maxChars) {
+      for (let i = 0; i < paragraph.length; i += maxChars) {
+        chunks.push(paragraph.slice(i, i + maxChars));
+      }
+    } else {
+      current = paragraph;
+    }
+  }
+
+  if (current) {
+    chunks.push(current);
+  }
+
+  return chunks;
+}
+
+function applyProvenance(
+  markdown: string,
+  meta: {
+    model: string;
+    baseUrl: string;
+    sources: string[];
+    slots: string[];
+  },
+): { ok: true; markdown: string } | { ok: false; message: string } {
+  const parsed = parseFrontmatter(markdown);
+  if ('errors' in parsed) {
+    return { ok: false, message: 'frontmatter is missing or invalid' };
+  }
+
+  const frontmatter = { ...parsed.frontmatter };
+  const provenance = Array.isArray(frontmatter.provenance)
+    ? frontmatter.provenance.slice()
+    : [];
+  provenance.push({
+    source: 'ideamark-cli',
+    at: new Date().toISOString(),
+    task: 'assist.fill',
+    model: meta.model,
+    base_url: meta.baseUrl,
+    slots: meta.slots,
+    inputs: meta.sources,
+  });
+  frontmatter.provenance = provenance;
+
+  const renderedFrontmatter = stringifyYaml(frontmatter).trimEnd();
+  const outputText = `---\n${renderedFrontmatter}\n---\n${parsed.body}`;
+  return { ok: true, markdown: outputText };
+}
+
+function selectSourceChunksForSlot(
+  slot: ReturnType<typeof extractTemplateSlots>['slots'][number],
+  chunks: SourceChunk[],
+  maxChunks: number,
+): SourceChunk[] {
+  const query = [
+    slot.heading,
+    slot.description,
+    slot.yaml,
+  ]
+    .join(' ')
+    .toLowerCase()
+    .split(/[^a-z0-9_]+/g)
+    .filter((token) => token.length >= 3);
+  const uniqueTerms = Array.from(new Set(query));
+
+  const scored = chunks.map((chunk) => {
+    const text = chunk.content.toLowerCase();
+    let score = 0;
+    for (const term of uniqueTerms) {
+      if (text.includes(term)) {
+        score += 1;
+      }
+    }
+    return { chunk, score };
+  });
+
+  scored.sort((a, b) => b.score - a.score);
+  const selected = scored.filter((item) => item.score > 0).slice(0, maxChunks);
+  if (selected.length > 0) {
+    return selected.map((item) => item.chunk);
+  }
+
+  return chunks.slice(0, maxChunks);
+}
+
+async function callOpenAi(params: {
+  baseUrl: string;
+  apiKey: string;
+  model: string;
+  messages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }>;
+  temperature: number;
+}): Promise<string> {
+  const response = await fetch(`${params.baseUrl.replace(/\/+$/, '')}/chat/completions`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${params.apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: params.model,
+      messages: params.messages,
+      temperature: params.temperature,
+    }),
+  });
+
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`openai_error: ${response.status} ${text}`);
+  }
+
+  const data = (await response.json()) as {
+    choices?: Array<{ message?: { content?: string } }>;
+  };
+  const content = data.choices?.[0]?.message?.content;
+  if (!content) {
+    throw new Error('openai_error: empty response');
+  }
+  return content;
+}
 
 program.parse();
