@@ -17,7 +17,7 @@ created_at: "2026-01-09"
 
 ---
 
-## 0. Provenance（参照元の明確化）【必須】
+## Slot: Provenance（参照元の明確化）【必須】
 
 ```yaml
 provenance:
@@ -36,7 +36,7 @@ provenance:
 
 ---
 
-## 1. Event Schemas（イベントスキーマ）【必須】
+## Slot: Event Schemas（イベントスキーマ）【必須】
 
 ```yaml
 event_schemas:
@@ -50,7 +50,7 @@ event_schemas:
 
 ---
 
-## 2. Versioning Policy（バージョニング）【必須】
+## Slot: Versioning Policy（バージョニング）【必須】
 
 ```yaml
 versioning:
@@ -61,7 +61,7 @@ versioning:
 
 ---
 
-## 3. Delivery Guarantees（配信保証）【推奨】
+## Slot: Delivery Guarantees（配信保証）【推奨】
 
 ```yaml
 delivery:
@@ -73,7 +73,7 @@ delivery:
 
 ---
 
-## 4. References（参照）【必須】
+## Slot: References（参照）【必須】
 
 ```yaml
 refs:

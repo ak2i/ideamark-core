@@ -21,7 +21,7 @@ UI/API/DB の前提にもなるが、特に **実行環境・運用・監査性*
 
 ---
 
-## 0. Provenance（参照元の明確化）【必須】
+## Slot: Provenance（参照元の明確化）【必須】
 
 このInfra仕様が **どの版・どのファイル**に基づくかを機械可読で記録する。
 
@@ -52,7 +52,7 @@ provenance:
 
 ---
 
-## 1. Infra Context（前提）【必須】
+## Slot: Infra Context（前提）【必須】
 
 ```yaml
 infra_context:
@@ -69,7 +69,7 @@ infra_context:
 
 ---
 
-## 2. Components（構成要素）【必須】
+## Slot: Components（構成要素）【必須】
 
 ```yaml
 components:
@@ -83,7 +83,7 @@ components:
 
 ---
 
-## 3. Integration Points（接続点）【必須】
+## Slot: Integration Points（接続点）【必須】
 
 ```yaml
 integration_points:
@@ -95,7 +95,7 @@ integration_points:
 
 ---
 
-## 4. Event & Job Wiring（イベント/ジョブ連携）【推奨】
+## Slot: Event & Job Wiring（イベント/ジョブ連携）【推奨】
 
 ```yaml
 event_wiring:
@@ -106,7 +106,7 @@ event_wiring:
 
 ---
 
-## 5. Secrets & Security（秘密情報・セキュリティ）【必須】
+## Slot: Secrets & Security（秘密情報・セキュリティ）【必須】
 
 ```yaml
 security:
@@ -120,7 +120,7 @@ security:
 
 ---
 
-## 6. Observability & Audit（観測・監査）【必須】
+## Slot: Observability & Audit（観測・監査）【必須】
 
 ```yaml
 observability:
@@ -135,7 +135,7 @@ observability:
 
 ---
 
-## 7. Operations & SLO（運用・SLO）【推奨】
+## Slot: Operations & SLO（運用・SLO）【推奨】
 
 ```yaml
 operations:
@@ -147,7 +147,7 @@ operations:
 
 ---
 
-## 8. Deployment & Release（デプロイ・リリース）【推奨】
+## Slot: Deployment & Release（デプロイ・リリース）【推奨】
 
 ```yaml
 deployment:
@@ -159,7 +159,7 @@ deployment:
 
 ---
 
-## 9. References（参照）【必須】
+## Slot: References（参照）【必須】
 
 ```yaml
 refs:

@@ -43,7 +43,7 @@ created_at: "2026-01-06"
 
 ---
 
-## Intent
+## Slot: Intent
 ```yaml
 type: intent
 summary: "<このWorkCellで達成したい状態>"
@@ -58,7 +58,7 @@ links: []
 
 ---
 
-## Hypothesis
+## Slot: Hypothesis
 ```yaml
 type: hypothesis
 claim: "<この設計・構成がうまくいくという仮説>"
@@ -71,7 +71,7 @@ Intentを実現するための **成立仮説**。
 
 ---
 
-## DecisionOption
+## Slot: DecisionOption
 ```yaml
 type: decision_option
 option: "<今回採用する設計・方針>"
@@ -85,7 +85,7 @@ links: []
 
 ---
 
-## Experiment
+## Slot: Experiment
 ```yaml
 type: experiment
 purpose: "<このProductionで何を確かめるか>"
@@ -100,7 +100,7 @@ Experiment = Production。
 
 ---
 
-## Metric
+## Slot: Metric
 ```yaml
 type: metric
 name: "<計測指標名>"
@@ -116,7 +116,7 @@ refs: []
 
 ---
 
-## DecisionLog
+## Slot: DecisionLog
 ```yaml
 type: decision_log
 decision: "<今回の判断内容>"

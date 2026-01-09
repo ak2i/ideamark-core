@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { Command } from 'commander';
-import { parse, validate } from '@ideamark/core';
+import { extractTemplateSlots, parse, validate } from '@ideamark/core';
 import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
 
 const program = new Command();
@@ -137,8 +137,6 @@ program
     console.log('ok');
   });
 
-program.parse();
-
 type FrontmatterParseResult =
   | { ok: true; frontmatter: Record<string, unknown>; body: string }
   | { ok: false; errors: Array<{ code: string; message: string; line?: number }> };
@@ -235,3 +233,53 @@ function loadConfig(): { output_dir?: string } {
 
   return {};
 }
+
+const templateCommand = program.command('template').description('Template utilities');
+
+templateCommand
+  .command('slots')
+  .argument('<file>', 'Template markdown file')
+  .option('--json', 'output machine-readable result')
+  .action((file, options) => {
+    let input: string;
+    try {
+      input = readFileSync(file, 'utf8');
+    } catch (error) {
+      const result = {
+        ok: false,
+        errors: [
+          {
+            code: 'file_read_error',
+            message: `failed to read file: ${file}`,
+          },
+        ],
+      };
+      console.error(JSON.stringify(result, null, 2));
+      process.exitCode = 1;
+      return;
+    }
+
+    const result = extractTemplateSlots(input);
+    if (options.json) {
+      console.log(JSON.stringify(result, null, 2));
+      return;
+    }
+
+    if (result.slots.length === 0) {
+      console.log('no slots found');
+      return;
+    }
+
+    for (const slot of result.slots) {
+      const lineInfo = slot.meta.blockStartLine
+        ? `L${slot.meta.blockStartLine}`
+        : `L${slot.meta.headingLine}`;
+      console.log(`- ${slot.heading} (${lineInfo})`);
+    }
+
+    if (result.warnings.length > 0) {
+      console.error(JSON.stringify({ warnings: result.warnings }, null, 2));
+    }
+  });
+
+program.parse();

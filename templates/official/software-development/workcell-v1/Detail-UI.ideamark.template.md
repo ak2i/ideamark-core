@@ -21,7 +21,7 @@ API/DB/Infra の前提にもなるが、特に **ユーザー操作と状態** �
 
 ---
 
-## 0. Provenance（参照元の明確化）【必須】
+## Slot: Provenance（参照元の明確化）【必須】
 
 ```yaml
 provenance:
@@ -50,7 +50,7 @@ provenance:
 
 ---
 
-## 1. UI Context（前提）【必須】
+## Slot: UI Context（前提）【必須】
 
 ```yaml
 ui_context:
@@ -64,7 +64,7 @@ ui_context:
 
 ---
 
-## 2. Screens & States（画面・状態）【必須】
+## Slot: Screens & States（画面・状態）【必須】
 
 ```yaml
 screens:
@@ -78,7 +78,7 @@ screens:
 
 ---
 
-## 3. User Actions（操作）【必須】
+## Slot: User Actions（操作）【必須】
 
 ```yaml
 actions:
@@ -90,7 +90,7 @@ actions:
 
 ---
 
-## 4. State Transition Enforcement（状態遷移の強制）【必須】
+## Slot: State Transition Enforcement（状態遷移の強制）【必須】
 
 ```yaml
 ui_state_rules:
@@ -102,7 +102,7 @@ ui_state_rules:
 
 ---
 
-## 5. Observability & Audit（観測・監査）【必須】
+## Slot: Observability & Audit（観測・監査）【必須】
 
 ```yaml
 observability:
@@ -114,7 +114,7 @@ observability:
 
 ---
 
-## 6. Error & Recovery（エラーと回復）【推奨】
+## Slot: Error & Recovery（エラーと回復）【推奨】
 
 ```yaml
 errors:
@@ -125,7 +125,7 @@ errors:
 
 ---
 
-## 7. References（参照）【必須】
+## Slot: References（参照）【必須】
 
 ```yaml
 refs:

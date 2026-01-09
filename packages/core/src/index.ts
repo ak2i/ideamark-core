@@ -80,6 +80,32 @@ export type ValidationWarning = {
   field?: string;
 };
 
+export type TemplateSlot = {
+  name: string;
+  heading: string;
+  level: 2 | 3;
+  description: string;
+  yaml: string;
+  meta: {
+    headingLine: number;
+    blockStartLine?: number;
+    blockEndLine?: number;
+  };
+};
+
+export type TemplateSlotWarning = {
+  code: 'slot_yaml_missing' | 'slot_yaml_unclosed';
+  message: string;
+  slot: string;
+  line: number;
+};
+
+export type TemplateSlotResult = {
+  ok: true;
+  slots: TemplateSlot[];
+  warnings: TemplateSlotWarning[];
+};
+
 const REQUIRED_FIELDS = [
   'ideamark_version',
   'template_id',
@@ -331,4 +357,99 @@ function extractStructuredBlocks(
   }
 
   return { blocks, warnings };
+}
+
+export function extractTemplateSlots(markdown: string): TemplateSlotResult {
+  const lines = markdown.split(/\r?\n/);
+  const slots: TemplateSlot[] = [];
+  const warnings: TemplateSlotWarning[] = [];
+
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i];
+    const match = line.match(/^(#{2,3})\s+Slot:\s*(.+)\s*$/);
+    if (!match) {
+      i += 1;
+      continue;
+    }
+
+    const level = match[1].length as 2 | 3;
+    const heading = match[2].trim();
+    const descriptionLines: string[] = [];
+    let blockStart = -1;
+    let blockEnd = -1;
+
+    for (let j = i + 1; j < lines.length; j += 1) {
+      const nextLine = lines[j];
+      if (/^#{2,6}\s+/.test(nextLine)) {
+        break;
+      }
+
+      const fenceMatch = nextLine.match(/^```(\s*yaml|\s*yml)\s*$/);
+      if (fenceMatch) {
+        blockStart = j;
+        for (let k = j + 1; k < lines.length; k += 1) {
+          if (lines[k].startsWith('```')) {
+            blockEnd = k;
+            break;
+          }
+        }
+        break;
+      }
+
+      descriptionLines.push(nextLine);
+    }
+
+    if (blockStart === -1) {
+      warnings.push({
+        code: 'slot_yaml_missing',
+        message: `slot "${heading}" is missing a YAML block`,
+        slot: heading,
+        line: i + 1,
+      });
+      slots.push({
+        name: heading,
+        heading,
+        level,
+        description: descriptionLines.join('\n').trim(),
+        yaml: '',
+        meta: {
+          headingLine: i + 1,
+        },
+      });
+      i += 1;
+      continue;
+    }
+
+    if (blockEnd === -1) {
+      warnings.push({
+        code: 'slot_yaml_unclosed',
+        message: `slot "${heading}" has an unclosed YAML block`,
+        slot: heading,
+        line: blockStart + 1,
+      });
+    }
+
+    const yaml =
+      blockEnd > blockStart
+        ? lines.slice(blockStart + 1, blockEnd).join('\n')
+        : '';
+
+    slots.push({
+      name: heading,
+      heading,
+      level,
+      description: descriptionLines.join('\n').trim(),
+      yaml,
+      meta: {
+        headingLine: i + 1,
+        blockStartLine: blockStart + 1,
+        blockEndLine: blockEnd > -1 ? blockEnd + 1 : undefined,
+      },
+    });
+
+    i = blockEnd > -1 ? blockEnd + 1 : blockStart + 1;
+  }
+
+  return { ok: true, slots, warnings };
 }

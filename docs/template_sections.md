@@ -4,6 +4,11 @@ This document lists section headings found in the existing templates. It is
 intended to help plan shared vocabulary, data structures, and namespaces without
 imposing a centralized dictionary. Headings are copied as-is from templates.
 
+Slot convention (workcell-v1):
+- LLM-fill targets use headings that start with `Slot:`
+- LLM extraction should only read the first YAML block after each `Slot:` heading
+- `### Slot:` is used when a section needs further subdivision
+
 ---
 
 ## Software Development / WorkCell v1
@@ -12,61 +17,60 @@ Template: `templates/official/software-development/workcell-v1/WorkCell-Service-
 Sections:
 - Template Scope
 - Flow Definition (Required Sections)
-- Meta
-- Actors
-- Goals
-- Preconditions & Triggers
-- Main Flow
-- Alternative Flows
-- Exception Flows
-- State Model (Minimal)
-- Observability Hooks
-- References (to Detail Templates)
+- Slot: Meta
+- Slot: Actors
+- Slot: Goals
+- Slot: Preconditions & Triggers
+- Slot: Main Flow
+- Slot: Alternative Flows
+- Slot: Exception Flows
+- Slot: State Model (Minimal)
+- Slot: Observability Hooks
+- Slot: References (to Detail Templates)
 - Renderings (Optional)
 - Rendering Meta (Optional)
 - Mermaid Sequence Diagram (Optional)
 
 Template: `templates/official/software-development/workcell-v1/WorkCell-Integration-Spec.ideamark.template.md`
 Sections:
-- Section 0: Provenance (source attribution) [Required]
-- Section 1: Integration Goals (integration purpose) [Required]
+- Slot: Provenance (source attribution) [Required]
+- Slot: Integration Goals (integration purpose) [Required]
 - Section 2: Canonical Vocabulary (shared vocabulary) [Required]
-- Section 2.1: Canonical IDs / Entities
-- Section 2.2: Terminology Mapping (synonyms and aliases)
-- Section 3: Event Catalog [Required]
-- Section 4: State Integration [Required]
+- Slot: Canonical IDs / Entities
+- Slot: Terminology Mapping (synonyms and aliases)
+- Slot: Event Catalog [Required]
+- Slot: State Integration [Required]
 - Section 5: Conflict Register (conflict list) [Required]
-- Section 5.1: Conflict Types (classification)
-- Section 5.2: Conflicts
-- Section 6: Resolution Decisions (decision rationale) [Required]
-- Section 7: Detail Design Hand-off (rules shared with Detail) [Required]
-- Section 8: Change Log (spec revision history) [Recommended]
-- Renderings (Optional)
+- Slot: Conflicts
+- Slot: Resolution Decisions (decision rationale) [Required]
+- Slot: Detail Design Hand-off (rules shared with Detail) [Required]
+- Slot: Change Log (spec revision history) [Recommended]
+- Slot: Renderings (Optional)
 
 Template: `templates/official/software-development/workcell-v1/Detail-API.ideamark.template.md`
 Sections:
-- Section 0: Provenance (source attribution) [Required]
-- Section 1: API Context (assumptions) [Required]
-- Section 2: Canonical Resources (resources) [Required]
-- Section 3: Commands (operations) [Required]
-- Section 4: Read Models (read side) [Recommended]
-- Section 5: State Transition Enforcement (enforcement of transitions) [Required]
-- Section 6: Event Emission Contract (event contract) [Required]
-- Section 7: Observability & Audit (monitoring and audit) [Required]
-- Section 8: Error Model (error conventions) [Recommended]
-- Section 9: References [Required]
+- Slot: Provenance (source attribution) [Required]
+- Slot: API Context (assumptions) [Required]
+- Slot: Canonical Resources (resources) [Required]
+- Slot: Commands (operations) [Required]
+- Slot: Read Models (read side) [Recommended]
+- Slot: State Transition Enforcement (enforcement of transitions) [Required]
+- Slot: Event Emission Contract (event contract) [Required]
+- Slot: Observability & Audit (monitoring and audit) [Required]
+- Slot: Error Model (error conventions) [Recommended]
+- Slot: References [Required]
 - Renderings (Optional)
 
 Template: `templates/official/software-development/workcell-v1/Decision6-WorkCell.ideamark.template.md`
 Sections:
 - Template Scope
 - Node Types (Required)
-- Intent
-- Hypothesis
-- DecisionOption
-- Experiment
-- Metric
-- DecisionLog
+- Slot: Intent
+- Slot: Hypothesis
+- Slot: DecisionOption
+- Slot: Experiment
+- Slot: Metric
+- Slot: DecisionLog
 - Linking Rules
 - Reference Usage
 - Design Principle

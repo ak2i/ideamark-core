@@ -21,7 +21,7 @@ UI/DB/Infra の前提にもなるが、特に **イベント・状態・監査�
 
 ---
 
-## 0. Provenance（参照元の明確化）【必須】
+## Slot: Provenance（参照元の明確化）【必須】
 
 このAPI仕様が **どの版・どのファイル**に基づくかを機械可読で記録する。
 
@@ -52,7 +52,7 @@ provenance:
 
 ---
 
-## 1. API Context（前提）【必須】
+## Slot: API Context（前提）【必須】
 
 ```yaml
 api_context:
@@ -75,7 +75,7 @@ api_context:
 
 ---
 
-## 2. Canonical Resources（資源）【必須】
+## Slot: Canonical Resources（資源）【必須】
 
 Integration Spec の `canonical_entities` をAPI資源として確定する。
 
@@ -97,7 +97,7 @@ resources:
 
 ---
 
-## 3. Commands（操作）【必須】
+## Slot: Commands（操作）【必須】
 
 フローの step と状態遷移に対応する「操作（command）」を定義する。  
 UIはこの操作を呼び出し、Infraはこの操作が発火するイベントを運ぶ。
@@ -127,7 +127,7 @@ commands:
 
 ---
 
-## 4. Read Models（参照系）【推奨】
+## Slot: Read Models（参照系）【推奨】
 
 ```yaml
 read_models:
@@ -140,7 +140,7 @@ read_models:
 
 ---
 
-## 5. State Transition Enforcement（状態遷移の強制）【必須】
+## Slot: State Transition Enforcement（状態遷移の強制）【必須】
 
 Integration Spec の `canonical_transitions` をAPIレベルで守る。
 
@@ -158,7 +158,7 @@ state_enforcement:
 
 ---
 
-## 6. Event Emission Contract（イベント契約）【必須】
+## Slot: Event Emission Contract（イベント契約）【必須】
 
 Integration Spec の `event_catalog.required_fields` を満たすこと。
 
@@ -174,7 +174,7 @@ event_contract:
 
 ---
 
-## 7. Observability & Audit（観測・監査）【必須】
+## Slot: Observability & Audit（観測・監査）【必須】
 
 Decision6 の Metric を “計測可能” にするログ/イベントを保証する。
 
@@ -195,7 +195,7 @@ observability:
 
 ---
 
-## 8. Error Model（エラー規約）【推奨】
+## Slot: Error Model（エラー規約）【推奨】
 
 ```yaml
 errors:
@@ -209,7 +209,7 @@ errors:
 
 ---
 
-## 9. References（参照）【必須】
+## Slot: References（参照）【必須】
 
 ```yaml
 refs:

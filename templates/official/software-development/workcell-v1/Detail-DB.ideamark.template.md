@@ -21,7 +21,7 @@ API/Infra の前提にもなるが、特に **状態整合・権限・監査性*
 
 ---
 
-## 0. Provenance（参照元の明確化）【必須】
+## Slot: Provenance（参照元の明確化）【必須】
 
 このDB仕様が **どの版・どのファイル**に基づくかを機械可読で記録する。
 
@@ -52,7 +52,7 @@ provenance:
 
 ---
 
-## 1. DB Context（前提）【必須】
+## Slot: DB Context（前提）【必須】
 
 ```yaml
 db_context:
@@ -68,7 +68,7 @@ db_context:
 
 ---
 
-## 2. Canonical Entities（共通語彙）【必須】
+## Slot: Canonical Entities（共通語彙）【必須】
 
 Integration Spec の `canonical_entities` をDB資源として確定する。
 
@@ -81,7 +81,7 @@ entities:
 
 ---
 
-## 3. Logical Schema（論理スキーマ）【必須】
+## Slot: Logical Schema（論理スキーマ）【必須】
 
 ```yaml
 schema:
@@ -94,7 +94,7 @@ schema:
 
 ---
 
-## 4. Constraints & Policies（制約・権限）【必須】
+## Slot: Constraints & Policies（制約・権限）【必須】
 
 ```yaml
 constraints:
@@ -107,7 +107,7 @@ policies:
 
 ---
 
-## 5. State Alignment（状態整合）【必須】
+## Slot: State Alignment（状態整合）【必須】
 
 ```yaml
 state_alignment:
@@ -119,7 +119,7 @@ state_alignment:
 
 ---
 
-## 6. Observability & Audit（観測・監査）【必須】
+## Slot: Observability & Audit（観測・監査）【必須】
 
 ```yaml
 observability:
@@ -132,7 +132,7 @@ observability:
 
 ---
 
-## 7. Migration & Change Policy（変更規約）【推奨】
+## Slot: Migration & Change Policy（変更規約）【推奨】
 
 ```yaml
 migration_policy:
@@ -142,7 +142,7 @@ migration_policy:
 
 ---
 
-## 8. References（参照）【必須】
+## Slot: References（参照）【必須】
 
 ```yaml
 refs:

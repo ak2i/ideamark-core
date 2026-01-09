@@ -40,7 +40,7 @@ created_at: "2026-01-07"
 
 # Flow Definition (Required Sections)
 
-## Meta
+## Slot: Meta
 ```yaml
 flow_id: "<stable id, e.g. flow.relatea.booking.v1>"
 title: "<flow title>"
@@ -54,7 +54,7 @@ refs: []
 
 ---
 
-## Actors
+## Slot: Actors
 ```yaml
 actors:
   - id: "actor.client"
@@ -72,7 +72,7 @@ actors:
 
 ---
 
-## Goals
+## Slot: Goals
 ```yaml
 goals:
   - id: "goal.client.book"
@@ -87,7 +87,7 @@ goals:
 
 ---
 
-## Preconditions & Triggers
+## Slot: Preconditions & Triggers
 ```yaml
 preconditions:
   - "ユーザーが連絡可能（例: LINE友だち登録済み）"
@@ -101,7 +101,7 @@ triggers:
 
 ---
 
-## Main Flow
+## Slot: Main Flow
 ```yaml
 main_flow:
   - step_id: "S1"
@@ -135,7 +135,7 @@ main_flow:
 
 ---
 
-## Alternative Flows
+## Slot: Alternative Flows
 ```yaml
 alternative_flows:
   - alt_id: "A1"
@@ -152,7 +152,7 @@ alternative_flows:
 
 ---
 
-## Exception Flows
+## Slot: Exception Flows
 ```yaml
 exception_flows:
   - ex_id: "E1"
@@ -167,7 +167,7 @@ exception_flows:
 
 ---
 
-## State Model (Minimal)
+## Slot: State Model (Minimal)
 ```yaml
 state_model:
   entity: "booking"
@@ -182,7 +182,7 @@ state_model:
 
 ---
 
-## Observability Hooks
+## Slot: Observability Hooks
 ```yaml
 hooks:
   - id: "hook.booking.started"
@@ -200,7 +200,7 @@ hooks:
 
 ---
 
-## References (to Detail Templates)
+## Slot: References (to Detail Templates)
 ```yaml
 refs:
   - id: "ref.ui.flow.booking"
