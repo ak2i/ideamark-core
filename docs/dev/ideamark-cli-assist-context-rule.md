@@ -12,6 +12,61 @@ prioritization, and slot completion in IdeaMark templates.
 - Distinguish hypothesis/plan/outcome to avoid mixing intent and evidence
 - Enable assist to ask fewer, higher-leverage questions
 - Keep rules simple enough to run in CLI and in WebUI
+- Support structural transforms for Breakdown and Convergent flows
+
+---
+
+## Functional Requirements: Breakdown / Convergent
+
+assist must support two foundational operations, and the document structure
+must allow a node.js script to process them deterministically.
+
+### Breakdown
+
+- Input: a single IdeaMark document
+- Output: a set of derived IdeaMark fragments
+- Requirement: Problem and Solution viewpoints are separable
+- Requirement: Each fragment carries its own focus/phase/origin context
+
+### Convergent
+
+- Input: multiple IdeaMark documents
+- Output: a synthesized IdeaMark document
+- Requirement: Sources are traceable back to origin IdeaMark docs
+- Requirement: Each merged slot retains focus/phase/origin context
+
+---
+
+## Structural Requirements for Processing
+
+Documents must be representable in a way that supports both LLM reasoning and
+deterministic node.js transforms.
+
+### Required Separation
+
+- Problem content and Solution content must be distinguishable
+- The separation can be done by tags, slots, or explicit sections
+- focus, phase, origin must be explicitly represented per unit of content
+
+### Minimal Shape (Illustrative)
+
+```yaml
+idea:
+  id: "..."
+  problem:
+    - text: "..."
+      context: { focus: "problem", phase: "hypothesis", origin: "new" }
+  solution:
+    - text: "..."
+      context: { focus: "solution", phase: "plan", origin: "new" }
+  links:
+    - from: "problem[0]"
+      to: "solution[0]"
+      relation: "addresses"
+```
+
+The natural language parts may still require LLMs for semantic parsing, but
+the surrounding structure must be parseable, stable, and scriptable.
 
 ---
 
