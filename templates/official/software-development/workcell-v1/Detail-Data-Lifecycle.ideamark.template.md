@@ -17,7 +17,7 @@ created_at: "2026-01-09"
 
 ---
 
-## 0. Provenance（参照元の明確化）【必須】
+## Slot: Provenance（参照元の明確化）【必須】
 
 ```yaml
 provenance:
@@ -41,7 +41,7 @@ provenance:
 
 ---
 
-## 1. Lifecycle Policy（ポリシー）【必須】
+## Slot: Lifecycle Policy（ポリシー）【必須】
 
 ```yaml
 lifecycle_policy:
@@ -55,7 +55,7 @@ lifecycle_policy:
 
 ---
 
-## 2. Deletion & Export（削除/エクスポート）【推奨】
+## Slot: Deletion & Export（削除/エクスポート）【推奨】
 
 ```yaml
 deletion:
@@ -68,7 +68,7 @@ export:
 
 ---
 
-## 3. References（参照）【必須】
+## Slot: References（参照）【必須】
 
 ```yaml
 refs:

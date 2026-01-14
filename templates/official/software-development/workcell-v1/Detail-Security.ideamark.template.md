@@ -17,7 +17,7 @@ created_at: "2026-01-09"
 
 ---
 
-## 0. Provenance（参照元の明確化）【必須】
+## Slot: Provenance（参照元の明確化）【必須】
 
 ```yaml
 provenance:
@@ -41,7 +41,7 @@ provenance:
 
 ---
 
-## 1. Security Context（前提）【必須】
+## Slot: Security Context（前提）【必須】
 
 ```yaml
 security_context:
@@ -55,7 +55,7 @@ security_context:
 
 ---
 
-## 2. Secrets & Key Management（秘密情報）【必須】
+## Slot: Secrets & Key Management（秘密情報）【必須】
 
 ```yaml
 secrets:
@@ -69,7 +69,7 @@ secrets:
 
 ---
 
-## 3. Authorization & Policies（権限）【必須】
+## Slot: Authorization & Policies（権限）【必須】
 
 ```yaml
 authorization:
@@ -80,7 +80,7 @@ authorization:
 
 ---
 
-## 4. PII & Data Handling（PII）【必須】
+## Slot: PII & Data Handling（PII）【必須】
 
 ```yaml
 pii:
@@ -91,7 +91,7 @@ pii:
 
 ---
 
-## 5. Audit & Compliance（監査）【推奨】
+## Slot: Audit & Compliance（監査）【推奨】
 
 ```yaml
 audit:
@@ -102,7 +102,7 @@ audit:
 
 ---
 
-## 6. References（参照）【必須】
+## Slot: References（参照）【必須】
 
 ```yaml
 refs:

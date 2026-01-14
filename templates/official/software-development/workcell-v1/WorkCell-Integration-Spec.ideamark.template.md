@@ -22,7 +22,7 @@ created_at: "2026-01-07"
 
 ---
 
-## 0. Provenance（参照元の明確化）【必須】
+## Slot: Provenance（参照元の明確化）【必須】
 
 このSpecが **どのバージョン／どのファイル**に基づくかを、機械可読に記録する。  
 （将来、ロジック処理エンジンで自動生成・差分検出するための最重要セクション）
@@ -57,7 +57,7 @@ provenance:
 
 ---
 
-## 1. Integration Goals（統合の目的）【必須】
+## Slot: Integration Goals（統合の目的）【必須】
 
 ```yaml
 integration_goals:
@@ -70,7 +70,7 @@ integration_goals:
 
 ## 2. Canonical Vocabulary（共通語彙）【必須】
 
-### 2.1 Canonical IDs / Entities
+### Slot: Canonical IDs / Entities
 ```yaml
 canonical_entities:
   - name: "client"
@@ -95,7 +95,7 @@ relations:
 - ここで “同じ概念に別IDがある” を潰す。
 - 以後の Detail はこの語彙に従う。
 
-### 2.2 Terminology Mapping（同義語・別名のマッピング）
+### Slot: Terminology Mapping（同義語・別名のマッピング）
 ```yaml
 term_map:
   - canonical: "client"
@@ -106,7 +106,7 @@ term_map:
 
 ---
 
-## 3. Event Catalog（イベントカタログ）【必須】
+## Slot: Event Catalog（イベントカタログ）【必須】
 
 各 Service Flow の `outputs` / `hooks` を統合し、イベントの意味を固定する。
 
@@ -140,7 +140,7 @@ event_catalog:
 
 ---
 
-## 4. State Integration（状態統合）【必須】
+## Slot: State Integration（状態統合）【必須】
 
 フローごとの `state_model` を統合して、WorkCellとして矛盾しない状態機械にする。
 
@@ -176,7 +176,7 @@ state_integration:
 - **Auth conflict**：権限・責務がズレる
 - **Ops conflict**：ジョブ・キュー・時刻依存の衝突
 
-### 5.2 Conflicts
+### Slot: Conflicts
 ```yaml
 conflicts:
   - id: "C-001"
@@ -193,7 +193,7 @@ conflicts:
 
 ---
 
-## 6. Resolution Decisions（解決方針：意思決定）【必須】
+## Slot: Resolution Decisions（解決方針：意思決定）【必須】
 
 Decision6 の優先軸（M-REL-001/002/003等）を踏まえ、競合をどう解くかを固定する。
 
@@ -215,7 +215,7 @@ resolution_decisions:
 
 ---
 
-## 7. Detail Design Hand-off（Detailへ渡す共通ルール）【必須】
+## Slot: Detail Design Hand-off（Detailへ渡す共通ルール）【必須】
 
 UI/API/DB/Infra が “全事情” を踏まえるための、最小の共通制約をここに集約する。
 
@@ -239,7 +239,7 @@ refs_to_detail:
 
 ---
 
-## 8. Change Log（このSpec自体の更新履歴）【推奨】
+## Slot: Change Log（このSpec自体の更新履歴）【推奨】
 
 ```yaml
 change_log:
@@ -251,7 +251,7 @@ change_log:
 
 ---
 
-# Renderings (Optional)
+## Slot: Renderings (Optional)
 
 統合は図にするとレビューが速い。以下は任意（派生）で、正は上の意味構造。
 
@@ -268,4 +268,3 @@ flowchart LR
   Session --> Chart[Chart]
   Booking -->|confirmed| Reminder[Reminder Job]
 ```
-

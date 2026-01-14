@@ -18,7 +18,7 @@ created_at: "2026-01-09"
 
 ---
 
-## 0. Provenance（参照元の明確化）【必須】
+## Slot: Provenance（参照元の明確化）【必須】
 
 ```yaml
 provenance:
@@ -47,7 +47,7 @@ provenance:
 
 ---
 
-## 1. Observability Context（前提）【必須】
+## Slot: Observability Context（前提）【必須】
 
 ```yaml
 observability_context:
@@ -61,7 +61,7 @@ observability_context:
 
 ---
 
-## 2. Event Contract（イベント契約）【必須】
+## Slot: Event Contract（イベント契約）【必須】
 
 ```yaml
 event_contract:
@@ -71,7 +71,7 @@ event_contract:
 
 ---
 
-## 3. Metrics（メトリクス）【必須】
+## Slot: Metrics（メトリクス）【必須】
 
 ```yaml
 metrics:
@@ -82,7 +82,7 @@ metrics:
 
 ---
 
-## 4. Logs（ログ）【必須】
+## Slot: Logs（ログ）【必須】
 
 ```yaml
 logs:
@@ -92,7 +92,7 @@ logs:
 
 ---
 
-## 5. Tracing（トレース）【推奨】
+## Slot: Tracing（トレース）【推奨】
 
 ```yaml
 tracing:
@@ -103,7 +103,7 @@ tracing:
 
 ---
 
-## 6. Alerting（アラート）【推奨】
+## Slot: Alerting（アラート）【推奨】
 
 ```yaml
 alerts:
@@ -113,7 +113,7 @@ alerts:
 
 ---
 
-## 7. References（参照）【必須】
+## Slot: References（参照）【必須】
 
 ```yaml
 refs:

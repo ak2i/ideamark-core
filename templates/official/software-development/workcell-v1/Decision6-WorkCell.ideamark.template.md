@@ -26,6 +26,7 @@ created_at: "2026-01-06"
 - MVP / PoC / 初期本番を跨ぐ開発
 - AIを含む探索的・反復的な開発
 - 意思決定の根拠と履歴を残したいケース
+ - 問題整理〜解決整理〜再利用までの文脈を持つケース
 
 ### This template is NOT responsible for
 - 詳細UI設計
@@ -43,7 +44,27 @@ created_at: "2026-01-06"
 
 ---
 
-## Intent
+## Problem/Solution Context (Recommended)
+
+IdeaMarkは **Problem と Solution の記録を再利用可能にする**ことが主目的である。  
+そのため、各スロットが **Problem / Solution / 両方**のどれに属するか、  
+そして **仮説 / 計画 / 実績**のどれに当たるかを明示することを推奨する。
+
+### Context Tags
+各スロットに以下の補助タグを追加できる（任意）。
+```yaml
+context:
+  focus: "problem | solution | both"
+  phase: "hypothesis | plan | outcome | other"
+  origin: "new | observed | reused | retroactive"
+```
+- focus: 問題と解決のどちらに重心があるか
+- phase: 記述の性質（仮説 / 計画 / 実績 / その他）
+- origin: どういう文脈で作成されたか（新規 / 観測 / 再利用 / 事後整理）
+
+---
+
+## Slot: Intent
 ```yaml
 type: intent
 summary: "<このWorkCellで達成したい状態>"
@@ -52,26 +73,34 @@ constraints: []
 non_goals: []
 success_definition_ref: []
 links: []
+context:
+  focus: "problem | solution | both"
+  phase: "hypothesis | plan | outcome | other"
+  origin: "new | observed | reused | retroactive"
 ```
 **目的・意図・スコープ境界**を定義する。  
 要件定義の代替であり、最上流の判断固定点。
 
 ---
 
-## Hypothesis
+## Slot: Hypothesis
 ```yaml
 type: hypothesis
 claim: "<この設計・構成がうまくいくという仮説>"
 tags: []
 falsifiable_by: []
 links: []
+context:
+  focus: "problem | solution | both"
+  phase: "hypothesis | plan | outcome | other"
+  origin: "new | observed | reused | retroactive"
 ```
 Intentを実現するための **成立仮説**。  
 必ず **反証可能** な形で書く。
 
 ---
 
-## DecisionOption
+## Slot: DecisionOption
 ```yaml
 type: decision_option
 option: "<今回採用する設計・方針>"
@@ -79,13 +108,17 @@ pros: []
 cons: []
 prerequisites: []
 links: []
+context:
+  focus: "problem | solution | both"
+  phase: "hypothesis | plan | outcome | other"
+  origin: "new | observed | reused | retroactive"
 ```
 今回の開発・設計で **採用する選択肢** を明示する。  
 「作らないこと」を含めるのが重要。
 
 ---
 
-## Experiment
+## Slot: Experiment
 ```yaml
 type: experiment
 purpose: "<このProductionで何を確かめるか>"
@@ -94,13 +127,17 @@ out_of_scope: []
 artifact: []
 links: []
 refs: []
+context:
+  focus: "problem | solution | both"
+  phase: "hypothesis | plan | outcome | other"
+  origin: "new | observed | reused | retroactive"
 ```
 Experiment = Production。  
 作ること自体ではなく、**判断材料を得るための生産**を定義する。
 
 ---
 
-## Metric
+## Slot: Metric
 ```yaml
 type: metric
 name: "<計測指標名>"
@@ -110,13 +147,17 @@ time_window: "<ISO 8601 duration or semantic window>"
 collection:
   method: "<計測方法>"
 refs: []
+context:
+  focus: "problem | solution | both"
+  phase: "hypothesis | plan | outcome | other"
+  origin: "new | observed | reused | retroactive"
 ```
 意思決定の質を担保する **観測点**。  
 結果指標よりも **近接指標** を優先する。
 
 ---
 
-## DecisionLog
+## Slot: DecisionLog
 ```yaml
 type: decision_log
 decision: "<今回の判断内容>"
@@ -124,6 +165,10 @@ why_now: "<なぜ今判断するのか>"
 stop_rule_ref: []
 evidence_refs: []
 next_candidates: []
+context:
+  focus: "problem | solution | both"
+  phase: "hypothesis | plan | outcome | other"
+  origin: "new | observed | reused | retroactive"
 ```
 進む／止める／変える、を正式な成果物として残す。  
 失敗ではなく **学習の記録**。
