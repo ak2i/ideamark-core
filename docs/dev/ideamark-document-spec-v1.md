@@ -201,7 +201,34 @@ structure:
 | `#` | Document タイトル |
 | `##` | Section |
 | `###` | Occurrence / Entities Registry / Relations |
-| `####` | サブ構造（必要に応じて） |
+| `####` | IdeaEntity 概要などのサブ構造（必要に応じて） |
+
+### Markdown 配置パターン（推奨）
+
+````markdown
+## Section 001 : セクション名
+```yaml
+section_id: "SEC-001"
+anchorage:
+  view: "background"
+  phase: "confirmed"
+```
+
+セクション全体の概要を自然言語で記述する。
+
+### OCC-001 : 出現タイトル
+```yaml
+occurrence_id: "OCC-001"
+entity: "IE-001"
+role: "context"
+status:
+  state: "confirmed"
+```
+Occurrence の概要を自然言語で記述する。
+
+#### IdeaEntity: IE-001
+IdeaEntity の概要を自然言語で記述する。
+````
 
 ### YAML ブロックの種類
 
@@ -212,6 +239,7 @@ structure:
 | 各 Occurrence | occurrence_id, entity, role, status | **必須** |
 | 文書末尾 | Entities Registry (entities, occurrences, sections, relations, structure) | **必須** |
 | その他 | 補足メタ情報、人間向け構造化データ | 任意 |
+| YAML 直後の Markdown | Occurrence/IdeaEntity の概要テキスト | 任意 |
 
 ### 機械処理の方針
 ```
@@ -219,4 +247,5 @@ structure:
 2. 文書末尾の Entities Registry を検出（entities: キーを含む）
 3. 各 ## セクション内の section_id を持つ YAML を検出
 4. 各 ### 内の occurrence_id を持つ YAML を検出
-5. それ以外の YAML・Markdown は補足情報として無視（または LLM 用コンテキスト）
+5. fenced `yaml` 以外の Markdown は補足情報として無視（または LLM 用コンテキスト）
+6. YAML ブロック直後の Markdown は人間向けの概要として扱い、機械処理対象外とする
