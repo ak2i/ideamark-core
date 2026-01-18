@@ -161,6 +161,11 @@ occurrences:
 ## 3.3 Section: 施策パッケージ（観光振興）（anchorage: measures）
 section_id: "SEC-KNG-03"
 anchorage: ["tourism", "measures", "visitor-experience"]
+detail_docs:
+  - uri: "./detail/kng-tourism-packages.ideamark.md"
+    relation: "elaborates"
+    covers: ["IE-KNG-TOUR-ROUTE-01", "IE-KNG-TOUR-SIGN-01"]
+    summary: "周遊モデルコースとサイン整備の詳細設計"
 entities:
   - id: "IE-KNG-TOUR-ROUTE-01"
     kind: "measure"
@@ -187,6 +192,10 @@ entities:
     atomic_state: true
     content: "公共サイン整備（案内標識の連続性・統一性、多言語化、ピクト活用、広域観光地図作成等）"
     source_hint: "kousou3.pdf p18"
+    detail_doc:
+      uri: "./detail/kng-signage-guide.ideamark.md"
+      relation: "elaborates"
+      summary: "サイン統一ルールと多言語化のガイド"
 occurrences:
   - entity: "IE-KNG-TOUR-ROUTE-01"
     role: "measure"

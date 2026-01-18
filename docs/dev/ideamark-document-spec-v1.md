@@ -223,6 +223,9 @@ entity: "IE-001"
 role: "context"
 status:
   state: "confirmed"
+detail_doc:
+  uri: "./detail-doc.ideamark.md"
+  relation: "elaborates"
 ```
 Occurrence の概要を自然言語で記述する。
 
@@ -240,6 +243,27 @@ IdeaEntity の概要を自然言語で記述する。
 | 文書末尾 | Entities Registry (entities, occurrences, sections, relations, structure) | **必須** |
 | その他 | 補足メタ情報、人間向け構造化データ | 任意 |
 | YAML 直後の Markdown | Occurrence/IdeaEntity の概要テキスト | 任意 |
+
+### 詳細 Document 参照（optional）
+
+Entity / Occurrence / Section に `detail_doc` または `detail_docs` を付与できる。
+詳細文書側は `refs.parent` で親文書への参照を持つ。
+
+```yaml
+entities:
+  IE-001:
+    kind: "hypothesis"
+    content: "予約制の導入が有効"
+    detail_doc:
+      uri: "./reservation-design.ideamark.md"
+      relation: "elaborates"
+
+refs:
+  parent:
+    uri: "ideamark://docs/main-plan-001"
+    entity: "IE-001"
+    relation: "elaborates"
+```
 
 ### 機械処理の方針
 ```

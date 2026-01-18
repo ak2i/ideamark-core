@@ -76,6 +76,11 @@ role_vocab (sample):
 ## 2.1 Section: 目的・範囲・ガバナンス（anchorage: governance）
 section_id: "SEC-KNG-01"
 anchorage: ["governance", "scope", "timebox"]
+detail_docs:
+  - uri: "./detail/kng-governance-operating-model.ideamark.md"
+    relation: "elaborates"
+    covers: ["IE-KNG-GOV-01", "IE-KNG-MON-01"]
+    summary: "推進体制と進行管理の運用モデル"
 entities:
   - id: "IE-KNG-OBJ-01"
     kind: "policy_goal"
@@ -92,6 +97,10 @@ entities:
     atomic_state: true
     content: "推進体制：三県サミットを核に、市町村・関係団体と連携・協力し、役割分担のもと推進する。"
     source_hint: "kousou3.pdf p2"
+    detail_doc:
+      uri: "./detail/kng-summit-governance.ideamark.md"
+      relation: "elaborates"
+      summary: "三県サミットの意思決定フローと協議体設計"
   - id: "IE-KNG-MON-01"
     kind: "mechanism"
     atomic_state: true

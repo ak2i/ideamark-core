@@ -101,6 +101,13 @@ refs:
     - uri: string                      # 必須: 参照先 URI
       relation: RelationType           # 必須: 関連種別
       description: string              # optional: 説明
+
+  parent:                              # 親文書（詳細文書の場合、単一）
+    uri: string                        # 必須: 親 Document の URI
+    entity: entity_ref                 # optional: どの Entity の詳細か
+    occurrence: occurrence_ref         # optional: どの Occurrence の詳細か
+    section: section_ref               # optional: どの Section の詳細か
+    relation: DetailRelation           # 必須: 関係種別
 ```
 
 #### SourceRole
@@ -131,7 +138,37 @@ refs:
 |`prerequisite`|前提知識|
 |`follow_up`   |発展  |
 
-### 2.3 URI スキーム
+### 2.3 Detail Document References
+
+Entity / Occurrence / Section から詳細文書を参照できる。
+
+```yaml
+detail_doc: DetailDocRef               # optional: 単一参照
+detail_docs: [DetailDocRef, ...]       # optional: 複数参照
+```
+
+#### DetailDocRef
+
+```yaml
+detail_doc:
+  uri: string                          # 必須: 詳細 Document の URI
+  relation: DetailRelation             # 必須: 関係種別
+  summary: string                      # optional: 要約（人間向け）
+  covers: [cover_ref, ...]             # optional: 対象範囲
+```
+
+#### DetailRelation
+
+|値           |説明       |
+|------------|----------|
+|`elaborates`|詳細化する   |
+|`discusses` |議論する    |
+|`implements`|実装する    |
+|`evidences` |根拠を示す   |
+|`explores`  |探索する    |
+|`decomposes`|分解する    |
+
+### 2.4 URI スキーム
 
 ```
 ideamark://docs/{doc_id}                       # Document
@@ -167,6 +204,8 @@ entities:
     transfer_context: TransferContext  # optional: 転用文脈（transfer 系 kind で使用）
     supersedes: entity_ref             # optional: 置換した Entity
     superseded_by: entity_ref          # optional: 置換された Entity
+    detail_doc: DetailDocRef           # optional: 詳細 Document 参照（単一）
+    detail_docs: [DetailDocRef, ...]   # optional: 詳細 Document 参照（複数）
     
   {entity_id}:
     # 外部参照
@@ -277,6 +316,8 @@ occurrences:
     derived_from: DerivedFrom          # optional: 派生元情報
     supporting_evidence: [entity_ref]  # optional: 根拠となる Entity
     timestamp: timestamp               # optional: 出現時刻
+    detail_doc: DetailDocRef           # optional: 詳細 Document 参照（単一）
+    detail_docs: [DetailDocRef, ...]   # optional: 詳細 Document 参照（複数）
 ```
 
 ### 4.2 OccurrenceRole
@@ -401,6 +442,8 @@ sections:
     occurrences: [occurrence_ref]      # 必須: Occurrence への参照リスト
     source_session: string             # optional: 元セッションID
     timestamp_range: TimestampRange    # optional: 時間範囲
+    detail_doc: DetailDocRef           # optional: 詳細 Document 参照（単一）
+    detail_docs: [DetailDocRef, ...]   # optional: 詳細 Document 参照（複数）
 ```
 
 ### 5.2 Anchorage（読み方の指定）
@@ -691,6 +734,9 @@ sections:
 |`occurrence_ref_valid`    |Occurrence 参照が解決可能であること         |
 |`section_ref_valid`       |Section 参照が解決可能であること            |
 |`structure_sections_exist`|structure.sections の参照がすべて存在すること|
+|`detail_doc_ref_valid`    |detail_doc/detail_docs の必須項目が存在すること|
+|`detail_doc_cover_ref_valid`|detail_doc.covers の参照が解決可能であること|
+|`parent_ref_valid`        |refs.parent の必須項目が存在すること         |
 
 ### 10.2 Extraction 検証（–strict モード）
 
@@ -707,6 +753,7 @@ timestamp     = ISO 8601 形式の日時文字列
 entity_ref    = string (Entity ID または URI)
 occurrence_ref = string (Occurrence ID)
 section_ref   = string (Section ID)
+cover_ref     = entity_ref | occurrence_ref | section_ref
 uri           = string (IdeaMark URI または URL)
 number        = 数値 (整数または浮動小数点)
 boolean       = true | false
