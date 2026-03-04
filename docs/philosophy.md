@@ -1,102 +1,155 @@
 # IdeaMark Philosophy
 
-## A Language for Thinking Across Systems
+## Implementing Structural Principles for the AI Era
 
-**IdeaMark** is not just a data format — it is a design philosophy.
+IdeaMark is not a new philosophical theory.
 
-Inspired by Christopher Alexander's *Pattern Language*, IdeaMark aspires to be a reusable grammar for understanding and shaping complex realities.  
-Where Alexander described towns and buildings, IdeaMark encodes patterns in **infrastructure, business, ecology, and society** — for both human reflection and machine reasoning.
+It is an implementation.
 
-It aims to make **structured thinking sharable, composable, and improvable**.
+IdeaMark draws inspiration from existing intellectual traditions---most
+notably Christopher Alexander's *Pattern Language* and Roland Barthes'
+concept of *anchorage*.\
+However, it does not attempt to reinterpret, critique, or extend those
+theories.\
+Instead, it translates certain structural insights into a practical,
+machine-readable design framework.
 
----
+This document clarifies that position.
 
-## What Problem Is IdeaMark Trying to Solve?
+------------------------------------------------------------------------
 
-Across domains — from local disaster preparedness to rural mobility to digital commerce — practitioners, planners, and policymakers face:
+## 1. From Pattern Language to Structured Reuse
 
-- Fragmented knowledge
-- Context-specific solutions that are hard to generalize
-- Design ideas that are lost over time or locked in PDF reports
-- Incompatible silos between social, industrial, and business thinking
+Christopher Alexander proposed that recurring design problems could be
+described as reusable patterns.\
+Patterns were not rigid rules, but structured descriptions linking
+context, problem, and solution.
 
-At the same time, **AI systems are advancing rapidly**, and can support synthesis and insight — *if given the right scaffolding*.
+IdeaMark adopts this spirit of reusable structural knowledge.
 
-IdeaMark addresses this gap not by prescribing answers,  
-but by providing a shared structure for describing problems, solutions, and the decisions that connect them.
+However, unlike architectural patterns, IdeaMark operates in:
 
----
+-   infrastructure\
+-   policy\
+-   business systems\
+-   software architecture\
+-   civic design\
+-   AI-assisted knowledge work
 
-## The Design Principles of IdeaMark
+The goal is not to prescribe solutions, but to preserve structured
+reasoning so that it can be inspected, compared, recombined, and
+evolved.
 
-1. **Explicit Structure**  
-   Every pattern encodes its context, problem, and solution in a standard, predictable format —  
-   not to enforce correctness, but to enable inspection, comparison, and reuse.
+------------------------------------------------------------------------
 
-2. **Problem–Solution Separability**  
-   While patterns are often recorded as concrete combinations of problems and solutions,  
-   IdeaMark treats problems and solutions as conceptually separable.  
-   This allows existing solutions to be reconsidered in new contexts,  
-   and existing problems to be revisited with alternative approaches.
+## 2. Anchorage as a Structural Insight
 
-3. **Referential Connectivity**  
-   Patterns can refer to related patterns — such as alternatives, refinements, or derivatives —  
-   forming a navigable graph of design knowledge rather than isolated documents.
+Roland Barthes introduced the concept of *anchorage* to describe how
+language fixes or directs the meaning of images.\
+Images are inherently polysemic; captions and contextual framing
+constrain interpretation.
 
-4. **Scalable Granularity**  
-   Rather than rigid "macro/micro" labels, patterns describe their temporal, spatial,  
-   and organizational scope explicitly, allowing ideas to be compared across scales.
+IdeaMark adopts this insight at a structural level.
 
-5. **Machine-and-Human Legibility**  
-   IdeaMark patterns are easy for humans to write and read,  
-   and structured enough for machines — including AI systems — to parse, relate, and recombine.
+In IdeaMark:
 
-6. **Composability and Conflict Awareness**  
-   Patterns are expected to be combined, adapted, or even to conflict.  
-   Tension between patterns is not a failure, but a signal for further design and judgment.
+-   Entities are semantically neutral.\
+-   Meaning emerges through relational roles (Occurrences).\
+-   Interpretation is guided by contextual framing (Sections with
+    anchorage).
 
----
+This is not a philosophical argument about meaning.\
+It is a structural design decision:
 
-## Why Patterns, Not Models?
+> Meaning should not be embedded invisibly inside content.\
+> It should be made explicit through framing and context.
 
-While models simulate and predict, **patterns describe and connect**.  
-They are fragments of design memory — durable, inspectable, and reusable across contexts.
+Anchorage in IdeaMark is therefore not a theoretical claim, but a
+modeling principle.
 
-Patterns do not claim universal validity.  
-Instead, they preserve *how* a problem was understood, *why* a solution was chosen,  
-and *under what conditions* it appeared to work.
+------------------------------------------------------------------------
 
-This makes patterns suitable not only for analysis,  
-but for reflection, adaptation, and learning over time.
+## 3. Structural Design, Not Philosophical Ownership
 
----
+IdeaMark does not claim originality over the underlying ideas.
 
-## Templates and Use
+The separation between content and interpretation,\
+the contextual generation of meaning,\
+and the structuring of reusable knowledge\
+are well-established themes in philosophy, semiotics, and systems
+theory.
 
-IdeaMark distinguishes between **what can be expressed** and **how it is used**.
+What IdeaMark contributes is:
 
-The core philosophy and structure of IdeaMark define the expressive space:  
-the kinds of problems, solutions, relationships, and decisions that can be recorded.
+-   A concrete layered structure (Entity → Occurrence → Section)\
+-   A machine-readable YAML specification\
+-   Operational tooling (CLI contracts, validation rules)\
+-   A format compatible with AI-assisted workflows
 
-Specific methodologies, workflows, and evaluative criteria are intentionally delegated  
-to templates built on top of IdeaMark.  
-This allows multiple approaches to coexist, evolve, and be compared  
-without constraining the core itself.
+This is an engineering effort, not a philosophical appropriation.
 
----
+------------------------------------------------------------------------
 
-## Toward a Pattern Network
+## 4. Why This Matters in the AI Era
 
-In the long run, IdeaMark envisions a decentralized, evolving network of patterns that:
+Large Language Models generate meaning contextually.\
+They do not interpret isolated fragments; they operate within prompts,
+frames, and conversational states.
 
-- Spans domains, regions, and disciplines
-- Supports human judgment alongside machine assistance
-- Preserves both successful and unsuccessful attempts as reusable design memory
-- Enables new configurations to emerge through synthesis rather than prescription
+In this environment:
 
-This is a form of *civic infrastructure* — a commons of structured thought.
+-   Context is not optional.\
+-   Framing determines output.\
+-   Implicit structure leads to ambiguity.
 
-If we are to meet the challenges of the 21st century,  
-we will need not just data or code, but **shared languages for design and decision-making**.
+IdeaMark formalizes framing.
 
-IdeaMark is one such attempt.
+By making interpretive layers explicit,\
+it becomes possible to:
+
+-   Inspect how conclusions are formed\
+-   Compare alternative framings\
+-   Track evolving hypotheses\
+-   Enable machine-assisted reasoning without collapsing human judgment
+
+Anchorage becomes operational.
+
+------------------------------------------------------------------------
+
+## 5. Open by Design
+
+IdeaMark is published as open source.
+
+It is not patented, nor intended to be proprietary.
+
+The structural principles it embodies are part of a shared intellectual
+heritage.\
+Its purpose is to make those principles operational in contemporary
+technological environments.
+
+By remaining open:
+
+-   It can evolve through community use.\
+-   It avoids enclosing public knowledge in private ownership.\
+-   It encourages interoperability through shared contracts and
+    specifications.
+
+IdeaMark is intended as civic infrastructure for structured thought.
+
+------------------------------------------------------------------------
+
+## 6. A Practical Position
+
+IdeaMark does not aim to replace philosophy.
+
+It does not attempt to redefine meaning, truth, or interpretation.
+
+Instead, it takes a modest but concrete position:
+
+> If meaning depends on structure and framing,\
+> then structure and framing should be explicit, inspectable, and
+> machine-processable.
+
+IdeaMark is the implementation of that position.
+
+Nothing more---and nothing less.
