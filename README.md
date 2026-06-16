@@ -1,74 +1,112 @@
 # IdeaMark Core
 
-**IdeaMark Core** is a framework for making traces of intellectual activity reusable across contexts.
+**IdeaMark Core** is a framework for making intellectual activity reusable.
 
-It is designed for situations where useful knowledge exists in conversations, reports, observations, plans, essays, analyses, or structured documents, but cannot be easily reused because its meaning depends on context, perspective, and later interpretation.
+It is built around one central idea:
 
-IdeaMark does not try to store meaning itself.
+> Do not try to store meaning itself.  
+> Preserve the structure that allows meaning to be generated again.
 
-Instead, it preserves reusable structures that help future readers, tools, or AI systems generate meaning again.
+IdeaMark is for conversations, reports, observations, plans, essays, analyses, structured documents, and other artifacts where useful knowledge exists, but cannot be reused reliably because its meaning depends on context, perspective, and later interpretation.
 
-> Meaning is not stored in text itself.  
-> Meaning emerges through structured interpretation.
+## The Problem
 
-## Why IdeaMark?
+Most knowledge-management systems treat knowledge as if it were stable content.
 
-Many knowledge-management approaches assume that knowledge can be captured as stable content.
+They usually try to capture, classify, summarize, embed, or retrieve pieces of information.
 
-In practice, the same text, claim, observation, or plan may mean different things depending on:
+That works for many tasks, but it breaks down when the important part is not the text itself, but the intellectual activity behind it:
 
-- who reads it
-- why it is being reused
-- which perspective is applied
-- which surrounding context is active
-- which downstream task is being performed
+- why a claim mattered
+- how an observation was used
+- what perspective made an idea relevant
+- which context made a statement meaningful
+- how one discussion can be reprojected into another domain
+- how prior thinking can be recomposed into a new plan, policy, design, or argument
 
-IdeaMark addresses this by separating representation from reusable meaning structure.
+In these cases, simply storing text is not enough.
 
-Rather than forcing all knowledge into one universal representation format, IdeaMark provides a core structure for organizing reusable traces of meaning-making.
+The same statement can function as evidence, a hypothesis, a constraint, a risk, or a design principle depending on how it is activated in a later context.
 
-## What IdeaMark Core Provides
+## The IdeaMark Approach
 
-IdeaMark Core defines a small set of structural concepts:
+IdeaMark treats documents as **logs of meaning-making activity**, not as containers of fixed meaning.
 
-| Concept | Purpose |
-|---|---|
-| **Entity** | Defines the boundary of a reusable trace of meaning-making |
-| **Occurrence** | Records how an Entity was used in a specific intellectual activity |
-| **Section** | Groups Occurrences into a local interpretation boundary |
-| **Perspective** | Records reusable clues about interpretive direction |
-| **Relations** | Connect IdeaMark units into a graph structure |
-| **Constraints** | Validate structural integrity without validating meaning |
-
-These concepts allow prior intellectual activity to be retrieved, reinterpreted, recomposed, and projected into new contexts.
-
-## What IdeaMark Is Not
-
-IdeaMark Core is **not**:
-
-- a command-line tool
-- a GUI application
-- a server framework
-- a database
-- a validator implementation
-- a universal knowledge-representation format
-- a replacement for domain-specific formats such as OKF, TPCG, JSON, YAML, or Markdown
-
-This repository provides specifications, philosophy, examples, and official templates only.
-
-Executable tools and application-specific processors should live in separate repositories.
-
-## Core Idea
-
-IdeaMark is based on a simple but important shift:
+Its basic model is:
 
 ```text
 Reality → Projection → Log → IdeaMark Structure → Projection → New Meaning
 ```
 
-A document is treated as a log of prior meaning-making activity, not as knowledge itself.
+A prior conversation, report, or analysis is treated as a trace of intellectual activity. IdeaMark extracts reusable structure from that trace so that a future reader, tool, or AI system can perform a new projection and generate meaning again.
 
-IdeaMark extracts and organizes reusable structural traces from that log. Later, another reader, tool, or AI system can use those traces to perform a new projection and generate new meaning in a different context.
+In other words, IdeaMark is not primarily about preserving knowledge.
+
+It is about making prior meaning-making reusable.
+
+## What Makes IdeaMark Different
+
+IdeaMark separates concerns that are often mixed together:
+
+| Concern | IdeaMark Treatment |
+|---|---|
+| Representation | Stored externally as payload: Markdown, YAML, JSON, OKF, TPCG, text, etc. |
+| Meaning | Not stored directly; emerges through interpretation |
+| Entity | Boundary of a reusable trace of meaning-making |
+| Occurrence | How an Entity functioned in a specific intellectual activity |
+| Section | Local interpretation boundary for reading Occurrences together |
+| Perspective | Reusable trace of projection / interpretive direction |
+| Relations | Graph structure connecting reusable units |
+| Constraints | Structural validation without semantic enforcement |
+
+This separation allows IdeaMark to support:
+
+- perspective-dependent retrieval
+- cross-domain reuse
+- recomposition of prior thinking
+- structured synthesis from conversations or reports
+- reuse of heterogeneous payload formats
+- AI-assisted interpretation without forcing a single knowledge schema
+
+## What IdeaMark Core Provides
+
+IdeaMark Core defines the minimum common structure for reusable intellectual traces:
+
+### Entity
+
+An Entity defines the boundary of a reusable trace of meaning-making.
+
+It does not own meaning itself. Its identity is independent from the payload it references or contains.
+
+### Occurrence
+
+An Occurrence records how an Entity was used in a specific intellectual activity.
+
+The same Entity may appear as a claim, evidence, observation, assumption, objective, constraint, risk, or another role depending on context.
+
+### Section
+
+A Section groups Occurrences into a local interpretation boundary.
+
+It defines how a set of Occurrences should be read together.
+
+### Perspective
+
+A Perspective records reusable clues about interpretive direction.
+
+It is not meaning itself and does not guarantee that future readers will derive the same meaning.
+
+### Relations
+
+Relations connect IdeaMark units into a graph structure.
+
+They support reuse, comparison, synthesis, decomposition, and recomposition.
+
+### Constraints
+
+Constraints validate structural integrity without validating meaning.
+
+IdeaMark Core checks that the structure is processable while leaving interpretation open.
 
 ## Payload-Agnostic by Design
 
@@ -87,7 +125,25 @@ An Entity may point to or contain many kinds of payloads, including:
 
 IdeaMark Core does not define the semantics of those payloads.
 
-It defines the structure around them: boundaries, activations, interpretation contexts, perspectives, and relations.
+Payload-specific meaning, correctness, URI reachability, selector semantics, and profile validation belong to external tools or domain-specific profiles.
+
+IdeaMark defines the reusable structure around payloads: boundaries, activations, interpretation contexts, perspectives, and relations.
+
+## What IdeaMark Is Not
+
+IdeaMark Core is **not**:
+
+- a command-line tool
+- a GUI application
+- a server framework
+- a database
+- a validator implementation
+- a universal knowledge-representation format
+- a replacement for domain-specific formats such as OKF, TPCG, JSON, YAML, or Markdown
+
+This repository provides specifications, philosophy, examples, and official templates only.
+
+Executable tools and application-specific processors should live in separate repositories.
 
 ## Repository Contents
 
@@ -143,6 +199,17 @@ sections:
 This example does not attempt to encode the full meaning of the claim.
 
 It identifies a reusable Entity, records its Occurrence as a claim, and places it inside a Section that provides an interpretation boundary.
+
+## Example Use Cases
+
+IdeaMark may be useful for:
+
+- converting research discussions into reusable structured traces
+- turning reports or observations into recomposable planning material
+- organizing policy, design, or business discussions across perspectives
+- reusing prior conversations as inputs for new documents
+- connecting domain-specific payloads such as OKF or TPCG without merging their schemas
+- building AI workflows that separate extraction, interpretation, and final expression
 
 ## Validation Philosophy
 
