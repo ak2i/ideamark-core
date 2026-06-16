@@ -1,6 +1,8 @@
 # IdeaMark Core
 
-**IdeaMark Core** is a framework for making intellectual activity reusable.
+**IdeaMark is a framework for reusing how people think, not just what they wrote.**
+
+IdeaMark Core provides the structural foundation for making intellectual activity reusable across contexts.
 
 It is built around one central idea:
 
