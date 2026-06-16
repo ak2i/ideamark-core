@@ -1,129 +1,125 @@
 # IdeaMark Core
 
-IdeaMark Core is a payload-agnostic meaning-structure framework for organizing, retrieving, reprojecting, and recomposing reusable traces of intellectual activity.
+**IdeaMark Core** is a framework for making traces of intellectual activity reusable across contexts.
 
-It is not a command-line tool, application framework, or knowledge-representation format. This repository provides the official IdeaMark Core specifications, design philosophy, conceptual model, constraints, examples, and official template library.
+It is designed for situations where useful knowledge exists in conversations, reports, observations, plans, essays, analyses, or structured documents, but cannot be easily reused because its meaning depends on context, perspective, and later interpretation.
 
-## What IdeaMark Is
+IdeaMark does not try to store meaning itself.
 
-IdeaMark starts from the hypothesis that meaning is not stored directly in text or data. Meaning emerges through structured interpretation.
+Instead, it preserves reusable structures that help future readers, tools, or AI systems generate meaning again.
 
-IdeaMark therefore preserves reusable traces of meaning-making rather than attempting to preserve meaning itself. These traces can later be retrieved, reinterpreted, recomposed, and projected into new contexts.
+> Meaning is not stored in text itself.  
+> Meaning emerges through structured interpretation.
 
-In short:
+## Why IdeaMark?
 
-> IdeaMark does not define meaning.  
-> It defines the conditions under which meaning can emerge without collapsing into chaos.
+Many knowledge-management approaches assume that knowledge can be captured as stable content.
 
-## Core Positioning
+In practice, the same text, claim, observation, or plan may mean different things depending on:
 
-IdeaMark Core separates the following concerns:
+- who reads it
+- why it is being reused
+- which perspective is applied
+- which surrounding context is active
+- which downstream task is being performed
 
-| Concern | Role in IdeaMark |
+IdeaMark addresses this by separating representation from reusable meaning structure.
+
+Rather than forcing all knowledge into one universal representation format, IdeaMark provides a core structure for organizing reusable traces of meaning-making.
+
+## What IdeaMark Core Provides
+
+IdeaMark Core defines a small set of structural concepts:
+
+| Concept | Purpose |
 |---|---|
-| Representation | External payload such as Markdown, YAML, JSON, OKF, TPCG, or other formats |
-| Entity | Boundary of a reusable trace of meaning-making |
-| Occurrence | Contextual activation of an Entity within intellectual activity |
-| Section | Local interpretation boundary that groups Occurrences |
-| Perspective | Reusable trace of projection / interpretive direction |
-| Relations | Graph structure connecting IdeaMark units |
-| Constraints | Structural validation without constraining meaning |
+| **Entity** | Defines the boundary of a reusable trace of meaning-making |
+| **Occurrence** | Records how an Entity was used in a specific intellectual activity |
+| **Section** | Groups Occurrences into a local interpretation boundary |
+| **Perspective** | Records reusable clues about interpretive direction |
+| **Relations** | Connect IdeaMark units into a graph structure |
+| **Constraints** | Validate structural integrity without validating meaning |
 
-This separation allows IdeaMark to work across heterogeneous knowledge formats without requiring a single universal representation format.
+These concepts allow prior intellectual activity to be retrieved, reinterpreted, recomposed, and projected into new contexts.
 
-## What This Repository Contains
+## What IdeaMark Is Not
 
-This repository is intended to provide:
+IdeaMark Core is **not**:
 
-- IdeaMark Core specifications
-- Core philosophy and design rationale
+- a command-line tool
+- a GUI application
+- a server framework
+- a database
+- a validator implementation
+- a universal knowledge-representation format
+- a replacement for domain-specific formats such as OKF, TPCG, JSON, YAML, or Markdown
+
+This repository provides specifications, philosophy, examples, and official templates only.
+
+Executable tools and application-specific processors should live in separate repositories.
+
+## Core Idea
+
+IdeaMark is based on a simple but important shift:
+
+```text
+Reality → Projection → Log → IdeaMark Structure → Projection → New Meaning
+```
+
+A document is treated as a log of prior meaning-making activity, not as knowledge itself.
+
+IdeaMark extracts and organizes reusable structural traces from that log. Later, another reader, tool, or AI system can use those traces to perform a new projection and generate new meaning in a different context.
+
+## Payload-Agnostic by Design
+
+IdeaMark Core is payload-agnostic.
+
+An Entity may point to or contain many kinds of payloads, including:
+
+- plain text
+- Markdown
+- YAML
+- JSON
+- OKF
+- TPCG
+- external documents
+- future formats
+
+IdeaMark Core does not define the semantics of those payloads.
+
+It defines the structure around them: boundaries, activations, interpretation contexts, perspectives, and relations.
+
+## Repository Contents
+
+This repository is intended to contain:
+
+- Core specifications
+- Design philosophy
 - Core model definitions
-- Structural constraints and validation boundaries
+- Structural constraints
 - Official examples
 - Official template library
-- Notes on applications and usage patterns
+- Application and usage notes
 
-This repository intentionally does **not** provide:
+The current active specification is **IdeaMark Core v1.1.1**.
 
-- CLI commands
-- GUI applications
-- server implementations
-- validators as executable tools
-- application-specific payload processors
+## Start Here
 
-Tooling may be built in separate repositories on top of IdeaMark Core.
+Read the v1.1.1 documents in this order:
 
-## Current Specification
+1. [`ideamark-core-philosophy-v1.1.1.md`](docs/specs/V1.1.1/ideamark-core-philosophy-v1.1.1.md)  
+   Explains the design hypothesis: meaning is emergent, not stored.
 
-The current active design-stage specification is **IdeaMark Core v1.1.1**.
+2. [`ideamark-core-model-v1.1.1.md`](docs/specs/V1.1.1/ideamark-core-model-v1.1.1.md)  
+   Defines Entity, Occurrence, Section, Perspective, and Relations.
 
-Primary specification documents:
+3. [`ideamark-core-constraints-v1.1.1.md`](docs/specs/V1.1.1/ideamark-core-constraints-v1.1.1.md)  
+   Defines structural validation boundaries and required constraints.
 
-- [`docs/specs/V1.1.1/ideamark-core-spec-v1.1.1.md`](docs/specs/V1.1.1/ideamark-core-spec-v1.1.1.md) — integrated core specification
-- [`docs/specs/V1.1.1/ideamark-core-philosophy-v1.1.1.md`](docs/specs/V1.1.1/ideamark-core-philosophy-v1.1.1.md) — philosophy and design hypothesis
-- [`docs/specs/V1.1.1/ideamark-core-model-v1.1.1.md`](docs/specs/V1.1.1/ideamark-core-model-v1.1.1.md) — core structural model
-- [`docs/specs/V1.1.1/ideamark-core-constraints-v1.1.1.md`](docs/specs/V1.1.1/ideamark-core-constraints-v1.1.1.md) — validation and structural constraints
+4. [`ideamark-core-spec-v1.1.1.md`](docs/specs/V1.1.1/ideamark-core-spec-v1.1.1.md)  
+   Provides the integrated Core Specification.
 
-## Core Model Overview
-
-### Entity
-
-An Entity is the fundamental reusable meaning-boundary unit.
-
-It does not own or preserve meaning itself. Instead, it defines the boundary of a reusable trace of meaning-making. Entity identity is independent from payload identity.
-
-Entities are payload-agnostic and may reference plain text, Markdown, OKF, TPCG, JSON, YAML, or future formats.
-
-### Occurrence
-
-An Occurrence activates an Entity within a specific intellectual activity.
-
-It records how an Entity functioned within a meaning-making process. The same Entity may participate in multiple Occurrences with different roles such as claim, evidence, observation, assumption, objective, or constraint.
-
-### Section
-
-A Section groups Occurrences into an interpretable unit.
-
-It is the primary local interpretation boundary. A Section defines how a set of Occurrences should be read together.
-
-### Perspective
-
-Perspective is not meaning itself.
-
-It records reusable clues regarding interpretive direction. It is a trace of projection, not a guarantee that future readers will derive identical meaning.
-
-### Relations
-
-Relations connect structured IdeaMark units and form the graph structure of an IdeaMark document.
-
-Relations may connect Entities or Sections depending on the document design.
-
-## Payload-Agnostic Design
-
-IdeaMark Core is responsible for structure, not payload semantics.
-
-It constrains:
-
-- Entity boundaries
-- Occurrence activation
-- Section interpretation
-- Perspective guidance
-- Relation structure
-
-It does not constrain:
-
-- payload meaning
-- payload correctness
-- payload profile semantics
-- external resource existence
-- URI reachability
-- selector interpretation
-
-Payload-specific processing belongs to profile-specific tooling or downstream applications.
-
-## Minimal Structural Shape
-
-An IdeaMark document must contain the following top-level structures:
+## Minimal Example
 
 ```yaml
 entities:
@@ -144,23 +140,32 @@ sections:
     occurrences: [O1]
 ```
 
-Relations and perspectives are optional in Core, although they are important for richer reuse and interpretation.
+This example does not attempt to encode the full meaning of the claim.
 
-## Validation Boundary
+It identifies a reusable Entity, records its Occurrence as a claim, and places it inside a Section that provides an interpretation boundary.
 
-IdeaMark Core validation guarantees structural integrity while preserving interpretive flexibility.
+## Validation Philosophy
 
-Core validation checks:
+IdeaMark Core validates structure, not meaning.
 
-- required structures
-- reference integrity
-- identifier uniqueness
-- occurrence completeness
-- section completeness
-- entity payload presence
-- payload reference shape
+Core validation checks things such as:
 
-Core validation does not check whether a payload is true, meaningful, reachable, semantically correct, or valid under an external profile.
+- required structures exist
+- references are valid
+- identifiers are unique
+- occurrences define `entity` and `role`
+- sections contain non-empty `occurrences`
+- entities define a usable `payload`
+
+Core validation does not check:
+
+- whether a claim is true
+- whether a payload is semantically correct
+- whether an external URI is reachable
+- whether a selector is meaningful for a payload profile
+- whether future readers will derive the same meaning
+
+This is intentional. IdeaMark constrains interpretation enough to support reuse, while preserving flexibility for future projection.
 
 ## Design Status
 
