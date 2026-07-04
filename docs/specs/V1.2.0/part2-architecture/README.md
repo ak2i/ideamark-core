@@ -17,8 +17,8 @@ Part 2 explains engineering through reconstruction at the ecosystem level.
 1. [Two-plus-one Layer Model](./01-two-plus-one-layer-model.md)
 2. [Index Construction Layer](./02-index-construction-layer.md)
 3. [Projection Libraries and Projection Selection](./03-projection-libraries-and-projection-selection.md)
-4. IdeaMark Generation and Repository Construction *(planned)*
-5. On-demand Generation and Background Generation *(planned)*
+4. [IdeaMark Generation and Repository Construction](./04-ideamark-generation-and-repository-construction.md)
+5. [On-demand Generation and Background Generation](./05-on-demand-generation-and-background-generation.md)
 6. Reconstruction Layer *(planned)*
 7. Retrieval as Navigation to Intellectual Activity *(planned)*
 8. AI Interpretation and Human Interpretation *(planned)*
