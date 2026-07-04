@@ -1,7 +1,7 @@
 # 3. Projection Libraries and Projection Selection
 
 **Part:** 2 — Architecture of Human-AI Co-evolution  
-**Status:** Draft Rev001  
+**Status:** Draft Rev002  
 **Type:** Informative / Reference Architecture
 
 Projection defines a reuse strategy.
@@ -23,7 +23,8 @@ A Projection may guide:
 - how sections should organize intellectual activity;
 - what retrieval should support;
 - what can be ignored;
-- what kind of future interpreter is expected.
+- what kind of future interpreter is expected;
+- what urgency, risk, capability, or responsibility should shape reconstruction.
 
 Projection therefore shapes both construction and reconstruction.
 
@@ -72,7 +73,55 @@ IdeaMark Core does not prescribe how Projection libraries are stored, versioned,
 
 The architectural requirement is that Projections can be reused and applied in a way that supports interoperable IdeaMark generation and reconstruction.
 
-## 3.4 Projection Origins
+## 3.4 Projection Libraries as Cognitive Scaffolding
+
+A Projection library is not only a technical reuse mechanism.
+
+It is also cognitive scaffolding for humans and organizations.
+
+A sufficiently capable AI system may generate a Situation-specific Projection without relying on a pre-existing library.
+
+However, humans and organizations often need shared patterns before they can understand, trust, evaluate, adopt, and govern a new intellectual activity.
+
+Projection libraries provide such patterns.
+
+They may offer:
+
+- familiar starting points;
+- examples of useful reuse strategies;
+- shared language for discussing reconstruction;
+- organizational defaults;
+- domain-specific expectations;
+- professional norms;
+- educational scaffolding;
+- reviewable precedents;
+- a basis for trust and accountability.
+
+A Projection library therefore helps humans begin acting rationally within a complex possibility space.
+
+It reduces cognitive load without eliminating adaptation.
+
+## 3.5 Projection Libraries as Authority and Assurance
+
+Projection libraries may also function as sources of assurance.
+
+A Projection may be trusted because it is maintained by a professional community, standards body, regulator, organization, expert group, open-source community, or long-running practice.
+
+This does not make the Projection universally correct.
+
+It means the Projection carries recognizable authority, provenance, and expectations that humans can use when deciding whether and how to rely on it.
+
+For example, a disaster response Projection maintained by domain experts may help users accept urgent safety-oriented reconstruction.
+
+An organizational design-review Projection may help engineers understand what kind of issues the organization considers important.
+
+A novice-friendly educational Projection may help new users understand how IdeaMark works before they attempt custom Projection generation.
+
+In this sense, Projection libraries support adoption as well as computation.
+
+They make IdeaMark understandable before it becomes fully customizable.
+
+## 3.6 Projection Origins
 
 A Projection may originate from many sources.
 
@@ -92,7 +141,7 @@ IdeaMark Core should not privilege one origin over another.
 
 What matters architecturally is whether the Projection can guide useful access to original sources and support future reconstruction.
 
-## 3.5 Projection Selection
+## 3.7 Projection Selection
 
 Projection selection is the process of choosing one or more Projections for construction or reconstruction.
 
@@ -100,6 +149,7 @@ Selection may occur before IdeaMark generation, during retrieval, during interpr
 
 A system may select Projection based on:
 
+- Situation Vector;
 - user role;
 - task type;
 - domain;
@@ -108,16 +158,18 @@ A system may select Projection based on:
 - language;
 - literacy level;
 - risk level;
+- urgency;
 - desired output form;
 - previous successful use;
 - AI recommendation;
-- explicit human choice.
+- explicit human choice;
+- library authority or organizational default.
 
 Part 2 does not define a required selection algorithm.
 
-Projection selection may be manual, automatic, interactive, policy-driven, AI-assisted, or experimental.
+Projection selection may be manual, automatic, interactive, policy-driven, AI-assisted, library-based, or experimental.
 
-## 3.6 Projection Generation
+## 3.8 Projection Generation
 
 In some situations, a suitable Projection may not exist in a library.
 
@@ -125,7 +177,8 @@ A human or AI system may generate a new Projection for the current situation.
 
 This may occur when:
 
-- the task is novel;
+- the Situation Vector is novel;
+- urgency or risk requires a more specific Projection;
 - the source domain is unfamiliar;
 - the user role is unusual;
 - existing Projections are too broad;
@@ -137,7 +190,32 @@ Generated Projections may remain temporary, be refined into reusable assets, or 
 
 Part 2 does not require generated Projections to be stored permanently.
 
-## 3.7 Multiple Projections
+## 3.9 Library-Guided Projection Generation
+
+Projection generation and Projection libraries are complementary.
+
+An AI system may generate a Situation-specific Projection by adapting, composing, constraining, or specializing library Projections.
+
+```text
+Projection Library
+        x
+Situation Vector
+        ↓
+Situation-specific Projection
+```
+
+This pattern allows the generated Projection to remain responsive to the current situation while preserving continuity with trusted or familiar reuse strategies.
+
+For example:
+
+- a safety Projection may be specialized for foreign tourists;
+- a design-review Projection may be adapted for an early-stage startup;
+- a compliance Projection may be combined with an incident-response Projection;
+- an educational Projection may be compressed into emergency guidance.
+
+Library-guided generation helps avoid the extremes of unrestricted improvisation and rigid template use.
+
+## 3.10 Multiple Projections
 
 A reconstruction activity may use multiple Projections.
 
@@ -148,7 +226,8 @@ Multiple Projections may be useful when:
 - risk and opportunity must both be evaluated;
 - a policy, engineering, and operational view are all needed;
 - an AI system needs alternative access paths;
-- uncertainty about the best reuse strategy remains high.
+- uncertainty about the best reuse strategy remains high;
+- normative priorities remain contested or domain-dependent.
 
 Multiple Projections may produce complementary IdeaMark documents or alternative interpretations from the same original source.
 
@@ -156,11 +235,11 @@ The architecture should allow such coexistence.
 
 It should not force premature convergence into a single Projection.
 
-## 3.8 Projection and Human-AI Co-evolution
+## 3.11 Projection and Human-AI Co-evolution
 
 Projection libraries may improve through use.
 
-Humans and AI systems may discover that a Projection is useful, misleading, incomplete, too abstract, too narrow, or difficult to apply.
+Humans and AI systems may discover that a Projection is useful, misleading, incomplete, too abstract, too narrow, difficult to apply, insufficiently trusted, or inappropriate for a Situation Vector.
 
 Feedback from reconstruction may therefore lead to:
 
@@ -171,13 +250,15 @@ Feedback from reconstruction may therefore lead to:
 - Projection combination;
 - creation of new Projection families;
 - better authoring guidance;
-- improved examples and evaluation methods.
+- improved examples and evaluation methods;
+- clearer authority and provenance;
+- better human understanding of available intellectual activity patterns.
 
 This feedback loop is part of human-AI co-evolution.
 
 The Projection library becomes a shared intellectual asset that records how a community has learned to reuse original sources.
 
-## 3.9 Relationship to IdeaMark Documents
+## 3.12 Relationship to IdeaMark Documents
 
 Projection influences the IdeaMark document generated from an original source.
 
@@ -191,7 +272,7 @@ This is not duplication in the ordinary sense.
 
 It is the preservation of multiple access strategies.
 
-## 3.10 Non-goals
+## 3.13 Non-goals
 
 Part 2 does not define:
 
@@ -202,11 +283,12 @@ Part 2 does not define:
 - a Projection marketplace;
 - a Projection registry protocol;
 - a universal Projection taxonomy;
-- a required Projection library storage mechanism.
+- a required Projection library storage mechanism;
+- a universal normative priority among individual preference, expert judgment, organizational policy, public safety, law, or social value.
 
-These may be specified in later parts, companion specifications, implementations, or organizational practices.
+These may be specified in later parts, companion specifications, implementations, domain practices, institutions, or future societies.
 
-## 3.11 Design Rationale
+## 3.14 Design Rationale
 
 Projection is central because reuse is situated.
 
@@ -214,16 +296,22 @@ The same original source may support many legitimate future intellectual activit
 
 If IdeaMark Core defined only one way to extract reusable structure, it would collapse reuse into a single interpretation.
 
+If IdeaMark Core assumed that all Projections should be generated freely from each Situation Vector, it would ignore the human need for shared patterns, trust, authority, and cognitive scaffolding.
+
 By treating Projection as a reusable intellectual asset, IdeaMark allows different access structures to coexist while keeping original sources authoritative.
 
-## 3.12 Summary
+By treating Projection libraries as scaffolding and assurance, IdeaMark also supports human adoption, organizational learning, and accountable human-AI collaboration.
+
+## 3.15 Summary
 
 Projection defines how original sources become reusable for future intellectual activities.
 
-Projection libraries preserve reusable access strategies.
+Projection libraries preserve reusable access strategies and provide cognitive scaffolding, shared language, assurance, and authority.
 
 Projection selection connects current situations to appropriate reconstruction paths.
 
 Projection generation allows new situations to be handled when existing strategies are insufficient.
 
-Together, Projection libraries and Projection selection make IdeaMark adaptable without turning IdeaMark documents into final meanings.
+Library-guided Projection generation allows AI systems to adapt trusted patterns to current Situation Vectors.
+
+Together, Projection libraries and Projection selection make IdeaMark adaptable without turning IdeaMark documents into final meanings or making Projection generation an unrestricted black box.
