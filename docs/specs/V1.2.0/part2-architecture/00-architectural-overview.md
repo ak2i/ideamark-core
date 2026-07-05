@@ -1,7 +1,7 @@
 # 0. Architectural Overview
 
 **Part:** 2 — Architecture of Human-AI Co-evolution  
-**Status:** Draft Rev001  
+**Status:** Draft Rev002  
 **Type:** Informative / Reference Architecture
 
 IdeaMark does not complete intellectual activity at the moment of document generation.
@@ -9,6 +9,8 @@ IdeaMark does not complete intellectual activity at the moment of document gener
 It creates reusable access structures that allow future humans and AI systems to return to authoritative original sources, apply a current Projection, and reconstruct meaning under a new situation.
 
 Part 2 describes this architectural cycle.
+
+IdeaMark exists not to preserve knowledge as an end in itself, but to support the continuous evolution of intellectual activity under changing situations.
 
 ## 0.1 Architectural Claim
 
@@ -44,7 +46,44 @@ A later user may reinterpret the same original source through a different Projec
 
 The ecosystem evolves when these activities create better Projections, better IdeaMark documents, better retrieval behavior, better human practices, and new authoritative original sources.
 
-## 0.3 IdeaMark as an Access Structure
+## 0.3 Reference Cycle
+
+The following diagram summarizes the reference cycle described in Part 2.
+
+```mermaid
+flowchart TD
+    OBS[Observation / Expression / Signal]
+    SI[Situation Interpretation]
+    SV[Situation Vector]
+    PL[Projection Library]
+    PG[Projection Selection / Generation]
+    SP[Situation-specific Projection]
+    IM[IdeaMark Retrieval / Generation]
+    OS[Authoritative Original Source]
+    IA[Human-AI Intellectual Activity]
+    OUT[Action / Explanation / Decision]
+    NEXT[Situation t + 1]
+
+    OBS --> SI --> SV
+    SV --> PG
+    PL --> PG
+    PG --> SP
+    SP --> IM
+    IM --> OS
+    OS --> IA
+    SP --> IA
+    SV --> IA
+    IA --> OUT --> NEXT
+    NEXT --> OBS
+```
+
+This diagram is explanatory.
+
+It does not define a required workflow, API, database schema, user interface, model architecture, or governance process.
+
+It shows the architectural relationship among observations, Situation interpretation, Projection, IdeaMark, original sources, collaborative intellectual activity, and Situation evolution.
+
+## 0.4 IdeaMark as an Access Structure
 
 IdeaMark documents may be used index-like, but Part 2 does not define storage-level indexing.
 
@@ -66,7 +105,7 @@ It supports access to original sources and helps structure reconstruction under 
 
 It is not itself the reconstructed meaning.
 
-## 0.4 Reconstruction Instead of Storage
+## 0.5 Reconstruction Instead of Storage
 
 The purpose of IdeaMark is not to store final interpretations.
 
@@ -75,7 +114,11 @@ The purpose is to make reconstruction easier.
 A typical reconstruction cycle is:
 
 ```text
-Current Situation
+Observation / Expression / Signal
+        ↓
+Situation Interpretation
+        ↓
+Situation Vector
         ↓
 Projection Selection or Projection Generation
         ↓
@@ -83,11 +126,11 @@ IdeaMark Retrieval or Generation
         ↓
 Original Source Access
         ↓
-AI Interpretation and Human Interpretation
+Human-AI Intellectual Activity
         ↓
-Judgment / Decision / Action
+Judgment / Decision / Action / Explanation
         ↓
-New Original Source
+Situation(t + 1)
 ```
 
 The IdeaMark document assists this cycle by preserving reusable structural traces.
@@ -96,7 +139,7 @@ These traces may identify relevant entities, occurrences, sections, relations, s
 
 The reconstructed meaning emerges from the interaction among the current situation, the Projection, the IdeaMark document, the original source, and the interpreters.
 
-## 0.5 Reference Architecture, Not Required Implementation
+## 0.6 Reference Architecture, Not Required Implementation
 
 The architecture described in Part 2 is a reference architecture.
 
@@ -110,15 +153,16 @@ All of these choices belong to implementation architecture, not to IdeaMark Core
 
 The Core concern is that IdeaMark documents can function as reusable access structures that connect future reconstruction activities to authoritative original sources through Projection.
 
-## 0.6 Architectural Responsibilities
+## 0.7 Architectural Responsibilities
 
 Part 2 organizes the architecture around the following responsibilities:
 
+- interpreting observations, expressions, and signals as Situation representations;
 - constructing IdeaMark documents from original sources and Projections;
-- selecting or generating Projections for current situations;
+- selecting, adapting, or generating Projections for current situations;
 - retrieving or generating relevant IdeaMark documents;
 - accessing authoritative original sources;
-- supporting AI and human interpretation;
+- supporting human-AI intellectual activity;
 - producing decisions, actions, explanations, and new original sources;
 - feeding usage, feedback, and new sources back into the ecosystem.
 
@@ -126,7 +170,19 @@ These responsibilities may be implemented by one system, many systems, human wor
 
 IdeaMark Core should not assume a single deployment pattern.
 
-## 0.7 Design Rationale
+## 0.8 AI as Architectural Participant
+
+AI systems may participate in intellectual activity as architectural participants.
+
+They may interpret observations, help construct Situation Vectors, propose or adapt Projections, retrieve IdeaMark documents, read original sources, generate explanations, and respond to human feedback.
+
+This does not imply legal personhood, moral status, or human-equivalent rights.
+
+It means that, within the IdeaMark Core architecture, AI systems are not limited to passive tools for output generation.
+
+They may participate in the collaborative process through which situations are interpreted, sources are revisited, meanings are reconstructed, and future situations are shaped.
+
+## 0.9 Design Rationale
 
 If IdeaMark were treated as a final knowledge store, it would compete with knowledge bases, ontologies, and generated summaries.
 
@@ -136,38 +192,16 @@ IdeaMark is designed to make prior intellectual activities reusable while preser
 
 This is especially important in AI-enabled environments.
 
-AI systems can generate situation-specific explanations, but their usefulness depends on grounding, source access, context, and traceability.
+AI systems can generate situation-specific explanations, but their usefulness depends on grounding, source access, context, traceability, and collaborative correction.
 
 IdeaMark contributes by helping AI and humans navigate from a current situation to relevant original sources through reusable intellectual structures.
 
-## 0.8 Non-normative Diagram
-
-```text
-Original Sources
-        x
-Projection
-        ↓
-IdeaMark Documents
-        ↓
-Retrieval / Generation
-        ↓
-Original Source Access
-        ↓
-Human-AI Interpretation
-        ↓
-Action / Explanation / New Source
-        ↓
-Feedback to Projection, IdeaMark, Retrieval, and Practice
-```
-
-This diagram is explanatory.
-
-It does not define a required workflow, API, database schema, or user interface.
-
-## 0.9 Summary
+## 0.10 Summary
 
 Part 2 explains how IdeaMark can support a living ecosystem of human-AI intellectual activity.
 
 The key point is not that IdeaMark stores meaning.
 
 The key point is that IdeaMark documents can function as reusable access structures that help humans and AI return to authoritative original sources and reconstruct meaning under new situations through Projection.
+
+The larger architectural purpose is to support Situation evolution through traceable human-AI intellectual activity.
