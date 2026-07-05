@@ -77,6 +77,30 @@ Something that cannot yet be observed by humans, supplied to AI systems, or conv
 
 Part 3 should therefore define Original Source Reference in a media-independent way while preserving the practical requirement that source material must be accessible enough to support traceability and reconstruction.
 
+## Structural Catalyst Stance
+
+The Core Model does not attempt to encode meaning.
+
+Its purpose is to preserve enough reusable structure so that Projection-guided Human-AI Intellectual Activity can efficiently reconstruct meaning from Original Sources.
+
+The three-layer structural pattern of Section, Occurrence, and Entity should therefore be understood primarily as a structural catalyst rather than as a fixed semantic taxonomy.
+
+Their names are historical and descriptive.
+
+The Core intentionally minimizes the functional semantics assigned to them.
+
+A Section does not have to mean a document section, workflow step, chapter, topic, or decision unit.
+
+An Occurrence does not have to mean a textual occurrence, event, instance, or observation.
+
+An Entity does not have to mean a concept, object, actor, term, or knowledge unit.
+
+Those functional interpretations belong to Projection, authoring practice, domain practice, or reconstruction activity.
+
+In the Core Model, Section, Occurrence, and Entity are structural positions that can carry ordering, anchorage, role, relation, and traceability information.
+
+They are useful because they can be separated from both Original Source and Projection while still functioning as keys that help future humans and AI systems reactivate meaning under a Projection.
+
 ## Draft Sections
 
 0. [Core Model Overview](./00-core-model-overview.md) *(planned)*
