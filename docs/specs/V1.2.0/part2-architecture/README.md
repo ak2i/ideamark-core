@@ -22,11 +22,11 @@ Part 2 explains engineering through reconstruction at the ecosystem level.
 6. [Situation Interpretation Layer](./06-situation-interpretation-layer.md)
 7. [Situation-driven Reconstruction Layer](./07-reconstruction-layer.md)
 8. [Original Source Open-hand Principle](./08-original-source-open-hand-principle.md)
-9. Human-AI Intellectual Activity *(planned)*
-10. Situation Evolution and Ecosystem Feedback *(planned)*
-11. Capability-Oriented Human-AI Co-evolution *(planned)*
+9. [Human-AI Intellectual Activity](./09-human-ai-intellectual-activity.md)
+10. [Situation Evolution and Ecosystem Feedback](./10-situation-evolution-and-ecosystem-feedback.md)
+11. [Capability-Oriented Human-AI Co-evolution](./11-capability-oriented-human-ai-co-evolution.md)
 12. [Architectural Boundaries and Non-prescription](./12-architectural-boundaries-and-non-prescription.md)
-13. Architecture Summary *(planned)*
+13. [Architecture Summary](./13-architecture-summary.md)
 
 ## Reading Notes
 
@@ -43,3 +43,5 @@ IdeaMark documents may be used index-like because they help future humans and AI
 Part 2 defines roles and connections rather than the complete contents of future intellectual activities.
 
 This non-prescriptive boundary is intentional: Original Source, Observation, Situation Vector, Projection, Human-AI Intellectual Activity, Feedback, and Capability must remain open enough to support future media, future AI systems, future social practices, and future knowledge representations.
+
+A major design rationale of this part is interpretation cost reduction. IdeaMark does not preserve one final interpretation; it provides reusable access structures and Projections that can reduce the cost of creating, understanding, reviewing, maintaining, teaching, and reusing intellectual work.
