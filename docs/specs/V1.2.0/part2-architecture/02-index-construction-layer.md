@@ -1,10 +1,10 @@
 # 2. Index Construction Layer
 
 **Part:** 2 — Architecture of Human-AI Co-evolution  
-**Status:** Draft Rev001  
+**Status:** Draft Rev002  
 **Type:** Informative / Reference Architecture
 
-The Index Construction Layer creates IdeaMark documents from authoritative original sources and Projections.
+The Index Construction Layer creates IdeaMark documents from Original Sources and Projections.
 
 In this layer, index means an access structure for future reconstruction.
 
@@ -12,7 +12,7 @@ It does not mean a database index, search engine index, vector index, storage la
 
 ## 2.1 Purpose
 
-The purpose of the Index Construction Layer is to produce IdeaMark documents that can later help humans and AI systems return to relevant original sources and reconstruct intellectual activity under a Projection.
+The purpose of the Index Construction Layer is to produce IdeaMark documents that can later help humans and AI systems return to relevant Original Sources and reconstruct intellectual activity under a Projection.
 
 The layer does not attempt to preserve final meaning.
 
@@ -30,24 +30,24 @@ Future Reconstruction Support
 
 An IdeaMark document generated in this layer should be understood as a reconstruction aid.
 
-It is not a replacement for the original source.
+It is not a replacement for the Original Source.
 
 ## 2.2 Inputs
 
 The primary inputs of this layer are:
 
-1. authoritative original sources;
+1. Original Sources treated as authority for the selected Projection-guided construction;
 2. one or more Projections;
 3. optional contextual information needed for generation;
 4. optional authoring or review policies.
 
-Original sources may include documents, reports, transcripts, datasets, conversations, code, logs, diagrams, or other materials from which future intellectual activity may be reconstructed.
+Original Sources may include documents, reports, transcripts, datasets, conversations, code, logs, diagrams, images, sensor streams, or other materials from which future intellectual activity may be reconstructed.
 
 Projection defines what kind of reuse matters.
 
 For example, a Projection may focus on field operations, policy design, education, engineering design, investment analysis, safety review, research synthesis, or another future intellectual activity.
 
-The same original source may therefore produce different IdeaMark documents under different Projections.
+The same Original Source may therefore produce different IdeaMark documents under different Projections.
 
 ## 2.3 Output
 
@@ -59,7 +59,7 @@ Part 2 does not define the exact YAML representation of these structures.
 
 That belongs to later Core Model and Core Specification parts.
 
-The architectural requirement is that the output can support future reconstruction by connecting a current situation and Projection back to relevant original sources.
+The architectural requirement is that the output can support future reconstruction by connecting a current Situation and Projection back to relevant Original Sources.
 
 ## 2.4 Source-Projection Pairing
 
@@ -136,7 +136,7 @@ IdeaMark Core does not require one mode over another.
 
 ## 2.7 Traceability Responsibility
 
-The Index Construction Layer should preserve traceability to original sources whenever possible.
+The Index Construction Layer should preserve traceability to Original Sources whenever possible.
 
 Traceability supports later reconstruction because future interpreters must be able to return to the original material.
 
@@ -156,7 +156,7 @@ They may be reviewed, replaced, versioned, regenerated, or allowed to coexist.
 
 Regeneration may be appropriate when:
 
-- an original source changes;
+- an Original Source changes;
 - a Projection changes;
 - the intended reconstruction activity changes;
 - better generation methods become available;
@@ -190,18 +190,18 @@ The Index Construction Layer exists because future reconstruction is easier when
 
 However, the layer must not collapse access into interpretation.
 
-The generated IdeaMark document should help future humans and AI systems find relevant original sources and reconstruct meaning under a Projection.
+The generated IdeaMark document should help future humans and AI systems find relevant Original Sources and reconstruct meaning under a Projection.
 
 It should not claim to be the meaning itself.
 
-This keeps IdeaMark aligned with the Part 1 principles of separating structure from meaning, treating Projection as reuse strategy, and preserving original sources as authoritative.
+This keeps IdeaMark aligned with the Part 2 principles of separating access from interpretation, treating Projection as reuse strategy, and treating Original Source as authority for a Projection-guided construction rather than as universal truth.
 
 ## 2.11 Summary
 
-The Index Construction Layer creates IdeaMark documents from original sources and Projections.
+The Index Construction Layer creates IdeaMark documents from Original Sources and Projections.
 
 These documents are index-like because they function as reusable access structures.
 
-They help future humans and AI systems find relevant original sources and reconstruct intellectual activity under current situations and Projections.
+They help future humans and AI systems find relevant Original Sources and reconstruct intellectual activity under current Situations and Projections.
 
 They do not define storage-level indexing, final meaning, or required implementation architecture.
