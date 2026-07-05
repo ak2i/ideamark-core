@@ -1,7 +1,7 @@
 # 1. Two-plus-one Layer Model
 
 **Part:** 2 — Architecture of Human-AI Co-evolution  
-**Status:** Draft Rev001  
+**Status:** Draft Rev002  
 **Type:** Informative / Reference Architecture
 
 Part 2 organizes the reference architecture as a two-plus-one layer model.
@@ -12,7 +12,7 @@ The plus-one layer describes long-term ecosystem improvement.
 
 ```text
 Layer 1: Index Construction Layer
-Layer 2: Reconstruction Layer
+Layer 2: Situation-driven Reconstruction Layer
 Plus-one: Ecosystem Feedback Layer
 ```
 
@@ -22,7 +22,7 @@ It does not define database indexing, search engine indexing, or storage optimiz
 
 ## 1.1 Layer 1: Index Construction Layer
 
-The Index Construction Layer creates IdeaMark documents from combinations of authoritative original sources and Projections.
+The Index Construction Layer creates IdeaMark documents from combinations of Original Sources and Projections.
 
 ```text
 Original Source Collection
@@ -40,22 +40,26 @@ The output is a reusable access structure that can later assist reconstruction.
 
 This layer answers questions such as:
 
-- Which original sources are available?
+- Which Original Sources are available?
 - Which Projection should be applied?
 - What reusable structures should be extracted or generated?
-- How should the resulting IdeaMark document remain traceable to the original source?
+- How should the resulting IdeaMark document remain traceable to the Original Source?
 - Should generation happen in advance, on demand, or both?
 
 These questions are architectural responsibilities.
 
 They do not imply a required storage engine, indexing method, database schema, job queue, or generation pipeline.
 
-## 1.2 Layer 2: Reconstruction Layer
+## 1.2 Layer 2: Situation-driven Reconstruction Layer
 
-The Reconstruction Layer uses IdeaMark documents to support future intellectual activity.
+The Situation-driven Reconstruction Layer uses IdeaMark documents to support future intellectual activity.
 
 ```text
-Current Situation
+Observation / Expression / Signal
+        ↓
+Situation Interpretation
+        ↓
+Situation Vector
         ↓
 Projection Selection or Projection Generation
         ↓
@@ -63,18 +67,18 @@ IdeaMark Retrieval or IdeaMark Generation
         ↓
 Original Source Access
         ↓
-AI Interpretation and Human Interpretation
+Human-AI Intellectual Activity
         ↓
-Decision / Action / Explanation
+Decision / Action / Explanation / Trace
         ↓
-New Original Source
+Situation(t + 1)
 ```
 
 This layer is where meaning is reconstructed.
 
-The Reconstruction Layer does not treat the IdeaMark document as the final answer.
+The Situation-driven Reconstruction Layer does not treat the IdeaMark document as the final answer.
 
-Instead, the IdeaMark document helps identify relevant original sources and reusable structures, while the current Projection guides how those sources should be interpreted for the present situation.
+Instead, the IdeaMark document helps identify relevant Original Sources and reusable structures, while the current Projection guides how those sources should be interpreted for the present Situation.
 
 A system may enter this layer through many kinds of input:
 
@@ -116,11 +120,11 @@ As humans and AI use IdeaMark documents, they may discover:
 - better entity boundaries;
 - more useful occurrence structures;
 - more effective retrieval patterns;
-- new original sources;
-- changing user capabilities;
+- new Original Sources;
+- changing capability conditions;
 - new organizational practices.
 
-The ecosystem may respond by improving Projections, regenerating IdeaMark documents, preserving multiple versions, refining authoring practices, or adding new authoritative sources.
+The ecosystem may respond by improving Projections, regenerating IdeaMark documents, preserving multiple versions, refining authoring practices, or adding new Original Sources.
 
 ## 1.4 Why Two-plus-one?
 
@@ -128,11 +132,11 @@ The first two layers are enough to describe ordinary operation.
 
 One layer constructs reusable access structures.
 
-The other layer uses them to reconstruct meaning under a current situation.
+The other layer uses them to reconstruct meaning under a current Situation.
 
 However, human-AI co-evolution cannot be explained by those two layers alone.
 
-If use does not improve Projections, source collections, retrieval practices, authoring practices, or human capability, the system becomes a static automation pipeline.
+If use does not improve Projections, source collections, retrieval practices, authoring practices, preservation practices, or human-AI collaboration, the system becomes a static automation pipeline.
 
 The plus-one layer keeps the architecture capability-oriented.
 
@@ -142,35 +146,35 @@ It makes improvement of the intellectual ecosystem a first-class architectural c
 
 Projection participates in all three layers.
 
-In the Index Construction Layer, Projection guides which reusable structures are generated from original sources.
+In the Index Construction Layer, Projection guides which reusable structures are generated from Original Sources.
 
-In the Reconstruction Layer, Projection guides how IdeaMark documents and original sources are interpreted under the current situation.
+In the Situation-driven Reconstruction Layer, Projection guides how IdeaMark documents and Original Sources are interpreted under the current Situation.
 
-In the Ecosystem Feedback Layer, Projection itself may be evaluated, refined, shared, standardized, replaced, or specialized.
+In the Ecosystem Feedback Layer, Projection itself may be evaluated, refined, shared, standardized, replaced, specialized, or kept private.
 
 This is why Projection should be treated as a reusable intellectual asset rather than a temporary prompt parameter.
 
 ## 1.6 Relationship to Original Sources
 
-Original sources remain authoritative across all layers.
+Original Sources participate in all three layers.
 
-The Index Construction Layer begins from original sources.
+The Index Construction Layer begins from Original Sources treated as authority for a given Projection-guided construction.
 
-The Reconstruction Layer returns to original sources.
+The Situation-driven Reconstruction Layer returns to Original Sources.
 
-The Ecosystem Feedback Layer may create, discover, revise, or reorganize original sources.
+The Ecosystem Feedback Layer may create, discover, preserve, revise, reinterpret, or reorganize Original Sources.
 
-IdeaMark documents improve access to original sources, but they do not replace them.
+IdeaMark documents improve access to Original Sources, but they do not replace them.
 
 ## 1.7 Relationship to AI Systems
 
 AI systems may participate in each layer.
 
-They may help generate IdeaMark documents, propose Projections, retrieve relevant structures, interpret original sources, explain results, identify missing information, and summarize feedback.
+They may help generate IdeaMark documents, propose Projections, retrieve relevant structures, interpret observations, construct Situation Vectors, read Original Sources, explain results, identify missing information, and summarize feedback.
 
 However, Part 2 does not assume that AI fully automates the architecture.
 
-Human participation remains essential because the goal is capability expansion, not merely answer production.
+Human participation remains essential because the goal is capability-oriented human-AI co-evolution, not merely answer production.
 
 A useful architecture should help humans and AI continue producing better intellectual activities together.
 
@@ -186,7 +190,7 @@ For example:
 - an interactive assistant may generate a temporary IdeaMark document during a conversation;
 - a repository may keep multiple IdeaMark versions for different Projections;
 - a human team may revise a Projection after observing repeated retrieval failures;
-- an AI agent may suggest missing original sources.
+- an AI agent may suggest missing Original Sources.
 
 All of these are compatible with the model if the architectural responsibilities remain clear.
 
@@ -196,7 +200,7 @@ The two-plus-one layer model explains IdeaMark as part of a living human-AI inte
 
 The Index Construction Layer creates reusable access structures.
 
-The Reconstruction Layer uses those structures to return to original sources and reconstruct meaning under current situations and Projections.
+The Situation-driven Reconstruction Layer uses those structures to return to Original Sources and reconstruct meaning under current Situations and Projections.
 
 The Ecosystem Feedback Layer improves the future conditions for both construction and reconstruction.
 
