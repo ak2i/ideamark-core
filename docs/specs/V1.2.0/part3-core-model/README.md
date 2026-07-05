@@ -61,6 +61,28 @@ Part 3 only defines how a Projection-guided Decomposition can produce Core Model
 
 Projection evaluation, Projection lifecycle, Projection library formation, and Projection governance belong primarily to Part 5.
 
+## Meaning Activation Stance
+
+IdeaMark does not store meaning.
+
+Meaning is not treated as something contained in an Original Source, Projection, IdeaMark document, or generated explanation by itself.
+
+Meaning becomes observable when expression, interpretation, Situation, and activity meet and produce some intellectual, practical, or observational consequence.
+
+The purpose of IdeaMark is therefore not to retrieve knowledge as a finished object.
+
+Its purpose is to preserve structures that help future humans and AI systems retrieve the materials needed to activate useful meaning under a Projection.
+
+In this sense, an IdeaMark document is not merely an index of Original Sources.
+
+It is a reusable structural snapshot that helps gather, order, and expose the materials from which an activation expression may be generated.
+
+Such an expression may be text, diagram, image, interaction, explanation, question, warning, plan, sensory representation, or another medium appropriate to the future Situation.
+
+Part 3 does not define how activation expressions are generated.
+
+It only defines the Core Model structures that make such generation and reconstruction traceable, reusable, and less costly.
+
 ## Original Source Stance
 
 An Original Source is not limited to a text document or fixed media object.
@@ -100,6 +122,22 @@ Those functional interpretations belong to Projection, authoring practice, domai
 In the Core Model, Section, Occurrence, and Entity are structural positions that can carry ordering, anchorage, role, relation, and traceability information.
 
 They are useful because they can be separated from both Original Source and Projection while still functioning as keys that help future humans and AI systems reactivate meaning under a Projection.
+
+## IdeaMark Document Stance
+
+An IdeaMark document is an operational access-structure artifact produced by Projection-guided Decomposition.
+
+It is not the final result of intellectual activity.
+
+It is an intermediate reusable structure that helps future intellectual activity begin more effectively.
+
+An IdeaMark document may be used to retrieve Original Sources, understand which Projection shaped the decomposition, reconstruct relevant structures, and generate expressions that can activate meaning for humans or AI systems under a future Situation.
+
+An IdeaMark document may also become an Original Source for later IdeaMark generation when it can participate as a component of future Human-AI Intellectual Activity.
+
+This recursive possibility does not make IdeaMark a knowledge base.
+
+It means that IdeaMark documents, like other artifacts, can become material for later Projection-guided reconstruction.
 
 ## Draft Sections
 
