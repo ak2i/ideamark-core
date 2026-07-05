@@ -24,6 +24,8 @@ Part 3 should not define:
 - storage architecture;
 - retrieval algorithms;
 - Projection authoring workflows;
+- Projection quality evaluation;
+- Projection library governance;
 - universal domain vocabularies;
 - universal coordinate systems;
 - universal authority rankings;
@@ -52,6 +54,12 @@ Decomposition
         ↓
 Entity / Occurrence / Section / Relation
 ```
+
+Part 3 does not evaluate whether a Projection is good, legitimate, widely shareable, or socially valuable.
+
+Part 3 only defines how a Projection-guided Decomposition can produce Core Model structures that remain traceable and reusable.
+
+Projection evaluation, Projection lifecycle, Projection library formation, and Projection governance belong primarily to Part 5.
 
 ## Draft Sections
 
