@@ -1,10 +1,10 @@
-# 7. Reconstruction Layer
+# 7. Situation-driven Reconstruction Layer
 
 **Part:** 2 — Architecture of Human-AI Co-evolution  
-**Status:** Draft Rev001  
+**Status:** Draft Rev002  
 **Type:** Informative / Reference Architecture
 
-The Reconstruction Layer uses Situation Vectors, Projections, IdeaMark documents, and authoritative original sources to support current intellectual activity.
+The Situation-driven Reconstruction Layer uses Situation Vectors, Projections, IdeaMark documents, and authoritative original sources to support current intellectual activity.
 
 Reconstruction is not merely answering a question.
 
@@ -12,7 +12,7 @@ It is the process of making prior intellectual activity usable under a current S
 
 ## 7.1 Purpose
 
-The purpose of the Reconstruction Layer is to help humans and AI systems return to relevant original sources and reconstruct meaning, judgment, explanation, or action under a current Situation and Projection.
+The purpose of the Situation-driven Reconstruction Layer is to help humans and AI systems return to relevant original sources and reconstruct meaning, judgment, explanation, or action under a current Situation and Projection.
 
 ```text
 Situation Vector
@@ -23,7 +23,7 @@ IdeaMark Retrieval or Generation
         ↓
 Original Source Access
         ↓
-Human-AI Interpretation
+Human-AI Intellectual Activity
         ↓
 Judgment / Decision / Action / Explanation
         ↓
@@ -91,24 +91,31 @@ In some situations, the system may present a compressed or transformed expressio
 
 Even then, source traceability remains important because the user, reviewer, AI system, or later process may need to inspect the original basis.
 
-## 7.6 Human-AI Interpretation
+## 7.6 Human-AI Intellectual Activity
 
-Human and AI interpretation may be interleaved.
+Reconstruction leads into Human-AI Intellectual Activity.
+
+Human and AI participation may be interleaved.
 
 For example:
 
 - AI may interpret a Situation Vector and propose a Projection;
-- a human may select or reject the Projection;
+- a human may select, reject, question, or modify the Projection;
 - AI may retrieve IdeaMark documents;
-- AI may summarize relevant original sources;
-- a human may provide judgment, preference, or domain knowledge;
+- AI may read or summarize relevant original sources;
+- a human may provide judgment, preference, domain knowledge, or lived context;
 - AI may generate action-oriented guidance;
-- a human or organization may decide what to do;
+- a human, AI system, organization, or workflow may perform further intellectual activity;
+- a human or organization may make decisions where decision authority is assigned to them;
 - the result may become a new source or new observation.
 
 Part 2 does not assume that either humans or AI are infallible.
 
-Both participate as interpreters within a reconstruction process.
+Both may participate as interpreters and contributors within the reconstruction process.
+
+AI participation in this context is architectural participation in intellectual activity.
+
+It does not imply legal personhood, moral status, or human-equivalent rights.
 
 ## 7.7 Judgment and Action
 
@@ -170,7 +177,7 @@ During an incident, the Projection may prioritize risk containment and reliabili
 
 ## 7.10 Non-goals
 
-The Reconstruction Layer does not define:
+The Situation-driven Reconstruction Layer does not define:
 
 - a chat interface;
 - a retrieval algorithm;
@@ -196,14 +203,16 @@ If reconstruction ignored Projection, it would fail to adapt to different intell
 
 If reconstruction ignored Situation, it would become generic explanation rather than useful support.
 
-The Reconstruction Layer binds these elements together.
+If reconstruction excluded AI from intellectual activity, it would fail to describe the collaborative architecture that makes IdeaMark practical in AI-enabled environments.
+
+The Situation-driven Reconstruction Layer binds these elements together.
 
 ## 7.12 Summary
 
-The Reconstruction Layer transforms Situation-specific need into traceable intellectual activity.
+The Situation-driven Reconstruction Layer transforms Situation-specific need into traceable intellectual activity.
 
 It uses Projection to guide access through IdeaMark documents back to authoritative original sources.
 
-It supports human-AI interpretation, judgment, explanation, and action.
+It supports Human-AI Intellectual Activity, judgment, explanation, and action.
 
 It also changes the next Situation, making reconstruction part of a continuing intellectual activity cycle.
