@@ -3,9 +3,9 @@
 **Version:** IdeaMark Core v1.2.0  
 **Status:** Draft
 
-This part describes the reference architecture through which humans, AI systems, Projections, IdeaMark documents, retrieval systems, and authoritative original sources may participate in continuous co-evolution.
+This part describes the reference architecture through which humans, AI systems, Projections, IdeaMark documents, retrieval systems, and Original Sources may participate in continuous co-evolution.
 
-In this specification, co-evolution means the continuous mutual development of humans and AI through shared intellectual activities grounded in authoritative original sources.
+In this specification, co-evolution means the continuous mutual development of humans and AI through shared intellectual activities grounded in Original Sources treated as authoritative for a given Projection.
 
 Part 1 explains why IdeaMark uses engineering through separation: reusable structure is separated from meaning so that it can be managed and reused without fixing interpretation.
 
@@ -19,13 +19,13 @@ Part 2 explains engineering through reconstruction at the ecosystem level.
 3. [Projection Libraries and Projection Selection](./03-projection-libraries-and-projection-selection.md)
 4. [IdeaMark Generation and Repository Construction](./04-ideamark-generation-and-repository-construction.md)
 5. [On-demand Generation and Background Generation](./05-on-demand-generation-and-background-generation.md)
-6. Reconstruction Layer *(planned)*
-7. Retrieval as Navigation to Intellectual Activity *(planned)*
-8. AI Interpretation and Human Interpretation *(planned)*
-9. Human Action and New Original Sources *(planned)*
-10. Ecosystem Feedback Layer *(planned)*
+6. [Situation Interpretation Layer](./06-situation-interpretation-layer.md)
+7. [Situation-driven Reconstruction Layer](./07-reconstruction-layer.md)
+8. [Original Source Open-hand Principle](./08-original-source-open-hand-principle.md)
+9. Human-AI Intellectual Activity *(planned)*
+10. Situation Evolution and Ecosystem Feedback *(planned)*
 11. Capability-Oriented Human-AI Co-evolution *(planned)*
-12. Architectural Non-goals *(planned)*
+12. [Architectural Boundaries and Non-prescription](./12-architectural-boundaries-and-non-prescription.md)
 13. Architecture Summary *(planned)*
 
 ## Reading Notes
@@ -38,6 +38,8 @@ When this part uses terms such as index, indexing, or index construction, those 
 
 They do not define how an implementation should create database indexes or optimize storage-level search.
 
-IdeaMark documents may be used index-like because they help future humans and AI systems find relevant authoritative original sources and reconstruct intellectual activity through a selected or generated Projection.
+IdeaMark documents may be used index-like because they help future humans and AI systems find relevant Original Sources and reconstruct intellectual activity through a selected or generated Projection.
 
-The purpose of Part 2 is to describe architectural relationships among Original Sources, Projections, IdeaMark documents, retrieval, interpretation, action, feedback, and new Original Sources.
+Part 2 defines roles and connections rather than the complete contents of future intellectual activities.
+
+This non-prescriptive boundary is intentional: Original Source, Observation, Situation Vector, Projection, Human-AI Intellectual Activity, Feedback, and Capability must remain open enough to support future media, future AI systems, future social practices, and future knowledge representations.
