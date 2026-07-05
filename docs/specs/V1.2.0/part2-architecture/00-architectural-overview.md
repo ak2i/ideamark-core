@@ -1,7 +1,7 @@
 # 0. Architectural Overview
 
 **Part:** 2 — Architecture of Human-AI Co-evolution  
-**Status:** Draft Rev003  
+**Status:** Draft Rev004  
 **Type:** Informative / Reference Architecture
 
 IdeaMark does not complete intellectual activity at the moment of document generation.
@@ -26,7 +26,9 @@ This architecture depends on three separations established in Part 1:
 
 These separations allow an IdeaMark document to be useful without becoming the final authority.
 
-The final authority for meaning reconstruction remains the original source, interpreted under a current situation and Projection by humans, AI systems, or both together.
+The Original Source is treated as authoritative for the purpose of generating and using an IdeaMark document under a Projection.
+
+IdeaMark Core does not declare that a particular source is universally authoritative, true, complete, or final.
 
 ## 0.2 Co-evolution
 
@@ -59,7 +61,7 @@ flowchart TD
     PG[Projection Selection / Generation]
     SP[Situation-specific Projection]
     IM[IdeaMark Retrieval / Generation]
-    OS[Authoritative Original Source]
+    OS[Original Source as Authority for this Projection]
     IA[Human-AI Intellectual Activity]
     OUT[Action / Explanation / Decision]
     NEXT[Situation t + 1]
@@ -99,7 +101,27 @@ A future Projection may reinterpret the same source differently, use the caption
 
 This open-hand treatment allows IdeaMark to support future intellectual activities without redesigning Core around each new source type or context.
 
-## 0.5 IdeaMark as an Access Structure
+## 0.5 Core Defines Roles and Connections, Not Contents
+
+IdeaMark Core defines architectural roles and relationships.
+
+It does not define the internal contents of all possible intellectual activities.
+
+For example:
+
+- Original Source is a role in reconstruction, not a closed list of source formats;
+- Observation is a role in Situation interpretation, not a fixed set of observable properties;
+- Situation Vector is a role in Projection selection or generation, not a required numerical representation;
+- Projection is a reuse strategy, not a universal truth model;
+- Human-AI Intellectual Activity is a role in the cycle, not an enumerated taxonomy of all future activities;
+- Feedback is recognized as part of the cycle, not specified as a fixed data structure;
+- Capability expansion is a guiding orientation, not a required metric for every use.
+
+This non-prescriptive boundary is intentional.
+
+It preserves IdeaMark Core as a long-lived architecture capable of accepting future media, future AI systems, future social practices, and future knowledge representations.
+
+## 0.6 IdeaMark as an Access Structure
 
 IdeaMark documents may be used index-like, but Part 2 does not define storage-level indexing.
 
@@ -121,7 +143,7 @@ It supports access to original sources and helps structure reconstruction under 
 
 It is not itself the reconstructed meaning.
 
-## 0.6 Reconstruction Instead of Storage
+## 0.7 Reconstruction Instead of Storage
 
 The purpose of IdeaMark is not to store final interpretations.
 
@@ -155,7 +177,7 @@ These traces may identify relevant entities, occurrences, sections, relations, s
 
 The reconstructed meaning emerges from the interaction among the current situation, the Projection, the IdeaMark document, the original source, and the interpreters.
 
-## 0.7 Reference Architecture, Not Required Implementation
+## 0.8 Reference Architecture, Not Required Implementation
 
 The architecture described in Part 2 is a reference architecture.
 
@@ -169,7 +191,7 @@ All of these choices belong to implementation architecture, not to IdeaMark Core
 
 The Core concern is that IdeaMark documents can function as reusable access structures that connect future reconstruction activities to authoritative original sources through Projection.
 
-## 0.8 Architectural Responsibilities
+## 0.9 Architectural Responsibilities
 
 Part 2 organizes the architecture around the following responsibilities:
 
@@ -180,13 +202,14 @@ Part 2 organizes the architecture around the following responsibilities:
 - accessing authoritative original sources;
 - supporting human-AI intellectual activity;
 - producing decisions, actions, explanations, and new original sources;
-- feeding usage, feedback, and new sources back into the ecosystem.
+- allowing results, traces, and records to become future Observations or Original Sources;
+- feeding use and newly created material back into the ecosystem.
 
 These responsibilities may be implemented by one system, many systems, human workflows, AI agents, organizational processes, or combinations of these.
 
 IdeaMark Core should not assume a single deployment pattern.
 
-## 0.9 AI as Architectural Participant
+## 0.10 AI as Architectural Participant
 
 AI systems may participate in intellectual activity as architectural participants.
 
@@ -198,7 +221,17 @@ It means that, within the IdeaMark Core architecture, AI systems are not limited
 
 They may participate in the collaborative process through which situations are interpreted, sources are revisited, meanings are reconstructed, and future situations are shaped.
 
-## 0.10 Design Rationale
+## 0.11 Long Time Horizon
+
+IdeaMark Core is designed for a long time horizon.
+
+It should remain useful even when future intellectual activities, AI systems, media, governance practices, and knowledge representations differ from those known at the time of specification.
+
+For this reason, Core avoids defining contents that should remain domain-specific, situation-specific, or future-dependent.
+
+It defines a stable architecture for connecting sources, Projections, IdeaMark documents, Situation interpretation, and human-AI intellectual activity.
+
+## 0.12 Design Rationale
 
 If IdeaMark were treated as a final knowledge store, it would compete with knowledge bases, ontologies, and generated summaries.
 
@@ -214,12 +247,16 @@ IdeaMark contributes by helping AI and humans navigate from a current situation 
 
 The Core leaves Original Source open because future intellectual activities may depend on media, contexts, and knowledge forms that cannot be fully enumerated in advance.
 
-## 0.11 Summary
+The Core leaves Observation, Intellectual Activity, Feedback, and Capability abstract for the same reason.
+
+Their exact contents are what future situations and future Projections must be allowed to determine.
+
+## 0.13 Summary
 
 Part 2 explains how IdeaMark can support a living ecosystem of human-AI intellectual activity.
 
 The key point is not that IdeaMark stores meaning.
 
-The key point is that IdeaMark documents can function as reusable access structures that help humans and AI return to authoritative original sources and reconstruct meaning under new situations through Projection.
+The key point is that IdeaMark documents can function as reusable access structures that help humans and AI return to Original Sources treated as authoritative for a given Projection and reconstruct meaning under new situations.
 
-The larger architectural purpose is to support Situation evolution through traceable human-AI intellectual activity.
+The larger architectural purpose is to support Situation evolution through traceable human-AI intellectual activity while preserving the openness required for future intellectual civilization.
