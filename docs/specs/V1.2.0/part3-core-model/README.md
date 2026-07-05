@@ -31,22 +31,45 @@ Part 3 should not define:
 
 Those belong to later parts, companion specifications, implementations, Projections, or domain practices.
 
+## Core Modeling Stance
+
+IdeaMark generation is not a general extraction task performed on an Original Source in isolation.
+
+An IdeaMark document becomes useful only when an Original Source is decomposed under a Projection for expected future reconstruction.
+
+Projection-independent decomposition may be technically possible, but it is not the intended Core model.
+
+Without Projection, an IdeaMark document risks becoming a detached catalog or dictionary-like artifact rather than a living access structure for Human-AI Intellectual Activity.
+
+Part 3 therefore treats Decomposition as the conceptual bridge between Original Source, Projection Context, and the generated structures of an IdeaMark document.
+
+```text
+Original Source
+        x
+Projection Context
+        ↓
+Decomposition
+        ↓
+Entity / Occurrence / Section / Relation
+```
+
 ## Draft Sections
 
 0. [Core Model Overview](./00-core-model-overview.md) *(planned)*
 1. [Model Boundary and Non-goals](./01-model-boundary-and-non-goals.md) *(planned)*
 2. [Original Source Reference Model](./02-original-source-reference-model.md) *(planned)*
 3. [Projection Context Model](./03-projection-context-model.md) *(planned)*
-4. [IdeaMark Document Model](./04-ideamark-document-model.md) *(planned)*
-5. [Entity Model](./05-entity-model.md) *(planned)*
-6. [Occurrence Model](./06-occurrence-model.md) *(planned)*
-7. [Section Model](./07-section-model.md) *(planned)*
-8. [Relation Model](./08-relation-model.md) *(planned)*
-9. [Perspective and Provenance Model](./09-perspective-and-provenance-model.md) *(planned)*
-10. [Anchorage and Traceability Model](./10-anchorage-and-traceability-model.md) *(planned)*
-11. [Status, Versioning, and Regeneration Model](./11-status-versioning-and-regeneration-model.md) *(planned)*
-12. [Model Invariants](./12-model-invariants.md) *(planned)*
-13. [Core Model Summary](./13-core-model-summary.md) *(planned)*
+4. [Decomposition Model](./04-decomposition-model.md) *(planned)*
+5. [IdeaMark Document Model](./05-ideamark-document-model.md) *(planned)*
+6. [Entity Model](./06-entity-model.md) *(planned)*
+7. [Occurrence Model](./07-occurrence-model.md) *(planned)*
+8. [Section Model](./08-section-model.md) *(planned)*
+9. [Relation Model](./09-relation-model.md) *(planned)*
+10. [Perspective and Provenance Model](./10-perspective-and-provenance-model.md) *(planned)*
+11. [Anchorage and Traceability Model](./11-anchorage-and-traceability-model.md) *(planned)*
+12. [Status, Versioning, and Regeneration Model](./12-status-versioning-and-regeneration-model.md) *(planned)*
+13. [Model Invariants](./13-model-invariants.md) *(planned)*
+14. [Core Model Summary](./14-core-model-summary.md) *(planned)*
 
 ## Drafting Notes
 
@@ -60,4 +83,4 @@ Part 3 should be read after Part 1 and Part 2.
 
 The key design constraint is that the Core Model must define enough structure to support reusable access, traceability, reconstruction, and interoperability while avoiding the temptation to encode final meaning.
 
-Part 3 should therefore model **access structures**, not final interpretations.
+Part 3 should therefore model **Projection-shaped access structures**, not final interpretations and not Projection-independent extraction results.
