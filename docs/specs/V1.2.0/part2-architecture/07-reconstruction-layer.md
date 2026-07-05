@@ -1,10 +1,10 @@
 # 7. Situation-driven Reconstruction Layer
 
 **Part:** 2 — Architecture of Human-AI Co-evolution  
-**Status:** Draft Rev002  
+**Status:** Draft Rev003  
 **Type:** Informative / Reference Architecture
 
-The Situation-driven Reconstruction Layer uses Situation Vectors, Projections, IdeaMark documents, and authoritative original sources to support current intellectual activity.
+The Situation-driven Reconstruction Layer uses Situation Vectors, Projections, IdeaMark documents, and Original Sources to support current intellectual activity.
 
 Reconstruction is not merely answering a question.
 
@@ -12,7 +12,7 @@ It is the process of making prior intellectual activity usable under a current S
 
 ## 7.1 Purpose
 
-The purpose of the Situation-driven Reconstruction Layer is to help humans and AI systems return to relevant original sources and reconstruct meaning, judgment, explanation, or action under a current Situation and Projection.
+The purpose of the Situation-driven Reconstruction Layer is to help humans and AI systems return to relevant Original Sources and reconstruct meaning, judgment, explanation, or action under a current Situation and Projection.
 
 ```text
 Situation Vector
@@ -25,7 +25,7 @@ Original Source Access
         ↓
 Human-AI Intellectual Activity
         ↓
-Judgment / Decision / Action / Explanation
+Judgment / Decision / Action / Explanation / Trace
         ↓
 Situation(t + 1)
 ```
@@ -36,21 +36,21 @@ Part 2 does not prescribe the output form.
 
 ## 7.2 Reconstruction Is Situation-Dependent
 
-The same original source may support different reconstructions under different Situation Vectors.
+The same Original Source may support different reconstructions under different Situation Vectors.
 
 A technical report may be reconstructed as beginner education in a calm situation, emergency guidance in a hazardous situation, policy evidence in an administrative situation, or design precedent in an engineering situation.
 
-The original source remains authoritative.
+The Original Source is treated as the material basis for the selected Projection-guided reconstruction.
 
 The reconstruction changes because the Situation and Projection change.
 
 ## 7.3 Reconstruction Is Projection-Dependent
 
-Projection determines how the system approaches the original source and IdeaMark document.
+Projection determines how the system approaches the Original Source and IdeaMark document.
 
 It may influence:
 
-- which original source sections are relevant;
+- which Original Source sections are relevant;
 - which IdeaMark structures should be prioritized;
 - what level of detail is appropriate;
 - what form of explanation is useful;
@@ -81,11 +81,11 @@ Part 2 does not define a required retrieval interface, ranking algorithm, databa
 
 ## 7.5 Return to Original Sources
 
-Reconstruction should return to original sources whenever possible.
+Reconstruction should return to Original Sources whenever possible.
 
 An IdeaMark document guides reconstruction but does not replace the source.
 
-The original source provides the authoritative material from which meaning may be reconstructed.
+The Original Source provides the material basis from which meaning may be reconstructed under a current Situation and Projection.
 
 In some situations, the system may present a compressed or transformed expression to the user.
 
@@ -102,7 +102,7 @@ For example:
 - AI may interpret a Situation Vector and propose a Projection;
 - a human may select, reject, question, or modify the Projection;
 - AI may retrieve IdeaMark documents;
-- AI may read or summarize relevant original sources;
+- AI may read or summarize relevant Original Sources;
 - a human may provide judgment, preference, domain knowledge, or lived context;
 - AI may generate action-oriented guidance;
 - a human, AI system, organization, or workflow may perform further intellectual activity;
@@ -125,7 +125,7 @@ A Projection may prioritize safety, legality, learning, operational continuity, 
 
 Core does not define which priority must dominate in all situations.
 
-It defines how such priorities can be made explicit through Projection and connected to original sources through IdeaMark.
+It defines how such priorities can be made explicit through Projection and connected to Original Sources through IdeaMark.
 
 ## 7.8 Reconstruction Changes Situation
 
@@ -153,7 +153,7 @@ A tourist under normal conditions may receive educational reconstruction that he
 
 The same tourist during visible eruption or strong shaking may receive safety-oriented reconstruction that compresses relevant knowledge into immediate action guidance.
 
-The difference is not the original source alone.
+The difference is not the Original Source alone.
 
 It is the Situation Vector and Projection.
 
@@ -195,9 +195,9 @@ These belong to implementations, Projections, domain practices, organizations, o
 
 Reconstruction is the reason IdeaMark documents exist.
 
-If IdeaMark documents were only stored and never used to return to original sources under new situations, they would become static documentation.
+If IdeaMark documents were only stored and never used to return to Original Sources under new Situations, they would become static documentation.
 
-If reconstruction ignored original sources, IdeaMark would become an unsupported summary system.
+If reconstruction ignored Original Sources, IdeaMark would become an unsupported summary system.
 
 If reconstruction ignored Projection, it would fail to adapt to different intellectual activities.
 
@@ -207,11 +207,13 @@ If reconstruction excluded AI from intellectual activity, it would fail to descr
 
 The Situation-driven Reconstruction Layer binds these elements together.
 
+It reduces interpretation cost by helping participants avoid starting from zero while still returning to source material and Projection context.
+
 ## 7.12 Summary
 
 The Situation-driven Reconstruction Layer transforms Situation-specific need into traceable intellectual activity.
 
-It uses Projection to guide access through IdeaMark documents back to authoritative original sources.
+It uses Projection to guide access through IdeaMark documents back to Original Sources treated as the material basis for reconstruction.
 
 It supports Human-AI Intellectual Activity, judgment, explanation, and action.
 
