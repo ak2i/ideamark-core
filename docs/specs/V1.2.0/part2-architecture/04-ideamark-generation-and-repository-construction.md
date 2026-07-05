@@ -1,10 +1,10 @@
 # 4. IdeaMark Generation and Repository Construction
 
 **Part:** 2 — Architecture of Human-AI Co-evolution  
-**Status:** Draft Rev001  
+**Status:** Draft Rev002  
 **Type:** Informative / Reference Architecture
 
-IdeaMark generation transforms an original source and a Projection into an IdeaMark document or document set.
+IdeaMark generation transforms an Original Source and a Projection into an IdeaMark document or document set.
 
 Repository construction makes those IdeaMark documents available for future reconstruction.
 
@@ -12,13 +12,13 @@ This section describes architectural responsibilities, not required implementati
 
 ## 4.1 Purpose
 
-The purpose of IdeaMark generation is to create reusable access structures that help future humans and AI systems return to authoritative original sources and reconstruct intellectual activity under a Projection.
+The purpose of IdeaMark generation is to create reusable access structures that help future humans and AI systems return to Original Sources and reconstruct intellectual activity under a Projection.
 
 The purpose of repository construction is to make those access structures discoverable and reusable.
 
 Neither generation nor repository construction turns IdeaMark into the final authority for meaning.
 
-Original sources remain authoritative.
+An Original Source is treated as authority for the Projection-guided generation and reconstruction activity, but IdeaMark Core does not declare the source universally authoritative, true, complete, or final.
 
 ## 4.2 Generation as Source-Projection Transformation
 
@@ -32,7 +32,7 @@ Projection
 IdeaMark Document
 ```
 
-The original source provides authoritative material.
+The Original Source provides the material basis for construction.
 
 The Projection defines how that material should become reusable for a future class of intellectual activities.
 
@@ -67,7 +67,7 @@ The repository should be understood as an architectural responsibility, not as a
 A repository may support responsibilities such as:
 
 - storing or referencing IdeaMark documents;
-- associating documents with original sources;
+- associating documents with Original Sources;
 - associating documents with Projections;
 - supporting retrieval or lookup;
 - preserving versions;
@@ -84,7 +84,7 @@ IdeaMark Core should not require that they all be implemented in a single databa
 
 ## 4.5 Multiple Documents for One Source
 
-The same original source may have multiple IdeaMark documents.
+The same Original Source may have multiple IdeaMark documents.
 
 This may occur because:
 
@@ -102,9 +102,9 @@ They may represent different access strategies for different reconstruction purp
 
 ## 4.6 Multiple Sources for One Reconstruction Activity
 
-A single reconstruction activity may require multiple original sources.
+A single reconstruction activity may require multiple Original Sources.
 
-An implementation may therefore retrieve or generate multiple IdeaMark documents and then guide the user or AI system back to several authoritative sources.
+An implementation may therefore retrieve or generate multiple IdeaMark documents and then guide the user or AI system back to several source materials.
 
 ```text
 Current Situation
@@ -145,7 +145,7 @@ The architectural point is that generated IdeaMark documents are operational art
 
 ## 4.8 Repository Construction and Original Source Access
 
-Repository construction should preserve the ability to return to original sources.
+Repository construction should preserve the ability to return to Original Sources.
 
 If an IdeaMark document is stored without sufficient source traceability, it may still be readable, but it becomes weaker as a reconstruction aid.
 
@@ -208,13 +208,15 @@ IdeaMark generation and repository construction are separated from meaning recon
 
 The repository makes reusable structures available.
 
-The reconstruction process later uses those structures to return to original sources and interpret them under a current situation and Projection.
+The reconstruction process later uses those structures to return to Original Sources and interpret them under a current Situation and Projection.
 
-This separation prevents the repository from becoming a final knowledge store and keeps original sources authoritative.
+This separation prevents the repository from becoming a final knowledge store and keeps Original Sources available as the material basis for Projection-guided reconstruction.
+
+It also reduces interpretation cost because later participants can inspect which source and Projection shaped a document rather than treating the document as an opaque result.
 
 ## 4.13 Summary
 
-IdeaMark generation creates access structures from original sources and Projections.
+IdeaMark generation creates access structures from Original Sources and Projections.
 
 Repository construction makes those access structures available for future reconstruction.
 
