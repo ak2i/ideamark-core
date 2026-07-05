@@ -61,6 +61,22 @@ Part 3 only defines how a Projection-guided Decomposition can produce Core Model
 
 Projection evaluation, Projection lifecycle, Projection library formation, and Projection governance belong primarily to Part 5.
 
+## Original Source Stance
+
+An Original Source is not limited to a text document or fixed media object.
+
+Anything may be treated as an Original Source if, when viewed through a Projection, it can participate as a component of Human-AI Intellectual Activity.
+
+This may include documents, images, audio, video, source code, datasets, sensor logs, interaction histories, generated artifacts, streams, composites, or future media not yet supported by current tools.
+
+However, practical use requires accessibility.
+
+For an Original Source to be usable in current IdeaMark workflows, humans, AI systems, or supporting tools must be able to observe, reference, transform, or input it sufficiently for Decomposition and later reconstruction.
+
+Something that cannot yet be observed by humans, supplied to AI systems, or converted into an accessible representation may be conceptually eligible as a future Original Source, but it is not practically usable in current IdeaMark authoring or reconstruction.
+
+Part 3 should therefore define Original Source Reference in a media-independent way while preserving the practical requirement that source material must be accessible enough to support traceability and reconstruction.
+
 ## Draft Sections
 
 0. [Core Model Overview](./00-core-model-overview.md) *(planned)*
