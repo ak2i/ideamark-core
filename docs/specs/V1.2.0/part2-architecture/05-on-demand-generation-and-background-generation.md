@@ -1,7 +1,7 @@
 # 5. On-demand Generation and Background Generation
 
 **Part:** 2 — Architecture of Human-AI Co-evolution  
-**Status:** Draft Rev001  
+**Status:** Draft Rev002  
 **Type:** Informative / Reference Architecture
 
 IdeaMark documents may be generated before they are needed, at the moment they are needed, or temporarily during reconstruction.
@@ -16,14 +16,14 @@ This section explains how generation timing affects the architecture.
 
 The purpose is not to define a job scheduler, database strategy, cache policy, or performance model.
 
-The purpose is to clarify that IdeaMark generation may occur at different points in the reconstruction ecosystem while preserving the same architectural role: creating reusable access structures that help humans and AI systems return to original sources under a Projection.
+The purpose is to clarify that IdeaMark generation may occur at different points in the reconstruction ecosystem while preserving the same architectural role: creating reusable access structures that help humans and AI systems return to Original Sources under a Projection.
 
 ## 5.2 Background Generation
 
 Background generation creates IdeaMark documents before a specific reconstruction request occurs.
 
 ```text
-Source Collection
+Original Source Collection
         x
 Projection Library
         ↓
@@ -57,7 +57,7 @@ Prioritization may consider:
 
 - source importance;
 - source recency;
-- source authority;
+- source authority within a domain or Projection-guided construction;
 - Projection demand;
 - user role;
 - organizational policy;
@@ -88,7 +88,7 @@ Original Source Access and Reconstruction
 
 On-demand generation may be useful when:
 
-- the current situation is novel;
+- the current Situation is novel;
 - a needed Projection did not exist previously;
 - the source collection is too large for full pre-generation;
 - source material changes frequently;
@@ -117,7 +117,7 @@ Regeneration creates a new IdeaMark document for a source-projection combination
 
 Regeneration may occur because:
 
-- the original source changed;
+- the Original Source changed;
 - the Projection changed;
 - a better generation method became available;
 - human review identified problems;
@@ -160,9 +160,11 @@ Thus generation timing is not fixed.
 
 It may change as Projections mature, usage patterns change, and the human-AI ecosystem evolves.
 
-## 5.9 Generation Timing and Original Source Authority
+## 5.9 Generation Timing and Source Authority
 
-Regardless of generation timing, original sources remain authoritative.
+Regardless of generation timing, an IdeaMark document is not itself the authority for meaning.
+
+The relevant Original Source remains the material basis to which reconstruction should remain traceable for the selected Projection.
 
 A background-generated IdeaMark document is not more authoritative simply because it already exists.
 
@@ -199,7 +201,9 @@ A rigid requirement to precompute everything would make IdeaMark unnecessarily e
 
 A rigid requirement to generate everything on demand would make some review and low-latency use cases difficult.
 
-The architecture therefore allows multiple generation modes while keeping the purpose constant: support future reconstruction from authoritative original sources through Projection.
+The architecture therefore allows multiple generation modes while keeping the purpose constant: support future reconstruction from Original Sources through Projection.
+
+This flexibility also controls interpretation cost across the lifecycle: systems may spend cost earlier for review and latency, later for adaptability, or temporarily for exploration.
 
 ## 5.12 Summary
 
@@ -207,4 +211,4 @@ IdeaMark generation may be background, prioritized, on-demand, temporary, regene
 
 These modes are implementation choices.
 
-The Core architectural concern is that generated IdeaMark documents remain reusable access structures that support traceable reconstruction under current situations and Projections.
+The Core architectural concern is that generated IdeaMark documents remain reusable access structures that support traceable reconstruction under current Situations and Projections.
