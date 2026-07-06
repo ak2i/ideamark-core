@@ -22,11 +22,12 @@ It describes how a Projection may express:
 - retrieval and matching intent;
 - reconstruction guidance;
 - evaluation criteria;
-- metadata, lifecycle, and library use.
+- metadata, lifecycle, and library use;
+- progressive authoring engine boundaries.
 
 Part 5 does not define the concrete YAML representation of IdeaMark documents. That belongs to Part 4.
 
-Part 5 also does not define retrieval algorithms, ranking systems, organizational governance rules, legal taxonomies, domain vocabularies, or universal coordinate systems. Those may be supplied by implementations, Projection Libraries, companion specifications, or domain practices.
+Part 5 also does not define retrieval algorithms, ranking systems, organizational governance rules, legal taxonomies, domain vocabularies, universal coordinate systems, progressive authoring algorithms, or Progressive Occurrence Resolution internals. Those may be supplied by implementations, Projection Libraries, companion specifications, or domain practices.
 
 ## Core Stance
 
@@ -78,6 +79,10 @@ Useful reuse may occur through partial overlap, compatible intent, shared functi
 7. [Projection-guided Reconstruction](./07-projection-guided-reconstruction.md) *(drafted)*
 8. [Projection Metadata, Lifecycle, and Libraries](./08-metadata-lifecycle-and-libraries.md) *(drafted)*
 9. [Projection Non-goals and Open Issues](./09-non-goals-and-open-issues.md) *(drafted)*
+10. [Projection Profile](./10-projection-profile.md) *(drafted)*
+11. [Projection Compatibility Model](./11-compatibility-model.md) *(drafted)*
+12. [Projection Evaluation](./12-projection-evaluation.md) *(drafted)*
+13. [Progressive Authoring Engines and POR Boundary](./13-progressive-authoring-engines-and-por-boundary.md) *(drafted)*
 
 ## Relationship to Core
 
@@ -93,6 +98,16 @@ Part 3 defines the Core Model output of Projection-guided Decomposition.
 
 Part 5 defines the Projection-side responsibilities that make such Decomposition, retrieval, matching, filtering, and reconstruction reusable, inspectable, and improvable.
 
+## Relationship to Progressive Occurrence Resolution
+
+Progressive Occurrence Resolution, abbreviated as POR in the IdeaMark ecosystem, is a companion mechanism for stateful progressive Decomposition of large, streaming, composite, or difficult Original Sources.
+
+Part 5 recognizes that progressive authoring engines may consume Projection as input and emit IdeaMark-compatible structures as output.
+
+Part 5 does not define POR algorithms, internal IR, session state, LLM orchestration, context-force reinterpretation, or progressive scheduling.
+
+Those responsibilities belong to the IdeaMark-POR repository or another companion specification.
+
 ## Reading Notes
 
 Part 5 should be read after Part 3.
@@ -101,4 +116,4 @@ Part 3 explains that Section, Occurrence, and Entity are Projection-shaped Core 
 
 Part 5 explains what kinds of responsibilities a Projection may carry so that those structures can be generated, searched, matched, filtered, reconstructed, evaluated, shared, versioned, or kept private.
 
-The key design constraint is that Projection should reduce interpretation cost without pretending to contain the whole Situation, the whole domain, or the final meaning of future activity.
+The key design constraint is that Projection should reduce interpretation cost without pretending to contain the whole Situation, the whole domain, the final meaning of future activity, or the internal algorithm of a progressive authoring engine.
