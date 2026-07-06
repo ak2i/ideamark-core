@@ -50,6 +50,21 @@ entities:
 
 These are required because they represent the minimum interoperable Core access-structure model.
 
+Required namespaces MAY be empty arrays during draft generation, template authoring, partial generation, or staged authoring.
+
+For example:
+
+```yaml
+sources: []
+sections: []
+occurrences: []
+entities: []
+```
+
+Validators SHOULD accept empty required namespaces in Core mode.
+
+Profiles or strict pipelines MAY require non-empty namespaces when the document claims to be complete, reviewed, or exchange-ready.
+
 ### `meta`
 
 `meta` records document-level identity, specification version, status, Projection references, tool notes, timestamps, and other document-level metadata.
@@ -94,7 +109,7 @@ provenance:
 extensions:
 ```
 
-`structure` may be allowed when explicit document ordering or grouping is needed beyond array order or local reference order.
+`structure` is optional. It may be used when explicit document ordering or grouping is needed beyond array order or local reference order.
 
 `relations`, `perspectives`, and `provenance` should not be required in Core v1.2.0. They may appear as optional extension or profile-level namespaces.
 
@@ -465,37 +480,63 @@ An Occurrence should be able to contain:
 - ordering when not provided by Section;
 - optional profile or extension fields.
 
-Part 4 should decide whether `role` is mandatory.
-
-Recommended: `role` SHOULD be required for Occurrences, because role-bearing placement is the main reason Occurrence exists.
+`role` SHOULD be mandatory for Occurrences, because role-bearing placement is the main reason Occurrence exists.
 
 ## 0.15 Entity Serialization Decision
 
 An Entity should represent Projection-shaped reusable material.
 
-Recommended minimal shape:
+Recommended minimal shapes:
 
 ```yaml
 entities:
   - id: ent-001
-    kind:
-    content:
-    status: active
+    kind: claim
+    content: Human-readable reusable text.
+```
+
+```yaml
+entities:
+  - id: ent-002
+    kind: structured_observation
+    payload:
+      metric: latency
+      value: 120
+      unit: ms
+```
+
+```yaml
+entities:
+  - id: ent-003
+    kind: external_reference
+    ref: source-fragment://example
 ```
 
 An Entity should be able to contain:
 
 - `id`;
-- kind or type;
-- content or payload;
+- optional kind or type;
+- `content` for human-readable textual reusable material;
+- `payload` for structured YAML data or non-text reusable material;
+- `ref` for reference-only reusable material;
 - status;
 - source role or local notes;
 - optional anchors;
 - optional profile or extension fields.
 
+`payload` is not removed from the model.
+
+Part 4 should clarify the role distinction:
+
+- `content` is the simple text-oriented field;
+- `payload` is the structured value field;
+- `ref` points to externally held material.
+
+An Entity SHOULD contain at least one of `content`, `payload`, or `ref` unless a profile explicitly permits placeholder Entities.
+
 Part 4 should avoid requiring a universal Entity kind taxonomy.
 
-Entity `kind` may be profile-defined or open vocabulary.
+Entity `kind` may be profile-defined or open vocabulary, and should be recommended rather than mandatory in Core mode.
 
 ## 0.16 Status Policy
 
@@ -546,9 +587,9 @@ structure:
     - sec-002
 ```
 
-Part 4 should decide whether `structure.sections` is required.
+`structure` should be optional.
 
-Recommended: allow but do not require it; Sections can still be referenced directly and may also appear in array order.
+Sections can still be referenced directly and may also appear in array order.
 
 ## 0.18 Validation Modes
 
@@ -656,23 +697,31 @@ Recommended example set:
 6. document with optional extension namespace;
 7. invalid examples for validation rules.
 
-## 0.23 Open Decisions Before Full Draft
+## 0.23 Resolved Decisions for Initial Draft
+
+The following decisions are accepted for the initial Part 4 draft:
+
+1. Required namespaces must exist, but empty arrays are allowed during draft, template, partial generation, or staged authoring.
+2. `structure` is optional.
+3. `occurrence.role` is mandatory.
+4. `entity.kind` is recommended but not mandatory in Core mode.
+5. An Entity should contain at least one of `content`, `payload`, or `ref` unless a profile permits placeholder Entities.
+6. Source anchors should use a common base shape with type-specific extension fields.
+7. Unknown fields and namespaces should be preserved and warned about in Core mode.
+8. Strict mode may reject unknown fields, namespaces, or vocabulary values.
+9. Part 4 defines Document Format, not Authoring Engine internals.
+
+## 0.24 Remaining Open Decisions Before Full Draft
 
 The following decisions should be finalized while drafting Part 4:
 
-1. Are `sources`, `sections`, `occurrences`, and `entities` all strictly required even for empty or partial documents?
-2. Is `structure` optional or required for document-level ordering?
-3. Is `role` mandatory for every Occurrence?
-4. Is Entity `kind` mandatory or optional?
-5. Is `content` mandatory for every Entity, or may an Entity be reference-only?
-6. Which `meta` fields are mandatory?
-7. Should source anchor shape be unified or allow multiple anchor schemas?
-8. Should validators preserve unknown fields by default?
-9. Should unknown top-level namespaces produce warning or error in default mode?
-10. Should inline Projection fragments be limited to simple notes in Core?
-11. Should empty required namespaces be allowed during draft generation?
+1. Which `meta` fields are mandatory beyond `spec_version`, `document_id`, and `status`?
+2. Should source anchor shape be unified into a single `anchors` array format everywhere?
+3. Should inline Projection fragments be limited to simple notes in Core?
+4. Should placeholder Entities be allowed in Core mode or only by profile?
+5. Which exact validation severities should be used: error, warning, info?
 
-## 0.24 Initial Recommendation
+## 0.25 Initial Recommendation
 
 The initial Part 4 draft should begin with a conservative array-based Core:
 
@@ -684,8 +733,10 @@ sections:
   - id: sec-001
 occurrences:
   - id: occ-001
+    role: example_role
 entities:
   - id: ent-001
+    content: Example reusable material.
 ```
 
 It should allow optional `structure` and `extensions`.
