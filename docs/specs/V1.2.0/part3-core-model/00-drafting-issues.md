@@ -50,7 +50,7 @@ The following conceptual objects appear necessary for Part 3:
 
 1. **Original Source Reference** — a traceable reference to source material used as the basis for Projection-guided generation or reconstruction.
 2. **Projection Context** — the reuse strategy or Projection identity that shaped the IdeaMark document.
-3. **Decomposition** — the Projection-guided modeling act that transforms Original Source material into Core Model structures.
+3. **Decomposition** — the Projection-guided modeling act that transforms Original Source material into an IdeaMark Document.
 4. **IdeaMark Document** — an operational access-structure artifact generated from Original Source(s) under Projection Context.
 5. **Entity** — a Projection-shaped structural component produced by Decomposition.
 6. **Occurrence** — an activation, appearance, evidence instance, or situated use produced or recognized by Decomposition.
@@ -71,18 +71,43 @@ Decomposition must not be defined as general extraction from an Original Source.
 
 A Projection-independent IdeaMark document may be technically possible, but it is not the intended model because it does not encode a useful reuse strategy.
 
+Decomposition should be understood as the Projection-guided structuring act that produces an IdeaMark document from Original Source material.
+
+Its purpose is to create structures that allow expected later uses of the IdeaMark document, including retrieval, reconstruction, and meaning activation.
+
 Drafting issue:
 
 - How should Part 3 define Decomposition without turning it into an algorithm?
 - How should Decomposition depend on Projection Context while remaining independent from any particular authoring workflow?
 - How should Part 3 explain that Situation Vector informs Projection generation but is not directly embedded as an unbounded input to Decomposition?
 - How should Decomposition avoid evaluating Projection quality?
+- Should Decomposition be represented explicitly in YAML, or should it remain a conceptual boundary with optional rationale and provenance notes?
+- How should Part 3 explain that Decomposition cannot be fully reconstructed as an inverse mapping from the generated IdeaMark document?
+- How should Part 3 support large-scale Decomposition processes, such as POR-assisted processing, without prescribing such processes as Core requirements?
 
 Likely direction:
 
-Decomposition should be defined as the Projection-guided modeling act that produces Entity, Occurrence, Section, Relation, Anchorage, and related structures from Original Source material.
+Decomposition should be defined as the Projection-guided modeling act that produces an IdeaMark Document from Original Source material and Projection Context.
 
-Part 3 should define Decomposition outputs and invariants, while leaving Projection quality, Projection lifecycle, and Projection library governance to Part 5.
+The output of Decomposition is the IdeaMark Document as a whole.
+
+Therefore, Section, Occurrence, Entity, Relation, Anchorage, Perspective, Provenance, status information, and other document-level structures may all be Decomposition products.
+
+Part 3 should define the Decomposition boundary clearly:
+
+```text
+Input:  Original Source material x Projection Context
+Process: Projection-guided Decomposition
+Output: IdeaMark Document
+```
+
+Part 3 should not require that the generated IdeaMark document contain a complete, reversible record of the Decomposition process.
+
+At most, local rationale, provenance, method notes, or explanatory traces may be recorded to explain why particular structures were produced.
+
+These explanations are not a full inverse mapping.
+
+Part 3 should define Decomposition outputs and invariants, while leaving algorithms, workflow management, POR execution, Projection quality, Projection lifecycle, and Projection library governance to other parts or implementations.
 
 ### 0.4.2 Entity: Meaning Unit or Decomposition Component?
 
@@ -231,6 +256,8 @@ Part 3 should preserve the following constraints from Part 1 and Part 2:
 10. **Future media and source types must remain possible.**
 11. **Decomposition should be Projection-guided, not general extraction.**
 12. **Entity ID should be treated primarily as a reference label, not a universal identity claim.**
+13. **Decomposition must preserve a clear input/process/output boundary, but need not be fully reversible from its output.**
+14. **Large-scale Decomposition workflows may be supported by implementations such as POR, but Core should not prescribe those workflows.**
 
 ## 0.7 Recommended Drafting Order
 
@@ -266,10 +293,11 @@ Before Part 4 defines YAML syntax, Part 3 should resolve:
 - How to express uncertainty, review status, and regeneration without turning the model into workflow management.
 - How to support multi-source documents without requiring a universal source aggregation model.
 - How to support non-textual sources without making text offsets the hidden default.
+- How to represent local rationale, provenance, or method notes without implying full reversibility of Decomposition.
 
 ## 0.9 Summary
 
-Part 3 should make IdeaMark Core precise enough to support interoperability and validation, but not so prescriptive that it freezes meaning, source media, domain vocabulary, Projection practice, or future intellectual activity.
+Part 3 should make IdeaMark Core precise enough to support interoperability and validation, but not so prescriptive that it freezes meaning, source media, domain vocabulary, Projection practice, Decomposition workflow, or future intellectual activity.
 
 The Core Model should be the bridge between the philosophy of separation and the later YAML specification.
 
