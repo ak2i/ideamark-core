@@ -13,7 +13,26 @@ Part 6 is not a normative Core schema.
 
 It should not introduce new required fields, new required namespaces, or new validation rules unless those requirements are also added to Part 4.
 
-## 0.2 Authoring Stance
+## 0.2 Diagram Convention
+
+Diagrams in Part 6 SHOULD be written as Mermaid diagrams inside Markdown code blocks.
+
+This keeps diagrams reviewable in plain text, renderable on GitHub, and easy to maintain alongside the specification.
+
+Example:
+
+```mermaid
+flowchart TD
+    A[Original Source] --> D[Projection-guided Decomposition]
+    B[Projection] --> D
+    C[Optional Authoring Context] --> D
+    D --> E[IdeaMark Document]
+    E --> F[Future Retrieval]
+    E --> G[Reconstruction]
+    E --> H[Activation Expression]
+```
+
+## 0.3 Authoring Stance
 
 IdeaMark authoring is Projection-guided decomposition.
 
@@ -21,21 +40,19 @@ An author does not merely summarize an Original Source.
 
 An author selects or creates a Projection, reads the Original Source through that Projection, and produces reusable access structures that support future reconstruction and meaning activation.
 
-```text
-Original Source
-      x
-Projection
-      x
-optional authoring context
-      ↓
-Projection-guided Decomposition
-      ↓
-IdeaMark Document
-      ↓
-future retrieval / reconstruction / activation expression
+```mermaid
+flowchart TD
+    OS[Original Source] --> DEC[Projection-guided Decomposition]
+    PR[Projection] --> DEC
+    CTX[Optional authoring context] --> DEC
+    DEC --> DOC[IdeaMark Document]
+    DOC --> SEC[Projection-shaped Sections]
+    DOC --> OCC[Role-bearing Occurrences]
+    DOC --> ENT[Reusable Entities]
+    DOC --> FUT[Future retrieval / reconstruction / activation]
 ```
 
-## 0.3 What Authoring Produces
+## 0.4 What Authoring Produces
 
 A practical IdeaMark authoring process produces:
 
@@ -54,7 +71,7 @@ It does not need to store every possible interpretation of the source.
 
 It does not need to solve all future retrieval tasks.
 
-## 0.4 Relationship to Part 3
+## 0.5 Relationship to Part 3
 
 Part 3 defines the Core Model concepts:
 
@@ -64,7 +81,15 @@ Part 3 defines the Core Model concepts:
 
 Part 6 explains how to make those modeling decisions in practice.
 
-## 0.5 Relationship to Part 4
+```mermaid
+flowchart LR
+    SEC[Section\nProjection-shaped local source window] --> OCC[Occurrence\nRole-bearing placement]
+    OCC --> ENT[Entity\nProjection-shaped reusable material]
+    SEC --> SRC[Source anchors]
+    ENT --> REC[Future reconstruction]
+```
+
+## 0.6 Relationship to Part 4
 
 Part 4 defines the concrete YAML representation.
 
@@ -72,7 +97,16 @@ Part 6 uses the Part 4 representation but does not replace it.
 
 When this guide gives YAML examples, they should follow the Part 4 array-based object representation.
 
-## 0.6 Relationship to Part 5
+```mermaid
+flowchart TD
+    MODEL[Part 3 Core Model] --> GUIDE[Part 6 Authoring Guide]
+    SPEC[Part 4 YAML Specification] --> GUIDE
+    GUIDE --> DOC[Authored IdeaMark Document]
+    DOC --> SAMPLE[Part 4 Normalized Samples]
+    SAMPLE --> CLI[Parser / Validator / Formatter Tests]
+```
+
+## 0.7 Relationship to Part 5
 
 Part 5 defines Projection itself.
 
@@ -80,7 +114,7 @@ Part 6 explains how an author uses a Projection during authoring.
 
 When a Projection decision becomes complex, reusable, versioned, or governed, it should be moved to Part 5-style Projection documents or Projection Library material.
 
-## 0.7 Relationship to Part 4 Samples
+## 0.8 Relationship to Part 4 Samples
 
 Part 4 normalized samples provide implementation-oriented YAML examples.
 
@@ -93,7 +127,7 @@ For example:
 - why the recipe cooking sample and recipe substitution sample produce different Entity kinds;
 - why `relations` is not required for the initial samples.
 
-## 0.8 Intended Readers
+## 0.9 Intended Readers
 
 Part 6 is intended for:
 
@@ -105,7 +139,7 @@ Part 6 is intended for:
 - sample corpus authors;
 - teams creating domain-specific profiles.
 
-## 0.9 Authoring Guide Boundary
+## 0.10 Authoring Guide Boundary
 
 Part 6 may recommend practices.
 
