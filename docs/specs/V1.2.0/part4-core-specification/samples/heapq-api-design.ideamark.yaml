@@ -1,0 +1,80 @@
+meta:
+  spec_version: ideamark-core-v1.2.0
+  document_id: sample-heapq-api-design
+  status: draft
+  title: Heapq API Design Sample
+  projections:
+    - role: generation
+      ref: projection://samples/code-api-design-heapq-v0
+      inline:
+        purpose: help a library designer understand how implementation choices shape API expectations
+sources:
+  - id: SRC-heapq-py
+    type: code_file
+    title: CPython heapq.py
+    uri: https://github.com/python/cpython/blob/main/Lib/heapq.py
+    revision: main
+sections:
+  - id: SEC-list-compatible-heap
+    title: Heap API as list-compatible design
+    anchors:
+      - source: SRC-heapq-py
+        type: line_range
+        ranges:
+          - start: 19
+            end: 32
+        precision: approximate
+        role: api_design_rationale
+    occurrences:
+      - OCC-zero-based-indexing
+      - OCC-min-heap-interface
+      - OCC-sort-preserves-invariant
+  - id: SEC-combined-operations
+    title: Combined operations as workload-shaped API
+    anchors:
+      - source: SRC-heapq-py
+        type: line_range
+        ranges:
+          - start: 150
+            end: 171
+        precision: approximate
+        role: workload_api_choice
+    occurrences:
+      - OCC-heapreplace-contract
+      - OCC-heappushpop-contract
+occurrences:
+  - id: OCC-zero-based-indexing
+    entity: ENT-zero-based-indexing
+    role: explains_language_alignment
+  - id: OCC-min-heap-interface
+    entity: ENT-min-heap-interface
+    role: explains_default_behavior
+  - id: OCC-sort-preserves-invariant
+    entity: ENT-sort-preserves-invariant
+    role: shows_list_interoperability
+  - id: OCC-heapreplace-contract
+    entity: ENT-heapreplace-contract
+    role: maps_api_contract_to_workload
+  - id: OCC-heappushpop-contract
+    entity: ENT-heappushpop-contract
+    role: maps_api_contract_to_workload
+entities:
+  - id: ENT-zero-based-indexing
+    kind: api_design_choice
+    content: The heap representation uses zero-based indexing so the heap behaves naturally as a Python list.
+  - id: ENT-min-heap-interface
+    kind: api_design_choice
+    content: The public API exposes a min-heap, making heap[0] the smallest element.
+  - id: ENT-sort-preserves-invariant
+    kind: interoperability_property
+    content: Sorting the list preserves the heap invariant because the smallest element remains at index 0.
+  - id: ENT-heapreplace-contract
+    kind: api_contract
+    content: heapreplace pops and returns the smallest item before pushing the new item, which is efficient for fixed-size heaps but may return a value larger than the inserted item.
+  - id: ENT-heappushpop-contract
+    kind: api_contract
+    content: heappushpop combines push and pop so workflows can avoid unnecessary heap growth when testing a new candidate item.
+structure:
+  sections:
+    - SEC-list-compatible-heap
+    - SEC-combined-operations
