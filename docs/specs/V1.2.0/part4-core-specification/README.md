@@ -41,6 +41,11 @@ Part 4 was drafted after reviewing:
 17. [Normative Examples](./16-normative-examples.md) *(draft)*
 18. [Core Specification Non-goals](./17-core-specification-non-goals.md) *(draft)*
 
+## Review Notes
+
+- [Sample Conformance Review](./18-sample-conformance-review.md) *(review note)*
+- [Open Review Issues](./19-open-review-issues.md) *(review note)*
+
 ## Required Core Namespaces
 
 Part 4 defines the normative representation for the required Core access-structure namespaces:
@@ -116,9 +121,9 @@ It does not define Projection content, authoring strategy, retrieval ranking, st
 
 The next review pass should focus on:
 
-1. whether the array-based object representation is acceptable as the normative v1.2.0 shape;
-2. whether placeholder objects should remain warnings in Core mode;
-3. whether `meta.projections` should allow inline fragments or only references;
-4. whether `structure` should remain optional;
-5. whether recommended vocabularies should stay open in Core mode;
-6. whether the validation rules are sufficient for the first CLI validator implementation.
+1. checking that the resolved decisions in [Open Review Issues](./19-open-review-issues.md) are reflected consistently across the normative chapters;
+2. deciding whether `meta.projections.inline` needs additional scope guidance;
+3. deciding whether anchor `role` / `purpose` should appear in normative examples;
+4. deciding how much legacy migration detail belongs in Part 4;
+5. adding compact code-source and recipe-source examples if needed;
+6. confirming that CLI diagnostic codes and command behavior remain outside Part 4.
