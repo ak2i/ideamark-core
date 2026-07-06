@@ -1,13 +1,32 @@
 # Part 5 — Projection Specification
 
 **Version:** IdeaMark Core v1.2.0  
-**Status:** Planning Draft
+**Status:** Initial Specification Draft Started
 
-This part defines Projection as an external but interoperable specification.
+Part 5 defines Projection as an external but interoperable specification for guiding Decomposition, retrieval, matching, filtering, and reconstruction.
 
-Projection is a reusable transformation key for making Original Sources, IdeaMark documents, and future expressions usable in Human-AI Intellectual Activity.
+Projection is a reusable transformation key for making Original Sources, IdeaMark documents, and future activation expressions usable in Human-AI Intellectual Activity.
 
 Projection should be treated as a reusable intellectual asset, not merely a prompt parameter.
+
+## Scope
+
+Part 5 defines the responsibilities of Projection-side specifications.
+
+It describes how a Projection may express:
+
+- intended reuse purpose;
+- requirement bundles;
+- Situation boundaries;
+- Decomposition guidance;
+- retrieval and matching intent;
+- reconstruction guidance;
+- evaluation criteria;
+- metadata, lifecycle, and library use.
+
+Part 5 does not define the concrete YAML representation of IdeaMark documents. That belongs to Part 4.
+
+Part 5 also does not define retrieval algorithms, ranking systems, organizational governance rules, legal taxonomies, domain vocabularies, or universal coordinate systems. Those may be supplied by implementations, Projection Libraries, companion specifications, or domain practices.
 
 ## Core Stance
 
@@ -47,117 +66,18 @@ The Projection used to generate an IdeaMark document and the Projection used lat
 
 Useful reuse may occur through partial overlap, compatible intent, shared functional structure, or transformable assumptions.
 
-For example, a Projection used to generate an IdeaMark document about professional cooking technique may later be partially matched by a household-cooking Projection that seeks functional guidance about how to increase umami, substitute ingredients, or adjust taste and texture for a specific dish.
+## Sections
 
-In that case, reuse does not depend on matching the same keyword such as a named ingredient or cooking term.
-
-It depends on whether the generated IdeaMark structures can help retrieve and transform relevant Original Source material for the current intellectual activity.
-
-## Projection and Decomposition
-
-Part 3 defines Decomposition as the Projection-guided modeling act that produces IdeaMark Core Model structures.
-
-Part 5 defines how Projection describes the requirements, assumptions, strategies, compatibility conditions, and evaluation criteria that guide such Decomposition and later reuse.
-
-```text
-Situation Observation
-        ↓
-Situation Vector
-        ↓
-Projection Selection / Generation
-        ↓
-Projection
-        ↓
-Decomposition of Original Source
-        ↓
-IdeaMark Document
-```
-
-The Situation Vector may inform Projection selection or generation.
-
-However, Projection should remain separable from both the particular Situation and the generated IdeaMark document so that it can be reused, compared, governed, refined, shared, or kept private.
-
-## Projection and Reconstruction
-
-Projection also guides the use side of IdeaMark.
-
-```text
-Current Situation
-        ↓
-Situation Vector
-        ↓
-Projection Selection / Generation
-        ↓
-Projection
-        ↓
-IdeaMark Retrieval / Matching / Filtering
-        ↓
-Original Source Access
-        ↓
-Projection-guided Reconstruction
-        ↓
-Activation Expression
-        ↓
-Human-AI Intellectual Activity
-```
-
-The reconstruction-side Projection may differ from the generation-side Projection.
-
-This difference is expected, not exceptional.
-
-Part 5 should therefore define how Projection can support compatibility, adaptation, and transformation rather than assuming exact identity between generation and use.
-
-## Projection Libraries
-
-Projection Libraries are collections of reusable Projections.
-
-They are not merely template catalogs.
-
-They may function as repositories of accumulated interpretation-cost reduction strategies and transformation keys.
-
-A Projection Library may help users and AI systems act effectively even when the immediate subject does not fully understand all layers of law, custom, domain practice, organizational procedure, or expert reasoning required to create a Projection from scratch.
-
-Projection Library use can therefore reduce interpretation cost and allow practical use to begin earlier.
-
-Repeated use may generate feedback, which may then lead to finer-grained, more intentional, and higher-quality Projections.
-
-A mature Projection Library may preserve not only common decomposition strategies, but also common retrieval, matching, filtering, and reconstruction strategies that have proven useful in practice.
-
-## Private and Shared Projection
-
-A Projection may be private, organizational, domain-specific, public, experimental, deprecated, or standardized.
-
-Sharing a Projection can increase organizational or social capability when it helps many participants reduce interpretation cost and coordinate reconstruction.
-
-However, some Projections may remain private because they depend on personal circumstances, confidential organizational practice, legal constraints, strategic value, or sensitive context.
-
-Part 5 should describe how Projection may be reused and referenced without requiring that all Projections be public.
-
-## Proposed Sections
-
-0. Projection Overview
-1. Projection as Reuse Strategy
-2. Projection as Requirement Bundling
-3. Projection as Bidirectional Transformation Key
-4. Projection and Situation Boundary
-5. Projection and Decomposition Guidance
-6. Projection and Retrieval
-7. Projection Matching and Compatibility
-8. Projection-guided Reconstruction
-9. Projection Metadata
-10. Intended Reuse Context
-11. Search and Reconstruction Tasks
-12. Entity Decomposition Strategy
-13. Occurrence Strategy
-14. Section Strategy
-15. Relation and Coordinate Preferences
-16. Source Coverage Policy
-17. Evaluation Criteria
-18. Projection Versioning and Lifecycle
-19. Projection Libraries and Templates
-20. Private, Shared, and Institutional Projection
-21. Projection Non-goals
-22. Projection Examples
+0. [Projection Overview](./00-projection-overview.md) *(drafted)*
+1. [Projection as Reuse Strategy](./01-projection-as-reuse-strategy.md) *(drafted)*
+2. [Projection as Requirement Bundling](./02-projection-as-requirement-bundling.md) *(drafted)*
+3. [Projection as Bidirectional Transformation Key](./03-bidirectional-transformation-key.md) *(drafted)*
+4. [Projection and Situation Boundary](./04-projection-and-situation-boundary.md) *(drafted)*
+5. [Projection and Decomposition Guidance](./05-decomposition-guidance.md) *(drafted)*
+6. [Projection Retrieval, Matching, and Compatibility](./06-retrieval-matching-and-compatibility.md) *(drafted)*
+7. [Projection-guided Reconstruction](./07-projection-guided-reconstruction.md) *(drafted)*
+8. [Projection Metadata, Lifecycle, and Libraries](./08-metadata-lifecycle-and-libraries.md) *(drafted)*
+9. [Projection Non-goals and Open Issues](./09-non-goals-and-open-issues.md) *(drafted)*
 
 ## Relationship to Core
 
@@ -173,12 +93,12 @@ Part 3 defines the Core Model output of Projection-guided Decomposition.
 
 Part 5 defines the Projection-side responsibilities that make such Decomposition, retrieval, matching, filtering, and reconstruction reusable, inspectable, and improvable.
 
-## Scope
+## Reading Notes
 
-Part 5 should define how Projection describes reuse strategy, requirement bundling, Decomposition guidance, retrieval intent, matching and compatibility behavior, intended reconstruction tasks, evaluation criteria, lifecycle, and library use.
+Part 5 should be read after Part 3.
 
-It should not redefine Core objects, YAML validation rules, retrieval algorithms, or domain-specific vocabularies unless they are explicitly declared as Projection-specific.
+Part 3 explains that Section, Occurrence, and Entity are Projection-shaped Core Model structures.
 
-Part 5 also should not require that every Projection be fully formal, public, standardized, or authored by experts.
+Part 5 explains what kinds of responsibilities a Projection may carry so that those structures can be generated, searched, matched, filtered, reconstructed, evaluated, shared, versioned, or kept private.
 
-A Projection may be carefully designed, gradually cultivated, AI-generated, experimentally discovered, or accidentally retained because it works.
+The key design constraint is that Projection should reduce interpretation cost without pretending to contain the whole Situation, the whole domain, or the final meaning of future activity.
