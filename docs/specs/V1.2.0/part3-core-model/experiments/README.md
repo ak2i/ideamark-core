@@ -3,6 +3,8 @@
 **Part:** 3 — Core Model  
 **Status:** Supporting Design Materials
 
+> Note: YAML fragments in this directory are exploratory design artifacts. They may predate the Part 4 array-based object representation and are not normative IdeaMark Core v1.2.0 examples. Use Part 4 normalized samples for implementation-oriented YAML.
+
 This directory contains exploratory design experiments used to test the Part 3 Core Model.
 
 These files are evidence and design history, not normative specification text.
@@ -30,3 +32,9 @@ The main Part 3 specification files remain in the parent directory.
 Experiment files may contain provisional structures, candidate YAML-like examples, rejected alternatives, and superseded terminology.
 
 When terminology differs, the parent Part 3 specification and Part 5 Projection Specification take precedence.
+
+For implementation-oriented YAML examples, use the normalized samples under:
+
+```text
+docs/specs/V1.2.0/part4-core-specification/samples/
+```
