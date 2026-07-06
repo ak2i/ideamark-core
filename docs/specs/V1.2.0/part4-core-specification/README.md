@@ -46,6 +46,14 @@ Part 4 was drafted after reviewing:
 - [Sample Conformance Review](./18-sample-conformance-review.md) *(review note)*
 - [Open Review Issues](./19-open-review-issues.md) *(review note)*
 
+## Normalized Samples
+
+- [Part 4 Normalized YAML Samples](./samples/README.md)
+
+The normalized samples are implementation-oriented examples derived from Part 3 design experiments and rewritten into the Part 4 array-based object representation.
+
+They are intended to support parser, validator, formatter, migration, and conformance-suite development.
+
 ## Required Core Namespaces
 
 Part 4 defines the normative representation for the required Core access-structure namespaces:
@@ -125,5 +133,5 @@ The next review pass should focus on:
 2. deciding whether `meta.projections.inline` needs additional scope guidance;
 3. deciding whether anchor `role` / `purpose` should appear in normative examples;
 4. deciding how much legacy migration detail belongs in Part 4;
-5. adding compact code-source and recipe-source examples if needed;
+5. extending normalized samples into a reusable conformance suite;
 6. confirming that CLI diagnostic codes and command behavior remain outside Part 4.
