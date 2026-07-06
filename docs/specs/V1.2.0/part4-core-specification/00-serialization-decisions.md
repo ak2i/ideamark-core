@@ -94,31 +94,9 @@ provenance:
 extensions:
 ```
 
-### `structure`
+`structure` may be allowed when explicit document ordering or grouping is needed beyond array order or local reference order.
 
-`structure` may be allowed when explicit document ordering or grouping is needed beyond map order.
-
-It should not introduce final meaning.
-
-### `relations`
-
-`relations` should not be required in Core v1.2.0.
-
-If allowed, relations should be treated as an optional extension or profile-level namespace.
-
-### `perspectives`
-
-`perspectives` should not be required in Core v1.2.0.
-
-Earlier Perspective responsibilities are handled by Projection references, Projection metadata, purpose notes, audience notes, local rationale, and reconstruction references.
-
-### `provenance`
-
-`provenance` should not be required as a separate Core namespace.
-
-Provenance responsibilities are handled by source references, source anchors, generation metadata, tool notes, timestamps, review status, and local rationale.
-
-### `extensions`
+`relations`, `perspectives`, and `provenance` should not be required in Core v1.2.0. They may appear as optional extension or profile-level namespaces.
 
 `extensions` may be used by profiles, tools, domains, or companion specifications.
 
@@ -140,52 +118,61 @@ This allows interoperability while keeping Core small.
 
 ## 0.5 Object Shape Decision
 
-Sections, Occurrences, Entities, and Sources should be represented as keyed maps rather than only arrays.
+Sections, Occurrences, Entities, and Sources should be represented as arrays of objects, not keyed maps.
+
+This decision is made for authoring reliability.
+
+LLMs often generate array-oriented YAML more consistently than deeply keyed map structures, especially when producing partial documents, adding examples, or revising generated output.
 
 Recommended shape:
 
 ```yaml
+sources:
+  - id: src-001
+    type: document
+    title: Example Source
+
 sections:
-  sec-001:
-    ...
+  - id: sec-001
+    title: Example Section
+    occurrences:
+      - occ-001
 
 occurrences:
-  occ-001:
-    ...
+  - id: occ-001
+    entity: ent-001
+    role: evidence
 
 entities:
-  ent-001:
-    ...
-
-sources:
-  src-001:
-    ...
+  - id: ent-001
+    kind: claim
+    content: Example reusable material.
 ```
 
 Rationale:
 
-- stable references are easier;
-- validators can detect duplicate IDs naturally;
-- diffs are easier to inspect;
-- partial updates are easier;
-- references from Sections to Occurrences and Occurrences to Entities remain explicit.
+- LLMs generate arrays more reliably than keyed maps;
+- array items can be appended, reordered, and revised naturally;
+- `id` remains explicit and visible in each object;
+- examples are easier for humans and LLMs to copy;
+- object shape remains uniform across namespaces;
+- validators can still detect duplicate IDs.
 
-Part 4 may allow array form as a compatibility profile only if the normalization behavior is defined.
+Part 4 should not use keyed-map object shape as the normative Core representation.
+
+A tool MAY normalize arrays into internal maps for validation, indexing, or lookup, but that normalized representation is an implementation detail.
 
 ## 0.6 Identifier Policy
 
-Each major Core object should have a stable identifier.
-
-For keyed maps, the map key may serve as the object identifier.
-
-Part 4 should decide whether an object may also contain an explicit `id` field.
+Each major Core object should have a stable `id` field.
 
 Recommended policy:
 
-- map key is the canonical local ID;
-- optional `id` field may be allowed only if it matches the map key;
-- validators should warn or error on mismatch;
-- local IDs should be document-local unless explicitly declared as global or URI-like.
+- `id` is mandatory for each Source, Section, Occurrence, and Entity object;
+- IDs are document-local unless explicitly declared as global or URI-like;
+- validators MUST detect duplicate IDs within each namespace;
+- validators SHOULD warn when ID prefixes do not match common conventions, but prefixes should not be mandatory;
+- references use the target object's `id` value.
 
 Suggested prefixes are informative, not mandatory:
 
@@ -290,7 +277,32 @@ meta:
 
 This records enough operational context for traceability without turning Core into a session-state format.
 
-## 0.10 Source Reference Policy
+## 0.10 Progressive Authoring Engine Boundary
+
+Part 4 should include a boundary note for progressive authoring engines, including Progressive Occurrence Resolution.
+
+This boundary is needed because large-source authoring engines may emit IdeaMark documents while also maintaining internal state that does not belong in Core YAML.
+
+The boundary prevents Part 4 from accidentally becoming a specification for:
+
+- progressive chunk scheduling;
+- internal intermediate representation;
+- LLM orchestration;
+- session state;
+- backward reinterpretation;
+- context-force behavior;
+- review queues;
+- engine-specific cache state.
+
+Part 4 should define the document representation that such engines may emit, validate, or exchange.
+
+Part 4 should not define the internal operation of those engines.
+
+This section is not intended to make POR central to Core.
+
+It exists to protect the Core YAML boundary because POR is an expected companion producer of IdeaMark-compatible documents.
+
+## 0.11 Source Reference Policy
 
 `sources` should represent Original Source references in a media-independent way.
 
@@ -298,7 +310,7 @@ Recommended minimal shape:
 
 ```yaml
 sources:
-  src-001:
+  - id: src-001
     type: document
     title:
     uri:
@@ -328,7 +340,7 @@ Possible source types include:
 
 The type vocabulary may start as recommended rather than exhaustive.
 
-## 0.11 Source Anchor and Traceability Policy
+## 0.12 Source Anchor and Traceability Policy
 
 Traceability should be represented as source anchors or traceability claims.
 
@@ -352,13 +364,13 @@ Part 4 should allow anchors such as:
 Recommended shape:
 
 ```yaml
-anchor:
-  source: src-001
-  type: line_range
-  ranges:
-    - start: 10
-      end: 25
-  precision: exact
+anchors:
+  - source: src-001
+    type: line_range
+    ranges:
+      - start: 10
+        end: 25
+    precision: exact
 ```
 
 or:
@@ -381,7 +393,7 @@ Recommended default:
 - Entity anchors MAY be supported;
 - document-level source references MUST be supported.
 
-## 0.12 Section Serialization Decision
+## 0.13 Section Serialization Decision
 
 A Section should represent a Projection-shaped local source window.
 
@@ -389,7 +401,7 @@ Recommended minimal shape:
 
 ```yaml
 sections:
-  sec-001:
+  - id: sec-001
     title:
     anchors:
       - source: src-001
@@ -404,6 +416,7 @@ sections:
 
 A Section should be able to contain:
 
+- `id`;
 - title or label;
 - source anchors;
 - ordered Occurrence references;
@@ -413,7 +426,7 @@ A Section should be able to contain:
 
 A Section should not be required to correspond to an Original Source heading.
 
-## 0.13 Occurrence Serialization Decision
+## 0.14 Occurrence Serialization Decision
 
 An Occurrence should represent a role-bearing placement of Entity material within a Section.
 
@@ -421,7 +434,7 @@ Recommended minimal shape:
 
 ```yaml
 occurrences:
-  occ-001:
+  - id: occ-001
     entity: ent-001
     role: evidence
     status: active
@@ -430,6 +443,7 @@ occurrences:
 
 An Occurrence should be able to contain:
 
+- `id`;
 - Entity reference;
 - role;
 - status;
@@ -442,7 +456,7 @@ Part 4 should decide whether `role` is mandatory.
 
 Recommended: `role` SHOULD be required for Occurrences, because role-bearing placement is the main reason Occurrence exists.
 
-## 0.14 Entity Serialization Decision
+## 0.15 Entity Serialization Decision
 
 An Entity should represent Projection-shaped reusable material.
 
@@ -450,7 +464,7 @@ Recommended minimal shape:
 
 ```yaml
 entities:
-  ent-001:
+  - id: ent-001
     kind:
     content:
     status: active
@@ -458,6 +472,7 @@ entities:
 
 An Entity should be able to contain:
 
+- `id`;
 - kind or type;
 - content or payload;
 - status;
@@ -469,7 +484,7 @@ Part 4 should avoid requiring a universal Entity kind taxonomy.
 
 Entity `kind` may be profile-defined or open vocabulary.
 
-## 0.15 Status Policy
+## 0.16 Status Policy
 
 Part 4 should define a small status vocabulary for documents and Core objects.
 
@@ -499,15 +514,15 @@ Recommended initial policy:
 - object status MAY use a controlled vocabulary with extension allowance;
 - validators SHOULD warn on unknown statuses unless a profile declares them.
 
-## 0.16 Ordering Policy
+## 0.17 Ordering Policy
 
 Ordering should be explicit when it affects reconstruction.
 
 Recommended policy:
 
+- Array order MAY be considered authoring order but should not be the only normative reconstruction order.
 - Section-level `occurrences` arrays define Occurrence order within a Section.
 - Optional `structure` namespace may define document-level Section order.
-- YAML map order should not be the only normative ordering mechanism.
 
 Example:
 
@@ -520,9 +535,9 @@ structure:
 
 Part 4 should decide whether `structure.sections` is required.
 
-Recommended: allow but do not require it; Sections can still be referenced directly.
+Recommended: allow but do not require it; Sections can still be referenced directly and may also appear in array order.
 
-## 0.17 Validation Modes
+## 0.18 Validation Modes
 
 Part 4 should define validation behavior for at least two modes:
 
@@ -540,7 +555,7 @@ Strict mode is useful for tests, CLI validation, and controlled pipelines.
 
 A future profile mode may validate additional profile-defined fields.
 
-## 0.18 Extension Policy
+## 0.19 Extension Policy
 
 Part 4 should allow extension without weakening Core.
 
@@ -564,7 +579,7 @@ or:
 
 ```yaml
 entities:
-  ent-001:
+  - id: ent-001
     kind: constraint
     content: ...
     x-example-org:
@@ -573,7 +588,7 @@ entities:
 
 Part 4 should choose a recommended extension style.
 
-## 0.19 Compatibility and Migration Policy
+## 0.20 Compatibility and Migration Policy
 
 Part 4 should define how documents declare specification version and profile compatibility.
 
@@ -599,7 +614,7 @@ Part 4 should define compatibility at the document format level, not Projection 
 
 Projection compatibility belongs primarily to Part 5.
 
-## 0.20 Serialization Format Decision
+## 0.21 Serialization Format Decision
 
 YAML should remain the primary human-authored serialization format for IdeaMark Core v1.2.0.
 
@@ -610,9 +625,9 @@ Recommended policy:
 - YAML is the primary authoring and documentation format;
 - JSON may be used as a normalized machine representation;
 - YAML anchors and advanced YAML features should be discouraged or prohibited for interoperability;
-- ordering-sensitive semantics should be represented explicitly rather than relying on YAML map order.
+- ordering-sensitive semantics should be represented explicitly rather than relying only on YAML array or map order.
 
-## 0.21 Normative Examples Policy
+## 0.22 Normative Examples Policy
 
 Part 4 should include normative examples.
 
@@ -628,7 +643,7 @@ Recommended example set:
 6. document with optional extension namespace;
 7. invalid examples for validation rules.
 
-## 0.22 Open Decisions Before Full Draft
+## 0.23 Open Decisions Before Full Draft
 
 The following decisions should be finalized while drafting Part 4:
 
@@ -642,17 +657,22 @@ The following decisions should be finalized while drafting Part 4:
 8. Should validators preserve unknown fields by default?
 9. Should unknown top-level namespaces produce warning or error in default mode?
 10. Should inline Projection fragments be limited to simple notes in Core?
+11. Should empty required namespaces be allowed during draft generation?
 
-## 0.23 Initial Recommendation
+## 0.24 Initial Recommendation
 
-The initial Part 4 draft should begin with a conservative Core:
+The initial Part 4 draft should begin with a conservative array-based Core:
 
 ```yaml
 meta:
 sources:
+  - id: src-001
 sections:
+  - id: sec-001
 occurrences:
+  - id: occ-001
 entities:
+  - id: ent-001
 ```
 
 It should allow optional `structure` and `extensions`.
@@ -661,4 +681,4 @@ It should not require `relations`, `perspectives`, or `provenance`.
 
 It should record Projection references but should not define Projection internals.
 
-It should prioritize traceability, stable object references, validator clarity, and round-trip preservation over broad semantic expressiveness.
+It should prioritize traceability, LLM generation reliability, explicit IDs, validator clarity, and round-trip preservation over broad semantic expressiveness.
