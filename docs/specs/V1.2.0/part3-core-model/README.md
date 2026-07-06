@@ -1,7 +1,7 @@
 # Part 3 — Core Model
 
 **Version:** IdeaMark Core v1.2.0  
-**Status:** Planning Draft
+**Status:** Specification Drafting
 
 Part 3 defines the conceptual model of IdeaMark Core.
 
@@ -15,7 +15,7 @@ Part 3 explains what conceptual objects IdeaMark Core needs in order to function
 
 Part 3 is conceptual.
 
-It should define model roles, relationships, and constraints before YAML representation is specified in Part 4.
+It defines model roles, relationships, constraints, and invariants before YAML representation is specified in Part 4.
 
 Part 3 should not define:
 
@@ -37,7 +37,7 @@ Those belong to later parts, companion specifications, implementations, Projecti
 
 IdeaMark generation is not a general extraction task performed on an Original Source in isolation.
 
-An IdeaMark document becomes useful only when an Original Source is decomposed under a Projection for expected future reconstruction.
+An IdeaMark document becomes useful when Original Source material is decomposed under a Projection for expected future retrieval, reconstruction, and meaning activation.
 
 Projection-independent decomposition may be technically possible, but it is not the intended Core model.
 
@@ -46,13 +46,15 @@ Without Projection, an IdeaMark document risks becoming a detached catalog or di
 Part 3 therefore treats Decomposition as the conceptual bridge between Original Source, Projection Context, and the generated structures of an IdeaMark document.
 
 ```text
-Original Source
+Original Source material
         x
 Projection Context
         ↓
-Decomposition
+Projection-guided Decomposition
         ↓
-Entity / Occurrence / Section
+IdeaMark Document
+        ↓
+Sections / Occurrences / Entities
 ```
 
 Part 3 does not evaluate whether a Projection is good, legitimate, widely shareable, or socially valuable.
@@ -71,7 +73,7 @@ Meaning becomes observable when expression, interpretation, Situation, and activ
 
 The purpose of IdeaMark is therefore not to retrieve knowledge as a finished object.
 
-Its purpose is to preserve structures that help future humans and AI systems retrieve the materials needed to activate useful meaning under a Projection.
+Its purpose is to preserve structures that help future humans and AI systems return to the right Original Source material and generate activation expressions under a Projection.
 
 In this sense, an IdeaMark document is not merely an index of Original Sources.
 
@@ -97,7 +99,7 @@ For an Original Source to be usable in current IdeaMark workflows, humans, AI sy
 
 Something that cannot yet be observed by humans, supplied to AI systems, or converted into an accessible representation may be conceptually eligible as a future Original Source, but it is not practically usable in current IdeaMark authoring or reconstruction.
 
-Part 3 should therefore define Original Source Reference in a media-independent way while preserving the practical requirement that source material must be accessible enough to support traceability and reconstruction.
+Part 3 therefore defines Original Source Reference in a media-independent way while preserving the practical requirement that source material must be accessible enough to support traceability and reconstruction.
 
 ## Decomposition Stance
 
@@ -125,41 +127,78 @@ Output: IdeaMark Document
 
 The output of Decomposition is the IdeaMark document as a whole.
 
-Therefore, any Core Model structure in the document may be a Decomposition product, including Sections, Occurrences, Entities, Anchorage, document-level metadata, status information, and other document-level structures.
+Therefore, any Core Model structure in the document may be a Decomposition product, including Sections, Occurrences, Entities, document-level metadata, traceability information, status information, and other document-level structures.
 
 Decomposition does not judge the universal truth of Original Sources or the quality, legitimacy, or social value of a Projection.
 
 It only determines what structures are produced under the given Original Source and Projection Context so that later Human-AI Intellectual Activity can begin from a traceable access structure.
 
+## Refined Core Object Interpretation
+
+The Part 3 design experiments support retaining Section, Occurrence, and Entity as the central Core Model objects.
+
+They must be defined functionally, not semantically.
+
+```text
+Section
+  = Projection-shaped local source window
+
+Occurrence
+  = role-bearing placement of reusable material within that window
+
+Entity
+  = reusable material shaped by Projection and available for later reconstruction
+```
+
+This interpretation was tested across:
+
+- algorithm implementation code;
+- system correctness and state-machine code;
+- formal RFC design prose;
+- everyday recipe procedure.
+
+Across these sources, the same pattern appeared:
+
+```text
+Original Source + Projection
+  -> Projection-shaped Sections
+  -> role-bearing Occurrences
+  -> Projection-shaped reusable Entities
+  -> lower-cost return to Original Source
+  -> future activation expression
+```
+
 ## Structural Catalyst Stance
 
 The Core Model does not attempt to encode meaning.
 
-Its purpose is to preserve enough reusable structure so that Projection-guided Human-AI Intellectual Activity can efficiently reconstruct meaning from Original Sources.
+Its purpose is to preserve enough reusable structure so that Projection-guided Human-AI Intellectual Activity can efficiently return to Original Sources and reconstruct useful activation expressions.
 
 The three-layer structural pattern of Section, Occurrence, and Entity should therefore be understood primarily as a structural catalyst rather than as a fixed semantic taxonomy.
 
 Their names are historical and descriptive.
 
-The Core intentionally minimizes the functional semantics assigned to them.
-
 A Section does not have to mean a document section, workflow step, chapter, topic, or decision unit.
+
+In Core, a Section is a Projection-shaped local source window: a bounded local context created by Decomposition so later reconstruction can reopen a useful part of the Original Source.
 
 An Occurrence does not have to mean a textual occurrence, event, instance, or observation.
 
+In Core, an Occurrence is a role-bearing placement of Entity material within a Section. It explains how reusable material participates in that local source window under the generation Projection.
+
 An Entity does not have to mean a concept, object, actor, term, or knowledge unit.
 
-Those functional interpretations belong to Projection, authoring practice, domain practice, or reconstruction activity.
+In Core, an Entity is Projection-shaped reusable material. It may be reused, referenced, placed, or reinterpreted, but it is not a universal meaning unit or global ontology object.
 
-In the Core Model, Section, Occurrence, and Entity are structural positions that can carry ordering, anchorage, role, local rationale, and traceability information.
+Those domain-specific interpretations belong to Projection, authoring practice, domain practice, or reconstruction activity.
 
-They are useful because they can be separated from both Original Source and Projection while still functioning as keys that help future humans and AI systems reactivate meaning under a Projection.
+Section, Occurrence, and Entity are useful because they can be separated from both Original Source and Projection while still functioning as keys that help future humans and AI systems reactivate meaning under a Projection.
 
 ## Metadata Stance
 
 Perspective and Provenance are not treated as required Core Model objects in Part 3.
 
-Their earlier responsibilities are folded into document-level metadata.
+Their earlier responsibilities are folded into document-level metadata, source references, projection references, source anchors, local rationale, and generation notes.
 
 The metadata area may record references to Projections, inline Projection definitions, Original Source references, generation notes, local rationale conventions, tool information, timestamps, review notes, or other information useful for traceability and reconstruction.
 
@@ -188,6 +227,39 @@ Part 3 only requires that the relevant Projection and source references can be r
 
 It does not require Perspective or Provenance to exist as separate namespaces.
 
+## Traceability Stance
+
+Traceability is more important than semantic completeness.
+
+An IdeaMark document should preserve enough traceability to allow later humans, AI systems, or tools to return to relevant Original Source material.
+
+Traceability should be modeled as a source anchor or traceability claim, not as a text-span-only mechanism.
+
+A source anchor may refer to:
+
+- line ranges;
+- paragraphs;
+- code spans;
+- ingredient lines;
+- recipe steps;
+- media time ranges;
+- image regions;
+- dataset rows or columns;
+- composite source fragments;
+- approximate or tool-specific source positions.
+
+Exact anchors are useful when available, but the Core Model must remain media-independent.
+
+## Relation Stance
+
+Relation is not a required Core Model object for v1.2.0 Part 3.
+
+The experiments did not require a separate Relation namespace.
+
+Ordering, Section grouping, Occurrence roles, Entity payloads, source anchors, and document-level metadata were sufficient to support reconstruction.
+
+Relation-like structures may be added later as an optional extension, profile, or companion specification, but they should not be mandatory for the Core Model.
+
 ## IdeaMark Document Stance
 
 An IdeaMark document is an operational access-structure artifact produced by Projection-guided Decomposition.
@@ -206,15 +278,15 @@ It means that IdeaMark documents, like other artifacts, can become material for 
 
 ## Draft Sections
 
-0. [Core Model Overview](./00-core-model-overview.md) *(planned)*
+0. [Core Model Overview](./00-core-model-overview.md) *(drafted)*
 1. [Model Boundary and Non-goals](./01-model-boundary-and-non-goals.md) *(planned)*
 2. [Original Source Reference Model](./02-original-source-reference-model.md) *(planned)*
 3. [Projection Context and Metadata Model](./03-projection-context-and-metadata-model.md) *(planned)*
 4. [Decomposition Model](./04-decomposition-model.md) *(planned)*
 5. [IdeaMark Document Model](./05-ideamark-document-model.md) *(planned)*
-6. [Entity Model](./06-entity-model.md) *(planned)*
+6. [Section Model](./06-section-model.md) *(planned)*
 7. [Occurrence Model](./07-occurrence-model.md) *(planned)*
-8. [Section Model](./08-section-model.md) *(planned)*
+8. [Entity Model](./08-entity-model.md) *(planned)*
 9. [Anchorage and Traceability Model](./09-anchorage-and-traceability-model.md) *(planned)*
 10. [Status, Versioning, and Regeneration Model](./10-status-versioning-and-regeneration-model.md) *(planned)*
 11. [Model Invariants](./11-model-invariants.md) *(planned)*
@@ -222,9 +294,13 @@ It means that IdeaMark documents, like other artifacts, can become material for 
 
 ## Drafting Notes
 
-The planning notes for Part 3 are maintained in:
+The planning notes and design experiments for Part 3 are maintained in this directory.
+
+Important notes include:
 
 - [Part 3 Drafting Issues](./00-drafting-issues.md)
+- [IdeaMark Document Constraints](./01-ideamark-document-constraints.md)
+- [Part 3 Readiness Assessment](./13-part3-readiness-assessment.md)
 
 ## Reading Notes
 
