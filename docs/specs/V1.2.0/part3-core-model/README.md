@@ -43,12 +43,14 @@ Projection-independent decomposition may be technically possible, but it is not 
 
 Without Projection, an IdeaMark document risks becoming a detached catalog or dictionary-like artifact rather than a living access structure for Human-AI Intellectual Activity.
 
-Part 3 therefore treats Decomposition as the conceptual bridge between Original Source, Projection Context, and the generated structures of an IdeaMark document.
+Part 3 therefore treats Decomposition as the conceptual bridge between Original Source, Projection, optional runtime context, and the generated structures of an IdeaMark document.
 
 ```text
 Original Source material
         x
-Projection Context
+Projection
+        x
+runtime context when applicable
         ↓
 Projection-guided Decomposition
         ↓
@@ -105,9 +107,9 @@ Part 3 therefore defines Original Source Reference in a media-independent way wh
 
 Decomposition is the Projection-guided structuring act that produces an IdeaMark document from Original Source material.
 
-Its role is to make later retrieval, reconstruction, and meaning activation possible by producing Core Model structures that are useful under an intended or anticipated Projection context.
+Its role is to make later retrieval, reconstruction, and meaning activation possible by producing Core Model structures that are useful under an intended or anticipated Projection.
 
-Decomposition may be performed by humans, AI systems, tools, or larger authoring processes such as POR.
+Decomposition may be performed by humans, AI systems, tools, or larger authoring processes such as Progressive Occurrence Resolution.
 
 Part 3 does not prescribe the algorithm or workflow by which Decomposition is performed.
 
@@ -120,7 +122,7 @@ However, such notes are partial explanations, not a complete inverse mapping of 
 For Part 3, the most important responsibility is that the Decomposition boundary remains clear:
 
 ```text
-Input:  Original Source material x Projection Context
+Input:  Original Source material x Projection x optional runtime context
 Process: Projection-guided Decomposition
 Output: IdeaMark Document
 ```
@@ -131,7 +133,7 @@ Therefore, any Core Model structure in the document may be a Decomposition produ
 
 Decomposition does not judge the universal truth of Original Sources or the quality, legitimacy, or social value of a Projection.
 
-It only determines what structures are produced under the given Original Source and Projection Context so that later Human-AI Intellectual Activity can begin from a traceable access structure.
+It only determines what structures are produced under the given Original Source, Projection, and any applicable runtime context so that later Human-AI Intellectual Activity can begin from a traceable access structure.
 
 ## Refined Core Object Interpretation
 
@@ -276,12 +278,12 @@ This recursive possibility does not make IdeaMark a knowledge base.
 
 It means that IdeaMark documents, like other artifacts, can become material for later Projection-guided reconstruction.
 
-## Draft Sections
+## Core Specification Sections
 
 0. [Core Model Overview](./00-core-model-overview.md) *(drafted)*
 1. [Model Boundary and Non-goals](./01-model-boundary-and-non-goals.md) *(drafted)*
 2. [Original Source Reference Model](./02-original-source-reference-model.md) *(drafted)*
-3. [Projection Context and Metadata Model](./03-projection-context-and-metadata-model.md) *(drafted)*
+3. [Projection and Metadata Model](./03-projection-and-metadata-model.md) *(drafted)*
 4. [Decomposition Model](./04-decomposition-model.md) *(drafted)*
 5. [IdeaMark Document Model](./05-ideamark-document-model.md) *(drafted)*
 6. [Section Model](./06-section-model.md) *(drafted)*
@@ -291,6 +293,30 @@ It means that IdeaMark documents, like other artifacts, can become material for 
 10. [Status, Versioning, and Regeneration Model](./10-status-versioning-and-regeneration-model.md) *(drafted)*
 11. [Model Invariants](./11-model-invariants.md) *(drafted)*
 12. [Core Model Summary](./12-core-model-summary.md) *(drafted)*
+
+## Supporting Design Materials
+
+The Part 3 directory separates specification text from design materials.
+
+Drafting notes are maintained under [`drafting-notes/`](./drafting-notes/):
+
+- [Part 3 Drafting Issues](./drafting-notes/00-drafting-issues.md)
+- [IdeaMark Document Constraints](./drafting-notes/01-ideamark-document-constraints.md)
+- [Part 3 Readiness Assessment](./drafting-notes/13-part3-readiness-assessment.md)
+
+Design experiments are maintained under [`experiments/`](./experiments/):
+
+- [Code Original Source Experiment](./experiments/02-code-original-source-experiment.md)
+- [Heapq Performance Candidate IdeaMark Experiment](./experiments/03-heapq-performance-candidate.md)
+- [Heapq Cross-Projection Reconstruction Test](./experiments/04-heapq-cross-projection-reconstruction.md)
+- [Heapq JSON and MongoDB Search Simulation](./experiments/05-heapq-json-mongodb-search-simulation.md)
+- [Heapq Multi-Projection Generation Test](./experiments/06-heapq-multi-projection-generation.md)
+- [SQLite Pager Original Source Test](./experiments/07-sqlite-pager-original-source-test.md)
+- [Rust RFC Original Source Test](./experiments/08-rust-rfc-original-source-test.md)
+- [SQLite Pager Multi-Projection Candidate Test](./experiments/09-sqlite-pager-multi-projection-candidates.md)
+- [Rust RFC Multi-Projection Candidate Test](./experiments/10-rust-rfc-multi-projection-candidates.md)
+- [Recipe Original Source Test](./experiments/11-recipe-original-source-test.md)
+- [Recipe Multi-Projection Candidate Test](./experiments/12-recipe-multi-projection-candidates.md)
 
 ## Review Status
 
@@ -302,16 +328,6 @@ Remaining work should focus on:
 - aligning normative language levels;
 - deciding which conceptual requirements become concrete YAML requirements in Part 4;
 - preparing example documents and validation profiles.
-
-## Drafting Notes
-
-The planning notes and design experiments for Part 3 are maintained in this directory.
-
-Important notes include:
-
-- [Part 3 Drafting Issues](./00-drafting-issues.md)
-- [IdeaMark Document Constraints](./01-ideamark-document-constraints.md)
-- [Part 3 Readiness Assessment](./13-part3-readiness-assessment.md)
 
 ## Reading Notes
 
