@@ -58,7 +58,37 @@ Each anchor object MUST include:
 
 `source` MUST reference an existing `sources[].id`.
 
-`type` identifies the anchor kind.
+`type` identifies the anchor mechanism or location kind, such as `line_range`, `page_range`, `heading_path`, or `media_time_range`.
+
+## 6.3.1 Anchor Role and Purpose
+
+An anchor MAY include `role` or `purpose` to describe why the source region is used.
+
+This is distinct from `type`.
+
+`type` identifies how the source location is addressed.
+
+`role` or `purpose` identifies why the source location matters in the current document.
+
+Example:
+
+```yaml
+anchors:
+  - source: src-001
+    type: line_range
+    ranges:
+      - start: 58
+        end: 95
+    precision: exact
+    role: implementation_rationale
+    purpose: identify source lines that explain a performance-oriented implementation choice
+```
+
+`role` and `purpose` are OPTIONAL.
+
+Core does not define a closed vocabulary for anchor roles or purposes.
+
+Profiles MAY define role or purpose vocabularies for source-specific, domain-specific, or audit-oriented documents.
 
 ## 6.4 Precision
 
@@ -288,7 +318,7 @@ Multiple anchors on one object indicate that the object is traceable to multiple
 
 They do not by themselves define whether the object synthesizes, compares, quotes, or transforms those sources.
 
-That role may be expressed through Occurrences, Entities, profiles, or extensions.
+That role may be expressed through Occurrences, Entities, anchor `role` or `purpose`, profiles, or extensions.
 
 ## 6.12 Approximate and Inferred Anchors
 
