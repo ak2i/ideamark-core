@@ -1,7 +1,7 @@
 # Part 3 — Core Model
 
 **Version:** IdeaMark Core v1.2.0  
-**Status:** Specification Drafting
+**Status:** Initial Specification Draft Complete
 
 Part 3 defines the conceptual model of IdeaMark Core.
 
@@ -15,7 +15,7 @@ Part 3 explains what conceptual objects IdeaMark Core needs in order to function
 
 Part 3 is conceptual.
 
-It defines model roles, relationships, constraints, and invariants before YAML representation is specified in Part 4.
+It defines model roles, boundaries, constraints, and invariants before YAML representation is specified in Part 4.
 
 Part 3 should not define:
 
@@ -279,18 +279,29 @@ It means that IdeaMark documents, like other artifacts, can become material for 
 ## Draft Sections
 
 0. [Core Model Overview](./00-core-model-overview.md) *(drafted)*
-1. [Model Boundary and Non-goals](./01-model-boundary-and-non-goals.md) *(planned)*
-2. [Original Source Reference Model](./02-original-source-reference-model.md) *(planned)*
-3. [Projection Context and Metadata Model](./03-projection-context-and-metadata-model.md) *(planned)*
-4. [Decomposition Model](./04-decomposition-model.md) *(planned)*
-5. [IdeaMark Document Model](./05-ideamark-document-model.md) *(planned)*
-6. [Section Model](./06-section-model.md) *(planned)*
-7. [Occurrence Model](./07-occurrence-model.md) *(planned)*
-8. [Entity Model](./08-entity-model.md) *(planned)*
-9. [Anchorage and Traceability Model](./09-anchorage-and-traceability-model.md) *(planned)*
-10. [Status, Versioning, and Regeneration Model](./10-status-versioning-and-regeneration-model.md) *(planned)*
-11. [Model Invariants](./11-model-invariants.md) *(planned)*
-12. [Core Model Summary](./12-core-model-summary.md) *(planned)*
+1. [Model Boundary and Non-goals](./01-model-boundary-and-non-goals.md) *(drafted)*
+2. [Original Source Reference Model](./02-original-source-reference-model.md) *(drafted)*
+3. [Projection Context and Metadata Model](./03-projection-context-and-metadata-model.md) *(drafted)*
+4. [Decomposition Model](./04-decomposition-model.md) *(drafted)*
+5. [IdeaMark Document Model](./05-ideamark-document-model.md) *(drafted)*
+6. [Section Model](./06-section-model.md) *(drafted)*
+7. [Occurrence Model](./07-occurrence-model.md) *(drafted)*
+8. [Entity Model](./08-entity-model.md) *(drafted)*
+9. [Anchorage and Traceability Model](./09-anchorage-and-traceability-model.md) *(drafted)*
+10. [Status, Versioning, and Regeneration Model](./10-status-versioning-and-regeneration-model.md) *(drafted)*
+11. [Model Invariants](./11-model-invariants.md) *(drafted)*
+12. [Core Model Summary](./12-core-model-summary.md) *(drafted)*
+
+## Review Status
+
+The initial Part 3 draft is complete enough for consistency review and transition planning toward Part 4.
+
+Remaining work should focus on:
+
+- reducing duplication across chapters;
+- aligning normative language levels;
+- deciding which conceptual requirements become concrete YAML requirements in Part 4;
+- preparing example documents and validation profiles.
 
 ## Drafting Notes
 
