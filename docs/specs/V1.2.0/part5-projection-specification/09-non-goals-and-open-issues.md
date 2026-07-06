@@ -7,7 +7,7 @@
 
 This chapter defines the non-goals and open issues for Part 5.
 
-Projection is central to IdeaMark use, but Part 5 must avoid turning Projection into a universal ontology, workflow engine, legal rule system, or retrieval algorithm.
+Projection is central to IdeaMark use, but Part 5 must avoid turning Projection into a universal ontology, workflow engine, legal rule system, authoring engine, or retrieval algorithm.
 
 ## Non-goals
 
@@ -27,6 +27,8 @@ Part 5 does not define:
 - a required Projection Library implementation;
 - a required storage model;
 - a required AI model or agent architecture;
+- a required progressive authoring engine;
+- the Progressive Occurrence Resolution algorithm;
 - a complete theory of meaning.
 
 These may be defined by Part 4, companion specifications, tool contracts, domain profiles, Projection Libraries, or implementations.
@@ -55,11 +57,11 @@ It may contain assumptions and requirements that strongly shape future meaning a
 
 ## Not an Algorithm
 
-Part 5 does not require a particular matching algorithm or retrieval algorithm.
+Part 5 does not require a particular matching algorithm, retrieval algorithm, or authoring algorithm.
 
 A simple implementation may use explicit metadata and human review.
 
-A larger implementation may use indexes, embeddings, graph search, ranking models, rule engines, or hybrid systems.
+A larger implementation may use indexes, embeddings, graph search, ranking models, rule engines, progressive authoring engines, or hybrid systems.
 
 Conformance to Part 5 should depend on whether the Projection responsibilities are represented and usable, not on whether a specific algorithm is used.
 
@@ -70,6 +72,18 @@ Part 5 allows private, shared, organizational, public, experimental, deprecated,
 It does not require every Projection to be approved by a central authority.
 
 Governance is important for shared and high-risk use, but governance style belongs to organizations, domains, communities, or companion specifications.
+
+## Not Progressive Occurrence Resolution
+
+Progressive Occurrence Resolution, abbreviated as POR in the IdeaMark ecosystem, is outside the scope of Part 5.
+
+POR is a stateful progressive authoring mechanism for large, streaming, composite, or difficult Original Sources.
+
+It may use Projection as input, and it may emit IdeaMark-compatible structures as output.
+
+However, POR's algorithm, internal intermediate representation, session state, LLM orchestration, and backward reinterpretation process belong to the IdeaMark-POR repository or another companion specification.
+
+Part 5 should reserve POR for Progressive Occurrence Resolution and should not use POR to abbreviate Projection lifecycle or reuse concepts.
 
 ## Open Issue: Concrete Serialization
 
@@ -133,19 +147,20 @@ Possible dimensions include:
 
 Part 5 should not freeze a universal quality score too early.
 
-## Open Issue: Projection and POR
+## Open Issue: Projection Engineering
 
-Projection-Oriented Reuse or Projection-Oriented Reconstruction workflows may generate, refine, compare, and test Projections.
+Projection Engineering refers to the design, evaluation, improvement, comparison, and lifecycle management of Projections.
 
-Part 5 should remain compatible with such workflows without requiring one specific POR implementation.
+This is distinct from Progressive Occurrence Resolution.
 
 Future work should clarify:
 
-- how POR proposes candidate Projections;
+- how candidate Projections are proposed;
 - how humans review them;
 - how feedback updates them;
 - how Projection Libraries retain successful strategies;
-- how failed Projections are archived or deprecated.
+- how failed Projections are archived or deprecated;
+- how Projection compatibility and evaluation evidence are preserved.
 
 ## Open Issue: Privacy-preserving Projection References
 
@@ -173,4 +188,5 @@ Before Part 5 becomes stable, reviewers should check whether it:
 - preserves Original Source priority;
 - gives enough guidance for Part 4 metadata design;
 - avoids prescribing implementation algorithms prematurely;
+- treats POR as Progressive Occurrence Resolution and keeps it outside Core;
 - supports private, shared, and public Projection use.
