@@ -1,0 +1,123 @@
+meta:
+  spec_version: ideamark-core-v1.2.0
+  document_id: sample-heapq-performance
+  status: draft
+  title: Heapq Performance Engineering Sample
+  projections:
+    - role: generation
+      ref: projection://samples/code-design-performance-heapq-v0
+      inline:
+        purpose: extract implementation and performance reasoning from source code
+        audience:
+          - software engineer
+          - LLM code assistant
+sources:
+  - id: SRC-heapq-py
+    type: code_file
+    title: CPython heapq.py
+    uri: https://github.com/python/cpython/blob/main/Lib/heapq.py
+    revision: main
+sections:
+  - id: SEC-heap-invariant
+    title: Heap invariant as performance boundary
+    anchors:
+      - source: SRC-heapq-py
+        type: line_range
+        ranges:
+          - start: 3
+            end: 32
+          - start: 41
+            end: 76
+        precision: exact
+        role: source_context
+        purpose: identify the invariant and API rationale that define later performance reasoning
+    occurrences:
+      - OCC-invariant-boundary
+      - OCC-api-alignment
+      - OCC-restoration-strategy
+  - id: SEC-sift-strategy
+    title: Comparison-cost-aware sift strategy
+    anchors:
+      - source: SRC-heapq-py
+        type: line_range
+        ranges:
+          - start: 58
+            end: 95
+        precision: exact
+        role: implementation_rationale
+        purpose: identify source comments explaining why early break is avoided
+    occurrences:
+      - OCC-non-textbook-choice
+      - OCC-cost-driver
+      - OCC-empirical-support
+  - id: SEC-fixed-size-operations
+    title: Choosing heap operations for fixed-size workflows
+    anchors:
+      - source: SRC-heapq-py
+        type: line_range
+        ranges:
+          - start: 150
+            end: 171
+        precision: approximate
+        role: api_performance_choice
+    occurrences:
+      - OCC-heapreplace-workload
+      - OCC-heappushpop-workload
+occurrences:
+  - id: OCC-invariant-boundary
+    entity: ENT-heap-invariant
+    role: establishes_performance_boundary
+    rationale: The heap invariant defines what must be preserved by every operation.
+  - id: OCC-api-alignment
+    entity: ENT-api-alignment
+    role: frames_api_design
+    rationale: The API design constrains how users reason about heap behavior as a normal Python list.
+  - id: OCC-restoration-strategy
+    entity: ENT-root-restoration
+    role: explains_restoration_strategy
+  - id: OCC-non-textbook-choice
+    entity: ENT-avoid-early-break
+    role: explains_non_textbook_choice
+    rationale: This is a reusable performance-engineering lesson about local optimization versus workload behavior.
+  - id: OCC-cost-driver
+    entity: ENT-comparison-cost
+    role: identifies_cost_driver
+  - id: OCC-empirical-support
+    entity: ENT-comparison-counts
+    role: supports_design_choice
+  - id: OCC-heapreplace-workload
+    entity: ENT-heapreplace-choice
+    role: maps_api_to_workload
+  - id: OCC-heappushpop-workload
+    entity: ENT-heappushpop-choice
+    role: maps_api_to_workload
+entities:
+  - id: ENT-heap-invariant
+    kind: structural_principle
+    content: A heap is represented as an array constrained by an invariant that keeps the smallest item at index 0.
+  - id: ENT-api-alignment
+    kind: design_choice
+    content: CPython's heap API uses 0-based indexing and exposes a min-heap interface to behave naturally as a Python list.
+  - id: ENT-root-restoration
+    kind: algorithmic_operation
+    content: Removing the root is handled by moving a lower-level item into the root and percolating it down until the invariant is restored.
+  - id: ENT-avoid-early-break
+    kind: implementation_rationale
+    content: The implementation deliberately avoids an early break in _siftup because the moved item after a heap pop tends to be large, and early comparisons often do not pay off.
+  - id: ENT-comparison-cost
+    kind: performance_factor
+    content: Comparison operations may be expensive because the priority may be hidden in custom comparison methods or tuple comparison.
+  - id: ENT-comparison-counts
+    kind: empirical_evidence
+    content: Commented comparison counts support the selected sift strategy for exhaustive heappop operations on random arrays.
+  - id: ENT-heapreplace-choice
+    kind: api_performance_choice
+    content: heapreplace is more efficient than heappop followed by heappush when maintaining a fixed-size heap, but its returned value may be larger than the inserted item.
+  - id: ENT-heappushpop-choice
+    kind: api_performance_choice
+    content: heappushpop conditionally replaces the root only when the new item is larger than the current smallest item, avoiding unnecessary heap growth.
+structure:
+  sections:
+    - SEC-heap-invariant
+    - SEC-sift-strategy
+    - SEC-fixed-size-operations
