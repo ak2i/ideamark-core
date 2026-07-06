@@ -1,11 +1,13 @@
 # Part 6 — Authoring Guide
 
 **Version:** IdeaMark Core v1.2.0  
-**Status:** Draft Started
+**Status:** Draft In Progress
 
 This part provides practical authoring guidance for humans and AI systems.
 
 Part 6 connects the formal specification to practical workflows without making those workflows part of the Core.
+
+Part 6 treats authoring as the ongoing activity of improving an IdeaMark Document so that knowledge becomes more reusable under one or more Projections.
 
 ## Diagram Convention
 
@@ -15,10 +17,10 @@ Diagrams in Part 6 should use Mermaid inside Markdown code blocks.
 
 0. [Authoring Guide Overview](./00-authoring-guide-overview.md) *(draft)*
 1. [Authoring Principles](./01-authoring-principles.md) *(draft)*
-2. Selecting or Creating a Projection *(planned)*
-3. Reading Original Sources *(planned)*
-4. Identifying Reusable Intellectual Structures *(planned)*
-5. Modeling Entities *(planned)*
+2. [Selecting or Creating a Projection](./02-selecting-or-creating-a-projection.md) *(draft)*
+3. [Reading Original Sources](./03-reading-original-sources.md) *(draft)*
+4. [Identifying Reusable Intellectual Structures](./04-identifying-reusable-intellectual-structures.md) *(draft)*
+5. [Modeling Entities](./05-modeling-entities.md) *(draft)*
 6. Modeling Occurrences *(planned)*
 7. Organizing Sections *(planned)*
 8. Recording Anchorage and Traceability *(planned)*
@@ -41,7 +43,8 @@ Expected workflows include:
 - Projection refinement;
 - retrieval evaluation;
 - sample corpus development;
-- migration from earlier versions.
+- migration from earlier versions;
+- Progressive Occurrence Resolution as one authoring method.
 
 ## Scope
 
