@@ -4,6 +4,8 @@
 **Status:** Design Experiment  
 **Type:** Candidate IdeaMark-like Document / Structural Test
 
+> Note: YAML fragments in this experiment are exploratory design artifacts. They predate the Part 4 array-based object representation and are not normative IdeaMark Core v1.2.0 examples. See Part 4 normalized samples for implementation-oriented YAML.
+
 This document is a manual candidate IdeaMark-like structure generated from CPython `Lib/heapq.py` under a Performance Engineering Projection.
 
 It is not intended to define final YAML syntax.
