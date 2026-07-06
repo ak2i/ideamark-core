@@ -4,9 +4,11 @@
 **Status:** Design Experiment  
 **Type:** Reconstruction / Projection Compatibility Test
 
-This document tests what happens when the candidate IdeaMark-like structure generated from CPython `Lib/heapq.py` under a Performance Engineering Projection is reconstructed under different Projections.
+This document tests what happens when the candidate IdeaMark-like structure generated from CPython `Lib/heapq.py` under a Performance Engineering Projection is reconstructed under each Projection proposed in `02-code-original-source-experiment.md`.
 
 The purpose is to evaluate whether an IdeaMark Document generated under one Projection can still function as a reusable access structure under another compatible or partially compatible Projection.
+
+This revision preserves the working assumption that Section / Occurrence / Entity remains a plausible structure. It does not assume replacement by `activity_frame`.
 
 ## 1. Source Candidate
 
@@ -14,6 +16,14 @@ Base candidate:
 
 ```text
 docs/specs/V1.2.0/part3-core-model/03-heapq-performance-candidate.md
+```
+
+Original Source:
+
+```text
+Repository: python/cpython
+Path: Lib/heapq.py
+Ref: main
 ```
 
 Generation Projection:
@@ -28,79 +38,81 @@ focus:
   - empirical comparison counts
 ```
 
-The base candidate contains four local source-anchored structures:
+The base candidate contains four source-anchored Sections:
 
 1. Heap invariant as performance boundary.
 2. Comparison-cost-aware sift strategy.
 3. Choosing heap operations for fixed-size workflows.
 4. Heapify as bottom-up construction.
 
-## 2. Reconstruction Projection A — API Design
+## 2. Projection 1 — Performance Engineering
+
+This is the same Projection used during generation.
 
 ```yaml
 projection:
-  id: code-api-design-heapq-v0
-  purpose: reconstruct API design reasoning from source code
+  id: code-design-performance-heapq-v0
+  purpose: extract implementation and performance reasoning from source code
   intended_activity:
-    - explain why an API exposes certain operations
-    - help library designers evaluate user-facing tradeoffs
+    - explain why the implementation makes specific optimization choices
+    - help engineers reuse the reasoning in other data-structure implementations
   focus:
-    - API shape
-    - user expectations
-    - operation naming
-    - fixed-size workflow support
-    - compatibility with host language idioms
-  non_goals:
-    - low-level proof of heap correctness
-    - exhaustive performance benchmarking
+    - heap invariant
+    - comparison cost
+    - implementation rationale
+    - empirical comparison counts
 ```
 
 ### 2.1 Retrieved Structures
-
-Likely retrieved from the base candidate:
 
 ```yaml
 retrieved:
   sections:
     - SEC-001
+    - SEC-002
     - SEC-003
+    - SEC-004
   entities:
+    - IE-001
     - IE-002
+    - IE-003
+    - IE-004
+    - IE-005
+    - IE-006
     - IE-007
     - IE-008
+    - IE-009
   occurrences:
+    - OCC-001
     - OCC-002
+    - OCC-003
+    - OCC-004
+    - OCC-005
+    - OCC-006
     - OCC-007
     - OCC-008
+    - OCC-009
 ```
 
 ### 2.2 Reconstruction Result
 
 Possible activation expression:
 
-> CPython's heap API is designed to feel like normal Python list usage while exposing priority-queue operations. The min-heap orientation and 0-based indexing make `heap[0]` the smallest item and allow the heap to remain list-compatible. The API also includes combined operations such as `heapreplace` and `heappushpop` for fixed-size or threshold-style workflows, where avoiding separate pop and push operations can better match the user's actual workload.
+> CPython's heap implementation shows a performance-engineering pattern: define the invariant first, then optimize the repair path under the real cost model. The heap invariant keeps the smallest item at index 0, but the interesting implementation choice is in `_siftup`: it avoids an apparent early-exit optimization because repeated pop workloads tend to move a large item to the root, and comparisons may be expensive when priorities are hidden inside custom comparison methods or tuple ordering. The source commentary therefore preserves not only an algorithm, but an engineering judgment about the workload and cost model.
 
 ### 2.3 Evaluation
 
-The generated candidate was not primarily an API design document, but it retained enough API-related material for a useful reconstruction.
+The candidate works best under its generation Projection.
 
-This supports the claim that generation Projection and reconstruction Projection need not be identical.
-
-However, the reconstruction is incomplete for full API design because it lacks user-error cases, naming alternatives, historical API discussion, and comparative analysis against other priority queue APIs.
+The Sections and Occurrences provide enough material to reconstruct an explanation without treating the IdeaMark Document as a substitute for the Original Source.
 
 ### 2.4 Implication
 
-A Section-like structure with role-bearing items can support partial cross-Projection reuse if the Projection overlap is sufficient.
+Generation Projection remains an important compatibility signal.
 
-For API Design, the useful overlap was:
+The document is strongest when the use-side Projection overlaps closely with the generation Projection.
 
-```text
-performance-oriented fixed-size heap operations
-        overlaps with
-user-facing operation selection and API ergonomics
-```
-
-## 3. Reconstruction Projection B — Algorithm Learning
+## 3. Projection 2 — Algorithm Learning
 
 ```yaml
 projection:
@@ -124,8 +136,6 @@ projection:
 
 ### 3.1 Retrieved Structures
 
-Likely retrieved from the base candidate:
-
 ```yaml
 retrieved:
   sections:
@@ -145,21 +155,76 @@ retrieved:
 
 Possible activation expression:
 
-> A heap can be taught as an array that behaves like a binary tree. The important invariant is that each parent is no larger than its children, so the smallest item is always at index 0. To remove the smallest item, the implementation moves a lower-level item to the root and restores the invariant by percolating it down. To build a heap efficiently from an existing list, `heapify` works bottom-up from the last parent node rather than inserting items one by one.
+> A heap can be introduced as an array that behaves like a binary tree. The key invariant is that each parent is no larger than its children, which makes the smallest item available at index 0. Removing the smallest item requires restoring that invariant: move a lower-level item to the root, then percolate it down. To build a heap efficiently from an existing list, `heapify` works bottom-up from the last parent node rather than inserting items one by one.
 
 ### 3.3 Evaluation
 
-The base candidate can support an introductory explanation, but the learner-facing reconstruction is thinner than ideal.
+The base candidate supports a basic learning reconstruction, but it is not ideal for learners.
 
-The base candidate did not preserve enough source material about tree diagrams, child index formulas, or worked examples because the generation Projection focused on performance reasoning.
+The generation Projection preserved the invariant, restoration pattern, and heapify construction, but omitted learner-friendly materials such as the tree diagram, child index walkthrough, examples, and exercises.
 
 ### 3.4 Implication
 
-Cross-Projection reconstruction works, but the quality depends on whether the generation Projection preserved enough material for the later Projection.
+Cross-Projection reuse works when the generation Projection preserves enough shared structural material.
 
-This suggests that IdeaMark Documents should record generation Projection metadata so later retrieval systems can judge fit and expected loss.
+For learner-facing use, Section anchors should help reopen the Original Source and recover omitted explanatory material.
 
-## 4. Reconstruction Projection C — Data Processing / Stream Merge
+## 4. Projection 3 — API Design
+
+```yaml
+projection:
+  id: code-api-design-heapq-v0
+  purpose: reconstruct API design reasoning from source code
+  intended_activity:
+    - explain why an API exposes certain operations
+    - help library designers evaluate user-facing tradeoffs
+  focus:
+    - API shape
+    - user expectations
+    - operation naming
+    - fixed-size workflow support
+    - compatibility with host language idioms
+  non_goals:
+    - low-level proof of heap correctness
+    - exhaustive performance benchmarking
+```
+
+### 4.1 Retrieved Structures
+
+```yaml
+retrieved:
+  sections:
+    - SEC-001
+    - SEC-003
+  entities:
+    - IE-002
+    - IE-007
+    - IE-008
+  occurrences:
+    - OCC-002
+    - OCC-007
+    - OCC-008
+```
+
+### 4.2 Reconstruction Result
+
+Possible activation expression:
+
+> CPython's heap API is designed to behave naturally as a Python list while exposing priority-queue operations. The 0-based indexing and min-heap orientation make `heap[0]` the smallest item, which avoids surprises for Python users. The API also includes combined operations such as `heapreplace` and `heappushpop` for fixed-size or threshold-style workflows, where avoiding separate pop and push operations better matches user intent and performance expectations.
+
+### 4.3 Evaluation
+
+The candidate was not generated as an API design document, but it retained enough API-related material for a useful reconstruction.
+
+The API Design Projection overlaps strongly with the performance candidate around fixed-size heap operations and host-language ergonomics.
+
+### 4.4 Implication
+
+This is a successful cross-Projection case.
+
+It suggests that Section / Occurrence / Entity can support Projection compatibility without a separate Relation object.
+
+## 5. Projection 4 — Data Processing / Stream Merge
 
 ```yaml
 projection:
@@ -181,54 +246,53 @@ projection:
     - fixed-size heap API design
 ```
 
-### 4.1 Retrieved Structures
-
-Likely retrieved from the base candidate:
+### 5.1 Retrieved Structures
 
 ```yaml
 retrieved:
   sections: []
   entities: []
   occurrences: []
+  source_pointer:
+    source: SRC-heapq-py
+    likely_region: merge function
 ```
 
-### 4.2 Reconstruction Result
+### 5.2 Reconstruction Result
 
 The base candidate does not contain the `merge` function material.
 
-A future LLM could still discover it by returning to the Original Source and applying the new Projection to the file, but the existing candidate IdeaMark-like document does not directly support this reconstruction.
+A future LLM or tool should reopen the Original Source and apply this Projection to the relevant region.
 
-Possible result if source re-reading is allowed:
+Possible activation expression if the source is reopened:
 
 > The `merge` function is a stream-oriented pattern: it assumes each input iterable is already sorted, keeps only the current frontier of each stream in a heap, and yields merged output lazily rather than materializing and sorting all input items at once.
 
-### 4.3 Evaluation
+### 5.3 Evaluation
 
-This is a useful failure case.
+This is a useful non-match case.
 
-The document was generated under a Performance Engineering Projection focused on heap invariant, comparison cost, and heap operations. It did not preserve stream-merge material.
+The existing candidate is not a bad IdeaMark Document; it is simply a Projection-limited access structure.
 
-The candidate can still point to the Original Source, but it cannot itself answer a stream-merge reconstruction request without additional Decomposition or source reading.
+It can point to the Original Source, but it does not itself contain the local Sections needed for stream-merge reconstruction.
 
-### 4.4 Implication
+### 5.4 Implication
 
-IdeaMark Documents should not pretend to cover the full Original Source.
-
-Projection metadata is necessary so retrieval systems can distinguish:
+IdeaMark should distinguish between:
 
 ```text
-This document contains useful material for the new Projection.
+Projection-compatible local structure exists.
 ```
 
-from:
+and:
 
 ```text
-This document only points to a source that may contain useful material.
+The Original Source may contain relevant material, but a new Projection-guided Decomposition is needed.
 ```
 
-This strengthens the need for explicit coverage or focus metadata at the document or local-frame level.
+This distinction is more important than whether the document can reconstruct everything by itself.
 
-## 5. Reconstruction Projection D — Domain Adaptation / Scheduler Design
+## 6. Projection 5 — Domain Adaptation / Scheduler Design
 
 ```yaml
 projection:
@@ -248,9 +312,7 @@ projection:
     - benchmark-level implementation analysis
 ```
 
-### 5.1 Retrieved Structures
-
-Likely retrieved from the base candidate:
+### 6.1 Retrieved Structures
 
 ```yaml
 retrieved:
@@ -262,129 +324,121 @@ retrieved:
   occurrences:
     - OCC-001
     - OCC-003
+  source_pointer:
+    source: SRC-heapq-py
+    likely_region: explanatory scheduler commentary
 ```
 
-### 5.2 Reconstruction Result
+### 6.2 Reconstruction Result
 
-Possible activation expression using only the base candidate:
+Possible activation expression using the candidate structure:
 
-> A heap can support scheduler design because it preserves an invariant that keeps the next item at the root. For an event scheduler, that root can represent the next scheduled event. After removing the next event, the heap is repaired by moving another item to the root and restoring the invariant.
+> A heap can support scheduler design because the invariant keeps the next priority item at the root. For an event scheduler, that root can represent the next scheduled event. After processing the event, the heap is repaired by replacing the root and restoring the invariant.
 
-Possible activation expression if the Original Source is re-read:
+Possible activation expression if the Original Source is reopened:
 
 > The source commentary explicitly connects heaps to simulation schedulers: the heap holds incoming events, and the winning condition is the smallest scheduled time. When an event schedules future events, those new events can be inserted into the heap because they occur after the event just processed.
 
-### 5.3 Evaluation
+### 6.3 Evaluation
 
-The base candidate partially supports scheduler reconstruction through general heap material, but it does not preserve the source's explicit scheduler explanation.
+The candidate partially supports scheduler reconstruction through general heap material, but it omitted the source's explicit scheduler example.
 
-This suggests that cross-Projection reconstruction has two modes:
+The Section anchor for heap invariant is still useful, but the candidate should not be treated as complete coverage for this Projection.
 
-1. **Direct reuse** — the IdeaMark Document already contains relevant local frames or items.
-2. **Source-mediated reuse** — the IdeaMark Document only helps locate or reopen Original Source material for a new Decomposition.
+### 6.4 Implication
 
-## 6. Summary of Cross-Projection Results
+This case supports a two-level retrieval interpretation:
 
-| Reconstruction Projection | Direct Reuse Quality | Source Re-reading Needed | Notes |
-|---|---:|---:|---|
-| API Design | High | Low | Fixed-size operation material transfers well. |
-| Algorithm Learning | Medium | Medium | Core invariant and heapify material help, but examples are thin. |
-| Data Processing / Stream Merge | Low | High | `merge` material was outside the generated candidate. |
-| Scheduler Domain Adaptation | Medium-Low | Medium-High | General heap material helps, but explicit scheduler commentary was omitted. |
+1. **Local structure reuse** — existing Sections and Occurrences provide partial materials.
+2. **Source-mediated continuation** — the document points back to the Original Source for a new or extended Decomposition.
 
-## 7. Design Findings
+## 7. Summary of All Projection Results
 
-### 7.1 Projection metadata is necessary
+| Projection from 02 | Relationship to Generation Projection | Direct Local Structure Reuse | Source Reopening Value | Result |
+|---|---|---:|---:|---|
+| Performance Engineering | Same | High | Medium | Strong reconstruction; best fit. |
+| Algorithm Learning | Partial overlap | Medium | High | Works for invariant and heapify; source needed for teaching detail. |
+| API Design | Strong overlap | High | Medium | Successful cross-Projection reuse. |
+| Data Processing / Stream Merge | Weak overlap | Low | High | Existing candidate mostly acts as source pointer. |
+| Domain Adaptation / Scheduler | Partial overlap | Medium-Low | High | General heap material transfers; scheduler source passage should be reopened. |
 
-A later retrieval or reconstruction system needs to know the generation Projection in order to estimate whether a candidate IdeaMark Document is likely to contain relevant material.
+## 8. Design Findings
 
-### 7.2 Coverage metadata may be necessary
+### 8.1 IdeaMark Document does not need self-contained reconstruction
 
-The candidate's `meta.projections.focus` helps, but it may not be enough.
+The important question is not whether the IdeaMark Document alone can reconstruct the activation expression.
 
-A local frame may need lightweight coverage tags such as:
+The more faithful question is:
 
-```yaml
-coverage:
-  includes:
-    - comparison_cost
-    - fixed_size_heap_operations
-  excludes:
-    - stream_merge
-    - scheduler_domain_adaptation
-```
+> Does the IdeaMark Document reduce the cost of returning to the right Original Source material under a new or compatible Projection?
 
-This should probably remain optional metadata, not a Core semantic ontology.
+In most non-trivial cases, reconstruction should involve the Original Source again.
 
-### 7.3 Section-like local frames remain useful
+### 8.2 Section-like structures remain useful
 
-The source-anchored local frame is the strongest structural unit in this test.
+The test supports keeping something like Section.
 
-It supports retrieval, partial reconstruction, source re-opening, and comparison across Projections.
+A Section acts as a Projection-shaped local window into Original Source material.
 
-### 7.4 Entity-like reusable payloads help but can over-summarize
+It is not a document chapter and not a stored intellectual activity.
 
-The entity payloads made reconstruction easy, but some of them act like mini-interpretations.
+It is a reusable local source context that helps future reconstruction begin cheaply.
 
-This remains a risk if IdeaMark is meant to preserve structure rather than final meaning.
+### 8.3 Occurrence-like structures remain useful as placements
 
-### 7.5 Occurrence-like wrappers are useful as role placements
+Occurrence-like structures are useful when treated as placements of reusable material within a Section.
 
-The occurrence layer is useful when understood as placement of reusable material inside a local activity frame.
+They carry role and local rationale without requiring a separate Relation object.
 
-The term `Occurrence` may still be misleading, but the role-bearing wrapper remains useful.
+### 8.4 Entity-like structures remain useful but require discipline
 
-### 7.6 Relation remains unnecessary
+Entity-like structures are useful as reusable materials, but their payload can become too explanatory.
 
-Cross-Projection reconstruction did not require a separate Relation object.
+Part 3 should clarify that Entity content should preserve reconstruction material, not final meaning.
 
-Section ordering, frame grouping, source anchoring, item roles, and projection metadata were sufficient.
+### 8.5 Projection coverage should be visible but lightweight
 
-## 8. Candidate Model Refinement
+The test suggests value in recording lightweight coverage or focus metadata.
 
-The test suggests a possible simplification:
+This metadata should help systems decide whether a Section is directly useful, partially useful, or mainly a source pointer.
 
-```yaml
-activity_frames:
-  - id: AF-001
-    title: Comparison-cost-aware sift strategy
-    source_anchor:
-      source: SRC-heapq-py
-      line_ranges:
-        - { start: 58, end: 95 }
-    projection_fit:
-      generated_for:
-        - comparison_cost
-        - implementation_rationale
-      compatible_with:
-        - performance_engineering
-        - api_design
-      weak_for:
-        - stream_merge
-        - scheduler_domain_adaptation
-    items:
-      - role: optimization_rationale
-        material: avoid early break in siftup
-        rationale: local early-exit optimization may increase total comparison cost
-      - role: cost_driver
-        material: comparisons may be expensive
-      - role: empirical_support
-        material: comparison-count examples support the chosen implementation
-```
+However, coverage should not become a universal ontology.
 
-This shape may better express the actual structure used in reconstruction:
+### 8.6 Relation remains unnecessary
+
+All tested Projections were handled through Section grouping, Occurrence roles, Entity payloads, source anchors, ordering, and metadata.
+
+No separate Relation object was needed.
+
+## 9. Implication for Part 3
+
+The current Section / Occurrence / Entity structure remains defensible if reinterpreted as:
 
 ```text
-source-anchored local activity frame
-  -> ordered role-bearing materials
-  -> projection-fit metadata
+Section
+  = Projection-shaped local source window
+
+Occurrence
+  = role-bearing placement of reusable material within that window
+
+Entity
+  = reusable material that can participate in future reconstruction
 ```
 
-## 9. Next Step
+This interpretation appears more consistent with Part 1 and Part 2 than replacing the model with `activity_frame`.
 
-The next experiment should simulate JSON conversion and MongoDB-style retrieval using both:
+The name `Section` may remain acceptable if the specification explicitly says it is not a document chapter.
 
-1. the current Section / Occurrence / Entity candidate; and
-2. the flatter activity-frame candidate.
+## 10. Next Step
 
-The goal is not to test MongoDB itself, but to reason about what searches become easy or difficult depending on the document shape.
+Run the same Projection-compatibility test on a second Original Source from a different project.
+
+The second source should ideally differ from `heapq.py` in one or more ways:
+
+- less explanatory prose;
+- more architectural structure;
+- more configuration or data-processing logic;
+- stronger domain assumptions;
+- different language or ecosystem.
+
+This will test whether the Section / Occurrence / Entity interpretation generalizes beyond a heavily commented algorithm module.
