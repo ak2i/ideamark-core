@@ -1,12 +1,12 @@
 # 4. AI-Enabled Knowledge Work
 
 **Part:** 1 — Philosophy  
-**Status:** Draft Rev004  
+**Status:** Draft Rev005  
 **Type:** Informative / Design Rationale
 
 AI-enabled knowledge work is not defined here as the mere use of AI tools in existing work.
 
-In this specification, AI-enabled knowledge work means knowledge work in which humans and AI systems expand each other's capabilities through shared intellectual activities grounded in authoritative original sources.
+In this specification, AI-enabled knowledge work means knowledge work in which humans and AI systems expand each other's capabilities through shared Human-AI Intellectual Activity grounded in Original Sources treated as authority for current Projections.
 
 The purpose is not simply automation.
 
@@ -36,7 +36,7 @@ A society becomes more capable when people with different abilities, literacy le
 
 AI can contribute to this by reducing the cost of interpretation, translation, explanation, retrieval, and coordination.
 
-IdeaMark contributes by giving AI systems structured access to reusable intellectual activities and authoritative original sources.
+IdeaMark contributes by giving AI systems structured access to reusable intellectual activities and Original Sources.
 
 The goal is not to erase differences among participants.
 
@@ -56,7 +56,7 @@ A person who lacks domain vocabulary, physical ability, institutional authority,
 
 IdeaMark is motivated by this possibility.
 
-It provides structures through which AI can help bridge differences in literacy, expertise, context, and actionability while maintaining traceability to authoritative original sources.
+It provides structures through which AI can help bridge differences in literacy, expertise, context, and actionability while maintaining traceability to Original Sources.
 
 ## 4.4 Smart Systems as Capability Platforms
 
@@ -88,7 +88,7 @@ This stance supports human-AI co-evolution.
 
 AI should not merely extract value from human intellectual activity, and humans should not merely consume AI-generated answers.
 
-Both should participate in a cycle that generates new intellectual activities, new original sources, and expanded collective capability.
+Both should participate in a cycle that generates new intellectual activities, new Original Sources, and expanded collective capability.
 
 ## 4.6 Sustainable Intellectual Ecosystems
 
@@ -96,7 +96,7 @@ An AI-enabled society should continuously generate new intellectual activities r
 
 If humans become passive recipients of AI answers, the shared intellectual environment may lose opportunities for growth, correction, diversity, and renewal.
 
-IdeaMark is motivated by the assumption that sustainable AI-enabled societies require active human participation, AI interpretation, authoritative original sources, and reusable intellectual structures.
+IdeaMark is motivated by the assumption that sustainable AI-enabled societies require active human participation, AI interpretation, Original Sources, reusable intellectual structures, and Projections that reduce interpretation cost.
 
 The aim is not to maximize automation.
 
@@ -112,10 +112,12 @@ Progress is also measured by the degree to which diverse humans and AI systems c
 
 IdeaMark is only one architectural component toward this vision.
 
-Its role is to preserve reusable access structures that allow humans and AI to reconstruct meaning, participate in intellectual activity, and generate future original sources.
+Its role is to preserve reusable access structures that allow humans and AI to reconstruct meaning, participate in intellectual activity, and generate future Original Sources.
 
 ## Design Rationale
 
-AI-enabled knowledge work should expand the range of situations in which people and AI systems can think, collaborate, act, and contribute effectively.
+AI-enabled knowledge work should expand the range of Situations in which people and AI systems can think, collaborate, act, and contribute effectively.
 
-IdeaMark contributes to this by giving AI systems structured access to prior intellectual activities and authoritative original sources while keeping humans engaged as active interpreters and contributors.
+IdeaMark contributes to this by giving AI systems structured access to prior intellectual activities and Original Sources while keeping humans engaged as active interpreters and contributors.
+
+This is valuable not only because it can improve immediate output, but also because it can reduce the long-term interpretation cost of understanding, reviewing, maintaining, teaching, and reusing intellectual work.

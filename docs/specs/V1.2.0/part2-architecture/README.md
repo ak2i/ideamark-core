@@ -1,135 +1,47 @@
 # Part 2 — Architecture of Human-AI Co-evolution
 
 **Version:** IdeaMark Core v1.2.0  
-**Status:** Planned
+**Status:** Draft
 
-This part describes the architecture through which humans, AI systems, projections, IdeaMark documents, retrieval systems, and authoritative original sources may participate in continuous co-evolution.
+This part describes the reference architecture through which humans, AI systems, Projections, IdeaMark documents, retrieval systems, and Original Sources may participate in continuous co-evolution.
 
-In this specification, co-evolution means the continuous mutual development of humans and AI through shared intellectual activities grounded in authoritative original sources.
+In this specification, co-evolution means the continuous mutual development of humans and AI through shared intellectual activities grounded in Original Sources treated as authoritative for a given Projection.
 
 Part 1 explains why IdeaMark uses engineering through separation: reusable structure is separated from meaning so that it can be managed and reused without fixing interpretation.
 
 Part 2 explains engineering through reconstruction at the ecosystem level.
 
-The architecture described in this part is a reference architecture for explaining how IdeaMark may be used.
+## Sections
 
-It does not prescribe a required system implementation, retrieval interface, projection selection method, or database architecture.
+0. [Architectural Overview](./00-architectural-overview.md)
+1. [Two-plus-one Layer Model](./01-two-plus-one-layer-model.md)
+2. [Index Construction Layer](./02-index-construction-layer.md)
+3. [Projection Libraries and Projection Selection](./03-projection-libraries-and-projection-selection.md)
+4. [IdeaMark Generation and Repository Construction](./04-ideamark-generation-and-repository-construction.md)
+5. [On-demand Generation and Background Generation](./05-on-demand-generation-and-background-generation.md)
+6. [Situation Interpretation Layer](./06-situation-interpretation-layer.md)
+7. [Situation-driven Reconstruction Layer](./07-reconstruction-layer.md)
+8. [Original Source Open-hand Principle](./08-original-source-open-hand-principle.md)
+9. [Human-AI Intellectual Activity](./09-human-ai-intellectual-activity.md)
+10. [Situation Evolution and Ecosystem Feedback](./10-situation-evolution-and-ecosystem-feedback.md)
+11. [Capability-Oriented Human-AI Co-evolution](./11-capability-oriented-human-ai-co-evolution.md)
+12. [Architectural Boundaries and Non-prescription](./12-architectural-boundaries-and-non-prescription.md)
+13. [Architecture Summary](./13-architecture-summary.md)
 
-The reference architecture is organized as a two-plus-one layer model:
+## Reading Notes
 
-1. Index Construction Layer
-2. Reconstruction Layer
-3. Ecosystem Feedback Layer
+This part defines a reference architecture for explaining how IdeaMark may be used.
 
-The first two layers describe common operational concerns. The third layer describes how projections, sources, IdeaMark documents, retrieval behavior, and human-AI practices may improve over time.
+It does not prescribe a required system implementation, retrieval interface, Projection selection method, database architecture, storage engine, indexing algorithm, queueing system, user interface, governance process, or internal knowledge-management product.
 
-## Proposed Sections
+When this part uses terms such as index, indexing, or index construction, those terms refer to the architectural role of IdeaMark documents as reusable access structures.
 
-0. Architectural Overview
-1. Two-plus-one Layer Model
-2. Index Construction Layer
-3. Projection Libraries and Projection Selection
-4. IdeaMark Generation and Repository Construction
-5. On-demand Generation and Background Generation
-6. Reconstruction Layer
-7. Retrieval as Navigation to Intellectual Activity
-8. AI Interpretation and Human Interpretation
-9. Human Action and New Original Sources
-10. Ecosystem Feedback Layer
-11. Capability-Oriented Human-AI Co-evolution
-12. Architectural Non-goals
-13. Architecture Summary
+They do not define how an implementation should create database indexes or optimize storage-level search.
 
-## Layer 1: Index Construction
+IdeaMark documents may be used index-like because they help future humans and AI systems find relevant Original Sources and reconstruct intellectual activity through a selected or generated Projection.
 
-The Index Construction Layer creates reusable structural indexes from combinations of original sources and projections.
+Part 2 defines roles and connections rather than the complete contents of future intellectual activities.
 
-```text
-Original Source Collection
-        x
-Projection Library
-        ↓
-IdeaMark Generation
-        ↓
-IdeaMark Repository / DB
-```
+This non-prescriptive boundary is intentional: Original Source, Observation, Situation Vector, Projection, Human-AI Intellectual Activity, Feedback, and Capability must remain open enough to support future media, future AI systems, future social practices, and future knowledge representations.
 
-This is a reference pattern, not a required implementation.
-
-For example, if an organization has 100,000 source files and 30 projections, an implementation may eventually generate up to 3,000,000 source-projection IdeaMark combinations.
-
-This generation may occur through background processing, prioritized processing, on-demand generation when a missing combination is needed, or another implementation-specific strategy.
-
-## Projection Sources
-
-Projection may be created, selected, shared, or standardized in many ways.
-
-For example, Projection may be:
-
-- created by an individual;
-- shared within an organization;
-- maintained as an organizational standard;
-- published through an open-source Projection library;
-- provided by consultants or domain experts;
-- standardized by an industry group;
-- generated or refined by AI systems.
-
-IdeaMark Core should not privilege one origin of Projection over another.
-
-The architectural requirement is that Projection can guide the construction or retrieval of IdeaMark structures in an interoperable way.
-
-## Layer 2: Reconstruction
-
-The Reconstruction Layer uses IdeaMark structures to support future intellectual activity.
-
-```text
-User / Situation
-        ↓
-Projection Selection or Projection Generation
-        ↓
-IdeaMark Retrieval
-        ↓
-Original Source Access
-        ↓
-AI Interpretation
-        ↓
-Human Interpretation
-        ↓
-Decision / Action
-        ↓
-New Original Source
-```
-
-This layer reconstructs meaning from authoritative original sources under current situations and projections.
-
-The diagram does not define a required retrieval interface.
-
-A system may accept a situation description, a selected Projection, a generated Projection, multiple Projections, a query, a task, a workflow state, an API request, or another implementation-specific input.
-
-Part 2 should explain architectural responsibilities without constraining how retrieval input is provided.
-
-## Plus-one Layer: Ecosystem Feedback
-
-The Ecosystem Feedback Layer improves the system over time.
-
-```text
-Usage / Retrieval Results / Human Feedback / New Sources
-        ↓
-Projection Improvement
-        ↓
-IdeaMark Regeneration
-        ↓
-Repository Improvement
-        ↓
-Improved Reconstruction
-```
-
-This layer explains why Projection should be treated as a reusable intellectual asset and why IdeaMark documents are operational snapshots rather than immutable final representations.
-
-## Scope
-
-Part 2 should explain the system-level architecture before the Core Model is specified.
-
-It should not define YAML fields, validation rules, storage engines, queueing systems, database schemas, retrieval input methods, user interfaces, Projection governance models, or implementation-specific retrieval algorithms.
-
-The purpose of Part 2 is to describe architectural relationships, not to specify a particular IdeaMark DB system or internal knowledge-management product.
+A major design rationale of this part is interpretation cost reduction. IdeaMark does not preserve one final interpretation; it provides reusable access structures and Projections that can reduce the cost of creating, understanding, reviewing, maintaining, teaching, and reusing intellectual work.

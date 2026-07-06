@@ -9,11 +9,11 @@ Each part is written as an independently reviewable document set with design rat
 ## Parts
 
 1. [Part 1 — Philosophy](./part1-philosophy/README.md)
-2. [Part 2 — Architecture of Human-AI Co-evolution](./part2-architecture/README.md) *(planned)*
-3. [Part 3 — Core Model](./part3-core-model/README.md) *(planned)*
-4. [Part 4 — Core Specification](./part4-core-specification/README.md) *(planned)*
-5. [Part 5 — Projection Specification](./part5-projection-specification/README.md) *(planned)*
-6. [Part 6 — Authoring Guide](./part6-authoring-guide/README.md) *(planned)*
+2. [Part 2 — Architecture of Human-AI Co-evolution](./part2-architecture/README.md)
+3. [Part 3 — Core Model](./part3-core-model/README.md) *(initial specification draft complete)*
+4. [Part 4 — Core Specification](./part4-core-specification/README.md) *(initial specification draft complete)*
+5. [Part 5 — Projection Specification](./part5-projection-specification/README.md) *(initial specification draft complete)*
+6. [Part 6 — Authoring Guide](./part6-authoring-guide/README.md) *(initial guide draft complete)*
 
 ## Design Policy
 
@@ -24,10 +24,10 @@ Each part is written as an independently reviewable document set with design rat
 - Treat human-AI co-evolution as a central architectural motivation rather than a secondary usage pattern.
 - Treat Projection as a reuse strategy and reusable intellectual asset.
 - Keep meanings, goals, vocabularies, coordinate systems, workflows, and implementations outside the Core whenever possible.
+- Treat Interpretation Cost Reduction as a design rationale for reusable access structures and Projection use.
+- Treat Authoring as knowledge reuse design rather than generic summarization or YAML editing.
 
 ## Drafting Order
-
-The recommended drafting order is:
 
 1. Part 1 — Philosophy
 2. Part 2 — Architecture of Human-AI Co-evolution
@@ -36,10 +36,12 @@ The recommended drafting order is:
 5. Part 4 — Core Specification
 6. Part 6 — Authoring Guide
 
-Part 4 is intentionally drafted after the conceptual model and Projection responsibilities are clearer, because the YAML representation should encode the model rather than prematurely define it.
+Part 4 intentionally follows Parts 3 and 5 so that the YAML representation encodes the settled conceptual model and Projection boundary rather than driving them.
+
+Part 6 follows Part 4 so that authoring guidance can use the settled Core Model, Projection boundary, and Part 4 array-based representation without redefining Core conformance.
 
 ## Current Focus
 
-Part 1 is drafted as the philosophical foundation.
+Parts 1 through 6 now have initial drafts.
 
-The next drafting focus is Part 2 — Architecture of Human-AI Co-evolution.
+The current focus should shift from expanding the specification text to review, terminology alignment, Part 4 sample verification, and implementation planning for IdeaMark CLI and related authoring tools.

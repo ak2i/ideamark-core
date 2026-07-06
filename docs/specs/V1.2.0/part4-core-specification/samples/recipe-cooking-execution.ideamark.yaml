@@ -1,0 +1,102 @@
+meta:
+  spec_version: ideamark-core-v1.2.0
+  document_id: sample-recipe-cooking-execution
+  status: draft
+  title: Recipe Cooking Execution Sample
+  projections:
+    - role: generation
+      ref: projection://samples/recipe-cooking-execution-v0
+      inline:
+        purpose: help a cook execute the recipe successfully as written
+sources:
+  - id: SRC-recipe-miso-soup
+    type: document
+    title: Simple miso soup with tofu and wakame recipe sketch
+    media_type: text/plain
+sections:
+  - id: SEC-prepare-dashi
+    title: Prepare dashi base
+    anchors:
+      - source: SRC-recipe-miso-soup
+        type: heading_path
+        path:
+          - Steps
+        precision: inferred
+        role: procedure_window
+    occurrences:
+      - OCC-soak-kombu
+      - OCC-remove-kombu
+      - OCC-add-bonito
+  - id: SEC-prepare-addins
+    title: Prepare tofu and wakame
+    anchors:
+      - source: SRC-recipe-miso-soup
+        type: heading_path
+        path:
+          - Steps
+        precision: inferred
+        role: prep_window
+    occurrences:
+      - OCC-rehydrate-wakame
+      - OCC-cut-tofu
+  - id: SEC-add-miso
+    title: Add miso without boiling
+    anchors:
+      - source: SRC-recipe-miso-soup
+        type: heading_path
+        path:
+          - Steps
+        precision: inferred
+        role: heat_control_window
+    occurrences:
+      - OCC-turn-off-heat
+      - OCC-dissolve-miso
+occurrences:
+  - id: OCC-soak-kombu
+    entity: ENT-soak-kombu
+    role: ordered_cooking_step
+  - id: OCC-remove-kombu
+    entity: ENT-remove-kombu
+    role: timing_constraint
+  - id: OCC-add-bonito
+    entity: ENT-add-bonito
+    role: ordered_cooking_step
+  - id: OCC-rehydrate-wakame
+    entity: ENT-rehydrate-wakame
+    role: prep_task
+  - id: OCC-cut-tofu
+    entity: ENT-cut-tofu
+    role: prep_task
+  - id: OCC-turn-off-heat
+    entity: ENT-turn-off-heat
+    role: heat_control_rule
+  - id: OCC-dissolve-miso
+    entity: ENT-dissolve-miso
+    role: ordered_cooking_step
+entities:
+  - id: ENT-soak-kombu
+    kind: cooking_step
+    content: Soak kombu in water, then heat gently.
+  - id: ENT-remove-kombu
+    kind: timing_constraint
+    content: Remove kombu before boiling.
+  - id: ENT-add-bonito
+    kind: cooking_step
+    content: Add bonito flakes, simmer briefly, then strain to make dashi.
+  - id: ENT-rehydrate-wakame
+    kind: prep_task
+    content: Rehydrate wakame before final assembly.
+  - id: ENT-cut-tofu
+    kind: prep_task
+    content: Cut tofu before adding it to the soup.
+  - id: ENT-turn-off-heat
+    kind: heat_control_rule
+    content: Turn off heat before dissolving miso paste.
+  - id: ENT-dissolve-miso
+    kind: cooking_step
+    content: Dissolve miso paste into the soup off heat.
+structure:
+  sections:
+    - SEC-prepare-dashi
+    - SEC-prepare-addins
+    - SEC-add-miso
