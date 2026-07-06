@@ -64,7 +64,7 @@ The following should not be required Core namespaces in v1.2.0:
 - domain-specific vocabularies;
 - Projection Library internals;
 - runtime session state;
-- POR internal state.
+- authoring engine internal state.
 
 These may appear in profiles, extensions, companion specifications, or implementation-specific documents.
 
@@ -84,15 +84,17 @@ Part 4 may allow metadata fields that record generation environment, tool identi
 
 However, runtime context is not a required Core object.
 
-Part 4 should not require IdeaMark documents to preserve the full execution state of a human workflow, AI session, CLI command, or progressive authoring engine.
+Part 4 should not require IdeaMark documents to preserve the full execution state of a human workflow, AI session, CLI command, or authoring engine.
 
-## Progressive Occurrence Resolution Boundary
+## Authoring Engine Boundary
 
-Progressive Occurrence Resolution, abbreviated as POR in the IdeaMark ecosystem, may produce IdeaMark-compatible structures.
+Part 4 defines the document representation that authoring engines may emit, validate, exchange, or normalize.
 
-Part 4 should define the document representation that POR may emit or validate against.
+It does not define how those documents are produced.
 
-Part 4 should not define POR algorithms, internal IR, session state, LLM orchestration, context-force reinterpretation, or progressive scheduling.
+Authoring engines may include CLI workflows, batch converters, visual editors, IDE plugins, AI agents, or companion systems such as Progressive Occurrence Resolution.
+
+Part 4 should not define chunking algorithms, internal IR, session state, prompt orchestration, review queues, cache state, progressive scheduling, or other engine-specific authoring behavior.
 
 ## Normative Role
 
@@ -106,4 +108,4 @@ It should also preserve the Projection boundaries defined in Part 5 so that conc
 
 Part 4 should define YAML-level requirements and validation behavior.
 
-It should not define Projection content, authoring strategy, retrieval ranking, storage engines, runtime session state, progressive authoring algorithms, or user-interface behavior.
+It should not define Projection content, authoring strategy, retrieval ranking, storage engines, runtime session state, authoring engine algorithms, or user-interface behavior.
