@@ -1,0 +1,93 @@
+meta:
+  spec_version: ideamark-core-v1.2.0
+  document_id: sample-sqlite-pager-state-machine
+  status: draft
+  title: SQLite Pager State-machine Sample
+  projections:
+    - role: generation
+      ref: projection://samples/system-correctness-state-machine-v0
+      inline:
+        purpose: extract reusable state-machine and correctness constraints from system implementation documentation
+sources:
+  - id: SRC-sqlite-pager
+    type: code_file
+    title: SQLite pager implementation or design notes
+    uri: https://github.com/sqlite/sqlite/blob/master/src/pager.c
+    revision: master
+sections:
+  - id: SEC-state-boundary
+    title: Pager states as correctness boundary
+    anchors:
+      - source: SRC-sqlite-pager
+        type: code_symbol
+        symbol: Pager
+        precision: approximate
+        role: state_machine_context
+    occurrences:
+      - OCC-state-boundary
+      - OCC-state-transition-discipline
+  - id: SEC-dirty-page-control
+    title: Dirty page and journal control
+    anchors:
+      - source: SRC-sqlite-pager
+        type: code_symbol
+        symbol: sqlite3PagerWrite
+        precision: approximate
+        role: correctness_sensitive_operation
+    occurrences:
+      - OCC-dirty-page-risk
+      - OCC-journal-before-write
+  - id: SEC-recovery-invariant
+    title: Recovery invariants
+    anchors:
+      - source: SRC-sqlite-pager
+        type: code_symbol
+        symbol: pager_playback
+        precision: approximate
+        role: recovery_logic
+    occurrences:
+      - OCC-recovery-invariant
+      - OCC-crash-consistency
+occurrences:
+  - id: OCC-state-boundary
+    entity: ENT-pager-state-boundary
+    role: establishes_correctness_boundary
+  - id: OCC-state-transition-discipline
+    entity: ENT-transition-discipline
+    role: constrains_allowed_operations
+  - id: OCC-dirty-page-risk
+    entity: ENT-dirty-page-risk
+    role: identifies_failure_mode
+  - id: OCC-journal-before-write
+    entity: ENT-journal-before-write
+    role: states_safety_rule
+  - id: OCC-recovery-invariant
+    entity: ENT-recovery-invariant
+    role: supports_reconstruction_after_failure
+  - id: OCC-crash-consistency
+    entity: ENT-crash-consistency
+    role: explains_system_goal
+entities:
+  - id: ENT-pager-state-boundary
+    kind: state_machine_boundary
+    content: Pager states define which operations are safe, unsafe, pending, or recoverable at a given moment.
+  - id: ENT-transition-discipline
+    kind: correctness_constraint
+    content: State transitions must be controlled so that write, commit, rollback, and recovery paths do not violate persistence assumptions.
+  - id: ENT-dirty-page-risk
+    kind: failure_mode
+    content: A dirty page represents modified data that may be inconsistent with persistent storage until the write path is safely completed.
+  - id: ENT-journal-before-write
+    kind: safety_rule
+    content: Journal or rollback information must be available before changes can create unrecoverable persistent inconsistency.
+  - id: ENT-recovery-invariant
+    kind: recovery_invariant
+    content: Recovery logic depends on enough persisted information to restore the database to a coherent state after interruption.
+  - id: ENT-crash-consistency
+    kind: system_goal
+    content: The pager design supports crash consistency by coordinating page cache state, journal state, and persistent writes.
+structure:
+  sections:
+    - SEC-state-boundary
+    - SEC-dirty-page-control
+    - SEC-recovery-invariant
