@@ -1,0 +1,108 @@
+meta:
+  spec_version: ideamark-core-v1.2.0
+  document_id: sample-recipe-ingredient-substitution
+  status: draft
+  title: Recipe Ingredient Function and Substitution Sample
+  projections:
+    - role: generation
+      ref: projection://samples/recipe-ingredient-function-substitution-v0
+      inline:
+        purpose: identify ingredient functions and support substitution decisions
+sources:
+  - id: SRC-recipe-miso-soup
+    type: document
+    title: Simple miso soup with tofu and wakame recipe sketch
+    media_type: text/plain
+sections:
+  - id: SEC-dashi-umami-system
+    title: Dashi ingredients as umami system
+    anchors:
+      - source: SRC-recipe-miso-soup
+        type: heading_path
+        path:
+          - Ingredients
+        precision: inferred
+        role: ingredient_function_context
+      - source: SRC-recipe-miso-soup
+        type: heading_path
+        path:
+          - Steps
+        precision: inferred
+        role: preparation_context
+    occurrences:
+      - OCC-kombu-function
+      - OCC-bonito-function
+      - OCC-dashi-substitution
+  - id: SEC-body-and-texture
+    title: Soup body and texture components
+    anchors:
+      - source: SRC-recipe-miso-soup
+        type: heading_path
+        path:
+          - Ingredients
+        precision: inferred
+        role: ingredient_function_context
+    occurrences:
+      - OCC-miso-body
+      - OCC-tofu-texture
+      - OCC-wakame-aroma
+  - id: SEC-fresh-aroma
+    title: Fresh aromatic garnish
+    anchors:
+      - source: SRC-recipe-miso-soup
+        type: heading_path
+        path:
+          - Ingredients
+        precision: inferred
+        role: garnish_context
+    occurrences:
+      - OCC-green-onion-aroma
+occurrences:
+  - id: OCC-kombu-function
+    entity: ENT-kombu-function
+    role: identifies_ingredient_function
+  - id: OCC-bonito-function
+    entity: ENT-bonito-function
+    role: identifies_ingredient_function
+  - id: OCC-dashi-substitution
+    entity: ENT-dashi-substitution
+    role: marks_substitution_target
+  - id: OCC-miso-body
+    entity: ENT-miso-body
+    role: identifies_ingredient_function
+  - id: OCC-tofu-texture
+    entity: ENT-tofu-texture
+    role: identifies_texture_function
+  - id: OCC-wakame-aroma
+    entity: ENT-wakame-aroma
+    role: identifies_aroma_and_texture_function
+  - id: OCC-green-onion-aroma
+    entity: ENT-green-onion-aroma
+    role: identifies_garnish_function
+entities:
+  - id: ENT-kombu-function
+    kind: ingredient_function
+    content: Kombu contributes glutamate-rich umami.
+  - id: ENT-bonito-function
+    kind: ingredient_function
+    content: Bonito flakes contribute smoky and savory flavor.
+  - id: ENT-dashi-substitution
+    kind: substitution_target
+    content: Dashi can be approximated by another broth that supplies savory depth.
+  - id: ENT-miso-body
+    kind: ingredient_function
+    content: Miso contributes saltiness, fermented flavor, and body to the soup.
+  - id: ENT-tofu-texture
+    kind: texture_function
+    content: Tofu provides soft protein body.
+  - id: ENT-wakame-aroma
+    kind: texture_function
+    content: Wakame adds marine aroma and a soft seaweed texture.
+  - id: ENT-green-onion-aroma
+    kind: garnish_function
+    content: Green onion provides fresh aromatic contrast at serving.
+structure:
+  sections:
+    - SEC-dashi-umami-system
+    - SEC-body-and-texture
+    - SEC-fresh-aroma
