@@ -11,6 +11,10 @@ These files are evidence and design history, not normative specification text.
 
 They were used to evaluate whether Section, Occurrence, and Entity can serve as functional Core Model objects across different Original Source types and Projections.
 
+## Non-normative YAML Note
+
+See [Non-normative YAML Note](./00-non-normative-yaml-note.md) for how to interpret exploratory YAML fragments in this directory.
+
 ## Experiments
 
 2. [Code Original Source Experiment](./02-code-original-source-experiment.md)
