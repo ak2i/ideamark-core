@@ -13,7 +13,25 @@ Part 6 is not a normative Core schema.
 
 It should not introduce new required fields, new required namespaces, or new validation rules unless those requirements are also added to Part 4.
 
-## 0.2 Diagram Convention
+## 0.2 Knowledge Reuse Design Stance
+
+IdeaMark authoring is not the process of describing knowledge.
+
+It is the process of designing how knowledge can be reused through future human-AI activities under a chosen Projection.
+
+In this sense, Part 6 is closer to a guide for reusable intellectual structure design than to a YAML writing tutorial.
+
+The object of design is not knowledge as a finished substance.
+
+The object of design is the future use of knowledge:
+
+- what future users may need to find;
+- what source material they may need to return to;
+- what can be reused across situations;
+- what must remain traceable;
+- what can be reconstructed later under the same or a compatible Projection.
+
+## 0.3 Diagram Convention
 
 Diagrams in Part 6 SHOULD be written as Mermaid diagrams inside Markdown code blocks.
 
@@ -32,7 +50,7 @@ flowchart TD
     E --> H[Activation Expression]
 ```
 
-## 0.3 Authoring Stance
+## 0.4 Authoring Stance
 
 IdeaMark authoring is Projection-guided decomposition.
 
@@ -52,7 +70,29 @@ flowchart TD
     DOC --> FUT[Future retrieval / reconstruction / activation]
 ```
 
-## 0.4 What Authoring Produces
+## 0.5 Human-AI Co-evolution Stance
+
+Part 6 does not assign fixed authoring steps to humans or AI systems.
+
+Projection selection, source reading, Section design, Occurrence design, Entity design, validation, review, and regeneration may be performed by humans, AI systems, tools, or combinations of them.
+
+Current LLMs may be better suited to some tasks than others, and humans may often remain responsible for difficult judgment, accountability, or domain interpretation.
+
+However, the specification should not freeze a particular division of labor.
+
+IdeaMark is intended to support human-AI co-evolution by providing a communication and reuse structure that both humans and AI systems can inspect, revise, and extend.
+
+```mermaid
+flowchart LR
+    H[Human author / reviewer] <--> A[AI authoring agent]
+    H <--> D[IdeaMark Document]
+    A <--> D
+    D --> V[Validation / review signals]
+    V --> H
+    V --> A
+```
+
+## 0.6 What Authoring Produces
 
 A practical IdeaMark authoring process produces:
 
@@ -71,7 +111,29 @@ It does not need to store every possible interpretation of the source.
 
 It does not need to solve all future retrieval tasks.
 
-## 0.5 Relationship to Part 3
+## 0.7 Entity Material Boundary
+
+An Entity is reusable material shaped by Projection.
+
+It is not limited to a named thing, extracted concept, fact, keyword, or ontology node.
+
+Depending on the Projection and the future use case, Entity material may be:
+
+- a source excerpt;
+- a summary;
+- a word or phrase that names a useful cut;
+- a JSON fragment;
+- a URI;
+- an image reference;
+- binary material or a reference to binary material;
+- a generated label;
+- a reusable payload defined by a domain profile.
+
+The Core question is not whether the Entity has a universal semantic category.
+
+The Core authoring question is whether the material supports future reuse under the Projection.
+
+## 0.8 Relationship to Part 3
 
 Part 3 defines the Core Model concepts:
 
@@ -89,7 +151,7 @@ flowchart LR
     ENT --> REC[Future reconstruction]
 ```
 
-## 0.6 Relationship to Part 4
+## 0.9 Relationship to Part 4
 
 Part 4 defines the concrete YAML representation.
 
@@ -106,15 +168,17 @@ flowchart TD
     SAMPLE --> CLI[Parser / Validator / Formatter Tests]
 ```
 
-## 0.7 Relationship to Part 5
+## 0.10 Relationship to Part 5
 
 Part 5 defines Projection itself.
 
 Part 6 explains how an author uses a Projection during authoring.
 
+Projection quality is important, but Part 6 should not attempt to complete a theory of Projection quality before practical implementations exist.
+
 When a Projection decision becomes complex, reusable, versioned, or governed, it should be moved to Part 5-style Projection documents or Projection Library material.
 
-## 0.8 Relationship to Part 4 Samples
+## 0.11 Relationship to Part 4 Samples
 
 Part 4 normalized samples provide implementation-oriented YAML examples.
 
@@ -127,7 +191,7 @@ For example:
 - why the recipe cooking sample and recipe substitution sample produce different Entity kinds;
 - why `relations` is not required for the initial samples.
 
-## 0.9 Intended Readers
+## 0.12 Intended Readers
 
 Part 6 is intended for:
 
@@ -139,7 +203,7 @@ Part 6 is intended for:
 - sample corpus authors;
 - teams creating domain-specific profiles.
 
-## 0.10 Authoring Guide Boundary
+## 0.13 Authoring Guide Boundary
 
 Part 6 may recommend practices.
 
