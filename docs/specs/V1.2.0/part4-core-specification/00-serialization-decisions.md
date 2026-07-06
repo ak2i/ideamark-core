@@ -17,7 +17,7 @@ This document is therefore a bridge between:
 - Part 5 — Projection Specification;
 - Part 4 — Core Specification;
 - IdeaMark CLI parser, formatter, validator, and migration tools;
-- companion authoring engines such as Progressive Occurrence Resolution.
+- authoring engines such as CLI workflows, batch converters, visual editors, AI agents, and companion systems such as Progressive Occurrence Resolution.
 
 ## 0.1 Serialization Goal
 
@@ -261,7 +261,7 @@ However, Part 4 should not require documents to preserve full execution state of
 - AI sessions;
 - CLI commands;
 - web applications;
-- Progressive Occurrence Resolution sessions;
+- authoring engine sessions;
 - external storage systems.
 
 Recommended policy:
@@ -277,30 +277,43 @@ meta:
 
 This records enough operational context for traceability without turning Core into a session-state format.
 
-## 0.10 Progressive Authoring Engine Boundary
+## 0.10 Authoring Engine Boundary
 
-Part 4 should include a boundary note for progressive authoring engines, including Progressive Occurrence Resolution.
+Part 4 should include an Authoring Engine Boundary.
 
-This boundary is needed because large-source authoring engines may emit IdeaMark documents while also maintaining internal state that does not belong in Core YAML.
+This boundary is needed because many systems may produce IdeaMark documents while maintaining internal behavior that does not belong in Core YAML.
+
+Authoring engines may include:
+
+- CLI workflows;
+- batch converters;
+- visual authoring tools;
+- IDE plugins;
+- AI agents;
+- progressive large-source processors;
+- companion systems such as Progressive Occurrence Resolution.
+
+Part 4 defines the document representation that these engines may emit, validate, exchange, or normalize.
+
+Part 4 does not define how those documents are produced.
 
 The boundary prevents Part 4 from accidentally becoming a specification for:
 
-- progressive chunk scheduling;
+- chunk scheduling;
+- OCR or media preprocessing;
 - internal intermediate representation;
-- LLM orchestration;
-- session state;
-- backward reinterpretation;
-- context-force behavior;
+- prompt orchestration;
+- LLM call planning;
 - review queues;
-- engine-specific cache state.
+- approval workflows;
+- session state;
+- cache state;
+- progressive reinterpretation;
+- engine-specific recovery behavior.
 
-Part 4 should define the document representation that such engines may emit, validate, or exchange.
+This section is not intended to make any particular authoring engine central to Core.
 
-Part 4 should not define the internal operation of those engines.
-
-This section is not intended to make POR central to Core.
-
-It exists to protect the Core YAML boundary because POR is an expected companion producer of IdeaMark-compatible documents.
+It exists to protect the Core YAML boundary: Part 4 specifies the document format, not the authoring process.
 
 ## 0.11 Source Reference Policy
 
@@ -680,5 +693,7 @@ It should allow optional `structure` and `extensions`.
 It should not require `relations`, `perspectives`, or `provenance`.
 
 It should record Projection references but should not define Projection internals.
+
+It should define an Authoring Engine Boundary so that Part 4 remains a document serialization specification rather than an authoring process specification.
 
 It should prioritize traceability, LLM generation reliability, explicit IDs, validator clarity, and round-trip preservation over broad semantic expressiveness.
