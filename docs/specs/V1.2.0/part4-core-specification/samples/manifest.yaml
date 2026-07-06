@@ -1,0 +1,91 @@
+spec_version: ideamark-core-v1.2.0
+manifest_id: part4-normalized-samples-v0
+status: draft
+purpose: seed parser, validator, formatter, migration, and conformance-suite development
+sample_policy:
+  representation: array-based-object-representation
+  expected_validation_mode: core
+  expected_result: valid
+  vocabularies: open
+  structure_namespace: optional
+  placeholder_policy: warning-in-core-mode
+samples:
+  - id: sample-heapq-performance
+    path: heapq-performance.ideamark.yaml
+    source_domain: code
+    source_pattern: CPython heapq.py
+    projection_pattern: performance_engineering
+    expected_core_result: valid
+    covers:
+      - code_file_source
+      - line_range_anchors
+      - anchor_role_and_purpose
+      - occurrence_roles
+      - entity_kinds
+      - explicit_structure_ordering
+  - id: sample-heapq-api-design
+    path: heapq-api-design.ideamark.yaml
+    source_domain: code
+    source_pattern: CPython heapq.py
+    projection_pattern: api_design
+    expected_core_result: valid
+    covers:
+      - same_source_different_projection
+      - code_file_source
+      - line_range_anchors
+      - open_role_vocabulary
+      - open_kind_vocabulary
+  - id: sample-sqlite-pager-state-machine
+    path: sqlite-pager-state-machine.ideamark.yaml
+    source_domain: code
+    source_pattern: system_correctness_state_machine
+    projection_pattern: correctness_and_recovery
+    expected_core_result: valid
+    covers:
+      - code_symbol_anchors
+      - state_machine_reasoning
+      - correctness_constraints
+      - recovery_invariants
+  - id: sample-rust-rfc-design-prose
+    path: rust-rfc-design-prose.ideamark.yaml
+    source_domain: formal_design_prose
+    source_pattern: RFC-like design document
+    projection_pattern: design_rationale
+    expected_core_result: valid
+    covers:
+      - document_source
+      - heading_path_anchors
+      - design_problem
+      - compatibility_constraints
+      - migration_costs
+  - id: sample-recipe-cooking-execution
+    path: recipe-cooking-execution.ideamark.yaml
+    source_domain: recipe
+    source_pattern: simple miso soup recipe sketch
+    projection_pattern: cooking_execution
+    expected_core_result: valid
+    covers:
+      - non_technical_source
+      - heading_path_anchors
+      - procedure_sections
+      - timing_constraints
+      - heat_control_rules
+  - id: sample-recipe-ingredient-substitution
+    path: recipe-ingredient-substitution.ideamark.yaml
+    source_domain: recipe
+    source_pattern: simple miso soup recipe sketch
+    projection_pattern: ingredient_function_substitution
+    expected_core_result: valid
+    covers:
+      - same_source_different_projection
+      - ingredient_function_entities
+      - substitution_target_entities
+      - open_kind_vocabulary
+      - inferred_anchors
+future_groups:
+  - valid
+  - invalid
+  - warnings
+  - migration
+  - profiles
+  - roundtrip
