@@ -11,8 +11,8 @@ Each part is written as an independently reviewable document set with design rat
 1. [Part 1 — Philosophy](./part1-philosophy/README.md)
 2. [Part 2 — Architecture of Human-AI Co-evolution](./part2-architecture/README.md)
 3. [Part 3 — Core Model](./part3-core-model/README.md) *(initial specification draft complete)*
-4. [Part 4 — Core Specification](./part4-core-specification/README.md) *(planned)*
-5. [Part 5 — Projection Specification](./part5-projection-specification/README.md) *(initial specification draft started)*
+4. [Part 4 — Core Specification](./part4-core-specification/README.md) *(ready for drafting)*
+5. [Part 5 — Projection Specification](./part5-projection-specification/README.md) *(initial specification draft complete)*
 6. [Part 6 — Authoring Guide](./part6-authoring-guide/README.md) *(planned)*
 
 ## Design Policy
@@ -28,8 +28,6 @@ Each part is written as an independently reviewable document set with design rat
 
 ## Drafting Order
 
-The recommended drafting order is:
-
 1. Part 1 — Philosophy
 2. Part 2 — Architecture of Human-AI Co-evolution
 3. Part 3 — Core Model
@@ -37,12 +35,10 @@ The recommended drafting order is:
 5. Part 4 — Core Specification
 6. Part 6 — Authoring Guide
 
-Part 4 is intentionally drafted after the conceptual model and Projection responsibilities are clearer, because the YAML representation should encode the model rather than prematurely define it.
+Part 4 intentionally follows Parts 3 and 5 so that the YAML representation encodes the settled conceptual model and Projection boundary rather than driving them.
 
 ## Current Focus
 
-Part 1 and Part 2 are drafted as the philosophical and architectural foundation.
+Parts 1, 2, 3, and the initial draft of Part 5 have established the conceptual architecture.
 
-Part 3 is complete enough for consistency review and transition planning toward Part 4.
-
-The current drafting focus is Part 5 — Projection Specification, so that Projection responsibilities, compatibility, reconstruction, lifecycle, and library boundaries are clear before the concrete Core YAML representation is finalized.
+The current drafting focus is **Part 4 — Core Specification**, where those conceptual decisions will be translated into the normative YAML representation, validation rules, and interoperability requirements for IdeaMark Core v1.2.0.
