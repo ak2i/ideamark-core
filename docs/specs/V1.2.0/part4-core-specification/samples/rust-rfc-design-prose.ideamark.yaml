@@ -1,0 +1,96 @@
+meta:
+  spec_version: ideamark-core-v1.2.0
+  document_id: sample-rust-rfc-design-prose
+  status: draft
+  title: Rust RFC Design Prose Sample
+  projections:
+    - role: generation
+      ref: projection://samples/formal-rfc-design-rationale-v0
+      inline:
+        purpose: extract reusable design rationale and compatibility constraints from formal RFC prose
+sources:
+  - id: SRC-rust-rfc
+    type: document
+    title: Rust RFC design prose sample
+    uri: https://github.com/rust-lang/rfcs
+    revision: unspecified
+sections:
+  - id: SEC-motivation
+    title: Motivation as problem framing
+    anchors:
+      - source: SRC-rust-rfc
+        type: heading_path
+        path:
+          - Motivation
+        precision: approximate
+        role: problem_framing
+    occurrences:
+      - OCC-problem-framing
+      - OCC-user-impact
+  - id: SEC-design-choice
+    title: Design choice and tradeoff
+    anchors:
+      - source: SRC-rust-rfc
+        type: heading_path
+        path:
+          - Detailed design
+        precision: approximate
+        role: design_choice
+    occurrences:
+      - OCC-design-mechanism
+      - OCC-tradeoff
+  - id: SEC-compatibility
+    title: Compatibility and migration concerns
+    anchors:
+      - source: SRC-rust-rfc
+        type: heading_path
+        path:
+          - Drawbacks
+        precision: approximate
+        role: compatibility_review
+    occurrences:
+      - OCC-compatibility-constraint
+      - OCC-migration-cost
+occurrences:
+  - id: OCC-problem-framing
+    entity: ENT-problem-framing
+    role: frames_design_problem
+  - id: OCC-user-impact
+    entity: ENT-user-impact
+    role: explains_why_change_matters
+  - id: OCC-design-mechanism
+    entity: ENT-design-mechanism
+    role: states_selected_mechanism
+  - id: OCC-tradeoff
+    entity: ENT-design-tradeoff
+    role: records_tradeoff
+  - id: OCC-compatibility-constraint
+    entity: ENT-compatibility-constraint
+    role: identifies_constraint
+  - id: OCC-migration-cost
+    entity: ENT-migration-cost
+    role: identifies_adoption_cost
+entities:
+  - id: ENT-problem-framing
+    kind: design_problem
+    content: Formal design prose begins by identifying the practical or language-level problem that motivates a change.
+  - id: ENT-user-impact
+    kind: motivation
+    content: Motivation sections connect the design problem to concrete developer impact or ecosystem pressure.
+  - id: ENT-design-mechanism
+    kind: design_choice
+    content: Detailed design sections describe the selected mechanism that resolves the motivating problem.
+  - id: ENT-design-tradeoff
+    kind: tradeoff
+    content: RFC design prose records what the design gains and what complexity, restriction, or ambiguity it accepts.
+  - id: ENT-compatibility-constraint
+    kind: compatibility_constraint
+    content: Compatibility review identifies existing code, mental models, or ecosystem practices that may be affected.
+  - id: ENT-migration-cost
+    kind: adoption_cost
+    content: Migration cost records the work users or tools may need to adopt the design safely.
+structure:
+  sections:
+    - SEC-motivation
+    - SEC-design-choice
+    - SEC-compatibility
