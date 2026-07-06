@@ -486,6 +486,16 @@ An Occurrence should be able to contain:
 
 An Entity should represent Projection-shaped reusable material.
 
+`content` is not mandatory.
+
+An Entity SHOULD contain at least one of `content`, `payload`, or `ref` unless a profile explicitly permits placeholder Entities.
+
+These three fields represent different ways of carrying or pointing to reusable material:
+
+- `content` is the simple human-readable text field;
+- `payload` is the structured value field;
+- `ref` points to externally held material.
+
 Recommended minimal shapes:
 
 ```yaml
@@ -525,14 +535,6 @@ An Entity should be able to contain:
 - optional profile or extension fields.
 
 `payload` is not removed from the model.
-
-Part 4 should clarify the role distinction:
-
-- `content` is the simple text-oriented field;
-- `payload` is the structured value field;
-- `ref` points to externally held material.
-
-An Entity SHOULD contain at least one of `content`, `payload`, or `ref` unless a profile explicitly permits placeholder Entities.
 
 Part 4 should avoid requiring a universal Entity kind taxonomy.
 
@@ -705,11 +707,12 @@ The following decisions are accepted for the initial Part 4 draft:
 2. `structure` is optional.
 3. `occurrence.role` is mandatory.
 4. `entity.kind` is recommended but not mandatory in Core mode.
-5. An Entity should contain at least one of `content`, `payload`, or `ref` unless a profile permits placeholder Entities.
-6. Source anchors should use a common base shape with type-specific extension fields.
-7. Unknown fields and namespaces should be preserved and warned about in Core mode.
-8. Strict mode may reject unknown fields, namespaces, or vocabulary values.
-9. Part 4 defines Document Format, not Authoring Engine internals.
+5. `entity.content` is not mandatory.
+6. An Entity should contain at least one of `content`, `payload`, or `ref` unless a profile permits placeholder Entities.
+7. Source anchors should use a common base shape with type-specific extension fields.
+8. Unknown fields and namespaces should be preserved and warned about in Core mode.
+9. Strict mode may reject unknown fields, namespaces, or vocabulary values.
+10. Part 4 defines Document Format, not Authoring Engine internals.
 
 ## 0.24 Remaining Open Decisions Before Full Draft
 
