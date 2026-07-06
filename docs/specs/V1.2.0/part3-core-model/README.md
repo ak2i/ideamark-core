@@ -99,6 +99,38 @@ Something that cannot yet be observed by humans, supplied to AI systems, or conv
 
 Part 3 should therefore define Original Source Reference in a media-independent way while preserving the practical requirement that source material must be accessible enough to support traceability and reconstruction.
 
+## Decomposition Stance
+
+Decomposition is the Projection-guided structuring act that produces an IdeaMark document from Original Source material.
+
+Its role is to make later retrieval, reconstruction, and meaning activation possible by producing Core Model structures that are useful under an intended or anticipated Projection context.
+
+Decomposition may be performed by humans, AI systems, tools, or larger authoring processes such as POR.
+
+Part 3 does not prescribe the algorithm or workflow by which Decomposition is performed.
+
+In particular, Decomposition is not assumed to be fully reconstructable from the generated IdeaMark document.
+
+The generated IdeaMark document may preserve local rationale, provenance, method notes, or explanatory traces that help later users understand why particular structures were produced.
+
+However, such notes are partial explanations, not a complete inverse mapping of the Decomposition process.
+
+For Part 3, the most important responsibility is that the Decomposition boundary remains clear:
+
+```text
+Input:  Original Source material x Projection Context
+Process: Projection-guided Decomposition
+Output: IdeaMark Document
+```
+
+The output of Decomposition is the IdeaMark document as a whole.
+
+Therefore, any Core Model element in the document may be a Decomposition product, including Sections, Occurrences, Entities, Relations, Anchorage, Perspectives, Provenance, status information, and other document-level structures.
+
+Decomposition does not judge the universal truth of Original Sources or the quality, legitimacy, or social value of a Projection.
+
+It only determines what structures are produced under the given Original Source and Projection Context so that later Human-AI Intellectual Activity can begin from a traceable access structure.
+
 ## Structural Catalyst Stance
 
 The Core Model does not attempt to encode meaning.
