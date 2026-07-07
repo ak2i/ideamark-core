@@ -5,7 +5,7 @@
 
 Part 5 defines Projection as an external but interoperable specification for guiding Decomposition, retrieval, matching, filtering, and reconstruction.
 
-Projection is a reusable transformation key for making Original Sources, IdeaMark documents, and future activation expressions usable in Human-AI Intellectual Activity.
+Projection is a reusable transformation key for making Original Sources, IdeaMark documents, Skeleton Graphs, and future activation expressions usable in Human-AI Intellectual Activity.
 
 Projection should be treated as a reusable intellectual asset, not merely a prompt parameter.
 
@@ -20,6 +20,7 @@ It describes how a Projection may express:
 - Situation boundaries;
 - Decomposition guidance;
 - retrieval and matching intent;
+- required, preferred, optional, excluded, or unsafe Skeleton Graph patterns;
 - reconstruction guidance;
 - evaluation criteria;
 - metadata, lifecycle, and library use;
@@ -27,7 +28,7 @@ It describes how a Projection may express:
 
 Part 5 does not define the concrete YAML representation of IdeaMark documents. That belongs to Part 4.
 
-Part 5 also does not define retrieval algorithms, ranking systems, organizational governance rules, legal taxonomies, domain vocabularies, universal coordinate systems, progressive authoring algorithms, or Progressive Occurrence Resolution internals. Those may be supplied by implementations, Projection Libraries, companion specifications, or domain practices.
+Part 5 also does not define retrieval algorithms, ranking systems, graph databases, organizational governance rules, legal taxonomies, domain vocabularies, universal coordinate systems, progressive authoring algorithms, or Progressive Occurrence Resolution internals. Those may be supplied by implementations, Projection Libraries, companion specifications, or domain practices.
 
 ## Core Stance
 
@@ -42,13 +43,14 @@ A Projection may combine requirements from many layers, such as:
 - role expectations;
 - user capability and literacy assumptions;
 - risk, urgency, and responsibility constraints;
-- intended future search and reconstruction needs.
+- intended future search and reconstruction needs;
+- Intellectual Activity Skeleton expectations.
 
 These requirements may originate from large-scale Situation context, but Projection does not simply contain the entire Situation Vector.
 
 Projection exists partly because Situation space is effectively unbounded, while IdeaMark generation, retrieval, matching, and reconstruction require finite, reusable strategies that can complete in finite steps.
 
-Projection therefore serves as a practical boundary between unbounded Situation interpretation and finite operations over Original Sources, IdeaMark documents, and activation expressions.
+Projection therefore serves as a practical boundary between unbounded Situation interpretation and finite operations over Original Sources, IdeaMark documents, Skeleton Graphs, and activation expressions.
 
 ## Projection as Bidirectional Transformation Key
 
@@ -58,14 +60,14 @@ It is also used when searching for IdeaMark documents, selecting relevant Origin
 
 Projection may therefore function in at least four roles:
 
-1. **Decomposition Key** — guides how Original Source material is decomposed into IdeaMark Core Model structures.
-2. **Retrieval Key** — helps find IdeaMark documents or Original Sources relevant to a Situation or intended activity.
-3. **Matching and Filtering Key** — supports full match, partial match, approximate match, inclusion, specialization, exclusion, or other compatibility judgments among Projections, IdeaMark documents, and sources.
+1. **Decomposition Key** — guides how Original Source material is decomposed into IdeaMark Core Model structures and optional document-side Skeleton Graphs.
+2. **Retrieval Key** — helps find IdeaMark documents, Skeleton Graphs, Sections, or Original Sources relevant to a Situation or intended activity.
+3. **Matching and Filtering Key** — supports full match, partial match, approximate match, inclusion, specialization, exclusion, or other compatibility judgments among Projections, Skeleton Graphs, IdeaMark documents, and sources.
 4. **Reconstruction Key** — guides how retrieved materials are transformed into expressions appropriate for a future interpreter, capability level, Situation, or activity.
 
 The Projection used to generate an IdeaMark document and the Projection used later to retrieve or reconstruct from it do not need to be identical.
 
-Useful reuse may occur through partial overlap, compatible intent, shared functional structure, or transformable assumptions.
+Useful reuse may occur through partial overlap, compatible intent, shared functional structure, compatible Skeleton Graphs, or transformable assumptions.
 
 ## Sections
 
@@ -83,6 +85,7 @@ Useful reuse may occur through partial overlap, compatible intent, shared functi
 11. [Projection Compatibility Model](./11-compatibility-model.md) *(drafted)*
 12. [Projection Evaluation](./12-projection-evaluation.md) *(drafted)*
 13. [Progressive Authoring Engines and POR Boundary](./13-progressive-authoring-engines-and-por-boundary.md) *(drafted)*
+14. [Projection Skeleton Graph](./14-projection-skeleton-graph.md) *(drafted)*
 
 ## Relationship to Core
 
@@ -90,11 +93,15 @@ Projection is not part of the Core in the strict sense.
 
 However, IdeaMark Core must be able to record which Projection or Projection Context guided Decomposition and authoring.
 
-The same Original Source may have multiple valid Projections, and those Projections may produce different IdeaMark documents.
+IdeaMark Core may also record optional `skeletons` that were generated under, or are intended to be consumed by, a Projection.
 
-The same IdeaMark document may later be reused under a different Projection when sufficient compatibility, partial match, or transformability exists.
+The same Original Source may have multiple valid Projections, and those Projections may produce different IdeaMark documents and different Skeleton Graphs.
+
+The same IdeaMark document may later be reused under a different Projection when sufficient compatibility, partial match, Skeleton Graph match, or transformability exists.
 
 Part 3 defines the Core Model output of Projection-guided Decomposition.
+
+Part 4 defines the YAML representation for IdeaMark documents, including optional document-side Skeleton Graphs.
 
 Part 5 defines the Projection-side responsibilities that make such Decomposition, retrieval, matching, filtering, and reconstruction reusable, inspectable, and improvable.
 
@@ -104,7 +111,9 @@ Progressive Occurrence Resolution, abbreviated as POR in the IdeaMark ecosystem,
 
 Part 5 recognizes that progressive authoring engines may consume Projection as input and emit IdeaMark-compatible structures as output.
 
-Part 5 does not define POR algorithms, internal IR, session state, LLM orchestration, context-force reinterpretation, or progressive scheduling.
+Such engines may also emit document-side Skeleton Graphs when useful for retrieval-oriented reuse.
+
+Part 5 does not define POR algorithms, internal IR, session state, LLM orchestration, context-force reinterpretation, progressive scheduling, or graph matching implementation.
 
 Those responsibilities belong to the IdeaMark-POR repository or another companion specification.
 
@@ -112,8 +121,8 @@ Those responsibilities belong to the IdeaMark-POR repository or another companio
 
 Part 5 should be read after Part 3.
 
-Part 3 explains that Section, Occurrence, and Entity are Projection-shaped Core Model structures.
+Part 3 explains that Section, Occurrence, Entity, and optional Skeleton Graph are Projection-shaped Core Model structures.
 
 Part 5 explains what kinds of responsibilities a Projection may carry so that those structures can be generated, searched, matched, filtered, reconstructed, evaluated, shared, versioned, or kept private.
 
-The key design constraint is that Projection should reduce interpretation cost without pretending to contain the whole Situation, the whole domain, the final meaning of future activity, or the internal algorithm of a progressive authoring engine.
+The key design constraint is that Projection should reduce interpretation cost without pretending to contain the whole Situation, the whole domain, the final meaning of future activity, the universal graph of all intellectual activity, or the internal algorithm of a progressive authoring engine.
