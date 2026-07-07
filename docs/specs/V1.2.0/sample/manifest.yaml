@@ -1,0 +1,63 @@
+spec_version: ideamark-core-v1.2.0
+sample_library_id: ideamark-core-v1.2.0-sample-library
+status: draft
+purpose: seed CLI, POR, retrieval, reconstruction, and Projection Library implementation
+non_normative: true
+files:
+  - path: README.md
+    kind: guide
+  - path: skeleton-families.yaml
+    kind: skeleton_family_library
+    count: 8
+  - path: projections.yaml
+    kind: projection_library
+    count: 24
+library_policy:
+  core_boundary: external_to_core
+  intended_use:
+    - cli_fixture
+    - por_fixture
+    - projection_loader_fixture
+    - skeleton_family_loader_fixture
+    - retrieval_test_expansion
+    - reconstruction_test_expansion
+  id_style:
+    skeleton_family: skeleton-family://samples/{name}/v0
+    projection: projection://samples/{name}/v0
+  stability: draft_sample
+  validation_expectation: schema_shape_and_reference_resolution
+skeleton_families:
+  - id: skeleton-family://samples/preserve-required-effect-under-change/v0
+    title: Preserve Required Effect Under Change
+  - id: skeleton-family://samples/constraint-bounded-selection/v0
+    title: Constraint-bounded Selection
+  - id: skeleton-family://samples/risk-controlled-operation/v0
+    title: Risk-controlled Operation
+  - id: skeleton-family://samples/failure-recovery-restoration/v0
+    title: Failure Recovery and Restoration
+  - id: skeleton-family://samples/compatibility-preserving-change/v0
+    title: Compatibility-preserving Change
+  - id: skeleton-family://samples/evidence-supported-decision/v0
+    title: Evidence-supported Decision
+  - id: skeleton-family://samples/procedure-execution-sequencing/v0
+    title: Procedure Execution and Sequencing
+  - id: skeleton-family://samples/audience-capability-adaptation/v0
+    title: Audience Capability Adaptation
+projection_groups:
+  recipe:
+    count: 4
+  code:
+    count: 5
+  design_prose:
+    count: 4
+  policy_and_operations:
+    count: 5
+  research_and_reports:
+    count: 4
+  education_and_support:
+    count: 2
+next_steps:
+  - connect selected projections to existing Part 4 sample documents
+  - add retrieval tests for each skeleton family
+  - add POR generation prompts that consume these projection samples
+  - add CLI validation expectations for reference resolution
