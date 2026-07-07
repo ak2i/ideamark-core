@@ -89,6 +89,75 @@ entities:
   - id: ENT-migration-cost
     kind: adoption_cost
     content: Migration cost records the work users or tools may need to adopt the design safely.
+skeletons:
+  - id: SKEL-compatibility-preserving-design-change
+    role: retrieval
+    projection: projection://samples/formal-rfc-design-rationale-v0
+    status: draft
+    notes: Supports retrieval for design-change material where a selected mechanism must preserve compatibility boundaries and make migration cost visible.
+    nodes:
+      - id: SKN-design-problem
+        ref:
+          kind: occurrence
+          id: OCC-problem-framing
+        slot: unavailable_or_problematic_current_state
+        required: true
+      - id: SKN-required-effect
+        ref:
+          kind: occurrence
+          id: OCC-user-impact
+        slot: preserved_effect_or_function
+        required: true
+      - id: SKN-selected-mechanism
+        ref:
+          kind: occurrence
+          id: OCC-design-mechanism
+        slot: chosen_operational_form
+        required: true
+      - id: SKN-tradeoff
+        ref:
+          kind: occurrence
+          id: OCC-tradeoff
+        slot: compatibility_boundary
+        required: true
+      - id: SKN-compatibility-constraint
+        ref:
+          kind: occurrence
+          id: OCC-compatibility-constraint
+        slot: preserved_invariant_or_boundary
+        required: true
+      - id: SKN-migration-cost
+        ref:
+          kind: occurrence
+          id: OCC-migration-cost
+        slot: confirmation_signal
+        required: false
+    links:
+      - id: SKL-problem-effect
+        from: SKN-design-problem
+        to: SKN-required-effect
+        type: dependency
+        required: true
+      - id: SKL-effect-mechanism
+        from: SKN-required-effect
+        to: SKN-selected-mechanism
+        type: dependency
+        required: true
+      - id: SKL-compatibility-mechanism
+        from: SKN-compatibility-constraint
+        to: SKN-selected-mechanism
+        type: constraint
+        required: true
+      - id: SKL-tradeoff-mechanism
+        from: SKN-tradeoff
+        to: SKN-selected-mechanism
+        type: constraint
+        required: true
+      - id: SKL-mechanism-migration
+        from: SKN-selected-mechanism
+        to: SKN-migration-cost
+        type: confirmation
+        required: false
 structure:
   sections:
     - SEC-motivation
