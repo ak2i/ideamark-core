@@ -1,0 +1,125 @@
+test_id: rt-function-preserving-alternative-selection
+spec_version: ideamark-core-v1.2.0
+status: draft
+purpose: >
+  Test whether a use-side Projection can retrieve material for selecting an
+  alternative when an element is unavailable while preserving a required
+  effect or function, without depending on exact source keywords.
+use_side_projection:
+  ref: projection://tests/function-preserving-alternative-selection-v0
+  intent: replace an unavailable or blocked element while preserving a required effect or function
+  keyword_independence:
+    forbidden_source_specific_terms:
+      - bonito
+      - bonito flakes
+      - dashi
+      - heap
+      - heapq
+      - siftdown
+  required_skeleton:
+    id: req-skel-function-preserving-alternative
+    nodes:
+      - id: qn-blocked-element
+        slot: unavailable_or_blocked_element
+        required: true
+      - id: qn-preserved-function
+        slot: preserved_effect_or_function
+        required: true
+      - id: qn-alternative-space
+        slot: alternative_space
+        required: true
+      - id: qn-confirmation
+        slot: confirmation_signal
+        required: false
+    links:
+      - id: ql-constraint
+        from: qn-blocked-element
+        to: qn-preserved-function
+        type: constraint
+        required: true
+      - id: ql-dependency
+        from: qn-preserved-function
+        to: qn-alternative-space
+        type: dependency
+        required: true
+      - id: ql-confirmation
+        from: qn-alternative-space
+        to: qn-confirmation
+        type: confirmation
+        required: false
+candidate_set:
+  - id: sample-recipe-ingredient-substitution
+    path: ../samples/recipe-ingredient-substitution.ideamark.yaml
+  - id: sample-heapq-performance
+    path: ../samples/heapq-performance.ideamark.yaml
+  - id: sample-recipe-cooking-execution
+    path: ../samples/recipe-cooking-execution.ideamark.yaml
+  - id: sample-heapq-api-design
+    path: ../samples/heapq-api-design.ideamark.yaml
+expected_retrieval:
+  matches:
+    - document: sample-recipe-ingredient-substitution
+      skeleton: SKEL-function-preserving-alternative
+      match_class: partial
+      matched_slots:
+        - unavailable_or_blocked_element
+        - preserved_effect_or_function
+        - alternative_space
+      missing_slots:
+        - confirmation_signal
+      matched_links:
+        - constraint
+        - dependency
+      expected_sections:
+        - SEC-dashi-umami-system
+      expected_occurrences:
+        - OCC-bonito-function
+        - OCC-dashi-substitution
+      expected_entities:
+        - ENT-bonito-function
+        - ENT-dashi-substitution
+      warnings:
+        - confirmation_signal_is_underspecified
+      reconstruction_policy: supported_with_warning
+  analogical_matches:
+    - document: sample-heapq-performance
+      skeleton: SKEL-invariant-constrained-design
+      match_class: analogical_partial
+      rationale: >
+        The heapq sample does not contain the same slot names, but it has a
+        structurally similar pattern: preserved boundary -> operational form ->
+        restoration strategy -> confirmation signal. It should be surfaced only
+        as an analogical match when cross-domain transfer is enabled.
+      required_review:
+        - domain_transfer_review
+        - slot_mapping_review
+      suggested_slot_mapping:
+        preserved_invariant_or_boundary: preserved_effect_or_function
+        chosen_operational_form: alternative_space
+        restoration_or_recovery_strategy: confirmation_or_recovery_material
+  non_matches:
+    - document: sample-recipe-cooking-execution
+      expected_reason: execution procedure does not explicitly model function-preserving alternatives
+    - document: sample-heapq-api-design
+      expected_reason: API design sample is not expected to contain the required alternative-selection Skeleton Graph
+expected_reconstruction:
+  for_document: sample-recipe-ingredient-substitution
+  status: supported_with_warning
+  should_include:
+    - blocked element should be treated as part of a function-preserving substitution problem
+    - preserved function or effect should be named from retrieved material
+    - alternative space should be grounded in the matched Section
+    - missing confirmation signal should be visible
+  should_not_include:
+    - literal-source-keyword-only retrieval explanation
+    - unsupported replacement candidate without marking external knowledge
+    - remove-only answer that ignores preserved function
+evaluation_signals:
+  positive:
+    - retrieval can succeed without forbidden source-specific terms
+    - missing confirmation slot is surfaced
+    - matched Skeleton Nodes lead to reconstructable Occurrences and Entities
+  negative:
+    - retrieval requires exact ingredient name
+    - confirmation gap is hidden
+    - reconstruction ignores function preservation

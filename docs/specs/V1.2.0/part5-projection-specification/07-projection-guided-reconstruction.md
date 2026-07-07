@@ -11,6 +11,8 @@ Reconstruction is the use-side process of transforming retrieved IdeaMark struct
 
 The activation expression may be a text, answer, plan, question, warning, diagram, table, code fragment, checklist, interface state, or another medium.
 
+Skeleton Graphs may support reconstruction indirectly by reducing the cost of selecting relevant candidate structures before reconstruction begins.
+
 ## Reconstruction Is Not Stored Meaning
 
 Reconstruction does not simply read stored meaning out of an IdeaMark document.
@@ -19,7 +21,29 @@ The IdeaMark document provides reusable access structures.
 
 The Projection provides the strategy for deciding what to retrieve, how to return to source, what to adapt, what to exclude, and how to express the result.
 
+When Skeleton Graphs are present, they provide an additional retrieval-oriented access layer. They help identify which Sections, Occurrences, Entities, and source anchors may contain activity-composition material needed by the use-side Projection.
+
 Meaning becomes active only when the reconstructed expression participates in a Situation and activity.
+
+## Reconstruction Pipeline
+
+A Projection-guided reconstruction pipeline may be understood as:
+
+```text
+Use-side Projection
+  -> retrieval intent and required_skeleton
+  -> candidate IdeaMark Skeleton Graphs
+  -> matched Sections / Occurrences / Entities / anchors
+  -> Original Source return
+  -> Projection-guided adaptation
+  -> activation expression
+```
+
+This pipeline is conceptual.
+
+Part 5 does not require a specific retrieval engine, graph database, ranking function, or expression generator.
+
+The important boundary is that Skeleton Graph matching selects candidate materials, while reconstruction transforms those materials into an expression.
 
 ## Reconstruction Target
 
@@ -56,6 +80,10 @@ A low-risk exploratory target may allow looser source return.
 
 The Projection should make such expectations explicit.
 
+Skeleton Graphs do not remove the need for source return.
+
+A matched Skeleton Node should ultimately lead, directly or indirectly, to Sections, Occurrences, Entities, source anchors, or source windows that support reconstruction.
+
 ## Adaptation
 
 A Projection MAY define adaptation rules.
@@ -78,6 +106,8 @@ Adaptation should not silently remove reconstruction-critical constraints.
 
 When adaptation could distort the source or exceed compatibility, the Projection SHOULD require review, warning, or exclusion.
 
+A Skeleton Graph match may indicate that analogical transfer is possible, but it does not by itself authorize domain transfer. The use-side Projection should decide whether the target Situation permits such transfer.
+
 ## Reconstruction Quality
 
 A Projection MAY define reconstruction quality criteria.
@@ -91,6 +121,8 @@ Examples include:
 - the output is actionable for the intended activity;
 - the output remains traceable to sufficient source material;
 - differences between generation Projection and use-side Projection are handled explicitly;
+- matched Skeleton slots are used consistently;
+- missing Skeleton slots are surfaced when they affect safety, completeness, or actionability;
 - known mismatch risks are surfaced.
 
 These criteria are not universal truth tests.
@@ -101,7 +133,7 @@ They are Projection-specific quality criteria for the intended reuse activity.
 
 A Projection SHOULD allow reconstruction to fail.
 
-Failure is preferable to producing an unsuitable expression when compatibility, traceability, authority, permission, or source coverage is insufficient.
+Failure is preferable to producing an unsuitable expression when compatibility, traceability, authority, permission, source coverage, or Skeleton Graph completeness is insufficient.
 
 Failure may result in:
 
@@ -114,6 +146,8 @@ Failure may result in:
 
 The ability to say that reconstruction is not supported is part of responsible Projection design.
 
+A Skeleton Graph partial match should not be hidden. Missing required slots, unsafe links, or insufficient anchors should be visible to reconstruction and review.
+
 ## Feedback
 
 Reconstruction may produce feedback for Projection improvement.
@@ -121,6 +155,8 @@ Reconstruction may produce feedback for Projection improvement.
 Feedback may indicate:
 
 - missing reusable units;
+- missing Skeleton slots;
+- weak or noisy Skeleton Links;
 - poor source anchors;
 - ambiguous roles;
 - excessive or insufficient granularity;

@@ -34,6 +34,8 @@ Diagrams in Part 6 should use Mermaid inside Markdown code blocks.
 14. [Common Authoring Mistakes](./14-common-authoring-mistakes.md) *(draft)*
 15. [Authoring Guide Non-goals](./15-authoring-guide-non-goals.md) *(draft)*
 16. [Authoring Guide Review Notes](./16-authoring-guide-review-notes.md) *(review note)*
+17. [Authoring Skeleton Graphs](./17-authoring-skeleton-graphs.md) *(draft)*
+18. [Retrieval Test Suite](./18-retrieval-test-suite.md) *(draft)*
 
 ## Expected Workflows
 
@@ -44,7 +46,9 @@ Expected workflows include:
 - human review and correction;
 - validation-guided iteration;
 - Projection refinement;
+- Skeleton Graph authoring;
 - retrieval evaluation;
+- retrieval test suite development;
 - sample corpus development;
 - migration from earlier versions;
 - Progressive Occurrence Resolution as one authoring method.
@@ -59,4 +63,4 @@ It should not introduce new normative Core requirements unless those requirement
 
 Part 6 is structurally complete as a first draft.
 
-The next review pass should focus on consistency with Part 4 examples, terminology alignment with Part 3 and Part 5, and whether the authoring guidance remains clearly non-normative.
+The next review pass should focus on consistency with Part 4 examples, terminology alignment with Part 3 and Part 5, whether Skeleton Graph guidance remains retrieval-oriented, and whether the authoring guidance remains clearly non-normative.

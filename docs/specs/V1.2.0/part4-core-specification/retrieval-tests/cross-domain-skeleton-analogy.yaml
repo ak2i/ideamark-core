@@ -1,0 +1,115 @@
+test_id: rt-cross-domain-skeleton-analogy
+spec_version: ideamark-core-v1.2.0
+status: draft
+purpose: >
+  Test whether structurally related Skeleton Graphs from different domains can
+  be surfaced as analogical candidates while preserving review boundaries and
+  avoiding unsafe domain transfer.
+use_side_projection:
+  ref: projection://tests/cross-domain-activity-skeleton-analogy-v0
+  intent: find structurally similar activity-composition patterns across domains for reviewable analogy
+  analogical_transfer: allowed_with_review
+  required_skeleton_family:
+    id: skeleton-family-preserve-required-effect-under-change
+    description: >
+      A family of activity Skeletons where some element, design, or measure is
+      constrained or unavailable, a required effect or boundary must be
+      preserved, and a candidate alternative or operational form must be
+      selected with a confirmation or review signal.
+    accepted_slot_mappings:
+      unavailable_or_blocked_element:
+        may_map_to:
+          - preserved_invariant_or_boundary
+          - constrained_or_unavailable_measure
+      preserved_effect_or_function:
+        may_map_to:
+          - preserved_invariant_or_boundary
+          - protective_effect_or_required_condition
+      alternative_space:
+        may_map_to:
+          - chosen_operational_form
+          - alternative_intervention_space
+      restoration_or_recovery_strategy:
+        may_map_to:
+          - confirmation_signal
+          - evaluation_or_monitoring_signal
+      confirmation_signal:
+        may_map_to:
+          - empirical_support
+          - benchmark_signal
+          - review_signal
+          - monitoring_signal
+  required_links:
+    - type: constraint
+    - type: dependency
+  optional_links:
+    - type: confirmation
+candidate_set:
+  - id: sample-recipe-ingredient-substitution
+    path: ../samples/recipe-ingredient-substitution.ideamark.yaml
+  - id: sample-heapq-performance
+    path: ../samples/heapq-performance.ideamark.yaml
+  - id: sample-sqlite-pager-state-machine
+    path: ../samples/sqlite-pager-state-machine.ideamark.yaml
+  - id: sample-rust-rfc-design-prose
+    path: ../samples/rust-rfc-design-prose.ideamark.yaml
+expected_retrieval:
+  analogical_matches:
+    - document: sample-recipe-ingredient-substitution
+      skeleton: SKEL-function-preserving-alternative
+      match_class: analogical_partial
+      matched_family: skeleton-family-preserve-required-effect-under-change
+      matched_links:
+        - constraint
+        - dependency
+      missing_or_weak:
+        - confirmation_signal
+      required_review:
+        - domain_transfer_review
+        - confirmation_gap_review
+    - document: sample-heapq-performance
+      skeleton: SKEL-invariant-constrained-design
+      match_class: analogical_compatible
+      matched_family: skeleton-family-preserve-required-effect-under-change
+      matched_links:
+        - constraint
+        - dependency
+        - confirmation
+      required_review:
+        - domain_transfer_review
+        - slot_mapping_review
+  possible_future_matches:
+    - document: sample-sqlite-pager-state-machine
+      expected_reason: >
+        The sample may become a useful match if it records a Skeleton Graph for
+        preserving correctness boundary, choosing recovery transition, and
+        confirming state consistency.
+    - document: sample-rust-rfc-design-prose
+      expected_reason: >
+        The sample may become a useful match if it records a Skeleton Graph for
+        preserving compatibility constraints while selecting a design change.
+  exact_matches: []
+expected_policy:
+  exact_use: disallowed
+  analogical_use: allowed_with_review
+  reconstruction:
+    status: review_required_before_domain_transfer
+    should_include:
+      - explicit statement that the match is analogical
+      - matched Skeleton slots and links
+      - missing or weak slots
+      - domain transfer warning
+      - source return requirements
+    should_not_include:
+      - direct prescription across domains
+      - claim that similar Skeleton means same meaning
+      - unsupported substitution of domain-specific conclusions
+evaluation_signals:
+  positive:
+    - recipe and heapq are surfaced as structurally related but not exact
+    - review boundaries are explicit
+    - missing confirmation in recipe remains visible
+  negative:
+    - analogical match is treated as exact
+    - domain-specific terms drive the match
+    - reconstruction skips review and directly transfers conclusions

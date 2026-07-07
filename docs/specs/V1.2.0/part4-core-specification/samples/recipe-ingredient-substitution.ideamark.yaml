@@ -101,6 +101,52 @@ entities:
   - id: ENT-green-onion-aroma
     kind: garnish_function
     content: Green onion provides fresh aromatic contrast at serving.
+skeletons:
+  - id: SKEL-function-preserving-alternative
+    role: retrieval
+    projection: projection://samples/recipe-ingredient-function-substitution-v0
+    status: draft
+    notes: Supports retrieval for replacing an unavailable component while preserving a required flavor or function.
+    nodes:
+      - id: SKN-blocked-element
+        ref:
+          kind: occurrence
+          id: OCC-bonito-function
+        slot: unavailable_or_blocked_element
+        required: true
+      - id: SKN-preserved-function
+        ref:
+          kind: occurrence
+          id: OCC-dashi-substitution
+        slot: preserved_effect_or_function
+        required: true
+      - id: SKN-alternative-space
+        ref:
+          kind: section
+          id: SEC-dashi-umami-system
+        slot: alternative_space
+        required: true
+      - id: SKN-confirmation-signal
+        slot: confirmation_signal
+        required: false
+        status: underspecified
+        notes: The recipe sketch does not provide a source-backed verification or tasting rule for substitutions.
+    links:
+      - id: SKL-blocked-preserved
+        from: SKN-blocked-element
+        to: SKN-preserved-function
+        type: constraint
+        required: true
+      - id: SKL-preserved-alternative
+        from: SKN-preserved-function
+        to: SKN-alternative-space
+        type: dependency
+        required: true
+      - id: SKL-alternative-confirmation
+        from: SKN-alternative-space
+        to: SKN-confirmation-signal
+        type: confirmation
+        required: false
 structure:
   sections:
     - SEC-dashi-umami-system

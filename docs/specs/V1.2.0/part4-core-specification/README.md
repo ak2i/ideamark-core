@@ -5,11 +5,13 @@
 
 Part 4 defines the normative representation, required fields, compatibility rules, and validation constraints for IdeaMark Core v1.2.0.
 
-Part 4 is expected to be the primary reference for CLI parser, formatter, validator, migration tooling, and interoperability implementations.
+Part 4 is expected to be the primary reference for CLI parser, formatter, validator, migration tooling, retrieval indexing, and interoperability implementations.
 
 Part 4 encodes the conceptual model defined in Part 3 and the Projection boundary clarified in Part 5.
 
 It should not re-expand Core by restoring concepts that Part 3 intentionally kept outside the required Core Model.
+
+The optional `skeletons` namespace is added as a Core-adjacent retrieval structure. It does not make semantic `relations` a required Core namespace.
 
 ## Drafting Inputs
 
@@ -40,6 +42,7 @@ Part 4 was drafted after reviewing:
 16. [Serialization Requirements](./15-serialization-requirements.md) *(draft)*
 17. [Normative Examples](./16-normative-examples.md) *(draft)*
 18. [Core Specification Non-goals](./17-core-specification-non-goals.md) *(draft)*
+19. [Skeleton Graph YAML Extension](./20-skeleton-graph-yaml-extension.md) *(draft)*
 
 ## Review Notes
 
@@ -52,7 +55,7 @@ Part 4 was drafted after reviewing:
 
 The normalized samples are implementation-oriented examples derived from Part 3 design experiments and rewritten into the Part 4 array-based object representation.
 
-They are intended to support parser, validator, formatter, migration, and conformance-suite development.
+They are intended to support parser, validator, formatter, migration, retrieval-indexing, and conformance-suite development.
 
 ## Required Core Namespaces
 
@@ -73,6 +76,7 @@ Required namespaces may be empty during draft, template, partial generation, or 
 The following are not required Core namespaces in v1.2.0:
 
 - `structure`
+- `skeletons`
 - `relations`
 - `perspectives`
 - `provenance`
@@ -83,6 +87,8 @@ The following are not required Core namespaces in v1.2.0:
 
 `structure` is defined as an optional Core-adjacent namespace for document-level ordering and grouping.
 
+`skeletons` is defined as an optional Core-adjacent namespace for retrieval-oriented Intellectual Activity Skeleton Graphs.
+
 Other optional namespaces may appear in profiles, extensions, companion specifications, or implementation-specific documents.
 
 ## Projection Boundary
@@ -91,7 +97,7 @@ Part 4 defines how an IdeaMark document records Projection references, inline Pr
 
 Part 4 does not define the full content model of Projection itself.
 
-Projection authoring, Projection evaluation, Projection compatibility modeling, Projection lifecycle, and Projection Library governance belong primarily to Part 5 or companion specifications.
+Projection authoring, Projection evaluation, Projection compatibility modeling, Projection lifecycle, Projection Skeleton Graph requirements, and Projection Library governance belong primarily to Part 5 or companion specifications.
 
 ## Runtime Context Boundary
 
@@ -103,13 +109,13 @@ Part 4 does not require IdeaMark documents to preserve the full execution state 
 
 ## Authoring Engine Boundary
 
-Part 4 defines the document representation that authoring engines may emit, validate, exchange, normalize, or migrate.
+Part 4 defines the document representation that authoring engines may emit, validate, exchange, normalize, migrate, or index for retrieval.
 
 It does not define how those documents are produced.
 
 Authoring engines may include CLI workflows, batch converters, visual editors, IDE plugins, AI agents, or companion systems such as Progressive Occurrence Resolution.
 
-Part 4 does not define chunking algorithms, internal IR, session state, prompt orchestration, review queues, cache state, progressive scheduling, or other engine-specific authoring behavior.
+Part 4 does not define chunking algorithms, internal IR, session state, prompt orchestration, review queues, cache state, progressive scheduling, graph matching algorithms, or other engine-specific authoring behavior.
 
 ## Normative Role
 
@@ -123,7 +129,7 @@ It also preserves the Projection boundaries defined in Part 5 so that concrete Y
 
 Part 4 defines YAML-level requirements and validation behavior.
 
-It does not define Projection content, authoring strategy, retrieval ranking, storage engines, runtime session state, authoring engine algorithms, or user-interface behavior.
+It does not define Projection content, authoring strategy, retrieval ranking, storage engines, runtime session state, authoring engine algorithms, graph database representation, or user-interface behavior.
 
 ## Review Focus
 
@@ -134,4 +140,5 @@ The next review pass should focus on:
 3. deciding whether anchor `role` / `purpose` should appear in normative examples;
 4. deciding how much legacy migration detail belongs in Part 4;
 5. extending normalized samples into a reusable conformance suite;
-6. confirming that CLI diagnostic codes and command behavior remain outside Part 4.
+6. confirming that CLI diagnostic codes and command behavior remain outside Part 4;
+7. validating that optional `skeletons` improves retrieval without replacing Sections, Occurrences, Entities, or anchors.

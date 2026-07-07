@@ -1,0 +1,122 @@
+test_id: rt-invariant-constrained-design-selection
+spec_version: ideamark-core-v1.2.0
+status: draft
+purpose: >
+  Test whether a use-side Projection can retrieve implementation material where
+  a design choice is constrained by an invariant or boundary and requires a
+  restoration or recovery strategy, without depending on exact source keywords.
+use_side_projection:
+  ref: projection://tests/invariant-constrained-design-selection-v0
+  intent: find implementation material where a design choice is constrained by an invariant and requires restoration
+  keyword_independence:
+    forbidden_source_specific_terms:
+      - heap
+      - heapq
+      - siftdown
+      - heappop
+      - invariant
+  required_skeleton:
+    id: req-skel-invariant-constrained-design
+    nodes:
+      - id: qn-boundary
+        slot: preserved_invariant_or_boundary
+        required: true
+      - id: qn-operational-form
+        slot: chosen_operational_form
+        required: true
+      - id: qn-restoration
+        slot: restoration_or_recovery_strategy
+        required: true
+      - id: qn-confirmation
+        slot: confirmation_signal
+        required: false
+    links:
+      - id: ql-boundary-operational
+        from: qn-boundary
+        to: qn-operational-form
+        type: constraint
+        required: true
+      - id: ql-operational-restoration
+        from: qn-operational-form
+        to: qn-restoration
+        type: dependency
+        required: true
+      - id: ql-restoration-confirmation
+        from: qn-restoration
+        to: qn-confirmation
+        type: confirmation
+        required: false
+candidate_set:
+  - id: sample-heapq-performance
+    path: ../samples/heapq-performance.ideamark.yaml
+  - id: sample-heapq-api-design
+    path: ../samples/heapq-api-design.ideamark.yaml
+  - id: sample-rust-rfc-design-prose
+    path: ../samples/rust-rfc-design-prose.ideamark.yaml
+  - id: sample-recipe-ingredient-substitution
+    path: ../samples/recipe-ingredient-substitution.ideamark.yaml
+expected_retrieval:
+  matches:
+    - document: sample-heapq-performance
+      skeleton: SKEL-invariant-constrained-design
+      match_class: compatible
+      matched_slots:
+        - preserved_invariant_or_boundary
+        - chosen_operational_form
+        - restoration_or_recovery_strategy
+        - confirmation_signal
+      matched_links:
+        - constraint
+        - dependency
+        - confirmation
+      expected_sections:
+        - SEC-heap-invariant
+      expected_occurrences:
+        - OCC-invariant-boundary
+        - OCC-api-alignment
+        - OCC-restoration-strategy
+        - OCC-empirical-support
+      expected_entities:
+        - ENT-heap-invariant
+        - ENT-api-alignment
+        - ENT-root-restoration
+        - ENT-comparison-counts
+      reconstruction_policy: supported
+  analogical_matches:
+    - document: sample-recipe-ingredient-substitution
+      skeleton: SKEL-function-preserving-alternative
+      match_class: analogical_partial
+      rationale: >
+        The recipe sample has a structurally related function-preserving
+        alternative-selection pattern. It should not be treated as a software
+        design match unless the use-side Projection explicitly allows analogical
+        transfer.
+      required_review:
+        - domain_transfer_review
+        - slot_mapping_review
+  non_matches:
+    - document: sample-heapq-api-design
+      expected_reason: API design sample may share the source but is not expected to contain the invariant-restoration Skeleton Graph
+    - document: sample-rust-rfc-design-prose
+      expected_reason: RFC sample may contain design rationale but no expected invariant-restoration sample Skeleton yet
+expected_reconstruction:
+  for_document: sample-heapq-performance
+  status: supported
+  should_include:
+    - invariant or boundary that constrains the design
+    - operational form or design choice selected under that boundary
+    - restoration or recovery strategy
+    - source-backed confirmation or empirical support when available
+  should_not_include:
+    - source keyword match as the primary retrieval reason
+    - design choice without boundary
+    - restoration strategy without source return
+evaluation_signals:
+  positive:
+    - exact source keywords are not required for retrieval
+    - Skeleton Nodes point to reconstructable Occurrences and Entities
+    - confirmation signal is available as optional support
+  negative:
+    - retrieval returns API-design material without invariant or restoration strategy
+    - reconstruction ignores source anchors
+    - analogical recipe match is treated as exact software match
