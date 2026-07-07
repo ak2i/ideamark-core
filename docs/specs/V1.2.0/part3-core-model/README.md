@@ -7,7 +7,7 @@ Part 3 defines the conceptual model of IdeaMark Core.
 
 Part 1 explains why IdeaMark exists.
 
-Part 2 explains the reference architecture for Human-AI Intellectual Activity and reconstruction.
+Part 2 explains the reference architecture for Human-AI Intellectual Activity, retrieval, and reconstruction.
 
 Part 3 explains what conceptual objects IdeaMark Core needs in order to function as reusable access structures without storing final meaning.
 
@@ -33,6 +33,8 @@ Part 3 should not define:
 
 Those belong to later parts, companion specifications, implementations, Projections, or domain practices.
 
+Part 3 may define conceptual retrieval support structures when they are needed to explain how IdeaMark remains an access-structure artifact rather than a keyword index or semantic knowledge base.
+
 ## Core Modeling Stance
 
 IdeaMark generation is not a general extraction task performed on an Original Source in isolation.
@@ -57,11 +59,13 @@ Projection-guided Decomposition
 IdeaMark Document
         ↓
 Sections / Occurrences / Entities
+        +
+optional Skeleton Graphs for retrieval-oriented matching
 ```
 
 Part 3 does not evaluate whether a Projection is good, legitimate, widely shareable, or socially valuable.
 
-Part 3 only defines how a Projection-guided Decomposition can produce Core Model structures that remain traceable and reusable.
+Part 3 only defines how a Projection-guided Decomposition can produce Core Model structures that remain traceable, reusable, and discoverable for later activity.
 
 Projection evaluation, Projection lifecycle, Projection library formation, and Projection governance belong primarily to Part 5.
 
@@ -129,7 +133,7 @@ Output: IdeaMark Document
 
 The output of Decomposition is the IdeaMark document as a whole.
 
-Therefore, any Core Model structure in the document may be a Decomposition product, including Sections, Occurrences, Entities, document-level metadata, traceability information, status information, and other document-level structures.
+Therefore, any Core Model structure in the document may be a Decomposition product, including Sections, Occurrences, Entities, document-level metadata, traceability information, status information, optional Skeleton Graphs, and other document-level structures.
 
 Decomposition does not judge the universal truth of Original Sources or the quality, legitimacy, or social value of a Projection.
 
@@ -137,7 +141,7 @@ It only determines what structures are produced under the given Original Source,
 
 ## Refined Core Object Interpretation
 
-The Part 3 design experiments support retaining Section, Occurrence, and Entity as the central Core Model objects.
+The Part 3 design experiments support retaining Section, Occurrence, and Entity as the central required Core Model objects.
 
 They must be defined functionally, not semantically.
 
@@ -150,6 +154,9 @@ Occurrence
 
 Entity
   = reusable material shaped by Projection and available for later reconstruction
+
+Skeleton Graph
+  = optional retrieval-oriented graph of Intellectual Activity composition
 ```
 
 This interpretation was tested across:
@@ -166,6 +173,7 @@ Original Source + Projection
   -> Projection-shaped Sections
   -> role-bearing Occurrences
   -> Projection-shaped reusable Entities
+  -> optional Skeleton Graphs for retrieval-oriented matching
   -> lower-cost return to Original Source
   -> future activation expression
 ```
@@ -192,9 +200,13 @@ An Entity does not have to mean a concept, object, actor, term, or knowledge uni
 
 In Core, an Entity is Projection-shaped reusable material. It may be reused, referenced, placed, or reinterpreted, but it is not a universal meaning unit or global ontology object.
 
+A Skeleton Graph does not have to mean a workflow, ontology graph, causal model, or process diagram.
+
+In Core, a Skeleton Graph is an optional graph-shaped access structure that records how matched material participates in an Intellectual Activity Skeleton for retrieval-oriented matching.
+
 Those domain-specific interpretations belong to Projection, authoring practice, domain practice, or reconstruction activity.
 
-Section, Occurrence, and Entity are useful because they can be separated from both Original Source and Projection while still functioning as keys that help future humans and AI systems reactivate meaning under a Projection.
+Section, Occurrence, Entity, and optional Skeleton Graphs are useful because they can be separated from both Original Source and Projection while still functioning as keys that help future humans and AI systems reactivate meaning under a Projection.
 
 ## Metadata Stance
 
@@ -252,15 +264,33 @@ A source anchor may refer to:
 
 Exact anchors are useful when available, but the Core Model must remain media-independent.
 
-## Relation Stance
+## Relation and Skeleton Link Stance
 
 Relation is not a required Core Model object for v1.2.0 Part 3.
 
-The experiments did not require a separate Relation namespace.
+The earlier experiments did not require a separate semantic Relation namespace for reconstruction.
 
 Ordering, Section grouping, Occurrence roles, Entity payloads, source anchors, and document-level metadata were sufficient to support reconstruction.
 
-Relation-like structures may be added later as an optional extension, profile, or companion specification, but they should not be mandatory for the Core Model.
+However, retrieval-oriented matching introduces a different need: representing the graph pattern of an Intellectual Activity Skeleton.
+
+This need is served by **Skeleton Links**, not semantic Relations.
+
+```text
+Semantic Relation:
+  A supports B
+  A causes B
+  A explains B
+
+Skeleton Link:
+  node A participates with node B as part of an activity composition pattern
+```
+
+Skeleton Links may appear inside optional Skeleton Graphs.
+
+They are Core-adjacent retrieval structures, not a resurrection of semantic Relation as a required Core namespace.
+
+Relation-like semantic structures may still be added later as optional extensions, profiles, or companion specifications, but they should not be mandatory for the Core Model.
 
 ## IdeaMark Document Stance
 
@@ -270,7 +300,7 @@ It is not the final result of intellectual activity.
 
 It is an intermediate reusable structure that helps future intellectual activity begin more effectively.
 
-An IdeaMark document may be used to retrieve Original Sources, understand which Projection shaped the decomposition, reconstruct relevant structures, and generate expressions that can activate meaning for humans or AI systems under a future Situation.
+An IdeaMark document may be used to retrieve Original Sources, understand which Projection shaped the decomposition, match Skeleton Graphs, reconstruct relevant structures, and generate expressions that can activate meaning for humans or AI systems under a future Situation.
 
 An IdeaMark document may also become an Original Source for later IdeaMark generation when it can participate as a component of future Human-AI Intellectual Activity.
 
@@ -293,6 +323,7 @@ It means that IdeaMark documents, like other artifacts, can become material for 
 10. [Status, Versioning, and Regeneration Model](./10-status-versioning-and-regeneration-model.md) *(drafted)*
 11. [Model Invariants](./11-model-invariants.md) *(drafted)*
 12. [Core Model Summary](./12-core-model-summary.md) *(drafted)*
+13. [Intellectual Activity Skeleton Graph Model](./13-intellectual-activity-skeleton-graph.md) *(drafted)*
 
 ## Supporting Design Materials
 
@@ -327,12 +358,13 @@ Remaining work should focus on:
 - reducing duplication across chapters;
 - aligning normative language levels;
 - deciding which conceptual requirements become concrete YAML requirements in Part 4;
-- preparing example documents and validation profiles.
+- preparing example documents and validation profiles;
+- validating whether Skeleton Graphs improve retrieval without turning Core into a workflow ontology.
 
 ## Reading Notes
 
 Part 3 should be read after Part 1 and Part 2.
 
-The key design constraint is that the Core Model must define enough structure to support reusable access, traceability, reconstruction, and interoperability while avoiding the temptation to encode final meaning.
+The key design constraint is that the Core Model must define enough structure to support reusable access, traceability, retrieval, reconstruction, and interoperability while avoiding the temptation to encode final meaning.
 
 Part 3 should therefore model **Projection-shaped access structures**, not final interpretations and not Projection-independent extraction results.
