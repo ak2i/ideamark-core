@@ -1,0 +1,1016 @@
+spec_version: ideamark-core-v1.2.0
+library_id: projection-library://samples/ideamark-core-v1.2.0/v0
+status: draft
+non_normative: true
+purpose: provide sample Projections for CLI, POR, retrieval, and reconstruction development
+projection_shape:
+  required_fields:
+    - id
+    - title
+    - domain_hint
+    - purpose
+    - intended_reuse
+    - uses_skeleton_families
+    - decomposition_guidance
+    - retrieval_expectations
+    - reconstruction_guidance
+    - evaluation_tests
+projections:
+  - id: projection://samples/recipe-cooking-execution/v0
+    title: Recipe Cooking Execution
+    domain_hint: recipe
+    purpose: Decompose a recipe into executable steps, setup requirements, timing constraints, and completion checks.
+    intended_reuse:
+      - cooking_checklist
+      - step_by_step_assistant
+      - beginner_execution_support
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/procedure-execution-sequencing/v0
+        slot_mapping:
+          procedure_goal: completed_dish
+          prerequisite_or_setup: ingredient_and_tool_setup
+          ordered_step: cooking_step
+          timing_or_sequence_constraint: timing_or_heat_constraint
+          checkpoint_or_completion_signal: doneness_or_serving_signal
+          exception_or_recovery_step: mistake_recovery_step
+    decomposition_guidance:
+      section_strategy: group by executable phase rather than source heading alone
+      entity_focus:
+        - cooking_step
+        - timing_constraint
+        - heat_control_rule
+        - completion_signal
+    retrieval_expectations:
+      primary_match: procedure sequence
+      expected_outputs:
+        - ordered_sections
+        - required_prerequisites
+    reconstruction_guidance:
+      activation_expression_types:
+        - checklist
+        - stepwise instruction
+    evaluation_tests:
+      - test missing prerequisite visibility
+      - test ordered step reconstruction
+
+  - id: projection://samples/recipe-ingredient-function-substitution/v0
+    title: Recipe Ingredient Function Substitution
+    domain_hint: recipe
+    purpose: Identify ingredient functions and support substitutions while preserving required culinary effects.
+    intended_reuse:
+      - substitution_planning
+      - dietary_adaptation
+      - ingredient_explanation
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/preserve-required-effect-under-change/v0
+        slot_mapping:
+          constrained_or_unavailable_element: unavailable_or_blocked_element
+          preserved_effect_or_boundary: preserved_effect_or_function
+          alternative_or_operational_form: alternative_space
+          confirmation_or_review_signal: confirmation_signal
+    decomposition_guidance:
+      section_strategy: group by ingredient function and substitution target
+      entity_focus:
+        - ingredient_function
+        - substitution_target
+        - preserved_flavor_or_texture
+        - verification_gap
+    retrieval_expectations:
+      primary_match: function-preserving alternative
+      expected_outputs:
+        - ingredient function sections
+        - missing confirmation warnings
+    reconstruction_guidance:
+      activation_expression_types:
+        - substitution note
+        - warning
+        - shopping adaptation
+    evaluation_tests:
+      - test keyword-independent ingredient retrieval
+      - test confirmation gap visibility
+
+  - id: projection://samples/beginner-recipe-teaching/v0
+    title: Beginner Recipe Teaching
+    domain_hint: recipe
+    purpose: Adapt recipe material for a novice cook by exposing assumptions, mistakes, and checkpoints.
+    intended_reuse:
+      - beginner_explanation
+      - coaching_prompt
+      - mistake_prevention
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/audience-capability-adaptation/v0
+        slot_mapping:
+          target_audience_or_role: beginner_cook
+          capability_or_literacy_assumption: assumed_cooking_skill
+          source_material_or_task: recipe_step_or_ingredient
+          adaptation_strategy: beginner_explanation
+          comprehension_or_action_signal: visible_checkpoint
+          escalation_or_next_step: ask_for_help_or_repeat_step
+      - ref: skeleton-family://samples/procedure-execution-sequencing/v0
+        slot_mapping:
+          procedure_goal: completed_dish
+          prerequisite_or_setup: setup_explanation
+          ordered_step: beginner_safe_step
+          timing_or_sequence_constraint: timing_explanation
+          checkpoint_or_completion_signal: visible_checkpoint
+          exception_or_recovery_step: common_mistake_recovery
+    decomposition_guidance:
+      section_strategy: group by learner difficulty and execution phase
+      entity_focus:
+        - beginner_explanation
+        - hidden_assumption
+        - visible_checkpoint
+        - common_mistake
+    retrieval_expectations:
+      primary_match: audience adaptation plus procedure sequencing
+    reconstruction_guidance:
+      activation_expression_types:
+        - teaching note
+        - guided checklist
+    evaluation_tests:
+      - test hidden assumption extraction
+      - test novice-safe reconstruction
+
+  - id: projection://samples/dietary-risk-adaptation/v0
+    title: Dietary Risk Adaptation
+    domain_hint: recipe
+    purpose: Identify dietary constraints and adapt recipe material while preserving safety and intended food role.
+    intended_reuse:
+      - allergy_check
+      - dietary_substitution
+      - food_service_warning
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/risk-controlled-operation/v0
+        slot_mapping:
+          intended_operation: prepare_or_serve_food
+          risk_or_failure_mode: dietary_or_allergy_risk
+          precondition_or_guard: dietary_constraint_check
+          control_action: substitution_or_exclusion_action
+          stop_or_escalation_condition: unsafe_or_unknown_ingredient
+          confirmation_signal: safe_to_serve_signal
+      - ref: skeleton-family://samples/preserve-required-effect-under-change/v0
+        slot_mapping:
+          constrained_or_unavailable_element: restricted_ingredient
+          preserved_effect_or_boundary: preserved_dish_function
+          alternative_or_operational_form: safe_alternative
+          confirmation_or_review_signal: dietary_confirmation_signal
+    decomposition_guidance:
+      section_strategy: group by risk, ingredient, and required check
+      entity_focus:
+        - dietary_constraint_flag
+        - restricted_ingredient
+        - safe_alternative
+        - review_required_warning
+    retrieval_expectations:
+      primary_match: risk-controlled substitution
+    reconstruction_guidance:
+      activation_expression_types:
+        - warning
+        - adaptation checklist
+    evaluation_tests:
+      - test unsafe missing confirmation blocking
+      - test ingredient risk visibility
+
+  - id: projection://samples/code-performance-engineering/v0
+    title: Code Performance Engineering
+    domain_hint: software
+    purpose: Extract implementation and performance reasoning from code, comments, benchmarks, and local design choices.
+    intended_reuse:
+      - code_review
+      - optimization_explanation
+      - implementation_rationale_search
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/evidence-supported-decision/v0
+        slot_mapping:
+          decision_or_question: performance_design_question
+          evidence_item: benchmark_or_count_evidence
+          evidence_quality_or_uncertainty: workload_assumption
+          inference_or_rationale: performance_rationale
+          recommendation_or_decision: selected_implementation_choice
+          review_or_update_condition: benchmark_update_condition
+      - ref: skeleton-family://samples/constraint-bounded-selection/v0
+        slot_mapping:
+          selection_goal: performance_goal
+          candidate_space: implementation_options
+          active_constraints: workload_and_api_constraints
+          selected_candidate_or_policy: selected_implementation_choice
+          rejected_or_deprioritized_candidates: rejected_local_optimization
+    decomposition_guidance:
+      section_strategy: group by performance boundary, cost driver, and selected choice
+      entity_focus:
+        - cost_driver
+        - implementation_rationale
+        - empirical_evidence
+        - workload_assumption
+    retrieval_expectations:
+      primary_match: evidence-supported performance choice
+    reconstruction_guidance:
+      activation_expression_types:
+        - code review comment
+        - design rationale note
+    evaluation_tests:
+      - test evidence-to-choice traceability
+      - test rejected optimization visibility
+
+  - id: projection://samples/invariant-constrained-implementation/v0
+    title: Invariant-constrained Implementation
+    domain_hint: software
+    purpose: Retrieve implementation material where an invariant or boundary constrains operations and restoration strategy.
+    intended_reuse:
+      - invariant_explanation
+      - implementation_review
+      - algorithm_teaching
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/preserve-required-effect-under-change/v0
+        slot_mapping:
+          constrained_or_unavailable_element: operation_that_may_break_boundary
+          preserved_effect_or_boundary: preserved_invariant_or_boundary
+          alternative_or_operational_form: chosen_operational_form
+          confirmation_or_review_signal: confirmation_signal
+      - ref: skeleton-family://samples/failure-recovery-restoration/v0
+        slot_mapping:
+          normal_or_required_state: valid_invariant_state
+          failure_or_interruption_mode: invariant_breaking_intermediate_state
+          preserved_recovery_information: retained_structure_or_state
+          restoration_strategy: restoration_or_recovery_strategy
+          restored_or_verified_state: restored_invariant_state
+    decomposition_guidance:
+      section_strategy: group invariant, operation, restoration, and verification together
+      entity_focus:
+        - structural_principle
+        - invariant_boundary
+        - restoration_strategy
+        - confirmation_signal
+    retrieval_expectations:
+      primary_match: invariant-constrained design skeleton
+    reconstruction_guidance:
+      activation_expression_types:
+        - implementation explanation
+        - warning
+    evaluation_tests:
+      - test boundary-operation-restoration matching
+      - test source return for invariant claims
+
+  - id: projection://samples/api-design-review/v0
+    title: API Design Review
+    domain_hint: software
+    purpose: Extract API design choices, user mental models, compatibility boundaries, and tradeoffs.
+    intended_reuse:
+      - api_review
+      - developer_documentation
+      - migration_note
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/compatibility-preserving-change/v0
+        slot_mapping:
+          motivating_problem: api_design_problem
+          existing_compatibility_boundary: user_expectation_or_existing_behavior
+          proposed_change_or_mechanism: api_mechanism
+          tradeoff_or_drawback: api_tradeoff
+          migration_or_adoption_cost: adoption_cost
+          review_or_confirmation_signal: review_signal
+      - ref: skeleton-family://samples/audience-capability-adaptation/v0
+        slot_mapping:
+          target_audience_or_role: api_user_role
+          capability_or_literacy_assumption: expected_developer_model
+          source_material_or_task: api_behavior
+          adaptation_strategy: documentation_strategy
+          comprehension_or_action_signal: correct_usage_signal
+          escalation_or_next_step: migration_or_support_note
+    decomposition_guidance:
+      section_strategy: group by API decision and user impact
+      entity_focus:
+        - api_behavior
+        - compatibility_constraint
+        - tradeoff
+        - user_expectation
+    retrieval_expectations:
+      primary_match: compatibility-preserving design change
+    reconstruction_guidance:
+      activation_expression_types:
+        - API rationale
+        - migration note
+    evaluation_tests:
+      - test compatibility boundary extraction
+      - test user mental model visibility
+
+  - id: projection://samples/sqlite-pager-correctness-recovery/v0
+    title: SQLite Pager Correctness Recovery
+    domain_hint: software_system
+    purpose: Extract correctness boundaries, risky operations, safety rules, and recovery invariants from pager-like system designs.
+    intended_reuse:
+      - recovery_design_review
+      - correctness_checklist
+      - state_machine_explanation
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/risk-controlled-operation/v0
+        slot_mapping:
+          intended_operation: write_or_commit_operation
+          risk_or_failure_mode: dirty_page_or_crash_risk
+          precondition_or_guard: journal_or_state_guard
+          control_action: guarded_write_or_transition
+          stop_or_escalation_condition: unrecoverable_state_risk
+          confirmation_signal: crash_consistency_signal
+      - ref: skeleton-family://samples/failure-recovery-restoration/v0
+        slot_mapping:
+          normal_or_required_state: coherent_database_state
+          failure_or_interruption_mode: crash_or_interrupted_write
+          preserved_recovery_information: journal_or_rollback_information
+          restoration_strategy: playback_or_rollback_strategy
+          restored_or_verified_state: crash_consistent_state
+    decomposition_guidance:
+      section_strategy: group boundary, risky operation, safety rule, and recovery invariant
+      entity_focus:
+        - state_machine_boundary
+        - failure_mode
+        - safety_rule
+        - recovery_invariant
+    retrieval_expectations:
+      primary_match: correctness-boundary recovery skeleton
+    reconstruction_guidance:
+      activation_expression_types:
+        - correctness explanation
+        - recovery checklist
+    evaluation_tests:
+      - test dirty-state risk retrieval
+      - test recovery invariant reconstruction
+
+  - id: projection://samples/service-incident-recovery/v0
+    title: Service Incident Recovery
+    domain_hint: software_operations
+    purpose: Convert incident notes into reusable detection, mitigation, restoration, and verification knowledge.
+    intended_reuse:
+      - runbook_generation
+      - incident_postmortem
+      - recovery_training
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/failure-recovery-restoration/v0
+        slot_mapping:
+          normal_or_required_state: normal_service_state
+          failure_or_interruption_mode: incident_failure_mode
+          preserved_recovery_information: logs_metrics_or_backup_state
+          restoration_strategy: mitigation_or_restore_action
+          restored_or_verified_state: recovery_verification_signal
+      - ref: skeleton-family://samples/risk-controlled-operation/v0
+        slot_mapping:
+          intended_operation: mitigation_action
+          risk_or_failure_mode: mitigation_side_effect
+          precondition_or_guard: safe_to_execute_condition
+          control_action: controlled_mitigation_step
+          stop_or_escalation_condition: escalation_threshold
+          confirmation_signal: service_health_signal
+    decomposition_guidance:
+      section_strategy: group detection, mitigation, restoration, and verification
+      entity_focus:
+        - incident_symptom
+        - root_or_contributing_factor
+        - mitigation_action
+        - verification_signal
+    retrieval_expectations:
+      primary_match: failure recovery runbook
+    reconstruction_guidance:
+      activation_expression_types:
+        - runbook
+        - postmortem learning note
+    evaluation_tests:
+      - test recovery step traceability
+      - test escalation condition visibility
+
+  - id: projection://samples/compatibility-preserving-rfc-review/v0
+    title: Compatibility-preserving RFC Review
+    domain_hint: design_prose
+    purpose: Extract design change rationale while preserving compatibility constraints, tradeoffs, and migration cost.
+    intended_reuse:
+      - design_review
+      - migration_planning
+      - language_or_platform_governance
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/compatibility-preserving-change/v0
+        slot_mapping:
+          motivating_problem: design_problem
+          existing_compatibility_boundary: compatibility_constraint
+          proposed_change_or_mechanism: selected_design_mechanism
+          tradeoff_or_drawback: recorded_tradeoff
+          migration_or_adoption_cost: migration_cost
+          review_or_confirmation_signal: review_or_stabilization_signal
+    decomposition_guidance:
+      section_strategy: group motivation, selected mechanism, compatibility, and migration material
+      entity_focus:
+        - design_problem
+        - design_choice
+        - compatibility_constraint
+        - adoption_cost
+    retrieval_expectations:
+      primary_match: compatibility-preserving design change
+    reconstruction_guidance:
+      activation_expression_types:
+        - RFC review note
+        - migration risk summary
+    evaluation_tests:
+      - test compatibility boundary retrieval
+      - test migration cost is not hidden
+
+  - id: projection://samples/api-migration-planning/v0
+    title: API Migration Planning
+    domain_hint: software_design
+    purpose: Retrieve API change material and reconstruct migration guidance for users or maintainers.
+    intended_reuse:
+      - migration_plan
+      - release_note
+      - developer_support
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/compatibility-preserving-change/v0
+        slot_mapping:
+          motivating_problem: old_api_limitation
+          existing_compatibility_boundary: existing_user_behavior
+          proposed_change_or_mechanism: new_api_or_migration_path
+          tradeoff_or_drawback: compatibility_or_usability_tradeoff
+          migration_or_adoption_cost: migration_work
+          review_or_confirmation_signal: migration_success_signal
+      - ref: skeleton-family://samples/audience-capability-adaptation/v0
+        slot_mapping:
+          target_audience_or_role: migrating_developer
+          capability_or_literacy_assumption: expected_api_knowledge
+          source_material_or_task: migration_task
+          adaptation_strategy: migration_explanation
+          comprehension_or_action_signal: correct_migration_signal
+          escalation_or_next_step: support_or_deprecation_path
+    decomposition_guidance:
+      section_strategy: group old behavior, new behavior, migration cost, and user-facing instructions
+      entity_focus:
+        - old_behavior
+        - new_behavior
+        - migration_step
+        - compatibility_warning
+    retrieval_expectations:
+      primary_match: compatibility-preserving migration
+    reconstruction_guidance:
+      activation_expression_types:
+        - migration guide
+        - release note
+    evaluation_tests:
+      - test migration-cost visibility
+      - test audience-specific reconstruction
+
+  - id: projection://samples/database-schema-evolution-review/v0
+    title: Database Schema Evolution Review
+    domain_hint: database_design
+    purpose: Extract schema change reasoning with compatibility, migration, rollback, and data integrity concerns.
+    intended_reuse:
+      - schema_migration_review
+      - rollback_plan
+      - release_checklist
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/compatibility-preserving-change/v0
+        slot_mapping:
+          motivating_problem: schema_change_motivation
+          existing_compatibility_boundary: existing_data_or_client_contract
+          proposed_change_or_mechanism: schema_change_mechanism
+          tradeoff_or_drawback: migration_tradeoff
+          migration_or_adoption_cost: migration_cost
+          review_or_confirmation_signal: data_integrity_check
+      - ref: skeleton-family://samples/failure-recovery-restoration/v0
+        slot_mapping:
+          normal_or_required_state: consistent_schema_and_data_state
+          failure_or_interruption_mode: failed_or_partial_migration
+          preserved_recovery_information: backup_or_migration_log
+          restoration_strategy: rollback_or_forward_fix
+          restored_or_verified_state: verified_schema_state
+    decomposition_guidance:
+      section_strategy: group change, compatibility, migration, verification, and rollback
+      entity_focus:
+        - schema_change
+        - compatibility_boundary
+        - migration_step
+        - rollback_strategy
+    retrieval_expectations:
+      primary_match: compatibility-preserving change plus recovery
+    reconstruction_guidance:
+      activation_expression_types:
+        - migration checklist
+        - risk review
+    evaluation_tests:
+      - test rollback path presence
+      - test data integrity verification
+
+  - id: projection://samples/design-tradeoff-analysis/v0
+    title: Design Tradeoff Analysis
+    domain_hint: design_prose
+    purpose: Extract competing goals, constraints, selected design choices, accepted drawbacks, and review conditions.
+    intended_reuse:
+      - decision_record
+      - architecture_review
+      - proposal_comparison
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/constraint-bounded-selection/v0
+        slot_mapping:
+          selection_goal: design_goal
+          candidate_space: design_options
+          active_constraints: constraints_and_tradeoffs
+          selected_candidate_or_policy: selected_design_choice
+          rejected_or_deprioritized_candidates: rejected_design_options
+      - ref: skeleton-family://samples/evidence-supported-decision/v0
+        slot_mapping:
+          decision_or_question: design_decision_question
+          evidence_item: rationale_or_observation
+          evidence_quality_or_uncertainty: uncertainty_or_assumption
+          inference_or_rationale: design_rationale
+          recommendation_or_decision: selected_design_choice
+          review_or_update_condition: revisit_condition
+    decomposition_guidance:
+      section_strategy: group decision, options, constraints, and rationale
+      entity_focus:
+        - design_option
+        - constraint
+        - tradeoff
+        - decision_rationale
+    retrieval_expectations:
+      primary_match: constraint-bounded design decision
+    reconstruction_guidance:
+      activation_expression_types:
+        - ADR
+        - comparison table
+    evaluation_tests:
+      - test rejected options are preserved
+      - test assumptions remain visible
+
+  - id: projection://samples/policy-intervention-evidence-review/v0
+    title: Policy Intervention Evidence Review
+    domain_hint: policy
+    purpose: Extract evidence, uncertainty, intervention choices, expected effects, and review conditions from policy material.
+    intended_reuse:
+      - policy_brief
+      - intervention_review
+      - evidence_gap_report
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/evidence-supported-decision/v0
+        slot_mapping:
+          decision_or_question: intervention_question
+          evidence_item: policy_evidence
+          evidence_quality_or_uncertainty: evidence_uncertainty
+          inference_or_rationale: intervention_rationale
+          recommendation_or_decision: recommended_intervention
+          review_or_update_condition: monitoring_or_review_condition
+      - ref: skeleton-family://samples/preserve-required-effect-under-change/v0
+        slot_mapping:
+          constrained_or_unavailable_element: unavailable_or_constrained_measure
+          preserved_effect_or_boundary: protective_or_policy_effect
+          alternative_or_operational_form: alternative_intervention
+          confirmation_or_review_signal: policy_evaluation_signal
+    decomposition_guidance:
+      section_strategy: group evidence, recommendation, uncertainty, and monitoring
+      entity_focus:
+        - evidence_item
+        - uncertainty
+        - intervention
+        - monitoring_signal
+    retrieval_expectations:
+      primary_match: evidence-supported intervention
+    reconstruction_guidance:
+      activation_expression_types:
+        - policy brief
+        - evidence review note
+    evaluation_tests:
+      - test uncertainty visibility
+      - test recommendation evidence traceability
+
+  - id: projection://samples/field-operation-checklist/v0
+    title: Field Operation Checklist
+    domain_hint: operations
+    purpose: Convert field operation knowledge into prerequisites, steps, safety controls, checkpoints, and escalation rules.
+    intended_reuse:
+      - operational_checklist
+      - field_training
+      - handover_note
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/procedure-execution-sequencing/v0
+        slot_mapping:
+          procedure_goal: field_operation_goal
+          prerequisite_or_setup: equipment_and_site_setup
+          ordered_step: field_step
+          timing_or_sequence_constraint: timing_or_site_constraint
+          checkpoint_or_completion_signal: checkpoint_signal
+          exception_or_recovery_step: exception_or_escalation_step
+      - ref: skeleton-family://samples/risk-controlled-operation/v0
+        slot_mapping:
+          intended_operation: field_action
+          risk_or_failure_mode: field_risk
+          precondition_or_guard: safety_precondition
+          control_action: controlled_field_step
+          stop_or_escalation_condition: stop_or_escalation_rule
+          confirmation_signal: safety_or_completion_signal
+    decomposition_guidance:
+      section_strategy: group setup, action, safety, and completion
+      entity_focus:
+        - prerequisite
+        - operation_step
+        - risk_control
+        - escalation_rule
+    retrieval_expectations:
+      primary_match: procedure plus risk control
+    reconstruction_guidance:
+      activation_expression_types:
+        - checklist
+        - training note
+    evaluation_tests:
+      - test prerequisite visibility
+      - test stop rule visibility
+
+  - id: projection://samples/field-risk-communication/v0
+    title: Field Risk Communication
+    domain_hint: operations
+    purpose: Adapt risk and action guidance to field personnel, managers, or external stakeholders.
+    intended_reuse:
+      - risk_message
+      - briefing_note
+      - stakeholder_update
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/audience-capability-adaptation/v0
+        slot_mapping:
+          target_audience_or_role: field_or_stakeholder_audience
+          capability_or_literacy_assumption: risk_literacy_assumption
+          source_material_or_task: risk_or_action_material
+          adaptation_strategy: audience_specific_message
+          comprehension_or_action_signal: expected_action_or_acknowledgment
+          escalation_or_next_step: escalation_or_follow_up
+      - ref: skeleton-family://samples/evidence-supported-decision/v0
+        slot_mapping:
+          decision_or_question: risk_response_question
+          evidence_item: observed_risk_signal
+          evidence_quality_or_uncertainty: uncertainty_or_confidence
+          inference_or_rationale: risk_interpretation
+          recommendation_or_decision: recommended_action
+          review_or_update_condition: update_condition
+    decomposition_guidance:
+      section_strategy: group by audience, risk, message, and action
+      entity_focus:
+        - audience_role
+        - risk_signal
+        - message_adaptation
+        - action_request
+    retrieval_expectations:
+      primary_match: audience-adapted risk decision
+    reconstruction_guidance:
+      activation_expression_types:
+        - briefing
+        - public-facing note
+    evaluation_tests:
+      - test audience assumption visibility
+      - test uncertainty is retained
+
+  - id: projection://samples/disaster-response-recovery-planning/v0
+    title: Disaster Response Recovery Planning
+    domain_hint: emergency_management
+    purpose: Extract recovery goals, disrupted states, available resources, intervention choices, and monitoring signals.
+    intended_reuse:
+      - recovery_plan
+      - resource_prioritization
+      - operational_brief
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/failure-recovery-restoration/v0
+        slot_mapping:
+          normal_or_required_state: acceptable_service_or_safety_state
+          failure_or_interruption_mode: disaster_disruption
+          preserved_recovery_information: known_resources_and_constraints
+          restoration_strategy: recovery_intervention
+          restored_or_verified_state: monitored_recovery_state
+      - ref: skeleton-family://samples/constraint-bounded-selection/v0
+        slot_mapping:
+          selection_goal: recovery_priority_goal
+          candidate_space: available_interventions
+          active_constraints: resource_and_site_constraints
+          selected_candidate_or_policy: selected_recovery_action
+          rejected_or_deprioritized_candidates: deferred_actions
+    decomposition_guidance:
+      section_strategy: group disruption, resource, recovery action, and monitoring
+      entity_focus:
+        - disruption
+        - resource_constraint
+        - recovery_action
+        - monitoring_signal
+    retrieval_expectations:
+      primary_match: recovery under constraint
+    reconstruction_guidance:
+      activation_expression_types:
+        - recovery plan
+        - operational brief
+    evaluation_tests:
+      - test resource constraint preservation
+      - test monitoring signal availability
+
+  - id: projection://samples/cloud-service-selection/v0
+    title: Cloud Service Selection
+    domain_hint: technology_planning
+    purpose: Compare cloud service options under cost, deployment, data, scaling, and operational constraints.
+    intended_reuse:
+      - architecture_decision
+      - vendor_shortlist
+      - implementation_plan
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/constraint-bounded-selection/v0
+        slot_mapping:
+          selection_goal: service_selection_goal
+          candidate_space: candidate_cloud_services
+          active_constraints: cost_scaling_and_deployment_constraints
+          selected_candidate_or_policy: selected_service_option
+          rejected_or_deprioritized_candidates: rejected_or_deferred_services
+      - ref: skeleton-family://samples/evidence-supported-decision/v0
+        slot_mapping:
+          decision_or_question: cloud_architecture_question
+          evidence_item: service_capability_or_cost_evidence
+          evidence_quality_or_uncertainty: uncertainty_or_assumption
+          inference_or_rationale: selection_rationale
+          recommendation_or_decision: selected_service_option
+          review_or_update_condition: scaling_or_cost_review_condition
+    decomposition_guidance:
+      section_strategy: group by requirement, candidate, constraint, and recommendation
+      entity_focus:
+        - candidate_service
+        - constraint
+        - rationale
+        - recommendation
+    retrieval_expectations:
+      primary_match: constraint-bounded selection
+    reconstruction_guidance:
+      activation_expression_types:
+        - decision memo
+        - comparison table
+    evaluation_tests:
+      - test rejected candidates are preserved
+      - test assumptions are visible
+
+  - id: projection://samples/research-method-selection/v0
+    title: Research Method Selection
+    domain_hint: research
+    purpose: Select a research or analysis method under data, cost, validity, ethics, and uncertainty constraints.
+    intended_reuse:
+      - research_plan
+      - method_comparison
+      - study_design_review
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/constraint-bounded-selection/v0
+        slot_mapping:
+          selection_goal: research_question_or_goal
+          candidate_space: candidate_methods
+          active_constraints: data_cost_validity_ethics_constraints
+          selected_candidate_or_policy: selected_method
+          rejected_or_deprioritized_candidates: rejected_methods
+      - ref: skeleton-family://samples/evidence-supported-decision/v0
+        slot_mapping:
+          decision_or_question: method_selection_question
+          evidence_item: method_evidence_or_precedent
+          evidence_quality_or_uncertainty: validity_or_uncertainty
+          inference_or_rationale: method_selection_rationale
+          recommendation_or_decision: selected_method
+          review_or_update_condition: data_or_review_condition
+    decomposition_guidance:
+      section_strategy: group by research question, method, constraint, and rationale
+      entity_focus:
+        - research_question
+        - method_option
+        - validity_constraint
+        - selection_rationale
+    retrieval_expectations:
+      primary_match: evidence-supported method selection
+    reconstruction_guidance:
+      activation_expression_types:
+        - method memo
+        - study design note
+    evaluation_tests:
+      - test validity constraints remain visible
+      - test rejected method rationale
+
+  - id: projection://samples/observation-to-recommendation/v0
+    title: Observation to Recommendation
+    domain_hint: research_report
+    purpose: Transform observations and evidence into cautious recommendations while preserving uncertainty and source traceability.
+    intended_reuse:
+      - recommendation_extraction
+      - evidence_chain_review
+      - report_reconstruction
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/evidence-supported-decision/v0
+        slot_mapping:
+          decision_or_question: recommendation_question
+          evidence_item: observation_or_measurement
+          evidence_quality_or_uncertainty: uncertainty_or_data_quality
+          inference_or_rationale: interpretation
+          recommendation_or_decision: recommendation
+          review_or_update_condition: monitoring_or_follow_up_condition
+    decomposition_guidance:
+      section_strategy: group observation, interpretation, recommendation, and uncertainty
+      entity_focus:
+        - observation
+        - evidence_quality
+        - interpretation
+        - recommendation
+    retrieval_expectations:
+      primary_match: evidence-supported recommendation
+    reconstruction_guidance:
+      activation_expression_types:
+        - evidence chain
+        - recommendation note
+    evaluation_tests:
+      - test evidence chain reconstruction
+      - test uncertainty visibility
+
+  - id: projection://samples/uncertainty-aware-research-summary/v0
+    title: Uncertainty-aware Research Summary
+    domain_hint: research_report
+    purpose: Summarize research findings while keeping uncertainty, scope, and unsupported extrapolation visible.
+    intended_reuse:
+      - research_summary
+      - literature_note
+      - risk_of_overclaim_warning
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/evidence-supported-decision/v0
+        slot_mapping:
+          decision_or_question: summary_question
+          evidence_item: finding_or_source_claim
+          evidence_quality_or_uncertainty: uncertainty_scope_or_limitation
+          inference_or_rationale: cautious_interpretation
+          recommendation_or_decision: summary_claim
+          review_or_update_condition: future_evidence_condition
+      - ref: skeleton-family://samples/audience-capability-adaptation/v0
+        slot_mapping:
+          target_audience_or_role: summary_audience
+          capability_or_literacy_assumption: domain_literacy_assumption
+          source_material_or_task: research_material
+          adaptation_strategy: summary_strategy
+          comprehension_or_action_signal: understood_limitation_signal
+          escalation_or_next_step: consult_source_or_expert
+    decomposition_guidance:
+      section_strategy: group by finding, limitation, and cautious interpretation
+      entity_focus:
+        - finding
+        - uncertainty
+        - scope_limit
+        - cautious_summary
+    retrieval_expectations:
+      primary_match: uncertainty-aware evidence summary
+    reconstruction_guidance:
+      activation_expression_types:
+        - summary
+        - caveat note
+    evaluation_tests:
+      - test unsupported extrapolation warning
+      - test audience simplification does not hide uncertainty
+
+  - id: projection://samples/monitoring-plan-reconstruction/v0
+    title: Monitoring Plan Reconstruction
+    domain_hint: research_operations
+    purpose: Reconstruct monitoring plans from observations, instruments, thresholds, recommended actions, and review triggers.
+    intended_reuse:
+      - monitoring_plan
+      - field_science_checklist
+      - observation_gap_report
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/evidence-supported-decision/v0
+        slot_mapping:
+          decision_or_question: monitoring_decision_question
+          evidence_item: observation_or_instrument_signal
+          evidence_quality_or_uncertainty: observation_gap_or_uncertainty
+          inference_or_rationale: monitoring_rationale
+          recommendation_or_decision: monitoring_recommendation
+          review_or_update_condition: threshold_or_review_trigger
+      - ref: skeleton-family://samples/procedure-execution-sequencing/v0
+        slot_mapping:
+          procedure_goal: monitoring_goal
+          prerequisite_or_setup: instrument_or_site_setup
+          ordered_step: monitoring_step
+          timing_or_sequence_constraint: sampling_interval_or_condition
+          checkpoint_or_completion_signal: observation_checkpoint
+          exception_or_recovery_step: missed_signal_or_equipment_failure_response
+    decomposition_guidance:
+      section_strategy: group instrument, observation, threshold, recommendation, and review trigger
+      entity_focus:
+        - instrument
+        - observation
+        - threshold
+        - monitoring_recommendation
+    retrieval_expectations:
+      primary_match: monitoring evidence to recommendation
+    reconstruction_guidance:
+      activation_expression_types:
+        - monitoring plan
+        - checklist
+    evaluation_tests:
+      - test observation gap visibility
+      - test monitoring threshold reconstruction
+
+  - id: projection://samples/evidence-chain-extraction/v0
+    title: Evidence Chain Extraction
+    domain_hint: research_report
+    purpose: Extract linked evidence chains from source material without collapsing independent evidence into summary blobs.
+    intended_reuse:
+      - evidence_graph
+      - audit_note
+      - claim_support_review
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/evidence-supported-decision/v0
+        slot_mapping:
+          decision_or_question: claim_or_question
+          evidence_item: independent_evidence_item
+          evidence_quality_or_uncertainty: quality_or_uncertainty_marker
+          inference_or_rationale: support_inference
+          recommendation_or_decision: supported_claim_or_decision
+          review_or_update_condition: evidence_gap_or_update_condition
+    decomposition_guidance:
+      section_strategy: one independent evidence chain per section when useful
+      entity_focus:
+        - evidence_item
+        - source_anchor
+        - inference
+        - supported_claim
+    retrieval_expectations:
+      primary_match: evidence-to-claim chain
+    reconstruction_guidance:
+      activation_expression_types:
+        - evidence table
+        - audit trail
+    evaluation_tests:
+      - test independent evidence atomicity
+      - test source anchor completeness
+
+  - id: projection://samples/developer-onboarding-explanation/v0
+    title: Developer Onboarding Explanation
+    domain_hint: education
+    purpose: Adapt technical source material for developers who need task-oriented understanding without losing constraints.
+    intended_reuse:
+      - onboarding_guide
+      - teaching_note
+      - codebase_orientation
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/audience-capability-adaptation/v0
+        slot_mapping:
+          target_audience_or_role: onboarding_developer
+          capability_or_literacy_assumption: expected_skill_or_gap
+          source_material_or_task: code_or_design_material
+          adaptation_strategy: explanation_or_guided_task
+          comprehension_or_action_signal: successful_task_or_question
+          escalation_or_next_step: deeper_reference_or_review
+      - ref: skeleton-family://samples/procedure-execution-sequencing/v0
+        slot_mapping:
+          procedure_goal: onboarding_task_goal
+          prerequisite_or_setup: environment_or_context_setup
+          ordered_step: learning_or_execution_step
+          timing_or_sequence_constraint: prerequisite_order
+          checkpoint_or_completion_signal: completion_checkpoint
+          exception_or_recovery_step: troubleshooting_step
+    decomposition_guidance:
+      section_strategy: group by learner task and prerequisite knowledge
+      entity_focus:
+        - prerequisite_concept
+        - task_step
+        - explanation
+        - checkpoint
+    retrieval_expectations:
+      primary_match: audience-adapted technical procedure
+    reconstruction_guidance:
+      activation_expression_types:
+        - onboarding guide
+        - tutorial step
+    evaluation_tests:
+      - test prerequisite extraction
+      - test constraints retained in simplified explanation
+
+  - id: projection://samples/onboarding-procedure-guide/v0
+    title: Onboarding Procedure Guide
+    domain_hint: education_operations
+    purpose: Convert organizational onboarding material into sequenced tasks with audience assumptions, checkpoints, and escalation paths.
+    intended_reuse:
+      - onboarding_checklist
+      - role_training
+      - task_handover
+    uses_skeleton_families:
+      - ref: skeleton-family://samples/procedure-execution-sequencing/v0
+        slot_mapping:
+          procedure_goal: onboarding_goal
+          prerequisite_or_setup: account_or_environment_setup
+          ordered_step: onboarding_step
+          timing_or_sequence_constraint: schedule_or_dependency
+          checkpoint_or_completion_signal: onboarding_checkpoint
+          exception_or_recovery_step: escalation_or_support_step
+      - ref: skeleton-family://samples/audience-capability-adaptation/v0
+        slot_mapping:
+          target_audience_or_role: new_member_role
+          capability_or_literacy_assumption: assumed_context_or_skill
+          source_material_or_task: onboarding_task
+          adaptation_strategy: role_specific_instruction
+          comprehension_or_action_signal: completed_or_understood_signal
+          escalation_or_next_step: manager_or_support_followup
+    decomposition_guidance:
+      section_strategy: group by role, sequence, and checkpoint
+      entity_focus:
+        - onboarding_task
+        - prerequisite
+        - checkpoint
+        - escalation_path
+    retrieval_expectations:
+      primary_match: sequenced audience-adapted onboarding
+    reconstruction_guidance:
+      activation_expression_types:
+        - checklist
+        - handover note
+    evaluation_tests:
+      - test role-specific adaptation
+      - test sequence and checkpoint preservation
