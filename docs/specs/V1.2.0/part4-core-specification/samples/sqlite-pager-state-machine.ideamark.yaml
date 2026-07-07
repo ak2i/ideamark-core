@@ -86,6 +86,75 @@ entities:
   - id: ENT-crash-consistency
     kind: system_goal
     content: The pager design supports crash consistency by coordinating page cache state, journal state, and persistent writes.
+skeletons:
+  - id: SKEL-correctness-boundary-recovery
+    role: retrieval
+    projection: projection://samples/system-correctness-state-machine-v0
+    status: draft
+    notes: Supports retrieval for preserving a correctness boundary while controlling risky operations and enabling recovery.
+    nodes:
+      - id: SKN-correctness-boundary
+        ref:
+          kind: occurrence
+          id: OCC-state-boundary
+        slot: preserved_invariant_or_boundary
+        required: true
+      - id: SKN-transition-discipline
+        ref:
+          kind: occurrence
+          id: OCC-state-transition-discipline
+        slot: compatibility_boundary
+        required: true
+      - id: SKN-risky-change
+        ref:
+          kind: occurrence
+          id: OCC-dirty-page-risk
+        slot: constrained_or_risky_element
+        required: true
+      - id: SKN-safety-rule
+        ref:
+          kind: occurrence
+          id: OCC-journal-before-write
+        slot: chosen_operational_form
+        required: true
+      - id: SKN-recovery-strategy
+        ref:
+          kind: occurrence
+          id: OCC-recovery-invariant
+        slot: restoration_or_recovery_strategy
+        required: true
+      - id: SKN-confirmation-signal
+        ref:
+          kind: occurrence
+          id: OCC-crash-consistency
+        slot: confirmation_signal
+        required: false
+    links:
+      - id: SKL-boundary-transition
+        from: SKN-correctness-boundary
+        to: SKN-transition-discipline
+        type: constraint
+        required: true
+      - id: SKL-transition-risk
+        from: SKN-transition-discipline
+        to: SKN-risky-change
+        type: constraint
+        required: true
+      - id: SKL-risk-safety-rule
+        from: SKN-risky-change
+        to: SKN-safety-rule
+        type: dependency
+        required: true
+      - id: SKL-safety-recovery
+        from: SKN-safety-rule
+        to: SKN-recovery-strategy
+        type: dependency
+        required: true
+      - id: SKL-recovery-confirmation
+        from: SKN-recovery-strategy
+        to: SKN-confirmation-signal
+        type: confirmation
+        required: false
 structure:
   sections:
     - SEC-state-boundary
