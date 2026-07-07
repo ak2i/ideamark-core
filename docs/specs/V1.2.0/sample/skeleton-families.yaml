@@ -1,0 +1,270 @@
+spec_version: ideamark-core-v1.2.0
+library_id: skeleton-family-library://samples/ideamark-core-v1.2.0/v0
+status: draft
+non_normative: true
+purpose: provide sample external Skeleton Families for CLI, POR, retrieval, and Projection Library development
+families:
+  - id: skeleton-family://samples/preserve-required-effect-under-change/v0
+    title: Preserve Required Effect Under Change
+    purpose: Support retrieval where something changes, becomes unavailable, or is constrained while a required effect, function, invariant, or condition must be preserved.
+    canonical_slots:
+      - constrained_or_unavailable_element
+      - preserved_effect_or_boundary
+      - alternative_or_operational_form
+      - confirmation_or_review_signal
+    common_links:
+      - type: constraint
+        from: constrained_or_unavailable_element
+        to: preserved_effect_or_boundary
+      - type: dependency
+        from: preserved_effect_or_boundary
+        to: alternative_or_operational_form
+      - type: confirmation
+        from: alternative_or_operational_form
+        to: confirmation_or_review_signal
+    expected_match_classes:
+      - compatible
+      - partial
+      - analogical_compatible
+      - analogical_partial
+    unsafe_transfer_notes:
+      - Do not transfer a domain-specific alternative directly across domains without review.
+      - A shared family does not imply shared meaning or safe substitution.
+    example_projection_refs:
+      - projection://samples/recipe-ingredient-function-substitution/v0
+      - projection://samples/invariant-constrained-implementation/v0
+      - projection://samples/compatibility-preserving-rfc-review/v0
+
+  - id: skeleton-family://samples/constraint-bounded-selection/v0
+    title: Constraint-bounded Selection
+    purpose: Support retrieval where a candidate must be selected under explicit constraints, limits, policies, resources, or compatibility boundaries.
+    canonical_slots:
+      - selection_goal
+      - candidate_space
+      - active_constraints
+      - selected_candidate_or_policy
+      - rejected_or_deprioritized_candidates
+    common_links:
+      - type: dependency
+        from: selection_goal
+        to: candidate_space
+      - type: constraint
+        from: active_constraints
+        to: selected_candidate_or_policy
+      - type: alternative
+        from: selected_candidate_or_policy
+        to: rejected_or_deprioritized_candidates
+    expected_match_classes:
+      - compatible
+      - partial
+      - specialization
+    unsafe_transfer_notes:
+      - Constraints may be local to an organization, jurisdiction, resource state, or domain.
+      - Candidate rankings should not be reused without rechecking active constraints.
+    example_projection_refs:
+      - projection://samples/cloud-service-selection/v0
+      - projection://samples/field-operation-resource-selection/v0
+      - projection://samples/research-method-selection/v0
+
+  - id: skeleton-family://samples/risk-controlled-operation/v0
+    title: Risk-controlled Operation
+    purpose: Support retrieval where an operation is useful but risky and must be performed under preconditions, controls, checks, or stop rules.
+    canonical_slots:
+      - intended_operation
+      - risk_or_failure_mode
+      - precondition_or_guard
+      - control_action
+      - stop_or_escalation_condition
+      - confirmation_signal
+    common_links:
+      - type: constraint
+        from: risk_or_failure_mode
+        to: precondition_or_guard
+      - type: dependency
+        from: precondition_or_guard
+        to: control_action
+      - type: conflict
+        from: intended_operation
+        to: risk_or_failure_mode
+      - type: confirmation
+        from: control_action
+        to: confirmation_signal
+    expected_match_classes:
+      - compatible
+      - partial
+      - unsafe_partial
+    unsafe_transfer_notes:
+      - Risk controls must not be treated as universal safety guarantees.
+      - Missing preconditions or stop rules should block automatic reconstruction.
+    example_projection_refs:
+      - projection://samples/sqlite-pager-correctness-recovery/v0
+      - projection://samples/field-operation-checklist/v0
+      - projection://samples/dietary-risk-adaptation/v0
+
+  - id: skeleton-family://samples/failure-recovery-restoration/v0
+    title: Failure Recovery and Restoration
+    purpose: Support retrieval where an interruption, corruption, failure, or invalid state must be detected and restored to an acceptable condition.
+    canonical_slots:
+      - normal_or_required_state
+      - failure_or_interruption_mode
+      - preserved_recovery_information
+      - restoration_strategy
+      - restored_or_verified_state
+    common_links:
+      - type: conflict
+        from: failure_or_interruption_mode
+        to: normal_or_required_state
+      - type: dependency
+        from: preserved_recovery_information
+        to: restoration_strategy
+      - type: confirmation
+        from: restoration_strategy
+        to: restored_or_verified_state
+    expected_match_classes:
+      - compatible
+      - partial
+      - analogical_partial
+    unsafe_transfer_notes:
+      - Recovery patterns are highly domain-sensitive.
+      - A restoration strategy must preserve source anchors and verification conditions.
+    example_projection_refs:
+      - projection://samples/sqlite-pager-correctness-recovery/v0
+      - projection://samples/service-incident-recovery/v0
+      - projection://samples/disaster-response-recovery-planning/v0
+
+  - id: skeleton-family://samples/compatibility-preserving-change/v0
+    title: Compatibility-preserving Change
+    purpose: Support retrieval where a design, process, policy, schema, or interface changes while compatibility, adoption, migration, or user expectations must be preserved.
+    canonical_slots:
+      - motivating_problem
+      - existing_compatibility_boundary
+      - proposed_change_or_mechanism
+      - tradeoff_or_drawback
+      - migration_or_adoption_cost
+      - review_or_confirmation_signal
+    common_links:
+      - type: dependency
+        from: motivating_problem
+        to: proposed_change_or_mechanism
+      - type: constraint
+        from: existing_compatibility_boundary
+        to: proposed_change_or_mechanism
+      - type: constraint
+        from: tradeoff_or_drawback
+        to: proposed_change_or_mechanism
+      - type: confirmation
+        from: proposed_change_or_mechanism
+        to: review_or_confirmation_signal
+    expected_match_classes:
+      - compatible
+      - partial
+      - analogical_compatible
+    unsafe_transfer_notes:
+      - Compatibility boundaries differ by ecosystem, organization, and audience.
+      - Migration cost should not be hidden during reconstruction.
+    example_projection_refs:
+      - projection://samples/compatibility-preserving-rfc-review/v0
+      - projection://samples/api-migration-planning/v0
+      - projection://samples/database-schema-evolution-review/v0
+
+  - id: skeleton-family://samples/evidence-supported-decision/v0
+    title: Evidence-supported Decision
+    purpose: Support retrieval where observations, measurements, sources, or arguments are used to justify a decision, recommendation, or interpretation.
+    canonical_slots:
+      - decision_or_question
+      - evidence_item
+      - evidence_quality_or_uncertainty
+      - inference_or_rationale
+      - recommendation_or_decision
+      - review_or_update_condition
+    common_links:
+      - type: dependency
+        from: evidence_item
+        to: inference_or_rationale
+      - type: constraint
+        from: evidence_quality_or_uncertainty
+        to: recommendation_or_decision
+      - type: confirmation
+        from: recommendation_or_decision
+        to: review_or_update_condition
+    expected_match_classes:
+      - compatible
+      - partial
+      - evidence_gap
+    unsafe_transfer_notes:
+      - Evidence quality and uncertainty must remain visible.
+      - Missing evidence must not be reconstructed as confirmed knowledge.
+    example_projection_refs:
+      - projection://samples/observation-to-recommendation/v0
+      - projection://samples/uncertainty-aware-research-summary/v0
+      - projection://samples/policy-intervention-evidence-review/v0
+
+  - id: skeleton-family://samples/procedure-execution-sequencing/v0
+    title: Procedure Execution and Sequencing
+    purpose: Support retrieval where a process must be executed in order with prerequisites, checkpoints, timing, and completion conditions.
+    canonical_slots:
+      - procedure_goal
+      - prerequisite_or_setup
+      - ordered_step
+      - timing_or_sequence_constraint
+      - checkpoint_or_completion_signal
+      - exception_or_recovery_step
+    common_links:
+      - type: dependency
+        from: prerequisite_or_setup
+        to: ordered_step
+      - type: sequence
+        from: ordered_step
+        to: ordered_step
+      - type: constraint
+        from: timing_or_sequence_constraint
+        to: ordered_step
+      - type: confirmation
+        from: ordered_step
+        to: checkpoint_or_completion_signal
+    expected_match_classes:
+      - compatible
+      - partial
+      - procedure_gap
+    unsafe_transfer_notes:
+      - Procedure order may be safety-critical.
+      - Missing prerequisites or exceptions should be warnings or blockers.
+    example_projection_refs:
+      - projection://samples/recipe-cooking-execution/v0
+      - projection://samples/field-operation-checklist/v0
+      - projection://samples/onboarding-procedure-guide/v0
+
+  - id: skeleton-family://samples/audience-capability-adaptation/v0
+    title: Audience Capability Adaptation
+    purpose: Support retrieval where explanation, instructions, or actions must be adapted to the capability, literacy, responsibility, or context of an audience.
+    canonical_slots:
+      - target_audience_or_role
+      - capability_or_literacy_assumption
+      - source_material_or_task
+      - adaptation_strategy
+      - comprehension_or_action_signal
+      - escalation_or_next_step
+    common_links:
+      - type: constraint
+        from: capability_or_literacy_assumption
+        to: adaptation_strategy
+      - type: dependency
+        from: source_material_or_task
+        to: adaptation_strategy
+      - type: confirmation
+        from: adaptation_strategy
+        to: comprehension_or_action_signal
+      - type: dependency
+        from: comprehension_or_action_signal
+        to: escalation_or_next_step
+    expected_match_classes:
+      - compatible
+      - partial
+      - capability_gap
+    unsafe_transfer_notes:
+      - Audience assumptions should be reviewable and correctable.
+      - Simplification must not remove safety-critical or decision-critical constraints.
+    example_projection_refs:
+      - projection://samples/beginner-recipe-teaching/v0
+      - projection://samples/field-risk-communication/v0
+      - projection://samples/developer-onboarding-explanation/v0
