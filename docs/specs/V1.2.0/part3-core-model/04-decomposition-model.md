@@ -15,6 +15,7 @@ It is the conceptual bridge between:
 - Original Source material;
 - Projection Context;
 - generated Sections, Occurrences, and Entities;
+- optional Skeleton Graphs;
 - later retrieval, reconstruction, and meaning activation.
 
 Part 3 defines Decomposition conceptually.
@@ -33,7 +34,7 @@ Output: IdeaMark Document
 
 The output is the IdeaMark document as a whole.
 
-Sections, Occurrences, Entities, source anchors, metadata, local rationale, status information, and optional structure information may all be products of Decomposition.
+Sections, Occurrences, Entities, source anchors, metadata, local rationale, status information, optional structure information, and optional Skeleton Graphs may all be products of Decomposition.
 
 ## 4.3 Decomposition Is Projection-guided
 
@@ -57,7 +58,7 @@ A recipe may yield different structures when decomposed for:
 - beginner teaching;
 - dietary adaptation.
 
-The Projection Context determines what local source windows are useful, what reusable material should be preserved, and what future activity the document should support.
+The Projection Context determines what local source windows are useful, what reusable material should be preserved, what Skeleton Graph patterns may be useful for later retrieval, and what future activity the document should support.
 
 ## 4.4 Decomposition Is Not Meaning Extraction
 
@@ -76,9 +77,12 @@ Therefore, Decomposition should not be understood as:
 - ontology construction;
 - universal knowledge extraction;
 - source replacement;
-- complete interpretation capture.
+- complete interpretation capture;
+- universal workflow modeling.
 
 It is the creation of reusable access structure under a Projection.
+
+When Decomposition produces a Skeleton Graph, that graph should be understood as a domain-reduced retrieval aid, not as stored meaning.
 
 ## 4.5 Decomposition Product
 
@@ -94,13 +98,14 @@ A generated IdeaMark document may contain:
 - Entities;
 - source anchors;
 - optional structure information;
+- optional Skeleton Graphs;
 - local rationale;
 - generation notes;
 - status information.
 
 The Core Model objects do not have to be generated independently.
 
-A Section, Occurrence, or Entity is meaningful in Core only as part of the generated access structure.
+A Section, Occurrence, Entity, or Skeleton Node is meaningful in Core only as part of the generated access structure.
 
 ## 4.6 Section Production
 
@@ -169,7 +174,29 @@ Core also does not require that Entities be meaningful outside the document or P
 
 An Entity is useful because it can be placed, referenced, reused, or reconstructed.
 
-## 4.9 Source Anchor Production
+## 4.9 Skeleton Graph Production
+
+Under Decomposition, a Skeleton Graph may be produced as an optional retrieval-oriented representation of an Intellectual Activity Skeleton.
+
+It records how Sections, Occurrences, Entities, anchors, or placeholder slots participate in an activity-composition pattern.
+
+A Skeleton Graph may be produced when:
+
+- future retrieval should not depend on exact source keywords;
+- cross-domain or analogical matching is expected;
+- the Projection defines required or preferred activity slots;
+- candidate selection needs lower-cost structural filtering before reconstruction;
+- missing slots should be visible for review or failure handling.
+
+A Skeleton Graph may contain nodes that reference generated Sections, Occurrences, Entities, source anchors, or profile-defined structures.
+
+A Skeleton Graph may also contain placeholder nodes for slots that the Projection expects but the current source does not satisfy.
+
+Skeleton Graph production should avoid turning domain-specific surface vocabulary into universal Core vocabulary.
+
+The purpose is to preserve activity composition, not to define a domain ontology.
+
+## 4.10 Source Anchor Production
 
 Decomposition may produce source anchors.
 
@@ -182,6 +209,7 @@ Source anchors may be attached to:
 - Entities;
 - metadata;
 - structure entries;
+- Skeleton Nodes;
 - local rationale;
 - extension objects.
 
@@ -189,7 +217,9 @@ Section-level anchors are the primary Core expectation because Sections are loca
 
 Occurrence-level and Entity-level anchors may be useful for more precise traceability.
 
-## 4.10 Local Rationale
+Skeleton Graphs should ultimately lead back to traceable structures when used for reconstruction.
+
+## 4.11 Local Rationale
 
 A generated IdeaMark document may include local rationale.
 
@@ -200,6 +230,8 @@ For example, rationale may explain:
 - why a source region became a Section;
 - why an Entity was placed in a Section through an Occurrence;
 - why an Occurrence has a particular role;
+- why a Skeleton Node was assigned a particular slot;
+- why a Skeleton Link type was selected;
 - why a source anchor is approximate;
 - why some material was omitted;
 - why a Section is useful for a future reconstruction activity.
@@ -208,7 +240,7 @@ Local rationale is optional unless required by a profile.
 
 It is not a complete inverse mapping of Decomposition.
 
-## 4.11 Non-reversibility
+## 4.12 Non-reversibility
 
 Decomposition is not assumed to be fully reversible.
 
@@ -216,11 +248,11 @@ Given only an IdeaMark document, a later user or tool may not be able to reconst
 
 This is acceptable.
 
-The document should preserve enough structure and traceability to support later reconstruction, not a complete record of the generation process.
+The document should preserve enough structure and traceability to support later retrieval and reconstruction, not a complete record of the generation process.
 
-Generation notes, rationale, tool information, and source anchors may improve explainability, but they do not make Decomposition fully reversible.
+Generation notes, rationale, tool information, source anchors, and Skeleton Graphs may improve explainability, but they do not make Decomposition fully reversible.
 
-## 4.12 Human, AI, and Tool Decomposition
+## 4.13 Human, AI, and Tool Decomposition
 
 Decomposition may be performed by:
 
@@ -237,11 +269,13 @@ Core does not privilege one authoring mechanism.
 
 Part 3 defines what the generated document must conceptually support, not how it is produced.
 
-## 4.13 Decomposition and POR
+## 4.14 Decomposition and POR
 
 POR-like processes may perform large-scale or automated Decomposition.
 
 Part 3 should remain compatible with such processes.
+
+A POR-like process may emit Skeleton Graphs as an intermediate or final retrieval aid, but Core does not require POR to do so.
 
 However, POR is not required by Core.
 
@@ -253,11 +287,12 @@ Core should not prescribe:
 - review workflow;
 - parallelization method;
 - storage architecture;
-- regeneration scheduler.
+- regeneration scheduler;
+- graph matching implementation.
 
 These belong to implementations or companion specifications.
 
-## 4.14 Decomposition and Review
+## 4.15 Decomposition and Review
 
 A generated IdeaMark document may be reviewed, corrected, extended, regenerated, or deprecated.
 
@@ -268,6 +303,7 @@ Review may modify:
 - Occurrences;
 - Entities;
 - anchors;
+- Skeleton Graphs;
 - rationale;
 - structure;
 - status.
@@ -276,7 +312,7 @@ Part 3 does not define review workflow.
 
 It only requires that the document remain traceable and conceptually coherent after modification.
 
-## 4.15 Decomposition and Multiple Outputs
+## 4.16 Decomposition and Multiple Outputs
 
 One Original Source and Projection Context may produce multiple IdeaMark documents.
 
@@ -285,6 +321,7 @@ Multiple Original Sources and Projections may also produce one IdeaMark document
 Valid cases include:
 
 - one source decomposed under several Projections into several documents;
+- one source decomposed under several Projections into several Skeleton Graphs;
 - one source decomposed under a composite Projection into one document;
 - several sources decomposed under one Projection into one document;
 - several generated documents later combined or compared;
@@ -294,7 +331,7 @@ Part 3 allows these cases conceptually.
 
 Part 4 may define representation details.
 
-## 4.16 Decomposition Quality
+## 4.17 Decomposition Quality
 
 Part 3 does not define Decomposition quality metrics.
 
@@ -313,7 +350,9 @@ Those questions belong to Projection practice, review workflow, governance, or i
 
 Part 3 defines structural responsibilities and invariants only.
 
-## 4.17 Decomposition Failure and Partial Documents
+Skeleton Graph quality is also outside Part 3 Core, though Part 5 and Part 6 may discuss retrieval-oriented evaluation.
+
+## 4.18 Decomposition Failure and Partial Documents
 
 A Decomposition may be partial, exploratory, draft, or failed.
 
@@ -321,9 +360,11 @@ Part 3 should allow documents or structures to carry status metadata indicating 
 
 A partial document may still be useful if it preserves traceable access structures.
 
+A partial Skeleton Graph may be useful if it exposes missing slots, uncertain links, or review needs.
+
 However, a document that cannot identify its Original Source or Projection Context may fail to function as an IdeaMark document in the Core sense.
 
-## 4.18 Conceptual Minimum
+## 4.19 Conceptual Minimum
 
 At the conceptual level, Decomposition must produce enough structure for:
 
@@ -339,9 +380,20 @@ later user or tool
   -> support reconstruction or activation expression generation
 ```
 
+When Skeleton Graphs are present, Decomposition may additionally support:
+
+```text
+later user or tool
+  -> identify use-side Projection Skeleton expectations
+  -> match document-side Skeleton Graphs
+  -> select candidate Sections / Occurrences / Entities / anchors
+  -> explain matched and missing activity slots
+  -> support lower-cost retrieval before reconstruction
+```
+
 Part 4 may define the concrete minimum YAML representation.
 
-## 4.19 Invariants
+## 4.20 Invariants
 
 Decomposition should preserve the following invariants:
 
@@ -353,15 +405,9 @@ Decomposition should preserve the following invariants:
 6. Occurrences are role-bearing placements within Sections.
 7. Entities are Projection-shaped reusable material.
 8. Source anchors preserve traceability claims.
-9. Decomposition need not be fully reversible.
-10. Decomposition algorithm and workflow are outside Core.
-11. Multiple valid Decomposition outputs may exist for the same Original Source.
-12. Decomposition quality evaluation is outside Part 3 Core.
-
-## 4.20 Summary
-
-Decomposition is the Core Model boundary that turns Original Source material and Projection Context into an IdeaMark document.
-
-It is the act that produces Projection-shaped access structures.
-
-Part 3 defines the conceptual products and invariants of Decomposition while leaving algorithms, workflows, quality evaluation, and governance to other parts or implementations.
+9. Skeleton Graphs, when present, support retrieval-oriented activity-composition matching.
+10. Skeleton Links are not semantic Relations.
+11. Decomposition need not be fully reversible.
+12. Decomposition algorithm and workflow are outside Core.
+13. Multiple valid Decomposition outputs may exist for the same Original Source.
+14. Decomposition quality evaluation is outside Part 3 Core.
