@@ -12,7 +12,9 @@ An IdeaMark document is the output of Projection-guided Decomposition.
 
 It is an operational access-structure artifact that helps future humans, AI systems, and tools return to relevant Original Source material and generate activation expressions under a Projection.
 
-It is not a final interpretation, knowledge base entry, summary, ontology object, or replacement for the Original Source.
+It may also carry optional Skeleton Graphs that help future systems retrieve candidate structures before reconstruction.
+
+It is not a final interpretation, knowledge base entry, summary, ontology object, workflow ontology, or replacement for the Original Source.
 
 ## 5.2 Definition
 
@@ -27,10 +29,11 @@ Conceptually, it contains:
 - Occurrences;
 - Entities;
 - traceability information;
+- optional Skeleton Graphs;
 - optional structure and ordering information;
 - optional rationale, generation notes, and status information.
 
-The document is the unit that carries enough context for later reconstruction and interoperability.
+The document is the unit that carries enough context for later retrieval, reconstruction, and interoperability.
 
 ## 5.3 Document as Decomposition Output
 
@@ -42,11 +45,11 @@ Process: Projection-guided Decomposition
 Output: IdeaMark Document
 ```
 
-This means that Sections, Occurrences, Entities, anchors, metadata, structure, rationale, and status information should be understood as parts of one generated access structure.
+This means that Sections, Occurrences, Entities, anchors, metadata, optional Skeleton Graphs, structure, rationale, and status information should be understood as parts of one generated access structure.
 
 They are not independent universal claims.
 
-Their usefulness depends on the document, source references, Projection Context, and later reconstruction activity.
+Their usefulness depends on the document, source references, Projection Context, retrieval context, and later reconstruction activity.
 
 ## 5.4 Document as Operational Snapshot
 
@@ -60,11 +63,15 @@ It should not be treated as:
 - a complete representation of the Original Source;
 - a permanent semantic truth;
 - an exhaustive knowledge extraction;
+- a universal domain classification;
+- a universal graph of intellectual activity;
 - a final result of Human-AI Intellectual Activity.
 
 Multiple valid IdeaMark documents may exist for the same Original Source.
 
 Different Projections may produce different documents from the same source.
+
+Different Projections may also produce different Skeleton Graphs from the same source.
 
 Different tools or authors may also produce different valid documents under similar Projection Contexts.
 
@@ -80,6 +87,7 @@ The document should therefore preserve traceability through:
 - Section-level anchors;
 - optional Occurrence-level anchors;
 - optional Entity-level anchors;
+- optional Skeleton Node references to traceable structures;
 - source revision metadata;
 - local rationale when useful.
 
@@ -91,9 +99,9 @@ It should not attempt to embed everything necessary for final interpretation.
 
 An IdeaMark document should record or reference the Projection Context that shaped its generation.
 
-This is necessary because the document's Sections, Occurrences, and Entities are Projection-shaped.
+This is necessary because the document's Sections, Occurrences, Entities, and optional Skeleton Graphs are Projection-shaped.
 
-Without Projection Context, later users may not know why particular source material was selected, grouped, omitted, or given specific roles.
+Without Projection Context, later users may not know why particular source material was selected, grouped, omitted, linked, or given specific roles.
 
 The document may record:
 
@@ -102,6 +110,8 @@ The document may record:
 - Projection version or revision;
 - focus and non-goal metadata;
 - intended reconstruction activities;
+- intended retrieval activities;
+- Skeleton Graph expectations or references;
 - compatibility notes;
 - multiple Projection entries.
 
@@ -120,6 +130,8 @@ For example, an Entity may contain explanatory material, but that material is no
 A Section may gather source fragments, but it is not a final interpretation.
 
 An Occurrence may assign a role, but that role is part of a Projection-shaped placement, not a universal truth claim.
+
+A Skeleton Link may connect nodes, but that link is an activity-composition structure for retrieval, not a universal semantic Relation.
 
 Meaning becomes observable later when the document, Original Source material, Projection, Situation, interpreter, and activation expression participate in intellectual or practical activity.
 
@@ -152,6 +164,7 @@ entities
 Optional document-level structures may include:
 
 ```text
+skeletons
 structure
 status
 rationale
@@ -203,6 +216,7 @@ A Section may include or reference:
 - local title or label;
 - rationale;
 - ordering information;
+- Skeleton Nodes that point to the Section;
 - status or review notes;
 - extension metadata.
 
@@ -221,6 +235,7 @@ An Occurrence may include or reference:
 - the Section in which it is placed;
 - local rationale;
 - source anchors;
+- Skeleton Nodes that point to the Occurrence;
 - status or review notes;
 - extension metadata.
 
@@ -241,6 +256,7 @@ An Entity may include:
 - content or payload;
 - source role;
 - source references;
+- Skeleton Nodes that point to the Entity;
 - status or review notes;
 - extension metadata.
 
@@ -248,7 +264,28 @@ Entity identity is not universal by default.
 
 Core treats Entity IDs primarily as reference labels within document or implementation-defined scope.
 
-## 5.13 Structure
+## 5.13 Skeleton Graphs
+
+The optional `skeletons` area may record one or more Intellectual Activity Skeleton Graphs.
+
+A Skeleton Graph helps retrieve candidate IdeaMark structures by representing activity-composition patterns with nodes and Skeleton Links.
+
+It may be useful when:
+
+- future queries may not contain source-specific keywords;
+- Projection reuse depends on structural activity slots;
+- analogical matching across domains is expected;
+- candidate selection should happen before full reconstruction;
+- missing slots should be visible for review or failure handling;
+- matching explanations should identify which activity-composition requirements were satisfied.
+
+A Skeleton Graph may point to Sections, Occurrences, Entities, source anchors, or placeholder slots.
+
+A Skeleton Graph does not replace source anchors, Section boundaries, Occurrence roles, or Entity material.
+
+Core does not require all IdeaMark documents to contain Skeleton Graphs.
+
+## 5.14 Structure
 
 The optional `structure` area may record document-level ordering, grouping, navigation, or reconstruction paths.
 
@@ -264,7 +301,9 @@ Core does not require `structure` to encode semantic relations.
 
 Relation-like structures may be added by profiles or extensions, but Relation is not mandatory in Part 3 Core.
 
-## 5.14 Local Rationale and Notes
+Skeleton Graphs serve a different role from `structure`: they support retrieval-oriented activity-composition matching rather than document navigation alone.
+
+## 5.15 Local Rationale and Notes
 
 An IdeaMark document may contain local rationale or notes.
 
@@ -273,15 +312,16 @@ These may explain:
 - why a Section was created;
 - why an Occurrence has a role;
 - why an Entity is shaped in a particular way;
+- why a Skeleton Node or Skeleton Link was created;
 - why a source anchor is approximate;
 - why certain source material was omitted;
-- how the document should be used in reconstruction.
+- how the document should be used in retrieval or reconstruction.
 
 Local rationale improves review and reuse.
 
 However, it is not required to fully explain or reverse the Decomposition process.
 
-## 5.15 Multi-source Documents
+## 5.16 Multi-source Documents
 
 One IdeaMark document may reference multiple Original Sources.
 
@@ -296,7 +336,9 @@ This may be necessary when:
 
 The document should preserve enough source references and local anchors to distinguish which source material supports each structure.
 
-## 5.16 Multi-projection Documents
+Skeleton Graphs in multi-source documents should not hide which source material supports matched nodes.
+
+## 5.17 Multi-projection Documents
 
 One IdeaMark document may reference multiple Projections.
 
@@ -304,6 +346,7 @@ This may occur when:
 
 - generation used a composite Projection;
 - different Sections were generated under different Projection Contexts;
+- different Skeleton Graphs were generated for different retrieval purposes;
 - the document records reconstruction-reference Projections;
 - the document compares multiple Projection views;
 - earlier documents are merged or compared.
@@ -312,7 +355,7 @@ Part 3 allows this conceptually.
 
 Part 4 may define representation details.
 
-## 5.17 Multiple Documents from the Same Source
+## 5.18 Multiple Documents from the Same Source
 
 The same Original Source may produce multiple IdeaMark documents.
 
@@ -331,7 +374,9 @@ Each document may be valid under its Projection.
 
 No single document is required to cover the source completely.
 
-## 5.18 Document Status
+Each document may also produce a different Skeleton Graph because each Projection may extract a different Intellectual Activity Skeleton.
+
+## 5.19 Document Status
 
 An IdeaMark document may have operational status.
 
@@ -353,7 +398,7 @@ Part 4, profiles, or implementations may define concrete status values.
 
 At Core level, status exists to support operational management, review, regeneration, and safe reuse.
 
-## 5.19 Document Regeneration
+## 5.20 Document Regeneration
 
 An IdeaMark document may be regenerated when:
 
@@ -363,6 +408,7 @@ An IdeaMark document may be regenerated when:
 - review feedback changes the desired structure;
 - a profile or schema changes;
 - a different granularity is needed;
+- a new retrieval purpose appears;
 - a new reconstruction purpose appears.
 
 Regeneration may produce a new document rather than overwriting the old one.
@@ -371,7 +417,9 @@ Part 3 does not require global identity stability across regeneration.
 
 It only requires that documents can preserve enough metadata for comparison and traceability.
 
-## 5.20 Document as Original Source
+Regeneration may preserve, replace, or add Skeleton Graphs depending on Projection compatibility and retrieval requirements.
+
+## 5.21 Document as Original Source
 
 An IdeaMark document may itself become an Original Source for later IdeaMark generation.
 
@@ -383,7 +431,9 @@ It means that generated access structures can themselves become material for lat
 
 When this occurs, later documents should preserve references to the prior document and, when useful, to the prior document's own Original Sources.
 
-## 5.21 Invalid or Weak Documents
+A later document may also use an earlier document's Skeleton Graph as Original Source material, for example to create a higher-level retrieval profile or compare multiple documents' activity composition.
+
+## 5.22 Invalid or Weak Documents
 
 A document may be weak or invalid as an IdeaMark document if it cannot support traceable reconstruction.
 
@@ -394,6 +444,7 @@ For example, a document may be weak if it:
 - contains only final summaries without traceability;
 - has Entities but no Section context;
 - has source anchors that cannot be interpreted;
+- contains Skeleton Graphs whose nodes cannot lead back to reconstructable material;
 - cannot explain its operational status;
 - collapses into a general knowledge note rather than Projection-shaped access structure.
 
@@ -401,7 +452,7 @@ Part 4 may define validation levels.
 
 Part 3 defines the conceptual risks.
 
-## 5.22 Conceptual Example
+## 5.23 Conceptual Example
 
 The following shape is illustrative:
 
@@ -437,6 +488,17 @@ entities:
     kind: reusable_material
     content: Example reusable material shaped by Projection.
 
+skeletons:
+  - id: skel-001
+    role: retrieval
+    nodes:
+      - id: skn-001
+        ref:
+          kind: occurrence
+          id: OCC-001
+        slot: reusable_activity_material
+    links: []
+
 structure:
   sections:
     - SEC-001
@@ -446,7 +508,7 @@ This example is not normative YAML.
 
 Part 4 defines concrete syntax.
 
-## 5.23 Invariants
+## 5.24 Invariants
 
 An IdeaMark document should preserve the following invariants:
 
@@ -459,14 +521,18 @@ An IdeaMark document should preserve the following invariants:
 7. It contains role-bearing Occurrences.
 8. It contains Projection-shaped reusable Entities.
 9. It supports traceability and later reconstruction.
-10. It may coexist with other valid documents from the same source.
-11. It may be partial, draft, reviewed, regenerated, or deprecated.
-12. It may itself become an Original Source for later Decomposition.
+10. It may contain optional Skeleton Graphs for retrieval-oriented matching.
+11. Skeleton Links, when present, are not semantic Relations.
+12. It may coexist with other valid documents from the same source.
+13. It may be partial, draft, reviewed, regenerated, or deprecated.
+14. It may itself become an Original Source for later Decomposition.
 
-## 5.24 Summary
+## 5.25 Summary
 
 An IdeaMark document is the Core Model's operational unit.
 
-It preserves Projection-shaped access structures that make later reconstruction cheaper and more traceable.
+It preserves Projection-shaped access structures that make later retrieval, reconstruction, and source return cheaper and more traceable.
 
-It should be minimal enough to avoid becoming a knowledge base, but structured enough to support source return, Projection awareness, and Human-AI Intellectual Activity.
+It may also preserve optional Skeleton Graphs that help future systems find structurally useful material without relying only on keywords or domain labels.
+
+It should be minimal enough to avoid becoming a knowledge base, but structured enough to support source return, Projection awareness, retrieval, reconstruction, and Human-AI Intellectual Activity.
