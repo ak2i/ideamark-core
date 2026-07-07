@@ -116,6 +116,53 @@ entities:
   - id: ENT-heappushpop-choice
     kind: api_performance_choice
     content: heappushpop conditionally replaces the root only when the new item is larger than the current smallest item, avoiding unnecessary heap growth.
+skeletons:
+  - id: SKEL-invariant-constrained-design
+    role: retrieval
+    projection: projection://samples/code-design-performance-heapq-v0
+    status: draft
+    notes: Supports retrieval for implementation material where a design choice is constrained by an invariant and requires a restoration strategy.
+    nodes:
+      - id: SKN-invariant-boundary
+        ref:
+          kind: occurrence
+          id: OCC-invariant-boundary
+        slot: preserved_invariant_or_boundary
+        required: true
+      - id: SKN-operational-form
+        ref:
+          kind: occurrence
+          id: OCC-api-alignment
+        slot: chosen_operational_form
+        required: true
+      - id: SKN-restoration-strategy
+        ref:
+          kind: occurrence
+          id: OCC-restoration-strategy
+        slot: restoration_or_recovery_strategy
+        required: true
+      - id: SKN-confirmation-signal
+        ref:
+          kind: occurrence
+          id: OCC-empirical-support
+        slot: confirmation_signal
+        required: false
+    links:
+      - id: SKL-boundary-operational-form
+        from: SKN-invariant-boundary
+        to: SKN-operational-form
+        type: constraint
+        required: true
+      - id: SKL-operational-restoration
+        from: SKN-operational-form
+        to: SKN-restoration-strategy
+        type: dependency
+        required: true
+      - id: SKL-restoration-confirmation
+        from: SKN-restoration-strategy
+        to: SKN-confirmation-signal
+        type: confirmation
+        required: false
 structure:
   sections:
     - SEC-heap-invariant
