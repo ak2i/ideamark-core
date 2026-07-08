@@ -125,6 +125,8 @@ Reusable intellectual structures identified through Projection-guided Decomposit
 
 Entities do not own final meaning. They preserve reusable boundaries and content traces that can support later activation.
 
+Optional namespaces may add stronger access structures when useful. For example, `skeletons` can record graph-shaped activity patterns produced by a Projection-guided Decomposition. A Skeleton Graph can connect Sections, Occurrences, Entities, anchors, or placeholders through named slots and links so that retrieval systems can match structure, not just keywords.
+
 ## Projection
 
 Projection is a central concept in IdeaMark Core v1.2.0.
@@ -269,6 +271,139 @@ entities:
 This example does not attempt to encode the full meaning of the source statement.
 
 It records a source, identifies a reusable Entity, records how that Entity functions as an Occurrence, and places it inside a Section that can be used for later reconstruction.
+
+## Skeleton-aware Example
+
+The minimal example above is enough to show the required Core path from Section to Occurrence to Entity. For retrieval and matching, a Projection may also guide Decomposition into a reusable Skeleton Graph.
+
+A Skeleton Graph is not a keyword index. It records an activity-composition pattern: which reusable slots were found, which Core objects fill those slots, and how the slots are linked. A retrieval system can then ask for a compatible pattern, such as "a constrained element, a preserved effect, an alternative, and an optional confirmation signal," even when different domains use different surface vocabulary.
+
+The following compact example shows the same idea in document-side form:
+
+```yaml
+meta:
+  spec_version: ideamark-core-v1.2.0
+  document_id: minimal-skeleton-aware-example
+  status: draft
+  title: Minimal Skeleton-aware Example
+  projections:
+    - role: generation
+      ref: projection://samples/function-preserving-substitution/v0
+      inline:
+        purpose: identify a reusable pattern for preserving a required effect under change
+        uses_skeleton_families:
+          - ref: skeleton-family://samples/preserve-required-effect-under-change/v0
+            slot_mapping:
+              constrained_or_unavailable_element: blocked_component
+              preserved_effect_or_boundary: required_effect
+              alternative_or_operational_form: candidate_alternative
+              confirmation_or_review_signal: confirmation_signal
+
+sources:
+  - id: SRC-001
+    type: text
+    title: Example statement
+    inline: "If the original component is unavailable, choose an alternative that preserves the required effect and verify the result."
+
+sections:
+  - id: SEC-function-preserving-change
+    title: Preserve the required effect under change
+    anchors:
+      - source: SRC-001
+        type: inline_text
+        precision: exact
+        role: source_context
+    occurrences:
+      - OCC-blocked-component
+      - OCC-required-effect
+      - OCC-candidate-alternative
+      - OCC-confirmation-signal
+
+occurrences:
+  - id: OCC-blocked-component
+    entity: ENT-original-component
+    role: constrained_element
+  - id: OCC-required-effect
+    entity: ENT-required-effect
+    role: preserved_effect
+  - id: OCC-candidate-alternative
+    entity: ENT-candidate-alternative
+    role: alternative_form
+  - id: OCC-confirmation-signal
+    entity: ENT-confirmation-signal
+    role: review_signal
+
+entities:
+  - id: ENT-original-component
+    kind: constraint
+    content: The original component may be unavailable or blocked.
+  - id: ENT-required-effect
+    kind: requirement
+    content: The required effect must be preserved even when the component changes.
+  - id: ENT-candidate-alternative
+    kind: option
+    content: A candidate alternative should be selected to preserve the required effect.
+  - id: ENT-confirmation-signal
+    kind: verification
+    content: The result should be verified before the alternative is treated as acceptable.
+
+skeletons:
+  - id: SKEL-preserve-required-effect-under-change
+    role: retrieval
+    projection: projection://samples/function-preserving-substitution/v0
+    family:
+      ref: skeleton-family://samples/preserve-required-effect-under-change/v0
+      mapping_profile: projection-local
+    nodes:
+      - id: SKN-blocked-component
+        slot: blocked_component
+        ref:
+          kind: occurrence
+          id: OCC-blocked-component
+        required: true
+      - id: SKN-required-effect
+        slot: required_effect
+        ref:
+          kind: occurrence
+          id: OCC-required-effect
+        required: true
+      - id: SKN-candidate-alternative
+        slot: candidate_alternative
+        ref:
+          kind: occurrence
+          id: OCC-candidate-alternative
+        required: true
+      - id: SKN-confirmation-signal
+        slot: confirmation_signal
+        ref:
+          kind: occurrence
+          id: OCC-confirmation-signal
+        required: false
+    links:
+      - id: SKL-blocked-effect
+        from: SKN-blocked-component
+        to: SKN-required-effect
+        type: constraint
+        required: true
+      - id: SKL-effect-alternative
+        from: SKN-required-effect
+        to: SKN-candidate-alternative
+        type: dependency
+        required: true
+      - id: SKL-alternative-confirmation
+        from: SKN-candidate-alternative
+        to: SKN-confirmation-signal
+        type: confirmation
+        required: false
+
+structure:
+  sections:
+    - SEC-function-preserving-change
+```
+
+In this example, retrieval does not have to depend only on words such as "component," "alternative," or "verify." A system can first match the Skeleton Family and graph slots, then return the linked Section, Occurrences, Entities, and source anchors for review or reconstruction.
+
+This is why Projection-guided Decomposition matters: the Projection does not merely label text. It determines which reusable activity slots are worth preserving and how those slots should be connected for future retrieval, matching, filtering, and reconstruction.
 
 ## Example Use Cases
 
