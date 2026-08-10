@@ -1,7 +1,7 @@
 # 9. Human-AI Intellectual Activity
 
 **Part:** 2 — Architecture of Human-AI Co-evolution  
-**Status:** Draft Rev001  
+**Status:** Draft Rev002  
 **Type:** Informative / Reference Architecture
 
 Human-AI Intellectual Activity is the collaborative activity in which humans and AI systems use Situation, Projection, IdeaMark documents, and Original Sources to produce understanding, judgment, explanation, action, or future traces.
@@ -125,6 +125,38 @@ For example, participants may trust a reconstruction more when they can see:
 
 IdeaMark supports such trust by making reconstruction paths more explicit and reusable.
 
+Trust is not equivalent to blind acceptance.
+
+A participant who cannot understand an explanation may reject a correct result, repeatedly intervene in an otherwise reliable process, or accept the result without meaningful review because verification is too costly.
+
+For this reason, explanation capability and explanation-understanding cost must be considered together.
+
+An explanation is useful only when its intended recipient — human or AI — can interpret it at an acceptable cost for the current Situation and required level of assurance.
+
+Projection is one mechanism for adapting explanation to the recipient, purpose, literacy, role, prior context, and risk of the Situation while preserving a reconstruction path to supporting Original Sources.
+
+The objective is not to maximize the amount of explanation.
+
+The objective is to provide sufficient explanation for informed trust while avoiding unnecessary interpretation burden.
+
+As trust is accumulated through repeated successful and understandable interaction, the amount of explanation required for routine activity may decrease. Conversely, anomalies, uncertainty, higher-risk actions, or changes in Situation may require more detailed explanation and renewed verification.
+
+This creates a trust-maintenance cycle:
+
+```text
+Action / Reconstruction
+        ↓
+Recipient-appropriate Explanation
+        ↓
+Understanding / Verification
+        ↓
+Trust Update
+        ↓
+Future Explanation and Intervention Cost
+```
+
+IdeaMark does not prescribe a universal trust metric or a universal optimal explanation length. It provides structures that allow implementations and Projections to reduce the combined cost of explanation, understanding, verification, and intervention without severing traceability.
+
 ## 9.7 Action and Trace Creation
 
 Human-AI Intellectual Activity may lead to action.
@@ -163,7 +195,9 @@ This section does not define:
 - a required user interface;
 - a requirement that all activity be recorded;
 - a universal trust metric;
-- a universal method for measuring interpretation cost.
+- a universal method for measuring interpretation cost;
+- a universal measure of explanation sufficiency;
+- a universal policy for when human intervention should be required.
 
 These concerns may be addressed by implementations, policies, institutions, laws, domains, or future specifications.
 
@@ -177,9 +211,13 @@ This is why lowering interpretation cost matters across the lifecycle of intelle
 
 A tool that produces an immediate result without an understandable reconstruction path may be impressive, but it may not remain maintainable, reviewable, teachable, or trustworthy.
 
+Likewise, a system that can generate exhaustive explanations may still fail to support trust if the cost of understanding those explanations is too high for the intended recipient.
+
+IdeaMark therefore treats explanation and explanation understanding as coupled concerns. Projection can reduce that combined cost by adapting what is emphasized, how much detail is presented, and which reconstruction paths are made immediately visible for a particular Situation and recipient.
+
 Human-AI Intellectual Activity should therefore remain connected to Situation, Projection, IdeaMark, and Original Sources.
 
-That connection is the basis for long-term reuse.
+That connection is the basis for long-term reuse and for trust that can be maintained through understandable reconstruction rather than blind acceptance.
 
 ## 9.11 Summary
 
@@ -189,4 +227,6 @@ AI may participate architecturally without being assigned human-equivalent legal
 
 Humans and AI remain fallible participants.
 
-IdeaMark supports them by lowering interpretation cost and preserving reconstruction paths rather than by storing final meaning.
+IdeaMark supports them by lowering interpretation cost, adapting explanation to recipients through Projection, and preserving reconstruction paths rather than by storing final meaning.
+
+The long-term objective is not merely fewer interventions or more automation. It is to reduce the cost of establishing and maintaining informed trust among autonomous participants while preserving the ability to return to supporting Original Sources when deeper verification is required.
